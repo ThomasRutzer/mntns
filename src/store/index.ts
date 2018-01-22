@@ -20,6 +20,8 @@ export default new Vuex.Store({
 })
 
 export {
+    mutations,
     mutationTypes,
+    actions,
     actionTypes
 }
