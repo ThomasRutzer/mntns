@@ -1,0 +1,8 @@
+<footer class="footerbar">
+    <ul class="footerbar__list">
+        <li v-for="link in links"
+            class="footerbar__list-item">
+            <router-link :to="link.path">{{link.name}}</router-link>
+        </li>
+    </ul>
+</footer>
