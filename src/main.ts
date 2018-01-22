@@ -1,7 +1,9 @@
 import Vue from 'vue';
+import {createRouter} from './components/router/Router';
 
 import './main.scss';
 
 let app = new Vue({
-  el: '#app-main',
+    router: createRouter(),
+    el: '#app-main',
 });
