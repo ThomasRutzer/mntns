@@ -1,0 +1,11 @@
+.navbar {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.navbar__back {
+  height: 50px;
+  transform: rotate(-90deg);
+  cursor: pointer;
+}

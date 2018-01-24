@@ -1,0 +1,37 @@
+@import "layout-definitions.json";
+@import "../../components/media-queries/sass-mq";
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 95% 1fr;
+  grid-template-rows: map_get($layout, "header-height") 1fr map_get($layout, "footer-height");
+  grid-template-areas:
+    ". header header ."
+    ". content content ."
+    ". footer footer .";
+
+  @include mq($from: 'm') {
+    grid-template-columns: 1fr map_get($layout, "header-row-width") calc(66% - #{map_get($layout, "header-row-width")}) 1fr;
+    grid-template-areas:
+            ". header header ."
+            ". . content ."
+            ". footer . .";
+  }
+}
+
+.layout__header {
+  grid-area: header;
+}
+
+.layout__content {
+  grid-area: content;
+}
+
+.layout__footer {
+  grid-area: footer;
+}
+
+.layout__background {
+  position: relative;
+  z-index: -1;
+}

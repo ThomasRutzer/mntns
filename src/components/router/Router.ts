@@ -8,7 +8,10 @@ Vue.use(VueRouter);
 export const createRoutes: () => RouteConfig[] = () => [
     {
         path: '/',
-        component: homeComponent,
+        components: {
+            content: homeComponent,
+            background: null
+        },
     },
 ];
 

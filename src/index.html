@@ -1,21 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>mnts</title>
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>mnts</title>
+        <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,600" rel="stylesheet">
+    </head>
 
-<body>
+    <body>
 
-    <div id="app-main">
-        <navbar></navbar>
-        <router-view>loading...</router-view>
-        <footerbar></footerbar>
-    </div>
+        <div class="layout"
+             id="app-main">
 
-</body>
+            <div class="layout__header">
+                <navbar></navbar>
+            </div>
+
+            <main class="layout__content">
+                <router-view name="content">loading...</router-view>
+            </main>
+
+            <div class="layout__background">
+                <background aria-hidden="true"></background>
+            </div>
+
+            <div class="layout__footer">
+                <footerbar></footerbar>
+            </div>
+
+        </div>
+
+    </body>
 
 </html>

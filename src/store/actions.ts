@@ -7,7 +7,7 @@ which dispatches a commit, e.g.:
 
 export const addToCart = ({ commit }, product) => {
     if (product.inventory > 0) {
-        commit(types.ADD_TO_CART, {
+        store.commit(types.ADD_TO_CART, {
             id: product.id
         })
     }

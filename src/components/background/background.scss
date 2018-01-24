@@ -1,21 +1,47 @@
+@import "../../components/media-queries/sass-mq";
+@import "./../layout/layout-definitions.json";
+@import "./../colors/colors.json";
+
 .background {
   position: absolute;
   display: grid;
-  grid-template-columns: 25% 75%;
+  grid-template-columns: 0 100%;
   grid-template-rows: auto;
   grid-template-areas: "sidebar content";
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
+
+  @include mq($from: 'm') {
+    grid-template-columns: calc(25% + #{map_get($layout, "header-row-width")}) calc(75% - #{map_get($layout, "header-row-width")});
+  }
 }
 
 .background__sidebar {
   background-color: aqua;
   grid-area: sidebar;
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    transition: width 300ms ease-out;
+    background-color: aqua;
+  }
+
+  &--expanded {
+    &:before {
+      width: calc(100% + #{map_get($layout, "header-row-width")});
+    }
+  }
 }
 
 .background__content {
-  background-color: blueviolet;
+  background-color: $color-dark;
   grid-area: content;
 }

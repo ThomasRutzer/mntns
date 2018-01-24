@@ -1,3 +1,18 @@
+@import "components/colors/colors";
+@import "components/footerbar/footerbar";
+@import "components/home/home";
+@import "components/layout/layout";
+@import "components/lists/lists";
+@import "components/links/links";
+@import "components/navbar/navbar";
+@import "components/typography/typography";
+@import "components/typography/typography-definitions.json";
+
 html, body, #app-main {
     height: 100%;
+    margin: 0;
+    padding: 0;
+    color: $color-light;
+    font-family: $font-family-main;
+    font-size: $font-size-main;
 }

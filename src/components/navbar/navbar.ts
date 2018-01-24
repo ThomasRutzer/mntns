@@ -8,6 +8,7 @@ import { RouterLink } from './../router/';
 export class NavbarComponent extends Vue {
 
     protected logger: Logger;
+    private isHome: Boolean = false;
 
     object: { default: string } = { default: 'Default object property!' }; // objects as default values don't need to be wrapped into functions
 
@@ -17,11 +18,15 @@ export class NavbarComponent extends Vue {
 
     @Watch('$route.path')
     pathChanged() {
-        this.logger.info('Changed current path to: ' + this.$route.path);
+        this.isHome = this.$route.path == '/';
     }
 
     mounted() {
         if (!this.logger) this.logger = new Logger();
         this.$nextTick(() => this.logger.info(this.object.default));
+    }
+
+    goHome() {
+        this.$router.push('/');
     }
 }

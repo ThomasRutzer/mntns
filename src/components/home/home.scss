@@ -1,0 +1,13 @@
+.home {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.home__content {
+  color: $color-lightest;
+}
+
+.home__title {
+  font-weight: 400;
+}
