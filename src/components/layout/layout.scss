@@ -3,7 +3,7 @@
 
 .layout {
   display: grid;
-  grid-template-columns: 1fr 95% 1fr;
+  grid-template-columns: 1fr map_get($layout, "content-area-width-small") 1fr;
   grid-template-rows: map_get($layout, "header-height") 1fr map_get($layout, "footer-height");
   grid-template-areas:
     ". header header ."
@@ -11,7 +11,7 @@
     ". footer footer .";
 
   @include mq($from: 'm') {
-    grid-template-columns: 1fr map_get($layout, "header-row-width") calc(66% - #{map_get($layout, "header-row-width")}) 1fr;
+    grid-template-columns: 1fr map_get($layout, "header-row-width") calc(#{map_get($layout, "content-area-width-medium")} - #{map_get($layout, "header-row-width")}) 1fr;
     grid-template-areas:
             ". header header ."
             ". . content ."

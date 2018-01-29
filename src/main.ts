@@ -18,9 +18,9 @@ let app = new Vue({
     el: '#app-main',
     store,
     components: {
-        'navbar': navbarComponent,
+    'navbar': navbarComponent,
         'footerbar': footerbarComponent,
         'background': backgroundComponent
-    },
+},
 
 });

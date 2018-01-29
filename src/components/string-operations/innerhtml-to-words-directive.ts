@@ -34,9 +34,9 @@ export default {
         let i = 0;
         let l = shuffledIndexes.length;
         for (i; i < l; i++) {
-            TweenMax.to(elements[shuffledIndexes[i]], 5, {
-                opacity:  0.7,
-                delay: 0.1 * i
+            TweenMax.to(elements[shuffledIndexes[i]], 3, {
+                opacity:  1,
+                delay: 0.05 * i
             });
         }
     }

@@ -1,3 +1,7 @@
 .bare-link {
   text-decoration: none;
+
+  &:visited {
+    color: inherit;
+  }
 }
