@@ -1,0 +1,14 @@
+.experiments-listing {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.experiments-listing__content {
+  color: $color-light;
+}
+
+.experiments-listing__title {
+  font-weight: 400;
+  max-width: 700px;
+}
