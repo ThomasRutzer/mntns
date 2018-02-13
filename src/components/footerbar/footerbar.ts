@@ -1,4 +1,4 @@
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 import { RouterLink } from './../router/';
 
 @Component({
@@ -6,6 +6,7 @@ import { RouterLink } from './../router/';
 })
 export class FooterbarComponent extends Vue {
     links: RouterLink[] = [
-        new RouterLink('Kontakt', '/contact'),
+        new RouterLink('Kontakt', 'contact'),
+        new RouterLink('mnts', 'mnts'),
     ];
 }
