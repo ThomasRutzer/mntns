@@ -1,7 +1,7 @@
 {
-  "color-darkest": "#020202",
-  "color-dark": "#2e2d2d",
-  "color-light": "#707070",
-  "color-lightest": "#fff",
+  "color-darkest": "#2e2d2d",
+  "color-dark": "#707070",
+  "color-light": "#f8f8f8",
+  "color-lightest": "#f8f8f8",
   "color-highlight": "#00ffcc"
 }
