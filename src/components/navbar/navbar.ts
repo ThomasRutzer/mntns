@@ -18,7 +18,11 @@ export class NavbarComponent extends Vue {
 
     @Watch('$route.path')
     pathChanged() {
-        this.isHome = this.$route.path == '/';
+        this.isHome = this.$route.path === '/';
+    }
+
+    created() {
+        this.isHome = this.$route.path === '/';
     }
 
     mounted() {

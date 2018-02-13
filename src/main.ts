@@ -8,8 +8,8 @@ const backgroundComponent = () => import('./components/background').then(({ Back
 const footerbarComponent = () => import('./components/footerbar').then(({ FooterbarComponent }) => FooterbarComponent);
 
 // import global directives
-import { innerHtmlToWordsSplitDirective } from './components/string-operations';
-Vue.directive('innerhtml-to-words', innerHtmlToWordsSplitDirective);
+import { titleAnimationDirective } from './components/string-operations';
+Vue.directive('title-animation', titleAnimationDirective);
 
 import './main.scss';
 

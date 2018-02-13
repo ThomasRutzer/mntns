@@ -1,4 +1,5 @@
 @import "components/colors/colors";
+@import "components/experiments-listing/experiments-listing";
 @import "components/footerbar/footerbar";
 @import "components/home/home";
 @import "components/layout/layout";
@@ -15,4 +16,8 @@ html, body, #app-main {
     color: $color-light;
     font-family: $font-family-main;
     font-size: $font-size-main;
+}
+
+body {
+  background-color: $color-lightest;
 }

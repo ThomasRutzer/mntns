@@ -1,5 +1,5 @@
-import innerHtmlToWordsSplitDirective from './innerhtml-to-words-directive';
+import titleAnimationDirective from './title-typo-animation-directive';
 
 export {
-    innerHtmlToWordsSplitDirective,
+    titleAnimationDirective,
 }

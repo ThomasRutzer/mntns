@@ -34,10 +34,17 @@ export default {
         let i = 0;
         let l = shuffledIndexes.length;
         for (i; i < l; i++) {
-            TweenMax.to(elements[shuffledIndexes[i]], 3, {
-                opacity:  1,
-                delay: 0.05 * i
-            });
+            TweenMax.fromTo(elements[shuffledIndexes[i]], 3,
+                {
+                    opacity: 0,
+                    x: 16 *  Math.random() < 0.5 ? -1 : 1
+                },
+                {
+                    opacity:  1,
+                    delay: 0.05 * i
+                }
+            );
         }
     }
 };
+

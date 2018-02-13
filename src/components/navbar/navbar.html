@@ -2,19 +2,24 @@
     <ul class="navbar__list bare-list">
         <li v-for="link in links"
             :class="{'navbar__list-item--active' : $route.path == link.path}">
-            <router-link class="bare-link" :to="link.path">{{link.name}}</router-link>
+            <router-link class="bare-link" :to="link.path">
+                {{link.name}}
+            </router-link>
         </li>
     </ul>
-    <svg viewBox="0 0 13 52"
-         version="1.1"
-         xmlns="http://www.w3.org/2000/svg"
-         xmlns:xlink="http://www.w3.org/1999/xlink"
+    <div class="navbar__home"
          @click="goHome"
-         v-show="isHome"
-         class="navbar__back">
-        <g>
-            <path d="M30.1464466,25.3535534 L-19.1464466,25.3535534 L-19.6464466,25.3535534 L-19.6464466,26.3535534 L-19.1464466,26.3535534 L30.1464466,26.3535534 L25.5,31 L25.1464466,31.3535534 L25.8535534,32.0606602 L26.2071068,31.7071068 L31.7071068,26.2071068 L32.0606602,25.8535534 L31.4571068,25.25 L31.2071068,25 L26.2071068,20 L25.8535534,19.6464466 L25.1464466,20.3535534 L25.5,20.7071068 L30.1464466,25.3535534 Z" id="arrow" transform="translate(6.207107, 25.853553) rotate(-90.000000) translate(-6.207107, -25.853553) "></path>
-        </g>
+         v-show="!isHome">
+        <svg version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
+            <g>
+                <path d="M8.1,32.5h49.3h0.5v-1h-0.5H8.1l4.6-4.6l0.4-0.4l-0.7-0.7L12,26.1l-5.5,5.5L6.1,32l0.6,0.6L7,32.9l5,5l0.4,0.4
+                l0.7-0.7l-0.4-0.4L8.1,32.5z"/>
+            </g>
+        </svg>
 
-    </svg>
+    </div>
+
 </nav>

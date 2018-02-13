@@ -1,9 +1,6 @@
-<div class="background">
-    <div class="background__sidebar"
-         :class="{'background__sidebar--expanded': isExpanded}">
+<div class="background"
+     :class="{'background--expanded': isExpanded}">
+    <router-view name="background"></router-view>
 
-    </div>
-    <div class="background__content">
-        <router-view name="background"></router-view>
-    </div>
+    <div class="background__backdrop"></div>
 </div>
