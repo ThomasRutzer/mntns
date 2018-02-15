@@ -1,4 +1,9 @@
+@import "./util/sass/map-get-next";
+
+@import "components/background/background";
+@import "components/buttons/buttons";
 @import "components/colors/colors";
+@import "components/contact/contact";
 @import "components/experiments-listing/experiments-listing";
 @import "components/footerbar/footerbar";
 @import "components/home/home";
@@ -6,6 +11,7 @@
 @import "components/lists/lists";
 @import "components/links/links";
 @import "components/navbar/navbar";
+@import "components/spacing/spacing";
 @import "components/typography/typography";
 @import "components/typography/typography-definitions.json";
 
@@ -13,7 +19,7 @@ html, body, #app-main {
     height: 100%;
     margin: 0;
     padding: 0;
-    color: $color-light;
+    color: $color-dark;
     font-family: $font-family-main;
     font-size: $font-size-main;
 }

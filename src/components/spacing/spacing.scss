@@ -1,0 +1,135 @@
+@import "./spacing-definitions.json";
+@import "./../media-queries/breakpoints.json";
+
+/**
+ * Utility classes for spacing between elements.
+ * Generates a suite of classes like:
+ *
+ *   .margin-top--s {}
+ *   .padding-left--m {}
+ *   .margin-right---xxl {}
+ *   .padding--l {}
+ *   .padding-right--none {}
+
+ *   .padding-vertical--s {}
+ *   .padding-vertical--m@m {}
+ *
+ *   It depends on  $spacing-sizes defined in spacing-definitions.json,
+ *   $mq-breakpoints defined in breakpoints.json
+ *   as well settings below.
+ *   Uses !important for highest priority
+ */
+
+/*
+ full set of possible and valid map entries
+for map $spacing-directions looks like this
+
+$spacing-directions: (
+  null: null,
+  '-top': '-top',
+  '-right': '-right',
+  '-bottom': '-bottom',
+  '-left': '-left'
+);
+*/
+$spacing-directions: (
+  null: null,
+  '-top': '-top',
+  '-bottom': '-bottom'
+);
+
+/*
+ full set of possible and valid map entries
+for map $spacing-properties looks like this
+
+$spacing-properties: (
+  'padding': 'padding',
+  'margin': 'margin'
+);
+*/
+$spacing-properties: (
+  'margin': 'margin'
+);
+
+@each $property, $property-namespace in $spacing-properties {
+
+  @each $direction, $direction-namespace in $spacing-directions {
+
+    @each $size, $value in $spacing-sizes {
+      .#{$property-namespace}#{$direction-namespace}--#{$size} {
+        #{$property}#{$direction}: $value !important;
+      }
+    }
+  }
+}
+
+@each $property, $property-namespace in $spacing-properties {
+  @each $size, $value in $spacing-sizes {
+
+    .#{$property-namespace}-vertical--#{$size} {
+      #{$property}-top: $value !important;
+      #{$property}-bottom: $value !important;
+    }
+
+    .#{$property-namespace}-horizontal--#{$size} {
+      #{$property}-left: $value !important;
+      #{$property}-right: $value !important;
+    }
+  }
+}
+
+@each $property, $property-namespace in $spacing-properties {
+
+  @each $direction, $direction-namespace in $spacing-directions {
+
+    @each $size, $value in $spacing-sizes {
+
+      @each $breakpoint, $breakpoint-value in $mq-breakpoints {
+
+        $nextBreakpoint: map-get-next($mq-breakpoints, $breakpoint);
+        $currentBreakpoint: $breakpoint-value;
+
+        .#{$property-namespace}#{$direction-namespace}--#{$size}#{\@}only-#{$breakpoint} {
+          @include mq($from: $currentBreakpoint, $until: $nextBreakpoint) {
+            #{$property}#{$direction}: $value !important;
+          }
+        }
+
+        .#{$property-namespace}#{$direction-namespace}--#{$size}#{\@}#{$breakpoint} {
+          @include mq($from: $currentBreakpoint) {
+            #{$property}#{$direction}: $value !important;
+
+          }
+        }
+
+        .#{$property-namespace}-vertical--#{$size}#{\@}only-#{$breakpoint} {
+          @include mq($from: $currentBreakpoint, $until: $nextBreakpoint) {
+            #{$property}-top: $value !important;
+            #{$property}-bottom: $value !important;
+          }
+        }
+
+        .#{$property-namespace}-horizontal--#{$size}#{\@}only-#{$breakpoint} {
+          @include mq($from: $currentBreakpoint, $until: $nextBreakpoint) {
+            #{$property}-left: $value !important;
+            #{$property}-right: $value !important;
+          }
+        }
+
+        .#{$property-namespace}-horizontal--#{$size}#{\@}#{$breakpoint} {
+          @include mq($from: $currentBreakpoint) {
+            #{$property}-left: $value !important;
+            #{$property}-right: $value !important;
+          }
+        }
+
+        .#{$property-namespace}-vertical--#{$size}#{\@}#{$breakpoint} {
+          @include mq($from: $currentBreakpoint) {
+            #{$property}-top: $value !important;
+            #{$property}-bottom: $value !important;
+          }
+        }
+      }
+    }
+  }
+}
