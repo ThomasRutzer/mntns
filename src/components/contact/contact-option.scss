@@ -1,0 +1,26 @@
+@import "./../colors/colors";
+
+$contact-option-line-width: 50px;
+
+.contact-option {
+  display: flex;
+}
+
+.contact-option__label {
+  position: relative;
+  width: 0;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: $contact-option-line-width + 8;
+    top: 8px;
+    width: $contact-option-line-width;
+    height: 1px;
+    background-color: $color-dark;
+  }
+}
+
+.contact-option__value {
+  margin-left: 2* $contact-option-line-width + 32;
+}
