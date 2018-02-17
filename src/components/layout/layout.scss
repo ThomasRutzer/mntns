@@ -1,5 +1,6 @@
 @import "layout-definitions.json";
 @import "../../components/media-queries/sass-mq";
+@import "../spacing/spacing-definitions.json";
 
 .layout {
   display: grid;
@@ -25,6 +26,12 @@
 
 .layout__content {
   grid-area: content;
+
+  padding: map_get($spacing-sizes, 'm') 0;
+
+  @include mq($from: 'm') {
+    padding: map_get($spacing-sizes, 'xl') 0;
+  }
 }
 
 .layout__footer {
