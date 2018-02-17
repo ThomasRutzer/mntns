@@ -4,23 +4,23 @@ import { mutations, mutationTypes } from './';
 describe('mutations', () => {
     it('reduces background', () => {
         // mock state
-        const state = { backgroundExpanded: true };
+        const state = { backgroundVisibility: 1 };
 
         // apply mutation
         mutations[mutationTypes.REDUCE_BACKGROUND](state);
 
         // assert result
-        expect(state.backgroundExpanded).to.equal(false)
+        expect(state.backgroundVisibility).to.equal(0)
     });
 
     it('expands background', () => {
         // mock state
-        const state = { backgroundExpanded: false };
+        const state = { backgroundVisibility: 0 };
 
         // apply mutation
         mutations[mutationTypes.EXPAND_BACKGROUND](state);
 
         // assert result
-        expect(state.backgroundExpanded).to.equal(true)
+        expect(state.backgroundVisibility).to.equal(1)
     })
 });
