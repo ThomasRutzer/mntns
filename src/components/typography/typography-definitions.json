@@ -3,5 +3,7 @@
   "font-family-highlight": "orator_fsregular, sans-serif",
   "font-size-main": "14px",
   "font-size-h1": "36px",
-  "line-height-h1": "1.2"
+  "line-height-h1": "1.2",
+  "font-size-h2": "24px",
+  "line-height-h2": "1.2"
 }

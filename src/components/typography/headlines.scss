@@ -1,8 +1,15 @@
 @import "./typography-definitions.json";
 
-h1, .h1 {
+h1, .h1, .h1-appearance {
   font-family: $font-family-highlight;
   font-size: $font-size-h1;
   line-height: $line-height-h1;
+  margin: 0;
+}
+
+h2, .h2, .h2-appearance {
+  font-family: $font-family-highlight;
+  font-size: $font-size-h2;
+  line-height: $line-height-h2;
   margin: 0;
 }
