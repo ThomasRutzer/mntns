@@ -7,7 +7,7 @@ import { mutationTypes } from './../../store/';
 
 export class ExperimentsListingComponent extends Vue {
 
-    mounted() {
+    beforeCreate() {
         this.$store.commit(mutationTypes.EXPAND_BACKGROUND);
     }
 }
