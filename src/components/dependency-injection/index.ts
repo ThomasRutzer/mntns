@@ -1,3 +1,7 @@
 import diContainer from './container';
+import types from './types';
 
-export default diContainer;
+export {
+    diContainer,
+    types
+};
