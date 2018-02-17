@@ -7,7 +7,7 @@ const state = {
      * @value 0 background component is visibile in reduced size
      * @value 1 background is visible and expanded
      */
-    backgroundVisibility: 1
+    backgroundVisibility: 0
 };
 
 export default state;
