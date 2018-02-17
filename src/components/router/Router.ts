@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter, { Location, Route, RouteConfig } from 'vue-router';
 
 const homeComponent = () => import('./../home').then(({ HomeComponent }) => HomeComponent);
+const contactComponent = () => import('./../contact').then(({ ContactComponent }) => ContactComponent);
 const experimentsListingComponent = () => import('./../experiments-listing').then(({ ExperimentsListingComponent }) => ExperimentsListingComponent);
 const mntsComponent = () => import('./../mnts').then(({ MntsComponent }) => MntsComponent);
 
@@ -21,6 +22,14 @@ export const createRoutes: () => RouteConfig[] = () => [
         components: {
             content: experimentsListingComponent,
             background: mntsComponent
+        },
+    },
+
+    {
+        path: '/contact',
+        components: {
+            content: contactComponent,
+            background: null
         },
     },
 ];
