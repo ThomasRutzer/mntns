@@ -1,4 +1,4 @@
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 import './background.scss';
 
 @Component({
@@ -10,5 +10,13 @@ import './background.scss';
     },
 })
 export class BackgroundComponent extends Vue {
+    private transition: boolean = false;
 
+    @Watch('$route')
+    routeChanged(to, from) {
+
+        // apply transition only when
+        // route changes anywhere FROM home (/)
+        this.transition = from === '/';
+    }
 }

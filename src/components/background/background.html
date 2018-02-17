@@ -1,6 +1,9 @@
 <div class="background"
      :class="{'background--expanded': isExpanded}">
-    <router-view name="background"></router-view>
+
+    <transition :name="transition ? 'background--transition' : null">
+        <router-view name="background"></router-view>
+    </transition>
 
     <div class="background__backdrop"></div>
 </div>
