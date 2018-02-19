@@ -7,7 +7,11 @@ const state = {
      * @value 0 background component is visibile in reduced size
      * @value 1 background is visible and expanded
      */
-    backgroundVisibility: 0
+    backgroundVisibility: 0,
+
+    currentRoute: {
+        titleAnimatedIn: false
+    }
 };
 
 export default state;

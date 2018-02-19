@@ -1,14 +1,28 @@
 import TweenMax from 'gsap';
 import { shuffle } from './../array-operations';
 import innerHTMLToWords from './innerhtml-to-words';
+import store, { mutationTypes } from '../../store/';
+
 
 export default {
-    inserted(el) {
+    async inserted(el) {
         const splittedWords = innerHTMLToWords(el);
         let shuffledIndexes = [];
         let elements = [];
 
+        // workaround for current native Promise,
+        // to resolve it later
+        let animationCompleteClb = new Function();
+        const animationCompletePromise = new Promise( (res) => {
+            animationCompleteClb = res;
+        });
+
+        // store a Promise for each Tween,
+        // so we can handle onComplete more conveniently
+        const allAnimationPromises: Promise<any> | any = [];
+
         el.innerHTML = null;
+        store.commit(mutationTypes.CURRENT_TITLE_INVISIBLE);
 
         splittedWords.forEach((word, key) => {
            const span = document.createElement('span');
@@ -16,12 +30,14 @@ export default {
            // add space to each span except
            // last one
            if (key !== splittedWords.length) {
-               span.innerHTML = word + ' ';
+               span.innerHTML = word + '&nbsp;';
+
            } else {
                span.innerHTML = word;
            }
 
            span.style.opacity = "0";
+           span.style.display = "inline-block";
 
            shuffledIndexes[key] = key;
            elements[key] = span;
@@ -29,22 +45,26 @@ export default {
            el.appendChild(span);
         });
 
-        shuffledIndexes = shuffle(shuffledIndexes);
+        //shuffledIndexes = shuffle(shuffledIndexes);
+        allAnimationPromises.push(animationCompletePromise);
 
         let i = 0;
-        let l = shuffledIndexes.length;
+        let l = elements.length;
         for (i; i < l; i++) {
-            TweenMax.fromTo(elements[shuffledIndexes[i]], 3,
+            TweenMax.fromTo(elements[i], 1.5 + elements.length * 0.1,
                 {
                     opacity: 0,
-                    x: 16 *  Math.random() < 0.5 ? -1 : 1
                 },
                 {
                     opacity:  1,
-                    delay: 0.05 * i
-                }
+                    delay: 0.05 * i,
+                    onComplete: animationCompleteClb
+                },
             );
         }
-    }
+
+        await Promise.all(allAnimationPromises);
+        store.commit(mutationTypes.CURRENT_TITLE_VISIBLE)
+    },
 };
 
