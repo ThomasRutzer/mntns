@@ -11,6 +11,9 @@ const footerbarComponent = () => import('./components/footerbar').then(({ Footer
 import { titleAnimationDirective } from './components/string-operations';
 Vue.directive('title-animation', titleAnimationDirective);
 
+// import any other modules
+import './components/github-api-client';
+
 import './main.scss';
 
 let app = new Vue({
