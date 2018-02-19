@@ -5,9 +5,7 @@ import { mutationTypes } from './../../store/';
     template: require('./home.html')
 })
 export class HomeComponent extends Vue {
-    mounted() {
+    beforeCreate() {
         this.$store.commit(mutationTypes.REDUCE_BACKGROUND);
-
-
     }
 }

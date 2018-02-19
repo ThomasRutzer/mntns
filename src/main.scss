@@ -27,3 +27,75 @@ html, body, #app-main {
 body {
   background-color: $color-lightest;
 }
+
+// @todo: move to separate file
+/// REQUIRED SETTINGS ///
+$selector: "revealing-content";
+
+/// OBKJECT DESIGN TOKENS ///
+
+///// OBKJECT STYLES ///
+.#{$selector} {
+  overflow: hidden;
+  clip-path: polygon(0 0,0 0,0 100%,0 100%);
+  opacity: 0;
+
+  &.#{$selector}--reveal {
+    animation: reveal 1100ms cubic-bezier(.17,.67,.55,1.21) forwards;
+  }
+
+  &.#{$selector}--delayed-300 {
+    animation-delay: 300ms;
+  }
+
+  &.#{$selector}--delayed-600 {
+    animation-delay: 600ms;
+  }
+
+  &.#{$selector}--medium-duration {
+    animation-duration: 1500ms;
+  }
+
+  &.#{$selector}--long-duration {
+    animation-duration: 3300ms;
+  }
+}
+
+.#{$selector}__delayed-content {
+  opacity: 0;
+  transform: translateX(-5px);
+  transition: all 300ms 300ms cubic-bezier(.17,.67,.55,1.21);
+
+  &.#{$selector}__delayed-content--300 {
+    transition-delay: 300ms;
+  }
+
+  &.#{$selector}__delayed-content--600 {
+    transition-delay: 600ms;
+  }
+
+  .#{$selector}--reveal & {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+@keyframes reveal {
+  0% {
+    clip-path: polygon(0 0,0 0,0 100%,0 100%);
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  77% {
+    transform: translateX(0);
+    clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
+
+  }
+}
