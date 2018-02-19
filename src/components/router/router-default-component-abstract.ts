@@ -6,7 +6,13 @@ import { mutationTypes } from './../../store/';
  * e.g. any content pages like contact etc, to abstract common behavior
  */
 
-@Component
+@Component({
+    computed: {
+        titleIn() {
+            return this.$store.state.currentRoute.titleAnimatedIn;
+        }
+    },
+})
 export class RouterDefaultComponentAbstract extends Vue {
     beforeCreate() {
         this.$store.commit(mutationTypes.REDUCE_BACKGROUND);
