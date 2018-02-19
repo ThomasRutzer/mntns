@@ -2,31 +2,29 @@
 @import "./../layout/layout-definitions.json";
 @import "./../colors/colors.json";
 
-$background-reduced-width: map_get($layout, 'content-area-width-medium') / 2;
-$background-reduced-height: 75vh;
-
 $background-backdrop-offset: 16px;
 
 .background {
   position: fixed;
-  width: 90vw;
+  width: map_get($layout, 'content-area-width-small');
   height: 50vh;
   top: 25vh;
-  left: 5vw;
+  left: (100 - map_get($layout, 'content-area-width-small')) / 2;
   transition: all 300ms ease-out;
 
   @include mq($from: 'm') {
+    right: 100 - map_get($layout, 'content-area-width-medium') / 2;
+    left: auto;
 
-    top: (100 - $background-reduced-height) / 2;
-    left: 50%;
+    top: map_get($layout, 'header-height');
 
-    width: $background-reduced-width;
-    height: $background-reduced-height;
+    width: calc(#{map_get($layout, 'content-area-width-medium')} - #{map_get($layout, 'header-row-width')} * 2 );
+    height: calc(100vh - (#{map_get($layout, 'header-height')} + #{map_get($layout, 'footer-height')}));
 
     &--transition-enter-active,
     &--transition-leave-active {
       transform-origin: top left;
-      transition: transform 300ms, opacity 300ms 100ms;
+      transition: transform 700ms, opacity 300ms 100ms;
     }
 
     &--transition-enter,
@@ -34,6 +32,13 @@ $background-backdrop-offset: 16px;
       transform: scaleX(0);
       opacity: 0;
     }
+  }
+
+  @include mq($from: 'l') {
+    right: auto;
+    left: 50%;
+
+    width: map_get($layout, 'content-area-width-medium') / 2;
   }
 
   &--expanded {

@@ -16,7 +16,7 @@ export class BackgroundComponent extends Vue {
     routeChanged(to, from) {
 
         // apply transition only when
-        // route changes anywhere FROM home (/)
-        this.transition = from === '/';
+        // route changes anywhere FROM or TO home (/)
+        this.transition = to.path === '/' || from.path === '/';
     }
 }
