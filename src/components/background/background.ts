@@ -10,7 +10,7 @@ import './background.scss';
     },
 })
 export class BackgroundComponent extends Vue {
-    private transition: boolean = false;
+    private transition: boolean;
 
     @Watch('$route')
     routeChanged(to, from) {
@@ -18,5 +18,9 @@ export class BackgroundComponent extends Vue {
         // apply transition only when
         // route changes anywhere FROM or TO home (/)
         this.transition = to.path === '/' || from.path === '/';
+    }
+
+    created() {
+        this.transition = this.$route.path === '/';
     }
 }

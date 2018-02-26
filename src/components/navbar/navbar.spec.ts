@@ -7,7 +7,6 @@ import { ComponentTest, MockLogger } from '../../util/component-test';
 import { NavbarComponent } from './navbar';
 import { RouterLink } from './../router/';
 
-let loggerSpy = spy();
 const links = [
     new RouterLink('Home', '/'),
     new RouterLink('Test', '/test'),
@@ -19,7 +18,6 @@ const links = [
 class MockNavbarComponent extends NavbarComponent {
     constructor() {
         super();
-        this.logger = new MockLogger(loggerSpy);
         this.links = links;
     }
 }
@@ -48,7 +46,6 @@ describe('Navbar component', () => {
 
         await directiveTest.execute((vm) => { // ensure Vue has bootstrapped/run change detection
             debugger;
-            assert.calledWith(loggerSpy, 'Default object property!');
             expect(vm.$el.querySelectorAll('.navbar__list li').length).to.equal(2);
         });
     });
@@ -58,7 +55,6 @@ describe('Navbar component', () => {
 
         await directiveTest.execute((vm) => { // ensure Vue has bootstrapped/run change detection
             debugger;
-            assert.calledWith(loggerSpy, 'Default object property!');
             expect(vm.$el.querySelectorAll('.navbar__list li')[0].textContent).to.equal(links[0].name);
         });
     });
