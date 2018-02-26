@@ -7,7 +7,7 @@ describe('mutations', () => {
         const state = { backgroundVisibility: 1 };
 
         // apply mutation
-        mutations[mutationTypes.REDUCE_BACKGROUND](state);
+        mutations[mutationTypes.REDUCE_BACKGROUND](state, null);
 
         // assert result
         expect(state.backgroundVisibility).to.equal(0)
@@ -18,7 +18,7 @@ describe('mutations', () => {
         const state = { backgroundVisibility: 0 };
 
         // apply mutation
-        mutations[mutationTypes.EXPAND_BACKGROUND](state);
+        mutations[mutationTypes.EXPAND_BACKGROUND](state, null);
 
         // assert result
         expect(state.backgroundVisibility).to.equal(1)
