@@ -13,5 +13,5 @@ export default function getMinMaxNumbers( ...numbers: number[]) {
        }
     });
 
-    return invalid === true ? [null, null] : [Math.min(...numbers), Math.max(...numbers)];
+    return invalid ? [null, null] : [Math.min(...numbers), Math.max(...numbers)];
 }
