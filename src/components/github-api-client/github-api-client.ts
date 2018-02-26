@@ -14,3 +14,6 @@ class GithubApiClient implements GithubApiClientInterface {
 }
 
 export default GithubApiClient;
+export {
+    baseUrl
+}
