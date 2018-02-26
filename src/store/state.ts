@@ -11,7 +11,13 @@ const state = {
 
     currentRoute: {
         titleAnimatedIn: false
-    }
+    },
+
+    /**
+     * stores retrieved repos from GitHub,
+     * already mapped to match mnts interface
+     */
+    mappedRepos: null,
 };
 
 export default state;

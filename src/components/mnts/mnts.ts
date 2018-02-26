@@ -1,7 +1,6 @@
 import { Component, Vue } from 'vue-property-decorator';
-import { GithubApiClientInterface } from "../github-api-client";
-import { types, diContainer } from "../dependency-injection";
-import { MntsDataMapperInterface } from "./mnts-data-mapper-interface";
+
+import * as actionTypes from './../../store/action-types';
 
 import { GeneratorComponent } from './../../../node_modules/mnts/src/components/generator';
 import { SceneComponent } from './../../../node_modules/mnts/src/components/scene';
@@ -13,17 +12,11 @@ Vue.component('scene', SceneComponent);
     template: require('./mnts.html'),
 })
 export class MntsComponent extends Vue {
-    private githubApiClient;
-    private dataMapper;
-
     data: any[] = [];
 
     async created() {
-        this.githubApiClient = diContainer.get<GithubApiClientInterface>(types.GithubApiClient);
-        this.dataMapper = diContainer.get<MntsDataMapperInterface>(types.MntsDataMapper);
-
-        const res = await this.githubApiClient.getUserRepos('thomasrutzer');
-        this.data = this.dataMapper.mapRepos(res.data);
+        await this.$store.dispatch(actionTypes.RETRIEVE_GITHUB_REPOS);
+        this.data = this.$store.state.mappedRepos;
     }
 
     expandMnts() {

@@ -17,6 +17,10 @@ const mutations = {
         state.currentRoute.titleAnimatedIn = false
     },
 
+    [types.STORE_GITHUB_REPOS](state, payload) {
+        state.mappedRepos = payload;
+    }
+
 };
 
 export default mutations;
