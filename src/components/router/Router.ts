@@ -21,7 +21,7 @@ export const createRoutes: () => RouteConfig[] = () => [
         path: '/mnts',
         components: {
             content: experimentsListingComponent,
-            background: mntsComponent
+            background: mntsComponent,
         },
     },
 

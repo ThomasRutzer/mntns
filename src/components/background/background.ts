@@ -1,4 +1,4 @@
-import { Component, Vue, Watch } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import './background.scss';
 
 @Component({
@@ -10,17 +10,21 @@ import './background.scss';
     },
 })
 export class BackgroundComponent extends Vue {
-    private transition: boolean;
+    // actual transition of background component for
+    // route specific component inside router-view=background
+    // only apply this transition, when route context is "/" (home)
+    private transition: boolean = true;
 
-    @Watch('$route')
-    routeChanged(to, from) {
-
-        // apply transition only when
-        // route changes anywhere FROM or TO home (/)
-        this.transition = to.path === '/' || from.path === '/';
-    }
+    // actual expanding transition of
+    // route specific component inside router-view=background
+    private expandTransition: boolean = false;
 
     created() {
-        this.transition = this.$route.path === '/';
+        this.$router.beforeEach((to, from, next) => {
+            this.transition = from.path === '/' || to.path === '/';
+            this.expandTransition = from.path === '/mnts' || to.path === '/mnts';
+
+            next();
+        })
     }
 }

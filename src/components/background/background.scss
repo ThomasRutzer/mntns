@@ -6,15 +6,17 @@ $background-backdrop-offset: 16px;
 
 .background {
   position: fixed;
-  width: map_get($layout, 'content-area-width-small');
-  height: 50vh;
-  top: 25vh;
-  left: (100 - map_get($layout, 'content-area-width-small')) / 2;
-  transition: all 300ms ease-out;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+
+  &--transition {
+    transition: all 300ms ease-out, height 300ms ease-out;
+  }
 
   @include mq($from: 'm') {
-    right: (100 - map_get($layout, 'content-area-width-medium')) / 2;
-    left: auto;
+    left: 50%;
 
     top: map_get($layout, 'header-height') * 2;
 
@@ -23,19 +25,18 @@ $background-backdrop-offset: 16px;
 
     &--transition-enter-active,
     &--transition-leave-active {
-      transform-origin: top left;
-      transition: transform 1000ms ease-out, opacity 300ms 100ms;
+      transform-origin: center;
+      transition: transform 1100ms ease-out 100ms, opacity 300ms 200ms;
     }
 
     &--transition-enter,
     &--transition-leave-to {
-      transform: scaleX(0);
+      transform: scale(0.95,0.95);
       opacity: 0;
     }
   }
 
   @include mq($from: 'l') {
-    right: auto;
     left: 50%;
 
     width: map_get($layout, 'content-area-width-medium') / 2;
@@ -48,9 +49,11 @@ $background-backdrop-offset: 16px;
     left: 0;
     overflow: hidden;
   }
+
 }
 
 .background__backdrop {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -58,18 +61,24 @@ $background-backdrop-offset: 16px;
   height: 100%;
   z-index: -1;
   background: $color-highlight;
-  transform: translate($background-backdrop-offset,-$background-backdrop-offset);
-  //animation: backgroundEntrance 700ms forwards cubic-bezier(.37,.3,.33,.57);
+  // animation: backgroundEntrance 700ms forwards cubic-bezier(.37,.3,.33,.57);
+  @include mq($from: 'm') {
+    transform: translate($background-backdrop-offset, -$background-backdrop-offset);
+  }
 
+
+  &--visible {
+    display: block;
+  }
 }
 
 @keyframes backgroundEntrance {
 
   0% {
-    transform: translate(0,0);
+    opacity: 0;
   }
 
   100% {
-    transform: translate($background-backdrop-offset,-$background-backdrop-offset);
+    opacity: 1;
   }
 }

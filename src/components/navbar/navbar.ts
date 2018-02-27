@@ -1,5 +1,4 @@
 import { Component, Vue, Watch } from 'vue-property-decorator';
-import { Logger } from '../../util/log';
 import { RouterLink } from './../router/';
 
 @Component({

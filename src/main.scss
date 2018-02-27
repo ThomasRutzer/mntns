@@ -29,6 +29,8 @@ body {
   background-color: $color-lightest;
 }
 
+[v-cloak] {display: none};
+
 // @todo: move to separate file
 /// REQUIRED SETTINGS ///
 $selector: "revealing-content";

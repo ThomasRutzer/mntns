@@ -5,6 +5,10 @@ import store, { mutationTypes } from '../../store/';
 
 
 export default {
+    bind() {
+        store.commit(mutationTypes.CURRENT_TITLE_INVISIBLE);
+    },
+
     async inserted(el) {
         const splittedWords = innerHTMLToWords(el);
         let shuffledIndexes = [];
@@ -22,7 +26,6 @@ export default {
         const allAnimationPromises: Promise<any> | any = [];
 
         el.innerHTML = null;
-        store.commit(mutationTypes.CURRENT_TITLE_INVISIBLE);
 
         splittedWords.forEach((word, key) => {
            const span = document.createElement('span');

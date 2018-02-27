@@ -2,7 +2,7 @@
     <ul class="navbar__list bare-list revealing-content revealing-content--reveal">
         <li v-for="link in links"
             :class="{'navbar__list-item--active' : $route.path == link.path}">
-            <router-link class="bare-link" :to="link.path">{{link.name}}</router-link>
+            <router-link class="bare-link" :to="link.path" exact>{{link.name}}</router-link>
         </li>
     </ul>
     <div class="navbar__home"
