@@ -1,6 +1,5 @@
 import * as mapperUtils from './mapper-utilts';
 import {expect} from 'chai';
-import { spy } from 'sinon';
 
 describe('mapper utils', () => {
     const data = [
@@ -51,6 +50,16 @@ describe('mapper utils', () => {
         it('caches properly', () => {
             const mappedData = mapperUtils.getMinMaxValueTypeDate(data, "pushed_at", "2018-01-21T17:28:58Z");
             expect(mapperUtils.minMaxCache["pushed_at"]).to.exist;
+        });
+    });
+
+    describe('rangeMapper', () => {
+        it('returns valid values', () => {
+            const value = 5;
+            const in_range = [0,5];
+            const out_range = [0,100];
+
+            expect(mapperUtils.rangeMapper(value, in_range[0], in_range[1], out_range[0], out_range[1])).to.equal(100)
         });
     });
 });

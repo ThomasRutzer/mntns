@@ -2,7 +2,6 @@ import { injectable } from "inversify";
 import "reflect-metadata";
 import { MntsDataMapperInterface } from "./mnts-data-mapper-interface";
 import * as mapperUtils from './mapper-utilts';
-import rangeMapper from './../mnts/range-mapper';
 
 @injectable()
 class MntsDataMapper implements MntsDataMapperInterface {
@@ -29,7 +28,7 @@ class MntsDataMapper implements MntsDataMapperInterface {
                 }
 
                 // map value from range determined from data values to requested
-                mappedValues[mapper.mountainsParameter] = rangeMapper(
+                mappedValues[mapper.mountainsParameter] = mapperUtils.rangeMapper(
                     value,
                     min,
                     max,
