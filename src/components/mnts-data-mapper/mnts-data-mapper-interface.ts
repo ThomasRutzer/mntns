@@ -1,3 +1,3 @@
 export interface MntsDataMapperInterface {
-    mapRepos(data: any[]): Object[]
+    mapRepos(data: any[], mapper: any[]): Object[]
 }

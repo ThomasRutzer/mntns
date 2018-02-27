@@ -1,5 +1,4 @@
-//@todo: fix config
-//import { MountainConfig } from './../../../node_modules/mnts/src/components/mountain/';
+import MountainConfig from 'mnts/src/components/mountain/MountainConfig';
 
 /**
  * strong bound mappers; only work when actually mapping
@@ -19,8 +18,8 @@ const mappers = [
     {
         dataKey: "size",
         mountainsParameter: "height",
-        min: 0,
-        max: 50,
+        min: MountainConfig.parameters.height.min,
+        max: MountainConfig.parameters.height.max,
         type: "number",
     },
 

@@ -4,6 +4,16 @@ import { expect } from 'chai';
 
 describe('Mnts Data Mapper', () => {
     let mapper: MntsDataMapperInterface = null;
+    const mappers = [
+        {
+            dataKey: "size",
+            mountainsParameter: "height",
+            min: 0,
+            max: 50,
+            type: "number",
+        },
+    ];
+
     const data = [
         {
             "id": 87546623,
@@ -60,12 +70,12 @@ describe('Mnts Data Mapper', () => {
     });
 
     it('maps every entry of data array', () => {
-        const mappedData = mapper.mapRepos(data);
+        const mappedData = mapper.mapRepos(data, mappers);
         expect(mappedData.length).to.equal(data.length)
     })
 
     it('maps properly', () => {
-        const mappedData = mapper.mapRepos(data);
+        const mappedData = mapper.mapRepos(data, mappers);
         expect(mappedData[0].height).to.equal(50)
         expect(mappedData[1].height).to.equal(0)
     })

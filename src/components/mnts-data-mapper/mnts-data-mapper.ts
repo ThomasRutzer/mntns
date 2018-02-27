@@ -1,7 +1,6 @@
 import { injectable } from "inversify";
 import "reflect-metadata";
 import { MntsDataMapperInterface } from "./mnts-data-mapper-interface";
-import mappers from './mappers';
 import * as mapperUtils from './mapper-utilts';
 import rangeMapper from './../mnts/range-mapper';
 
@@ -12,7 +11,7 @@ class MntsDataMapper implements MntsDataMapperInterface {
      * @param {any[]} data actually set of data which will be mapped to visualize Mountains
      * @return {Object[]} with mapped data
      */
-    mapRepos(data: any[]): Object[] {
+    mapRepos(data: any[], mappers: any[]): Object[] {
         const mappedData: Object[] = [];
 
         data.forEach((dataSet) => {
