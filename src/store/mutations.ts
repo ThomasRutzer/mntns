@@ -18,7 +18,6 @@ const mutations = {
     },
 
     [types.STORE_GITHUB_REPOS](state, payload) {
-        console.log(payload)
         state.mappedRepos = payload;
     }
 
