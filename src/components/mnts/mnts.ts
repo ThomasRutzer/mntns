@@ -1,12 +1,6 @@
 import {Component, Vue, Watch} from 'vue-property-decorator';
-
 import * as actionTypes from './../../store/action-types';
-
-import { GeneratorComponent } from './../../../node_modules/mnts/src/components/generator';
-import { SceneComponent } from './../../../node_modules/mnts/src/components/scene';
-
-Vue.component('generator', GeneratorComponent);
-Vue.component('scene', SceneComponent);
+import 'mnts/src/components/generator';
 
 @Component({
     template: require('./mnts.html'),

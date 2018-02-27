@@ -1,7 +1,8 @@
 <div class="mnts"
      @click="expandMnts()">
 
-    <generator :data="data"></generator>
+    <generator @intersection="focusedMnt($event)"
+               :data="data"></generator>
 
 </div>
 
