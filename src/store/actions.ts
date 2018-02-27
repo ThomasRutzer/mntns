@@ -3,6 +3,7 @@ import * as actionTypes from './action-types';
 
 import { types, diContainer } from "./../components/dependency-injection";
 import { MntsDataMapperInterface } from "../components/mnts-data-mapper/mnts-data-mapper-interface";
+import mappers from './../components/mnts-data-mapper/mappers';
 import { GithubApiClientInterface } from "./../components/github-api-client";
 
 /*
@@ -27,8 +28,12 @@ const actions = {
             const githubApiClient = diContainer.get<GithubApiClientInterface>(types.GithubApiClient);
             const dataMapper = diContainer.get<MntsDataMapperInterface>(types.MntsDataMapper);
 
-            const res = await githubApiClient.getUserRepos('thomasrutzer');
-            data = dataMapper.mapRepos(res.data);
+            const res = await githubApiClient.getUserRepos('thomasrutzer')
+                .catch((e) => {
+
+                });
+
+            data = res ? dataMapper.mapRepos(res.data, mappers): [];
         } else {
             data = state.mappedRepos;
         }
