@@ -2,11 +2,11 @@ import * as types from './mutation-types';
 
 const mutations = {
     [types.EXPAND_BACKGROUND](state) {
-        state.backgroundVisibility = 1;
+        state.background.visibility = 1;
     },
 
     [types.REDUCE_BACKGROUND](state) {
-        state.backgroundVisibility = 0;
+        state.background.visibility = 0;
     },
 
     [types.CURRENT_TITLE_VISIBLE](state) {
@@ -18,7 +18,8 @@ const mutations = {
     },
 
     [types.STORE_GITHUB_REPOS](state, payload) {
-        state.mappedRepos = payload;
+        state.mappedRepos = payload.mappedRepos;
+        state.rawRepos = payload.rawRepos;
     }
 
 };

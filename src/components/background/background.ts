@@ -5,7 +5,7 @@ import './background.scss';
     template: require('./background.html'),
     computed: {
         isExpanded() {
-            return this.$store.state.backgroundVisibility === 1;
+            return this.$store.state.background.visibility === 1;
         }
     },
 })

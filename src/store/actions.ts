@@ -28,14 +28,21 @@ const actions = {
             const githubApiClient = diContainer.get<GithubApiClientInterface>(types.GithubApiClient);
             const dataMapper = diContainer.get<MntsDataMapperInterface>(types.MntsDataMapper);
 
-            const res = await githubApiClient.getUserRepos('thomasrutzer')
+            const res = await githubApiClient.getUserRepos('addyosmani')
                 .catch((e) => {
 
                 });
 
-            data = res ? dataMapper.mapRepos(res.data, mappers): [];
+            data = {
+                mappedRepos: res ? dataMapper.mapRepos(res.data, mappers): [],
+                rawRepos: res.data
+            };
+
         } else {
-            data = state.mappedRepos;
+            data = {
+                mappedRepos: state.mappedRepos,
+                rawRepos: state.rawRepos
+            };
         }
 
         commit(mutationTypes.STORE_GITHUB_REPOS, data);
