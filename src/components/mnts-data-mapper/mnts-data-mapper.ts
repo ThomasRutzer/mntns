@@ -8,6 +8,7 @@ class MntsDataMapper implements MntsDataMapperInterface {
 
     /**
      * @param {any[]} data actually set of data which will be mapped to visualize Mountains
+     * @param {any[]} mappers a list of fixed mappers to apply to data
      * @return {Object[]} with mapped data
      */
     mapRepos(data: any[], mappers: any[]): Object[] {
@@ -37,7 +38,10 @@ class MntsDataMapper implements MntsDataMapperInterface {
                 );
             });
 
-            mappedData.push(mappedValues);
+            mappedData.push({
+                id: `${dataSet.id}`,
+                ...mappedValues
+            });
         });
 
         return mappedData;

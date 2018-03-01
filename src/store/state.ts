@@ -10,6 +10,11 @@ const state = {
          * @value 1 background is visible and expanded
          */
         visibility: 0,
+
+        /**
+         * whether background component is active or not.
+         */
+        activated: false,
     },
 
     currentRoute: {
@@ -24,7 +29,20 @@ const state = {
     /**
      * stores retrieved repos from GitHub,
      */
-    rawRepos:null,
+    rawRepos: null,
+
+    /**
+     * repo which will be shown in detail
+     * @type { Object }
+     * @property { Object } raw data from Github
+     * @property { Object } mapped Github repo data
+     * @property  { Object } event typo of which triggers focus
+     */
+    focusedRepo: {
+        raw: null,
+        mapped: null,
+        event: null
+    }
 };
 
 export default state;
