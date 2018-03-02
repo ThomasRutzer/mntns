@@ -21,28 +21,37 @@ const state = {
         titleAnimatedIn: false
     },
 
-    /**
-     * mapped repos to match mnts interface
-     */
-    mappedRepos: null,
+    gitHubData: {
+        startedLoading: null,
+        finishedLoading: null,
 
-    /**
-     * stores retrieved repos from GitHub,
-     */
-    rawRepos: null,
+        startedMapping: null,
+        finishedMapping: null,
 
-    /**
-     * repo which will be shown in detail
-     * @type { Object }
-     * @property { Object } raw data from Github
-     * @property { Object } mapped Github repo data
-     * @property  { Object } event typo of which triggers focus
-     */
-    focusedRepo: {
-        raw: null,
-        mapped: null,
-        event: null
-    }
+        /**
+         * mapped repos to match mnts interface
+         */
+        mappedRepos: null,
+
+        /**
+         * stores retrieved repos from GitHub,
+         */
+        rawRepos: null,
+
+        /**
+         * repo which will be shown in detail
+         * @type { Object }
+         * @property { Object } raw data from Github
+         * @property { Object } mapped Github repo data
+         * @property  { Object } event typo of which triggers focus
+         */
+        focusedRepo: {
+            raw: null,
+            mapped: null,
+            event: null
+        }
+    },
+
 };
 
 export default state;

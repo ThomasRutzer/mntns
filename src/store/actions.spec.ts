@@ -7,13 +7,15 @@ import './../components/github-api-client';
 import './../components/mnts-data-mapper';
 import {actions, actionTypes} from './';
 
+const mockGithubUserName = 'testUser';
+
 describe('actions', () => {
     describe('type: retrieve github repos', () => {
         let mock;
         beforeEach(() => {
             mock = new MockAdapter(axios);
 
-            mock.onGet(`${baseUrl}/users/thomasrutzer/repos`).reply(
+            mock.onGet(`${baseUrl}/users/${mockGithubUserName}/repos`).reply(
                 200,
                 [
                     {
@@ -144,10 +146,8 @@ describe('actions', () => {
         });
 
         it('adds repos to store.state', async () => {
-           await actions[actionTypes.RETRIEVE_GITHUB_REPOS]({commit:store.commit, state:store.state});
-           expect(store.state.mappedRepos.length).to.equal(2);
-           expect(store.state.mappedRepos[0].height).to.exist;
-           expect(store.state.mappedRepos[1].height).to.exist;
+           await actions[actionTypes.RETRIEVE_GITHUB_REPOS]({commit: store.commit, state: store.state}, mockGithubUserName);
+           expect(store.state.gitHubData.mappedRepos.length).to.equal(2);
        })
     });
 });

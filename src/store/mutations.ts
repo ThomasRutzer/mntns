@@ -14,7 +14,7 @@ const mutations = {
     },
 
     [types.DEACTIVATE_BACKGROUND](state) {
-        state.background.deactivated = false;
+        state.background.activated = false;
     },
 
     [types.CURRENT_TITLE_VISIBLE](state) {
@@ -25,21 +25,41 @@ const mutations = {
         state.currentRoute.titleAnimatedIn = false
     },
 
+    [types.GITHUB_API_STARTED](state) {
+        state.gitHubData.startedLoading = true;
+        state.gitHubData.finishedLoading = false;
+    },
+
+    [types.GITHUB_API_FINISHED](state) {
+        state.gitHubData.startedLoading = false;
+        state.gitHubData.finishedLoading = true;
+    },
+
+    [types.GITHUB_DATA_MAPPING_STARTED](state) {
+        state.gitHubData.startedMapping = true;
+        state.gitHubData.finishedMapping = false;
+    },
+
+    [types.GITHUB_DATA_MAPPING_FINISHED](state) {
+        state.gitHubData.startedMapping = false;
+        state.gitHubData.finishedMapping = true;
+    },
+
     [types.STORE_GITHUB_REPOS](state, payload) {
-        state.mappedRepos = payload.mappedRepos;
-        state.rawRepos = payload.rawRepos;
+        state.gitHubData.mappedRepos = payload.mappedRepos;
+        state.gitHubData.rawRepos = payload.rawRepos;
     },
 
     [types.FOCUS_REPO](state, payload) {
-        state.focusedRepo.raw = payload.raw;
-        state.focusedRepo.mapped = payload.mapped;
-        state.focusedRepo.event = payload.event;
+        state.gitHubData.focusedRepo.raw = payload.raw;
+        state.gitHubData.focusedRepo.mapped = payload.mapped;
+        state.gitHubData.focusedRepo.event = payload.event;
     },
 
     [types.UNFOCUS_REPO](state) {
-        state.focusedRepo.raw = null;
-        state.focusedRepo.mapped = null;
-        state.focusedRepo.event = null;
+        state.gitHubData.focusedRepo.raw = null;
+        state.gitHubData.focusedRepo.mapped = null;
+        state.gitHubData.focusedRepo.event = null;
     }
 
 };

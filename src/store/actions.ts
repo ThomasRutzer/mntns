@@ -21,27 +21,33 @@ export const addToCart = ({ commit }, product) => {
 */
 
 const actions = {
-    async [actionTypes.RETRIEVE_GITHUB_REPOS] ({ commit, state }) {
+    async [actionTypes.RETRIEVE_GITHUB_REPOS] ({ commit, state }, userName) {
         let data;
 
-        if (!state.mappedRepos) {
+        if (!state.gitHubData.mappedRepos) {
             const githubApiClient = diContainer.get<GithubApiClientInterface>(types.GithubApiClient);
             const dataMapper = diContainer.get<MntsDataMapperInterface>(types.MntsDataMapper);
 
-            const res = await githubApiClient.getUserRepos('addyosmani')
+            commit(mutationTypes.GITHUB_API_STARTED);
+
+            const res = await githubApiClient.getUserRepos(userName)
                 .catch((e) => {
 
                 });
 
+            commit(mutationTypes.GITHUB_DATA_MAPPING_STARTED);
+
             data = {
                 mappedRepos: res ? dataMapper.mapRepos(res.data, mappers): [],
-                rawRepos: res.data
+                rawRepos: res ? res.data : []
             };
 
+            commit(mutationTypes.GITHUB_DATA_MAPPING_FINISHED);
+            commit(mutationTypes.GITHUB_API_FINISHED);
         } else {
             data = {
-                mappedRepos: state.mappedRepos,
-                rawRepos: state.rawRepos
+                mappedRepos: state.gitHubData.mappedRepos,
+                rawRepos: state.gitHubData.rawRepos
             };
         }
 
