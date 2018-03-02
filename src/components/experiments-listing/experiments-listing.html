@@ -6,7 +6,26 @@
                 <i>Mnts</i> is a experiment to visualize my Github account.
             </h1>
 
-            <span class="primary-button margin-top--l" @click="activate()">explore</span>
+            <span class="primary-button margin-top--l revealing-content"
+                  :class="{'revealing-content--reveal': dataLoaded}"
+                  @click="activate()">explore</span>
+        </div>
+
+        <div v-show="isActivated">
+            <div v-if="focusedData"
+                 :class="{'experiments-listing__focused-label--outside': outside}"
+                 :style="{left: focusedEvent.mouseX + 'px', top: focusedEvent.mouseY + 'px'}"
+                 class="experiments-listing__focused-label">
+                {{ focusedData.name }}
+            </div>
+
+            <div v-if="focusedData"
+                 class="experiments-listing__details-box">
+                <p>title: {{ focusedData.name }}</p>
+                <a class="primary-button"
+                   :href="focusedData.url">view repo</a>
+            </div>
+
         </div>
     </div>
 </div>

@@ -12,3 +12,11 @@
   font-weight: 400;
   max-width: 700px;
 }
+
+.experiments-listing__focused-label {
+  position: fixed;
+
+  &--outside {
+    transform: translateX(-100%);
+  }
+}
