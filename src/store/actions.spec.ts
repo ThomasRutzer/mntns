@@ -4,7 +4,7 @@ import {baseUrl} from "../components/github-api-client/github-api-client";
 import store from './';
 import { expect } from 'chai'
 import './../components/github-api-client';
-import './../components/mnts-data-mapper';
+import '../components/data-mapper';
 import {actions, actionTypes} from './';
 
 const mockGithubUserName = 'testUser';

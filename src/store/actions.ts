@@ -2,8 +2,8 @@ import * as mutationTypes from './mutation-types'
 import * as actionTypes from './action-types';
 
 import { types, diContainer } from "./../components/dependency-injection";
-import { MntsDataMapperInterface } from "../components/mnts-data-mapper/mnts-data-mapper-interface";
-import * as mappers from './../components/mnts-data-mapper/mappers';
+import { DataMapperInterface } from "../components/data-mapper/data-mapper-interface";
+import * as mappers from '../components/data-mapper/mappers';
 import { GithubApiClientInterface } from "./../components/github-api-client";
 
 /*
@@ -26,7 +26,7 @@ const actions = {
 
         if (!state.gitHubData.mappedRepos) {
             const githubApiClient = diContainer.get<GithubApiClientInterface>(types.GithubApiClient);
-            const dataMapper = diContainer.get<MntsDataMapperInterface>(types.MntsDataMapper);
+            const dataMapper = diContainer.get<DataMapperInterface>(types.DataMapper);
 
             commit(mutationTypes.GITHUB_API_STARTED);
 
@@ -59,7 +59,7 @@ const actions = {
 
         if (!state.gitHubData.commits[repoName]) {
             const githubApiClient = diContainer.get<GithubApiClientInterface>(types.GithubApiClient);
-            const dataMapper = diContainer.get<MntsDataMapperInterface>(types.MntsDataMapper);
+            const dataMapper = diContainer.get<DataMapperInterface>(types.DataMapper);
 
             commit(mutationTypes.GITHUB_API_STARTED);
 

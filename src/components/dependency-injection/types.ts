@@ -1,6 +1,6 @@
 const types = {
     GithubApiClient: Symbol.for("GithubApiClient"),
-    MntsDataMapper: Symbol.for("MntsDataMapper"),
+    DataMapper: Symbol.for("DataMapper"),
 };
 
 export default types;

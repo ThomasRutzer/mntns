@@ -1,9 +1,9 @@
-import MntsDataMapper from './mnts-data-mapper';
-import { MntsDataMapperInterface } from "./";
+import DataMapper from './data-mapper';
+import { DataMapperInterface } from "./";
 import { expect } from 'chai';
 
-describe('Mnts Data Mapper', () => {
-    let mapper: MntsDataMapperInterface = null;
+describe('Data Mapper', () => {
+    let mapper: DataMapperInterface = null;
     const mappers = [
         {
             dataKey: ["size"],
@@ -66,7 +66,7 @@ describe('Mnts Data Mapper', () => {
     ];
 
     beforeEach(() => {
-       mapper = new MntsDataMapper();
+       mapper = new DataMapper();
     });
 
     it('maps every entry of data array', () => {

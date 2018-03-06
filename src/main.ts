@@ -13,7 +13,7 @@ Vue.directive('title-animation', titleAnimationDirective);
 
 // import any other modules
 import './components/github-api-client';
-import './components/mnts-data-mapper';
+import './components/data-mapper';
 
 import './main.scss';
 

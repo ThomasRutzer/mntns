@@ -1,11 +1,16 @@
 import { injectable } from "inversify";
 import "reflect-metadata";
-import { MntsDataMapperInterface } from "./mnts-data-mapper-interface";
+import { DataMapperInterface } from "./data-mapper-interface";
 import * as mapperUtils from './mapper-utilts';
 import { findDeep } from './../object-utils';
 
+/**
+ * DataMapper maps given data to specified output data.
+ * Mapping is configured by mappers
+ * @todo: implement mapper model
+ */
 @injectable()
-class MntsDataMapper implements MntsDataMapperInterface {
+class DataMapper implements DataMapperInterface {
 
     /**
      * @param {any[]} data actual set of data which will be mapped
@@ -49,4 +54,4 @@ class MntsDataMapper implements MntsDataMapperInterface {
     }
 }
 
-export default MntsDataMapper;
+export default DataMapper;
