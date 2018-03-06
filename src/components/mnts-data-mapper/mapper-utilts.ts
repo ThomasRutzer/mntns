@@ -2,6 +2,7 @@ import { getMinMaxNumbers } from "./../array-operations";
 import max from 'date-fns/max';
 import min from 'date-fns/min';
 import differenceInDays from 'date-fns/difference_in_days';
+import { findDeep } from './../object-utils';
 /**
  * @note: currently all mapper-utils only work with flat (not nested) data
  */
@@ -31,14 +32,18 @@ function getMinMaxTypeNumber(data: any[], property: string): number[]|null {
 /**
  *
  * @param {any[]} data all data
- * @param {string} property property of data to retrieve range from
+ * @param {string|any[]} property property of data to retrieve range from
  * @param { String } value which will be parsed to a Date
  * @return {[number, number, number]} where first index is minValue, and 2nd maxValue and 3rd value as number not Date
  */
-function getMinMaxValueTypeDate(data: any[], property: string, value: any): number[]|null {
+function getMinMaxValueTypeDate(data: any[], property: string|any[], value: any): number[]|null {
     if(!minMaxCache[property]) {
         const dates = data.map((value) => {
-            return new Date(value[property]);
+            if (typeof property === 'string') {
+                return new Date(value[property]);
+            } else {
+                return new Date(findDeep(value, property))
+            }
         });
 
         const minDate = min( ...dates );

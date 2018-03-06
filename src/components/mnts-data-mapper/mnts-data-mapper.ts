@@ -2,30 +2,31 @@ import { injectable } from "inversify";
 import "reflect-metadata";
 import { MntsDataMapperInterface } from "./mnts-data-mapper-interface";
 import * as mapperUtils from './mapper-utilts';
+import { findDeep } from './../object-utils';
 
 @injectable()
 class MntsDataMapper implements MntsDataMapperInterface {
 
     /**
-     * @param {any[]} data actually set of data which will be mapped to visualize Mountains
-     * @param {any[]} mappers a list of fixed mappers to apply to data
+     * @param {any[]} data actual set of data which will be mapped
+     * @param {any[]} mappers a list of mappers to map data
      * @return {Object[]} with mapped data
      */
-    mapRepos(data: any[], mappers: any[]): Object[] {
+    map(data: any[], mappers: any[]): Object[] {
         const mappedData: Object[] = [];
 
-        data.forEach((dataSet) => {
+        data.forEach((dataSet, index) => {
             const mappedValues = {};
 
-            mappers.forEach((mapper) => {
+            mappers.forEach((mapper, i) => {
                 let min, max, value;
 
-                // request range, considering mapper type
+                // determine range, considering mapper type
                 if(mapper.type === 'number') {
-                    [min, max] = mapperUtils.getMinMaxTypeNumber(data, mapper.dataKey);
+                    [min, max] = mapperUtils.getMinMaxTypeNumber(data, mapper.dataKey[mapper.dataKey.length - 1]);
                     value = dataSet[mapper.dataKey];
                 } else if (mapper.type === 'date') {
-                    [min, max, value] = mapperUtils.getMinMaxValueTypeDate(data, mapper.dataKey, dataSet[mapper.dataKey]);
+                    [min, max, value] = mapperUtils.getMinMaxValueTypeDate(data, mapper.dataKey, findDeep(dataSet, mapper.dataKey));
                 }
 
                 // map value from range determined from data values to requested
@@ -39,7 +40,7 @@ class MntsDataMapper implements MntsDataMapperInterface {
             });
 
             mappedData.push({
-                id: `${dataSet.id}`,
+                id: dataSet.id ? `${dataSet.id}` : index,
                 ...mappedValues
             });
         });

@@ -49,7 +49,9 @@ const state = {
             raw: null,
             mapped: null,
             event: null
-        }
+        },
+
+        commits: {}
     },
 
 };

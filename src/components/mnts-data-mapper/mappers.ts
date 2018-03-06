@@ -3,20 +3,19 @@ import MountainConfig from 'mnts/src/components/mountain/MountainConfig';
 /**
  * strong bound mappers; only work when actually mapping
  * Githup API data to Mountain Parameters.
- * Adjust this Array, to map other data.
  *
  * @type { Array.<Object>}
  *
  * @Object
- * @property { String } dateKey is any property of incoming data
+ * @property { Array.<String> } dateKey as path matching object structure
  * @property { String } height is any parameter to visualize Mountain.
  * @property { Number } min is minValue of this parameter
  * @property { Number } max is maxValue of this parameter
  * @property { String } type is type of dataKey, to use right mapping methods
  */
-const mappers = [
+const repoMappers = [
     {
-        dataKey: "size",
+        dataKey: ["size"],
         mountainsParameter: "height",
         min: MountainConfig.parameters.height.min,
         max: MountainConfig.parameters.height.max,
@@ -24,7 +23,7 @@ const mappers = [
     },
 
     {
-        dataKey: "created_at",
+        dataKey: ["created_at"],
         mountainsParameter: "xPos",
         min: 5,
         max: 100,
@@ -32,7 +31,7 @@ const mappers = [
     },
 
     {
-        dataKey: "pushed_at",
+        dataKey: ["pushed_at"],
         mountainsParameter: "yPos",
         min: 5,
         max: 100,
@@ -40,4 +39,17 @@ const mappers = [
     }
 ];
 
-export default mappers;
+const commitMappers = [
+    {
+        dataKey: ["commit", "author", "date"],
+        mountainsParameter: "height",
+        min: 5,
+        max: 100,
+        type: "date",
+    }
+];
+
+export {
+    repoMappers,
+    commitMappers
+};

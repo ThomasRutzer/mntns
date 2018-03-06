@@ -11,6 +11,10 @@ class GithubApiClient implements GithubApiClientInterface {
     getUserRepos(userName: string) {
         return axios.get(`${baseUrl}/users/${userName}/repos`);
     }
+
+    getCommits(repoName: string, userName: string) {
+        return axios.get(`${baseUrl}/repos/${userName}/${repoName}/commits`);
+    }
 }
 
 export default GithubApiClient;

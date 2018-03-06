@@ -50,6 +50,13 @@ const mutations = {
         state.gitHubData.rawRepos = payload.rawRepos;
     },
 
+    [types.STORE_COMMIT](state, payload) {
+        state.gitHubData.commits[payload.repoName] = {
+            mapped: payload.mapped,
+            raw: payload.raw
+        };
+    },
+
     [types.FOCUS_REPO](state, payload) {
         state.gitHubData.focusedRepo.raw = payload.raw;
         state.gitHubData.focusedRepo.mapped = payload.mapped;

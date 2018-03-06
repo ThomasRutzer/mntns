@@ -3,7 +3,7 @@ import * as actionTypes from './action-types';
 
 import { types, diContainer } from "./../components/dependency-injection";
 import { MntsDataMapperInterface } from "../components/mnts-data-mapper/mnts-data-mapper-interface";
-import mappers from './../components/mnts-data-mapper/mappers';
+import * as mappers from './../components/mnts-data-mapper/mappers';
 import { GithubApiClientInterface } from "./../components/github-api-client";
 
 /*
@@ -38,7 +38,7 @@ const actions = {
             commit(mutationTypes.GITHUB_DATA_MAPPING_STARTED);
 
             data = {
-                mappedRepos: res ? dataMapper.mapRepos(res.data, mappers): [],
+                mappedRepos: res ? dataMapper.map(res.data, mappers.repoMappers): [],
                 rawRepos: res ? res.data : []
             };
 
@@ -52,6 +52,39 @@ const actions = {
         }
 
         commit(mutationTypes.STORE_GITHUB_REPOS, data);
+    },
+
+    async [actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO] ({ commit, state }, { repoName, userName }) {
+        let data;
+
+        if (!state.gitHubData.commits[repoName]) {
+            const githubApiClient = diContainer.get<GithubApiClientInterface>(types.GithubApiClient);
+            const dataMapper = diContainer.get<MntsDataMapperInterface>(types.MntsDataMapper);
+
+            commit(mutationTypes.GITHUB_API_STARTED);
+
+            const res = await githubApiClient.getCommits(repoName, userName)
+                .catch((e) => {
+
+                });
+
+            commit(mutationTypes.GITHUB_DATA_MAPPING_STARTED);
+
+            data = {
+                mapped: res ? dataMapper.map(res.data, mappers.commitMappers): [],
+                raw: res ? res.data : []
+            };
+
+            commit(mutationTypes.GITHUB_DATA_MAPPING_FINISHED);
+            commit(mutationTypes.GITHUB_API_FINISHED);
+        } else {
+            data = {
+                mapped: state.gitHubData.commits[repoName].mapped,
+                raw: state.gitHubData.commits[repoName].raw
+            };
+        }
+
+        commit(mutationTypes.STORE_COMMIT, { ...data, repoName});
     }
 };
 
