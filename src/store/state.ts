@@ -54,6 +54,10 @@ const state = {
         commits: {}
     },
 
+    mntns: {
+        level: 1
+    }
+
 };
 
 export default state;

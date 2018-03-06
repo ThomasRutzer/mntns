@@ -67,6 +67,10 @@ const mutations = {
         state.gitHubData.focusedRepo.raw = null;
         state.gitHubData.focusedRepo.mapped = null;
         state.gitHubData.focusedRepo.event = null;
+    },
+
+    [types.MNTNS_NEXT_LEVEL](state, { level }) {
+        state.mntns.level = level;
     }
 
 };

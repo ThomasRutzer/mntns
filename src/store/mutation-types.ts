@@ -30,3 +30,5 @@ export const STORE_COMMIT = 'STORE_COMMIT';
 
 export const FOCUS_REPO = 'FOCUS_REPO';
 export const UNFOCUS_REPO = 'UNFOCUS_REPO';
+
+export const MNTNS_NEXT_LEVEL = 'MNTNS_NEXT_LEVEL';
