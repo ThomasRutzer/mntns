@@ -31,9 +31,7 @@ const actions = {
             commit(mutationTypes.GITHUB_API_STARTED);
 
             const res = await githubApiClient.getUserRepos(userName)
-                .catch((e) => {
-
-                });
+                .catch((e) => {});
 
             commit(mutationTypes.GITHUB_DATA_MAPPING_STARTED);
 
@@ -52,6 +50,7 @@ const actions = {
         }
 
         commit(mutationTypes.STORE_GITHUB_REPOS, data);
+        return Promise.resolve();
     },
 
     async [actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO] ({ commit, state }, { repoName, userName }) {
@@ -64,9 +63,7 @@ const actions = {
             commit(mutationTypes.GITHUB_API_STARTED);
 
             const res = await githubApiClient.getCommits(repoName, userName)
-                .catch((e) => {
-
-                });
+                .catch((e) => {});
 
             commit(mutationTypes.GITHUB_DATA_MAPPING_STARTED);
 
@@ -85,6 +82,7 @@ const actions = {
         }
 
         commit(mutationTypes.STORE_COMMIT, { ...data, repoName});
+        return Promise.resolve();
     }
 };
 

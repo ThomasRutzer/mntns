@@ -144,6 +144,15 @@ describe('actions', () => {
             );
         });
 
+        it('returns promise', async () => {
+            return expect(actions[actionTypes.RETRIEVE_GITHUB_REPOS]({commit: store.commit, state: store.state}, mockGithubUserName)).to.eventually.be.fulfilled;
+        });
+
+        it('returns promise when called twice', async () => {
+            await expect(actions[actionTypes.RETRIEVE_GITHUB_REPOS]({commit: store.commit, state: store.state}, mockGithubUserName));
+            return expect(actions[actionTypes.RETRIEVE_GITHUB_REPOS]({commit: store.commit, state: store.state}, mockGithubUserName)).to.eventually.be.fulfilled;
+        });
+
         it('adds repos to store.state', async () => {
            await actions[actionTypes.RETRIEVE_GITHUB_REPOS]({commit: store.commit, state: store.state}, mockGithubUserName);
            expect(store.state.gitHubData.mappedRepos.length).to.equal(2);
@@ -314,7 +323,16 @@ describe('actions', () => {
             );
         });
 
-        it('adds repos to store', async () => {
+        it('returns promise', async () => {
+            return expect(actions[actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO]({commit: store.commit, state: store.state}, { repoName: mockRepoName, userName: mockGithubUserName } )).to.eventually.be.fulfilled;
+        });
+
+        it('returns promise when called twice', async () => {
+            await expect(actions[actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO]({commit: store.commit, state: store.state}, { repoName: mockRepoName, userName: mockGithubUserName }));
+            return expect(actions[actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO]({commit: store.commit, state: store.state}, { repoName: mockRepoName, userName: mockGithubUserName })).to.eventually.be.fulfilled;
+        });
+
+        it('adds commit to store', async () => {
             await actions[actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO]({commit: store.commit, state: store.state}, { repoName: mockRepoName, userName: mockGithubUserName } );
             expect(store.state.gitHubData.commits[mockRepoName].mapped).to.exist;
             expect(store.state.gitHubData.commits[mockRepoName].raw).to.exist;
