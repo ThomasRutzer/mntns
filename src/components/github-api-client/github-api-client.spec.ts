@@ -1,4 +1,3 @@
-import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import chai, { expect } from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';

@@ -1,12 +1,8 @@
-import Component from 'vue-class-component';
+import {spy, assert, stub} from 'sinon';
 import {expect} from 'chai';
-import {stub} from 'sinon';
-import {ComponentTest} from '../../util/component-test';
-import {MntsComponent} from './mnts';
-import diContainer from "../dependency-injection/container";
+import MntsService from './mnts-service';
 import store, { mutationTypes } from './../../store';
 
-// mock data
 const rawRepos = [
     {
         "id": 1,
@@ -132,6 +128,7 @@ const rawRepos = [
         "default_branch": "master"
     }
 ];
+
 const mappedRepos = [
     {
         id: 1,
@@ -294,46 +291,43 @@ const rawCommits = [
         ]
     }
 ];
+
 const mappedCommits = [];
 
-@Component({
-    template: '<div></div>'
-})
-class MockMntsComponent extends MntsComponent {
-    constructor() {
-        super();
-    }
-}
+describe('Mnts Service', () => {
+    let service;
 
-describe('Mnts component', () => {
-    let directiveTest: ComponentTest;
+    before(() => {
+        service = new MntsService();
 
-    beforeEach(() => {
-        directiveTest = new ComponentTest('<div><mnts></mnts></div>', {'mnts': MockMntsComponent});
+        store.commit(mutationTypes.STORE_GITHUB_REPOS, {
+            rawRepos,
+            mappedRepos
+        });
+
+        store.commit(mutationTypes.STORE_COMMIT, {
+            raw: rawCommits,
+            mapped: mappedCommits,
+            repoName: "mntns"
+        });
     });
 
-    describe('hook created()', () => {
-        let diContainerStub = null;
-
-        // mock and restore DI get method
-        before(() => {
-            diContainerStub = stub(diContainer, 'get').returns({});
+    describe('method updateFocusedData()', () => {
+        it('when level is 1, focused data is repo', async () => {
+            await service.updateFocusedData("1");
+            expect(store.state.gitHubData.focusedRepo.raw).to.equal(rawRepos[0]);
         });
 
-        after(() => {
-            diContainerStub.restore();
-        });
-
-        it('sets level to 1', async () => {
+        it('when level is 2, focused data is repo', async () => {
             store.commit(mutationTypes.MNTNS_NEXT_LEVEL, {level:2});
+            await service.updateFocusedData("1");
+            expect(store.state.gitHubData.focusedRepo.raw).to.equal(rawCommits[0]);
+        });
 
-            let childComp: MockMntsComponent = null;
-            directiveTest.createComponent({store});
-
-            await directiveTest.execute((vm) => {
-                childComp = vm.$children[0];
-                expect(vm.$store.state.mntns.level).to.equal(1);
-            });
+        it('unfocus data, when called with unmatchind argument ID', async () => {
+            await service.updateFocusedData("1001");
+            expect(store.state.gitHubData.focusedRepo.raw).to.equal(null);
+            expect(store.state.gitHubData.focusedRepo.mapped).to.equal(null);
         });
     });
 });
