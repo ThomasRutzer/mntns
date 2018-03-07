@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Component from 'vue-class-component';
 import { expect } from 'chai';
-import { ComponentTest, MockLogger } from '../../util/component-test';
+import { ComponentTest } from '../../util/component-test';
 import { NavbarComponent } from './navbar';
 import { RouterLink } from './../router/';
 
