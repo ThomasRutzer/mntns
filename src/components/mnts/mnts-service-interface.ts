@@ -1,3 +1,3 @@
 export interface MntsServiceInterface {
-    updateFocusedData(id: string)
+    focusData(id: string)
 }

@@ -1,10 +1,14 @@
 import Component from 'vue-class-component';
-import {expect} from 'chai';
+import chai, { expect } from 'chai';
+import * as chaiAsPromised from 'chai-as-promised';
 import {stub} from 'sinon';
 import {ComponentTest} from '../../util/component-test';
 import {MntsComponent} from './mnts';
+import mntnsConfig  from './mnts-config';
 import diContainer from "../dependency-injection/container";
 import store, { mutationTypes } from './../../store';
+
+chai.use(chaiAsPromised);
 
 // mock data
 const rawRepos = [
@@ -317,7 +321,11 @@ describe('Mnts component', () => {
 
         // mock and restore DI get method
         before(() => {
-            diContainerStub = stub(diContainer, 'get').returns({});
+            diContainerStub = stub(diContainer, 'get').returns({
+                focusData: () => {
+                    return Promise.resolve();
+                }
+            });
         });
 
         after(() => {
@@ -333,6 +341,32 @@ describe('Mnts component', () => {
             await directiveTest.execute((vm) => {
                 childComp = vm.$children[0];
                 expect(vm.$store.state.mntns.level).to.equal(1);
+            });
+        });
+
+        it('does not exceed max level value', async () => {
+            let childComp: MockMntsComponent = null;
+            directiveTest.createComponent({store});
+
+            await directiveTest.execute(async (vm) => {
+                childComp = vm.$children[0];
+
+                await childComp.focusedMnt({ objectId: "1",type: mntnsConfig.eventToUpdateLevel});
+                await childComp.focusedMnt({ objectId: "1",type: mntnsConfig.eventToUpdateLevel});
+                await childComp.focusedMnt({ objectId: "1",type: mntnsConfig.eventToUpdateLevel});
+
+                expect(vm.$store.state.mntns.level).to.equal(mntnsConfig.maxLevel);
+            });
+        });
+
+        it('fullfils with empty promisewhen objectId is included in excludedFocusableObjectIds', async () => {
+            let childComp: MockMntsComponent = null;
+            directiveTest.createComponent({store});
+
+            await directiveTest.execute(async (vm) => {
+                childComp = vm.$children[0];
+
+                return expect(childComp.focusedMnt({objectId: "floor", type: "any"})).to.eventually.be.fulfilled;
             });
         });
     });

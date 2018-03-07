@@ -4,7 +4,7 @@ import { types, diContainer } from "./../dependency-injection";
 import * as actionTypes from './../../store/action-types';
 import * as mutationTypes from './../../store/mutation-types';
 import { MntsServiceInterface } from "./mnts-service-interface";
-import { gitHubUserName } from "./mnts-service";
+import config from './mnts-config';
 
 @Component({
     template: require('./mnts.html'),
@@ -27,14 +27,29 @@ export class MntsComponent extends Vue {
     async created() {
         this.service = diContainer.get<MntsServiceInterface>(types.MntnsService);
         this.$store.commit(mutationTypes.MNTNS_NEXT_LEVEL, { level: 1});
-        await this.$store.dispatch(actionTypes.RETRIEVE_GITHUB_REPOS, gitHubUserName);
+        await this.$store.dispatch(actionTypes.RETRIEVE_GITHUB_REPOS, config.gitHubUsername);
     }
 
     expandMnts() {
         this.$router.push('/mnts');
     }
 
-    async focusedMnt(event: {objectId: string}) {
-        await this.service.updateFocusedData(event.objectId);
+    async focusedMnt(event: {objectId: string, type: string}): void {
+
+        // certain scene objects might not be focused
+        if (config.excludedFocusableObjectIds.indexOf(event.objectId) != -1) {
+            return Promise.resolve();
+        }
+
+        await this.service.focusData(event.objectId);
+
+        if(event.type === config.eventToUpdateLevel) {
+
+            const level = this.$store.state.level < config.maxLevel
+                ? this.$store.state.level + 1
+                : config.maxLevel;
+
+            this.$store.commit(mutationTypes.MNTNS_NEXT_LEVEL, { level });
+        }
     }
 }

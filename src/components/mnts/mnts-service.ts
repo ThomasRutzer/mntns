@@ -1,14 +1,14 @@
 import {MntsServiceInterface} from "./mnts-service-interface";
+import config from './mnts-config';
 import { injectable } from "inversify";
 import store from './../../store';
 import * as actionTypes from './../../store/action-types';
 import * as mutationTypes from './../../store/mutation-types';
 
-const gitHubUserName = 'addyosmani';
-
 @injectable()
 class MntsService implements MntsServiceInterface {
-    public async updateFocusedData(id: string) {
+
+    public async focusData(id: string) {
 
         let raw, mapped;
 
@@ -53,17 +53,14 @@ class MntsService implements MntsServiceInterface {
     }
 
     private async loadCommit(repoName) {
-        await store.dispatch(actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO, { repoName, userName: gitHubUserName});
+        await store.dispatch(actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO, { repoName, userName: config.gitHubUsername});
         return Promise.resolve();
     }
 
     private async loadRepos() {
-        await store.dispatch(actionTypes.RETRIEVE_GITHUB_REPOS, gitHubUserName);
+        await store.dispatch(actionTypes.RETRIEVE_GITHUB_REPOS, config.gitHubUsername);
         return Promise.resolve();
     }
 }
 
 export default MntsService;
-export {
-    gitHubUserName
-}

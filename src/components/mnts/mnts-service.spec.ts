@@ -1,4 +1,3 @@
-import {spy, assert, stub} from 'sinon';
 import {expect} from 'chai';
 import MntsService from './mnts-service';
 import store, { mutationTypes } from './../../store';
@@ -312,20 +311,20 @@ describe('Mnts Service', () => {
         });
     });
 
-    describe('method updateFocusedData()', () => {
+    describe('method focusData()', () => {
         it('when level is 1, focused data is repo', async () => {
-            await service.updateFocusedData("1");
+            await service.focusData("1");
             expect(store.state.gitHubData.focusedRepo.raw).to.equal(rawRepos[0]);
         });
 
         it('when level is 2, focused data is repo', async () => {
             store.commit(mutationTypes.MNTNS_NEXT_LEVEL, {level:2});
-            await service.updateFocusedData("1");
+            await service.focusData("1");
             expect(store.state.gitHubData.focusedRepo.raw).to.equal(rawCommits[0]);
         });
 
         it('unfocus data, when called with unmatchind argument ID', async () => {
-            await service.updateFocusedData("1001");
+            await service.focusData("1001");
             expect(store.state.gitHubData.focusedRepo.raw).to.equal(null);
             expect(store.state.gitHubData.focusedRepo.mapped).to.equal(null);
         });
