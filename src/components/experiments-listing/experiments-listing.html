@@ -14,16 +14,39 @@
         <div v-show="isActivated">
             <div v-if="focusedData"
                  :class="{'experiments-listing__focused-label--outside': outside}"
-                 :style="{left: focusedEvent.mouseX + 'px', top: focusedEvent.mouseY + 'px'}"
+                 :style="{left: focusedEvent.x + 'px', top: focusedEvent.y + 'px'}"
                  class="experiments-listing__focused-label">
+
+                <span v-if="level == 1">
                 {{ focusedData.name }}
+                </span>
+
+                <span v-if="level == 2">
+                {{ focusedData.commit.message }}
+                </span>
+
             </div>
 
-            <div v-if="focusedData"
+            <div v-if="details"
                  class="experiments-listing__details-box">
-                <p>title: {{ focusedData.name }}</p>
-                <a class="primary-button"
-                   :href="focusedData.url">view repo</a>
+
+                <div v-if="level == 1">
+                    <p>title: {{ focusedData.name }}</p>
+                    <a class="primary-button"
+                       :href="focusedData.url">view repo</a>
+
+                    <span class="primary-button" @click="nextStep()">
+                    Dig deeper
+                    </span>
+                </div>
+
+                <div v-if="level == 2">
+                    <p>title: {{ focusedData.commit.message }}</p>
+                    <span class="primary-button" @click="back()">
+                    Back to overview
+                    </span>
+                </div>
+
             </div>
 
         </div>

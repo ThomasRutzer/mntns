@@ -1,4 +1,4 @@
-import MountainConfig from 'mnts/src/components/mountain/MountainConfig';
+import MountainConfig from 'mnts/src/components/mountain/mountainConfig';
 
 /**
  * strong bound mappers; only work when actually mapping
@@ -24,7 +24,7 @@ const repoMappers = [
 
     {
         dataKey: ["created_at"],
-        mountainsParameter: "xPos",
+        mountainsParameter: "x",
         min: 5,
         max: 100,
         type: "date",
@@ -32,7 +32,7 @@ const repoMappers = [
 
     {
         dataKey: ["pushed_at"],
-        mountainsParameter: "yPos",
+        mountainsParameter: "z",
         min: 5,
         max: 100,
         type: "date",

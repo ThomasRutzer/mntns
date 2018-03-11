@@ -1,5 +1,8 @@
-import { Component, Vue } from 'vue-property-decorator';
-import { mutationTypes } from './../../store/';
+import {Component, Vue} from 'vue-property-decorator';
+import {mutationTypes} from './../../store/';
+import { types, diContainer } from "./../dependency-injection";
+
+import { MntsServiceInterface, config } from './../mnts';
 
 @Component({
     template: require('./experiments-listing.html'),
@@ -17,14 +20,23 @@ import { mutationTypes } from './../../store/';
         },
 
         focusedEvent() {
-            this.outside = this.$store.state.gitHubData.focusedRepo.event.mouseX > (window.innerWidth / 2);
+            this.outside = this.$store.state.gitHubData.focusedRepo.event.x > (window.innerWidth / 2);
+            this.showDetails();
+
             return this.$store.state.gitHubData.focusedRepo.event
+        },
+
+        level() {
+            return this.$store.state.mntns.level;
         }
     },
 })
 
 export class ExperimentsListingComponent extends Vue {
     private outside: boolean = false;
+    private details: boolean = false;
+    private mntnsService: MntsServiceInterface;
+
 
     beforeCreate() {
         this.$store.commit(mutationTypes.EXPAND_BACKGROUND);
@@ -36,7 +48,32 @@ export class ExperimentsListingComponent extends Vue {
         this.$store.commit(mutationTypes.UNFOCUS_REPO);
     }
 
+    created() {
+        this.mntnsService = diContainer.get<MntsServiceInterface>(types.MntnsService);
+    }
+
     activate() {
         this.$store.commit(mutationTypes.ACTIVATE_BACKGROUND);
+    }
+
+    async nextStep() {
+        await this.mntnsService.nextState();
+        this.hideDetails();
+    }
+
+    async back() {
+        await this.mntnsService.previousStep();
+    }
+
+    showDetails() {
+        if (this.details) {
+            return;
+        }
+
+        this.details = this.$store.state.gitHubData.focusedRepo.event.type == config.eventToUpdateLevel
+    }
+
+    hideDetails() {
+        this.details = false;
     }
 }

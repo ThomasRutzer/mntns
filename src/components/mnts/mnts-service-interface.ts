@@ -1,3 +1,6 @@
 export interface MntsServiceInterface {
-    focusData(id: string)
+    focusData(id: string);
+    nextState();
+    previousStep();
+    start();
 }

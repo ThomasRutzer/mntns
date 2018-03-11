@@ -8,35 +8,17 @@ import * as mutationTypes from './../../store/mutation-types';
 @injectable()
 class MntsService implements MntsServiceInterface {
 
-    public async focusData(id: string) {
+    public focusData(id: string) {
 
         let raw, mapped;
 
-        // state.mntns.level determines whether
-        // filter repos or commits
-        if (store.state.mntns.level === 1) {
-            await this.loadRepos();
+        raw = store.state.gitHubData.usedRepo.raw.filter((data) => {
+            return data.id.toString() === id;
+        });
 
-            raw = store.state.gitHubData.rawRepos.filter((data) => {
-                return data.id.toString() === id;
-            });
-
-            mapped = store.state.gitHubData.mappedRepos.filter((data) => {
-                return data.id === id;
-            });
-
-        } else if (store.state.mntns.level === 2) {
-            const repoName = store.state.gitHubData.focusedRepo.raw.name;
-            await this.loadCommit(repoName);
-
-            raw = store.state.gitHubData.commits[repoName].raw.filter((data) => {
-                return data.id === id;
-            });
-
-            mapped = store.state.gitHubData.commits[repoName].mapped.filter((data) => {
-                return data.id === id;
-            });
-        }
+        mapped = store.state.gitHubData.usedRepo.mapped.filter((data) => {
+            return data.id === id;
+        });
 
         if (raw.length > 0) {
 
@@ -52,13 +34,59 @@ class MntsService implements MntsServiceInterface {
         }
     }
 
-    private async loadCommit(repoName) {
+    public async nextState() {
+        const level = store.state.level < config.maxLevel
+            ? store.state.level + 1
+            : config.maxLevel;
+
+        store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, { level });
+
+        await this.progessState();
+    }
+
+    public async previousStep() {
+        store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, { level: 1 });
+
+        await this.progessState();
+    }
+
+    public async start() {
+        store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, { level: 1});
+
+        await this.loadRepos(config.gitHubUsername);
+        store.commit(mutationTypes.USED_DATA, {
+            raw: store.state.gitHubData.rawRepos,
+            mapped: store.state.gitHubData.mappedRepos
+        })
+    }
+
+    private async progessState() {
+
+        if (store.state.mntns.level === 1) {
+            await this.loadRepos(config.gitHubUsername);
+            store.commit(mutationTypes.USED_DATA, {
+                raw: store.state.gitHubData.rawRepos,
+                mapped: store.state.gitHubData.mappedRepos
+            })
+
+        } else if (store.state.mntns.level === 2) {
+            const repoName = "angular.js"//store.state.gitHubData.focusedRepo.raw.name;
+            await this.loadCommits(repoName);
+
+            store.commit(mutationTypes.USED_DATA, {
+                raw: store.state.gitHubData.commits[repoName].raw,
+                mapped: store.state.gitHubData.commits[repoName].mapped
+            })
+        }
+    }
+
+    private async loadCommits(repoName) {
         await store.dispatch(actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO, { repoName, userName: config.gitHubUsername});
         return Promise.resolve();
     }
 
-    private async loadRepos() {
-        await store.dispatch(actionTypes.RETRIEVE_GITHUB_REPOS, config.gitHubUsername);
+    private async loadRepos(userName) {
+        await store.dispatch(actionTypes.RETRIEVE_GITHUB_REPOS, userName);
         return Promise.resolve();
     }
 }

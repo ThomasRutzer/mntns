@@ -69,8 +69,13 @@ const mutations = {
         state.gitHubData.focusedRepo.event = null;
     },
 
-    [types.MNTNS_NEXT_LEVEL](state, { level }) {
+    [types.MNTNS_UPDATE_LEVEL](state, { level }) {
         state.mntns.level = level;
+    },
+
+    [types.USED_DATA](state, payload) {
+        state.gitHubData.usedRepo.raw = payload.raw;
+        state.gitHubData.usedRepo.mapped = payload.mapped;
     }
 
 };

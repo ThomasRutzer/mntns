@@ -51,6 +51,12 @@ const state = {
             event: null
         },
 
+        usedRepo: {
+            raw: null,
+            mapped: null
+        },
+
+
         commits: {}
     },
 
