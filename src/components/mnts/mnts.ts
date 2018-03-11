@@ -25,12 +25,12 @@ export class MntsComponent extends Vue {
             return;
         }
 
-        this.data = this.$store.state.gitHubData.usedRepo.mapped;
+        this.data = this.$store.state.gitHubData.usedData.mapped;
     }
 
-    @Watch('$store.state.gitHubData.usedRepo.mapped')
+    @Watch('$store.state.gitHubData.usedData.mapped')
     dataWatcher() {
-        this.data = this.$store.state.gitHubData.usedRepo.mapped;
+        this.data = this.$store.state.gitHubData.usedData.mapped;
     }
 
     async created() {

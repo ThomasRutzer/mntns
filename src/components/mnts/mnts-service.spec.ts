@@ -314,19 +314,19 @@ describe('Mnts Service', () => {
     describe('method focusData()', () => {
         it('when level is 1, focused data is repo', async () => {
             await service.focusData("1");
-            expect(store.state.gitHubData.focusedRepo.raw).to.equal(rawRepos[0]);
+            expect(store.state.gitHubData.focusedData.raw).to.equal(rawRepos[0]);
         });
 
         it('when level is 2, focused data is repo', async () => {
-            store.commit(mutationTypes.MNTNS_NEXT_LEVEL, {level:2});
+            store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, {level:2});
             await service.focusData("1");
-            expect(store.state.gitHubData.focusedRepo.raw).to.equal(rawCommits[0]);
+            expect(store.state.gitHubData.focusedData.raw).to.equal(rawCommits[0]);
         });
 
         it('unfocus data, when called with unmatchind argument ID', async () => {
             await service.focusData("1001");
-            expect(store.state.gitHubData.focusedRepo.raw).to.equal(null);
-            expect(store.state.gitHubData.focusedRepo.mapped).to.equal(null);
+            expect(store.state.gitHubData.focusedData.raw).to.equal(null);
+            expect(store.state.gitHubData.focusedData.mapped).to.equal(null);
         });
     });
 });

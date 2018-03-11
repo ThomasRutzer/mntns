@@ -29,33 +29,37 @@ const state = {
         finishedMapping: null,
 
         /**
-         * mapped repos to match mnts interface
-         */
-        mappedRepos: null,
-
-        /**
-         * stores retrieved repos from GitHub,
-         */
-        rawRepos: null,
-
-        /**
          * repo which will be shown in detail
          * @type { Object }
-         * @property { Object } raw data from Github
-         * @property { Object } mapped Github repo data
-         * @property  { Object } event typo of which triggers focus
+         * @property { Object } raw data
+         * @property { Object } mapped data
+         * @property  { Object } event type which triggered focus
          */
-        focusedRepo: {
+        focusedData: {
             raw: null,
             mapped: null,
             event: null
         },
 
-        usedRepo: {
+        /**
+         * dataset, visualized by mntns
+         */
+        usedData: {
             raw: null,
             mapped: null
         },
 
+        repos: {
+            /**
+             * mapped repos to match mnts interface
+             */
+            mapped: null,
+
+            /**
+             * stores retrieved repos from GitHub,
+             */
+            raw: null,
+        },
 
         commits: {}
     },

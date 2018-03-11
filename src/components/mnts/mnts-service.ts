@@ -12,11 +12,11 @@ class MntsService implements MntsServiceInterface {
 
         let raw, mapped;
 
-        raw = store.state.gitHubData.usedRepo.raw.filter((data) => {
+        raw = store.state.gitHubData.usedData.raw.filter((data) => {
             return data.id.toString() === id;
         });
 
-        mapped = store.state.gitHubData.usedRepo.mapped.filter((data) => {
+        mapped = store.state.gitHubData.usedData.mapped.filter((data) => {
             return data.id === id;
         });
 
@@ -55,8 +55,8 @@ class MntsService implements MntsServiceInterface {
 
         await this.loadRepos(config.gitHubUsername);
         store.commit(mutationTypes.USED_DATA, {
-            raw: store.state.gitHubData.rawRepos,
-            mapped: store.state.gitHubData.mappedRepos
+            raw: store.state.gitHubData.repos.raw,
+            mapped: store.state.gitHubData.repos.mapped
         })
     }
 
@@ -65,12 +65,12 @@ class MntsService implements MntsServiceInterface {
         if (store.state.mntns.level === 1) {
             await this.loadRepos(config.gitHubUsername);
             store.commit(mutationTypes.USED_DATA, {
-                raw: store.state.gitHubData.rawRepos,
-                mapped: store.state.gitHubData.mappedRepos
+                raw: store.state.gitHubData.repos.raw,
+                mapped: store.state.gitHubData.repos.mapped
             })
 
         } else if (store.state.mntns.level === 2) {
-            const repoName = "angular.js"//store.state.gitHubData.focusedRepo.raw.name;
+            const repoName = "angular.js"//store.state.gitHubData.focusedData.raw.name;
             await this.loadCommits(repoName);
 
             store.commit(mutationTypes.USED_DATA, {

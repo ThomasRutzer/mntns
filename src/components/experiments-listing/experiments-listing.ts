@@ -16,14 +16,14 @@ import { MntsServiceInterface, config } from './../mnts';
         },
 
         focusedData() {
-            return this.$store.state.gitHubData.focusedRepo.raw
+            return this.$store.state.gitHubData.focusedData.raw
         },
 
         focusedEvent() {
-            this.outside = this.$store.state.gitHubData.focusedRepo.event.x > (window.innerWidth / 2);
+            this.outside = this.$store.state.gitHubData.focusedData.event.x > (window.innerWidth / 2);
             this.showDetails();
 
-            return this.$store.state.gitHubData.focusedRepo.event
+            return this.$store.state.gitHubData.focusedData.event
         },
 
         level() {
@@ -70,7 +70,7 @@ export class ExperimentsListingComponent extends Vue {
             return;
         }
 
-        this.details = this.$store.state.gitHubData.focusedRepo.event.type == config.eventToUpdateLevel
+        this.details = this.$store.state.gitHubData.focusedData.event.type == config.eventToUpdateLevel
     }
 
     hideDetails() {

@@ -46,8 +46,8 @@ const mutations = {
     },
 
     [types.STORE_GITHUB_REPOS](state, payload) {
-        state.gitHubData.mappedRepos = payload.mappedRepos;
-        state.gitHubData.rawRepos = payload.rawRepos;
+        state.gitHubData.repos.mapped = payload.mappedRepos;
+        state.gitHubData.repos.raw = payload.rawRepos;
     },
 
     [types.STORE_COMMIT](state, payload) {
@@ -58,15 +58,15 @@ const mutations = {
     },
 
     [types.FOCUS_REPO](state, payload) {
-        state.gitHubData.focusedRepo.raw = payload.raw;
-        state.gitHubData.focusedRepo.mapped = payload.mapped;
-        state.gitHubData.focusedRepo.event = payload.event;
+        state.gitHubData.focusedData.raw = payload.raw;
+        state.gitHubData.focusedData.mapped = payload.mapped;
+        state.gitHubData.focusedData.event = payload.event;
     },
 
     [types.UNFOCUS_REPO](state) {
-        state.gitHubData.focusedRepo.raw = null;
-        state.gitHubData.focusedRepo.mapped = null;
-        state.gitHubData.focusedRepo.event = null;
+        state.gitHubData.focusedData.raw = null;
+        state.gitHubData.focusedData.mapped = null;
+        state.gitHubData.focusedData.event = null;
     },
 
     [types.MNTNS_UPDATE_LEVEL](state, { level }) {
@@ -74,8 +74,8 @@ const mutations = {
     },
 
     [types.USED_DATA](state, payload) {
-        state.gitHubData.usedRepo.raw = payload.raw;
-        state.gitHubData.usedRepo.mapped = payload.mapped;
+        state.gitHubData.usedData.raw = payload.raw;
+        state.gitHubData.usedData.mapped = payload.mapped;
     }
 
 };
