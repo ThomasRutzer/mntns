@@ -1,4 +1,4 @@
-import {Component, Vue} from 'vue-property-decorator';
+import {Component, Vue, Watch} from 'vue-property-decorator';
 import {mutationTypes} from './../../store/';
 import { types, diContainer } from "./../dependency-injection";
 
@@ -7,23 +7,8 @@ import { MntsServiceInterface, config } from './../mnts';
 @Component({
     template: require('./experiments-listing.html'),
     computed: {
-        isActivated() {
-            return this.$store.state.background.activated;
-        },
-
         dataLoaded() {
             return this.$store.state.currentRoute.titleAnimatedIn;
-        },
-
-        focusedData() {
-            return this.$store.state.gitHubData.focusedData.raw
-        },
-
-        focusedEvent() {
-            this.outside = this.$store.state.gitHubData.focusedData.event.x > (window.innerWidth / 2);
-            this.showDetails();
-
-            return this.$store.state.gitHubData.focusedData.event
         },
 
         level() {
@@ -33,10 +18,16 @@ import { MntsServiceInterface, config } from './../mnts';
 })
 
 export class ExperimentsListingComponent extends Vue {
-    private outside: boolean = false;
+    private isActivated: boolean = false;
     private details: boolean = false;
     private mntnsService: MntsServiceInterface;
 
+    @Watch('$store.state.gitHubData.focusedData.event')
+    eventWatchHandler() {
+        if (event.type === config.eventToUpdateLevel) {
+            this.showDetails();
+        }
+    }
 
     beforeCreate() {
         this.$store.commit(mutationTypes.EXPAND_BACKGROUND);
@@ -52,8 +43,14 @@ export class ExperimentsListingComponent extends Vue {
         this.mntnsService = diContainer.get<MntsServiceInterface>(types.MntnsService);
     }
 
-    activate() {
+    activateExperiment() {
+        this.isActivated = true;
         this.$store.commit(mutationTypes.ACTIVATE_BACKGROUND);
+    }
+
+    deactivateExperiment() {
+        this.isActivated = true;
+        this.$store.commit(mutationTypes.DEACTIVATE_BACKGROUND);
     }
 
     async nextStep() {
@@ -70,7 +67,7 @@ export class ExperimentsListingComponent extends Vue {
             return;
         }
 
-        this.details = this.$store.state.gitHubData.focusedData.event.type == config.eventToUpdateLevel
+        this.details = this.$store.state.gitHubData.focusedData
     }
 
     hideDetails() {

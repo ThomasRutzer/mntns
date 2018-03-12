@@ -8,47 +8,30 @@
 
             <span class="primary-button margin-top--l revealing-content"
                   :class="{'revealing-content--reveal': dataLoaded}"
-                  @click="activate()">explore</span>
+                  @click="activateExperiment()">explore</span>
         </div>
 
-        <div v-show="isActivated">
-            <div v-if="focusedData"
-                 :class="{'experiments-listing__focused-label--outside': outside}"
-                 :style="{left: focusedEvent.x + 'px', top: focusedEvent.y + 'px'}"
-                 class="experiments-listing__focused-label">
+        <div v-if="details"
+             class="experiments-listing__details-box">
 
-                <span v-if="level == 1">
-                {{ focusedData.name }}
-                </span>
+            <div v-if="level == 1">
+                <p>title: {{ details.name }}</p>
+                <a class="primary-button"
+                   :href="details.url">view repo</a>
 
-                <span v-if="level == 2">
-                {{ focusedData.commit.message }}
-                </span>
-
-            </div>
-
-            <div v-if="details"
-                 class="experiments-listing__details-box">
-
-                <div v-if="level == 1">
-                    <p>title: {{ focusedData.name }}</p>
-                    <a class="primary-button"
-                       :href="focusedData.url">view repo</a>
-
-                    <span class="primary-button" @click="nextStep()">
+                <span class="primary-button" @click="nextStep()">
                     Dig deeper
                     </span>
-                </div>
+            </div>
 
-                <div v-if="level == 2">
-                    <p>title: {{ focusedData.commit.message }}</p>
-                    <span class="primary-button" @click="back()">
+            <div v-if="level == 2">
+                <p>title: {{ details.raw.commit.message }}</p>
+                <span class="primary-button" @click="back()">
                     Back to overview
                     </span>
-                </div>
-
             </div>
 
         </div>
+
     </div>
 </div>

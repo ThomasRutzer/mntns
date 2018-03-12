@@ -1,5 +1,8 @@
 @import "./../colors/colors.json";
 
+$mntns-focused-data-border-radius: 15px;
+$mntns-focused-data-max-width: 150px;
+
 .mnts {
   background-color: $color-darkest;
   width: 100%;
@@ -11,5 +14,32 @@
   canvas {
     width: 100% !important;
     height: auto !important;
+  }
+}
+
+.mnts__focused-data {
+  position: fixed;
+  background-color: $color-darkest;
+  border-radius: 0 0 0 $mntns-focused-data-border-radius;
+  padding: 5px 10px;
+  max-width: $mntns-focused-data-max-width;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &--outside {
+    transform: translateX(-100%);
+    border-radius: 0 0 $mntns-focused-data-border-radius 0;
+  }
+
+  &--show-transition-enter-active,
+  &--show-transition-leave-active {
+    opacity: 1;
+    transition: opacity 300ms 200ms;
+  }
+
+  &--show-transition-enter,
+  &--show-transition-leave-to {
+    opacity: 0;
   }
 }

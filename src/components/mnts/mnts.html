@@ -4,5 +4,16 @@
     <generator @intersection="focusObject($event)"
                :data="data"></generator>
 
+    <transition name="mnts__focused-data--show-transition">
+        <div class="mnts__focused-data"
+             :class="{'mnts__focused-data--outside': outside}"
+             :style="{left: focusedEvent.x + 'px', top: focusedEvent.y + 'px'}"
+             v-if="focusedData">
+
+            {{ focusedData }}
+        </div>
+    </transition>
+
+
 </div>
 
