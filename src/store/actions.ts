@@ -21,7 +21,7 @@ export const addToCart = ({ commit }, product) => {
 */
 
 const actions = {
-    async [actionTypes.RETRIEVE_GITHUB_REPOS] ({ commit, state }, userName) {
+    async [actionTypes.RETRIEVE_GITHUB_REPOS] ({ commit, state }, { userName, perPage }) {
         let data;
 
         if (!state.gitHubData.repos.raw) {
@@ -30,7 +30,7 @@ const actions = {
 
             commit(mutationTypes.GITHUB_API_STARTED);
 
-            const res = await githubApiClient.getUserRepos(userName)
+            const res = await githubApiClient.getUserRepos(userName, perPage)
                 .catch((e) => {});
 
             commit(mutationTypes.GITHUB_DATA_MAPPING_STARTED);
@@ -53,7 +53,7 @@ const actions = {
         return Promise.resolve();
     },
 
-    async [actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO] ({ commit, state }, { repoName, userName }) {
+    async [actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO] ({ commit, state }, { repoName, userName, perPage }) {
         let data;
 
         if (!state.gitHubData.commits[repoName]) {
@@ -62,7 +62,7 @@ const actions = {
 
             commit(mutationTypes.GITHUB_API_STARTED);
 
-            const res = await githubApiClient.getCommits(repoName, userName)
+            const res = await githubApiClient.getCommits(repoName, userName, perPage)
                 .catch((e) => {});
 
             commit(mutationTypes.GITHUB_DATA_MAPPING_STARTED);

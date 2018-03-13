@@ -1,4 +1,4 @@
 export interface GithubApiClientInterface {
-    getUserRepos(userName: string)
-    getCommits(repoName: string, userName: string)
+    getUserRepos(userName: string, maxItemCount?: number)
+    getCommits(repoName: string, userName: string, maxItemCount?: number)
 }

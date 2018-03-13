@@ -26,12 +26,25 @@ class GithubApiClient implements GithubApiClientInterface {
         });
     }
 
-    getUserRepos(userName: string) {
-        return this.httpClient.get(`${baseUrl}/users/${userName}/repos`);
+    /**
+     *
+     * @param {string} userName
+     * @param {number} maxItemCount, where 0 equals all
+     * @return {AxiosPromise}
+     */
+    getUserRepos(userName: string, maxItemCount?: number = 0) {
+        return this.httpClient.get(`${baseUrl}/users/${userName}/repos?per_page=${maxItemCount}`);
     }
 
-    getCommits(repoName: string, userName: string) {
-        return this.httpClient.get(`${baseUrl}/repos/${userName}/${repoName}/commits`);
+    /**
+     *
+     * @param {string} repoName
+     * @param {string} userName
+     * @param {number} maxItemCount, where 0 equals all
+     * @return {AxiosPromise}
+     */
+    getCommits(repoName: string, userName: string, maxItemCount?: number = 0) {
+        return this.httpClient.get(`${baseUrl}/repos/${userName}/${repoName}/commits?per_page=${maxItemCount}`);
     }
 }
 

@@ -53,7 +53,7 @@ class MntsService implements MntsServiceInterface {
     public async start() {
         store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, { level: 1});
 
-        await this.loadRepos(config.gitHubUsername);
+        await this.loadRepos();
         store.commit(mutationTypes.USED_DATA, {
             raw: store.state.gitHubData.repos.raw,
             mapped: store.state.gitHubData.repos.mapped
@@ -63,7 +63,7 @@ class MntsService implements MntsServiceInterface {
     private async progessState() {
 
         if (store.state.mntns.level === 1) {
-            await this.loadRepos(config.gitHubUsername);
+            await this.loadRepos();
             store.commit(mutationTypes.USED_DATA, {
                 raw: store.state.gitHubData.repos.raw,
                 mapped: store.state.gitHubData.repos.mapped
@@ -81,12 +81,18 @@ class MntsService implements MntsServiceInterface {
     }
 
     private async loadCommits(repoName) {
-        await store.dispatch(actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO, { repoName, userName: config.gitHubUsername});
+        await store.dispatch(
+                actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO,
+                { repoName, userName: config.gitHubUsername, perPage: config.maxSceneItems }
+            );
         return Promise.resolve();
     }
 
-    private async loadRepos(userName) {
-        await store.dispatch(actionTypes.RETRIEVE_GITHUB_REPOS, userName);
+    private async loadRepos() {
+        await store.dispatch(
+                actionTypes.RETRIEVE_GITHUB_REPOS,
+                { userName: config.gitHubUsername, perPage: config.maxSceneItems }
+            );
         return Promise.resolve();
     }
 }
