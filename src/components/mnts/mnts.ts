@@ -66,11 +66,10 @@ export class MntsComponent extends Vue {
             return;
         }
 
-        this.service.focusData(data.objectId);
-
-        if (data.event.type === config.eventToUpdateLevel) {
+        if (!this.isActivated) {
             this.focusedData = null;
         } else {
+            this.service.focusData(data.objectId);
             this.focusedWatcher();
         }
     }

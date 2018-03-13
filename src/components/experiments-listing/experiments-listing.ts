@@ -18,6 +18,7 @@ import { MntsServiceInterface, config } from './../mnts';
 })
 
 export class ExperimentsListingComponent extends Vue {
+    private isStarted: boolean = false;
     private isActivated: boolean = false;
     private details: boolean = false;
     private mntnsService: MntsServiceInterface;
@@ -43,6 +44,15 @@ export class ExperimentsListingComponent extends Vue {
         this.mntnsService = diContainer.get<MntsServiceInterface>(types.MntnsService);
     }
 
+    startExperiment() {
+        this.isStarted = true;
+        this.activateExperiment();
+    }
+
+    stopExperiment() {
+
+    }
+
     activateExperiment() {
         this.isActivated = true;
         this.$store.commit(mutationTypes.ACTIVATE_BACKGROUND);
@@ -60,6 +70,7 @@ export class ExperimentsListingComponent extends Vue {
 
     async back() {
         await this.mntnsService.previousStep();
+        this.hideDetails();
     }
 
     showDetails() {
@@ -67,10 +78,12 @@ export class ExperimentsListingComponent extends Vue {
             return;
         }
 
-        this.details = this.$store.state.gitHubData.focusedData
+        this.details = this.$store.state.gitHubData.focusedData;
+        this.deactivateExperiment();
     }
 
     hideDetails() {
         this.details = false;
+        this.activateExperiment();
     }
 }

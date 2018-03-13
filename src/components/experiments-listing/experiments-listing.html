@@ -1,6 +1,6 @@
 <div class="experiments-listing">
     <div class="experiments-listing__content">
-        <div v-show="!isActivated">
+        <div v-show="!isStarted">
             <h1 class="experiments-listing__title"
                 v-title-animation>
                 <i>Mnts</i> is a experiment to visualize my Github account.
@@ -8,10 +8,10 @@
 
             <span class="primary-button margin-top--l revealing-content"
                   :class="{'revealing-content--reveal': dataLoaded}"
-                  @click="activateExperiment()">explore</span>
+                  @click="startExperiment()">explore</span>
         </div>
 
-        <div v-if="details"
+        <div v-if="isStarted && details"
              class="experiments-listing__details-box">
 
             <div v-if="level == 1">
