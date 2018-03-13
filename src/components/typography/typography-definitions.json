@@ -5,5 +5,7 @@
   "font-size-h1": "36px",
   "line-height-h1": "1.2",
   "font-size-h2": "24px",
-  "line-height-h2": "1.2"
+  "line-height-h2": "1.2",
+  "font-size-h3": "24px",
+  "line-height-h3": "1.2"
 }

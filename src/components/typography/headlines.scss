@@ -13,3 +13,10 @@ h2, .h2, .h2-appearance {
   line-height: $line-height-h2;
   margin: 0;
 }
+
+h3, .h3, .h3-appearance {
+  font-family: $font-family-highlight;
+  font-size: $font-size-h3;
+  line-height: $line-height-h3;
+  margin: 0;
+}
