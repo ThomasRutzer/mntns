@@ -42,10 +42,18 @@ const repoMappers = [
 const commitMappers = [
     {
         dataKey: ["commit", "author", "date"],
-        mountainsParameter: "height",
+        mountainsParameter: "x",
         min: 5,
         max: 100,
         type: "date",
+    },
+
+    {
+        dataKey: ["commit", "message"],
+        mountainsParameter: "height",
+        min: 5,
+        max: 100,
+        type: "string",
     }
 ];
 

@@ -3,6 +3,7 @@ import "reflect-metadata";
 import { DataMapperInterface } from "./data-mapper-interface";
 import * as mapperUtils from './mapper-utilts';
 import { findDeep } from './../object-utils';
+import { capitalize } from './../string-operations';
 
 /**
  * DataMapper maps given data to specified output data.
@@ -27,11 +28,20 @@ class DataMapper implements DataMapperInterface {
                 let min, max, value;
 
                 // determine range, considering mapper type
-                if(mapper.type === 'number') {
-                    [min, max] = mapperUtils.getMinMaxTypeNumber(data, mapper.dataKey[mapper.dataKey.length - 1]);
-                    value = dataSet[mapper.dataKey];
-                } else if (mapper.type === 'date') {
-                    [min, max, value] = mapperUtils.getMinMaxValueTypeDate(data, mapper.dataKey, findDeep(dataSet, mapper.dataKey));
+                switch(mapper.type) {
+                    case 'number':
+                        [min, max] = mapperUtils.getMinMaxTypeNumber(data, mapper.dataKey[mapper.dataKey.length - 1]);
+                        value = dataSet[mapper.dataKey];
+                        break;
+
+                    case 'date':
+                        [min, max, value] = mapperUtils.getMinMaxValueTypeDate(data, mapper.dataKey, findDeep(dataSet, mapper.dataKey));
+                        break;
+
+                    case 'string':
+                        [min, max] = mapperUtils.getMinMaxTypeString(data, mapper.dataKey);
+                        value = findDeep(dataSet, mapper.dataKey).length;
+                        break;
                 }
 
                 // map value from range determined from data values to requested

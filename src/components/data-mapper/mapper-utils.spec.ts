@@ -40,6 +40,14 @@ describe('mapper utils', () => {
         });
     });
 
+    describe('getMinMaxTypeString', () => {
+        it('returns valid min max from data', () => {
+            const mappedData = mapperUtils.getMinMaxTypeString(data, "name");
+            expect(mappedData[0]).to.equal(5)
+            expect(mappedData[1]).to.equal(9)
+        });
+    });
+
     describe('getMinMaxValueTypeDate', () => {
         it('returns valid min max from data', () => {
             const mappedData = mapperUtils.getMinMaxValueTypeDate(data, "created_at", "2018-01-18T17:28:58Z");

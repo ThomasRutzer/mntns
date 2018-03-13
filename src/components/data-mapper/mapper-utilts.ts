@@ -61,6 +61,22 @@ function getMinMaxValueTypeDate(data: Object[], property: string|string[], value
     return [0, minMaxCache[property].range, parsedValue];
 }
 
+function getMinMaxTypeString(data: any[], property: string): number[]|null {
+    if(!minMaxCache[property]) {
+        const numbers = data.map((value) => {
+            if (typeof property === 'string') {
+                return value[property].length;
+            } else {
+                return findDeep(value, property).length
+            }
+        });
+
+        minMaxCache[property] = getMinMaxNumbers( ...numbers );
+    }
+
+    return minMaxCache[property];
+}
+
 /**
  * maps a value relatively from a given range into another oth
  * e.g.: 5 in range 0 - 5 equals 100 in range 0 - 100
@@ -79,6 +95,7 @@ function rangeMapper(value: number, in_min: number, in_max: number, out_min: num
 export {
     getMinMaxValueTypeDate,
     getMinMaxTypeNumber,
+    getMinMaxTypeString,
     minMaxCache,
     rangeMapper
 }
