@@ -70,7 +70,7 @@ class MntsService implements MntsServiceInterface {
             })
 
         } else if (store.state.mntns.level === 2) {
-            const repoName = "angular.js"//store.state.gitHubData.focusedData.raw.name;
+            const repoName = store.state.gitHubData.focusedData.raw.name;
             await this.loadCommits(repoName);
 
             store.commit(mutationTypes.USED_DATA, {

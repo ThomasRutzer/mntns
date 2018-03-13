@@ -24,7 +24,7 @@ const actions = {
     async [actionTypes.RETRIEVE_GITHUB_REPOS] ({ commit, state }, userName) {
         let data;
 
-        if (!state.gitHubData.repos) {
+        if (!state.gitHubData.repos.raw) {
             const githubApiClient = diContainer.get<GithubApiClientInterface>(types.GithubApiClient);
             const dataMapper = diContainer.get<DataMapperInterface>(types.DataMapper);
 
@@ -44,8 +44,8 @@ const actions = {
             commit(mutationTypes.GITHUB_API_FINISHED);
         } else {
             data = {
-                mappedRepos: state.gitHubData.mappedRepos,
-                rawRepos: state.gitHubData.rawRepos
+                mappedRepos: state.gitHubData.repos.mapped,
+                rawRepos: state.gitHubData.repos.raw
             };
         }
 

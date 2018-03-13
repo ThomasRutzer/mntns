@@ -35,7 +35,7 @@ $mntns-focused-data-max-width: 150px;
   &--show-transition-enter-active,
   &--show-transition-leave-active {
     opacity: 1;
-    transition: opacity 300ms 200ms;
+    transition: opacity 300ms;
   }
 
   &--show-transition-enter,

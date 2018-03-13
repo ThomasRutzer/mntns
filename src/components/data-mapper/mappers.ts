@@ -25,16 +25,16 @@ const repoMappers = [
     {
         dataKey: ["created_at"],
         mountainsParameter: "x",
-        min: 5,
-        max: 100,
+        min: -400,
+        max: 400,
         type: "date",
     },
 
     {
         dataKey: ["pushed_at"],
         mountainsParameter: "z",
-        min: 5,
-        max: 100,
+        min: -400,
+        max: 400,
         type: "date",
     }
 ];
@@ -43,16 +43,16 @@ const commitMappers = [
     {
         dataKey: ["commit", "author", "date"],
         mountainsParameter: "x",
-        min: 5,
-        max: 100,
+        min: -400,
+        max: 400,
         type: "date",
     },
 
     {
         dataKey: ["commit", "message"],
         mountainsParameter: "height",
-        min: 5,
-        max: 100,
+        min: MountainConfig.parameters.height.min,
+        max: MountainConfig.parameters.height.max,
         type: "string",
     }
 ];
