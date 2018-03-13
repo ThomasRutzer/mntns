@@ -24,7 +24,7 @@ const actions = {
     async [actionTypes.RETRIEVE_GITHUB_REPOS] ({ commit, state }, userName) {
         let data;
 
-        if (!state.gitHubData.mappedRepos) {
+        if (!state.gitHubData.repos) {
             const githubApiClient = diContainer.get<GithubApiClientInterface>(types.GithubApiClient);
             const dataMapper = diContainer.get<DataMapperInterface>(types.DataMapper);
 
