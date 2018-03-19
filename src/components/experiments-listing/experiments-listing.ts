@@ -2,7 +2,7 @@ import {Component, Vue, Watch} from 'vue-property-decorator';
 import {mutationTypes} from './../../store/';
 import { types, diContainer } from "./../dependency-injection";
 
-import { MntsServiceInterface, config } from './../mnts';
+import { MntsServiceInterface, config as mntnsConfig } from './../mnts';
 
 @Component({
     template: require('./experiments-listing.html'),
@@ -12,7 +12,7 @@ import { MntsServiceInterface, config } from './../mnts';
         },
 
         level() {
-            return this.$store.state.mntns.level;
+            return this.$store.state.mntns.levels.currentLevel;
         }
     },
 })
@@ -25,7 +25,7 @@ export class ExperimentsListingComponent extends Vue {
 
     @Watch('$store.state.gitHubData.focusedData.event')
     eventWatchHandler() {
-        if (event.type === config.eventToUpdateLevel) {
+        if (event.type === mntnsConfig.eventToUpdateLevel) {
             this.showDetails();
         }
     }
@@ -50,7 +50,7 @@ export class ExperimentsListingComponent extends Vue {
     }
 
     stopExperiment() {
-
+        this.isStarted = false;
     }
 
     activateExperiment() {

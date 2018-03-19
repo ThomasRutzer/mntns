@@ -70,7 +70,7 @@ const mutations = {
     },
 
     [types.MNTNS_UPDATE_LEVEL](state, { level }) {
-        state.mntns.level = level;
+        state.mntns.levels.currentLevel = level;
     },
 
     [types.USED_DATA](state, payload) {

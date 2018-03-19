@@ -65,7 +65,19 @@ const state = {
     },
 
     mntns: {
-        level: 1
+        levels: {
+            currentLevel: 1,
+            allLevels:  [
+                {
+                    index: 1,
+                    title: "Repos"
+                },
+                {
+                    index: 2,
+                    title: "Commits"
+                }
+            ]
+        }
     }
 
 };

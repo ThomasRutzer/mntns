@@ -22,7 +22,6 @@ export class MntsComponent extends Vue {
     private outside: boolean = false;
     private focusedData: string = null;
     private service: MntsServiceInterface;
-    private focusedEvent;
 
     @Watch('$store.state.currentRoute.titleAnimatedIn')
     watchHandler() {
@@ -37,7 +36,7 @@ export class MntsComponent extends Vue {
     focusedWatcher() {
         this.outside = this.$store.state.gitHubData.focusedData.event.x > (window.innerWidth / 2);
 
-        switch (this.$store.state.mntns.level) {
+        switch (this.$store.state.mntns.levels.currentLevel) {
             case(1):
                 this.focusedData = this.$store.state.gitHubData.focusedData.raw.name;
                 break;

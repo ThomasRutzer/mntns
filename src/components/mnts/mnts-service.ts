@@ -35,8 +35,8 @@ class MntsService implements MntsServiceInterface {
     }
 
     public async nextState() {
-        const level = store.state.level < config.maxLevel
-            ? store.state.level + 1
+        const level = store.state.mntns.levels.currentLevel < config.maxLevel
+            ? store.state.mntns.levels.currentLevel + 1
             : config.maxLevel;
 
         store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, { level });
@@ -62,14 +62,14 @@ class MntsService implements MntsServiceInterface {
 
     private async progessState() {
 
-        if (store.state.mntns.level === 1) {
+        if (store.state.mntns.levels.currentLevel === 1) {
             await this.loadRepos();
             store.commit(mutationTypes.USED_DATA, {
                 raw: store.state.gitHubData.repos.raw,
                 mapped: store.state.gitHubData.repos.mapped
             })
 
-        } else if (store.state.mntns.level === 2) {
+        } else if (store.state.mntns.levels.currentLevel === 2) {
             const repoName = store.state.gitHubData.focusedData.raw.name;
             await this.loadCommits(repoName);
 
