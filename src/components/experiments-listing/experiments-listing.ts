@@ -64,7 +64,7 @@ export class ExperimentsListingComponent extends Vue {
     }
 
     async nextStep() {
-        await this.mntnsService.nextState();
+        await this.mntnsService.nextStep();
         this.hideDetails();
     }
 

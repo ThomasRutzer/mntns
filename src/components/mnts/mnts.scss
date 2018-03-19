@@ -1,4 +1,6 @@
 @import "./../colors/colors.json";
+@import "./../layout/layout-definitions.json";
+@import "mntns-level-navigation";
 
 $mntns-focused-data-border-radius: 15px;
 $mntns-focused-data-max-width: 150px;
@@ -14,6 +16,20 @@ $mntns-focused-data-max-width: 150px;
   canvas {
     width: 100% !important;
     height: auto !important;
+  }
+}
+
+.mnts__header {
+  position: absolute;
+  top: 0;
+  right: calc((100vw - #{map_get($layout, "content-area-width-small")}) / 2);
+  height: map_get($layout, "header-height");
+  display: flex;
+  align-items: center;
+
+  @include mq($from: 'm') {
+    right: calc((100vw - #{map_get($layout, "content-area-width-medium")}) / 2);
+
   }
 }
 

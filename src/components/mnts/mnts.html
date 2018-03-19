@@ -1,6 +1,11 @@
 <div class="mnts"
      @click="expandMnts()">
 
+    <div v-show="isActivated"
+         class="mnts__header revealing-content revealing-content--reveal">
+        <mntns-level-navigation></mntns-level-navigation>
+    </div>
+
     <generator @intersection="focusObject($event)"
                :data="data"></generator>
 
@@ -13,9 +18,5 @@
             {{ focusedData }}
         </div>
     </transition>
-
-    <mntns-level-navigation></mntns-level-navigation>
-
-
 </div>
 

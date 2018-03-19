@@ -1,0 +1,33 @@
+@import "./../colors/colors.json";
+
+.mntns-level-navigation {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.mntns-level-navigation__back {
+  position: relative;
+
+  span {
+    overflow: hidden;
+    transition: width 300ms ease-out;
+  }
+
+  svg {
+    width: 80px;
+    height: 40px;
+  }
+
+  span:first-child {
+    fill: $color-highlight;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  span:last-child {
+    fill: $color-light;
+  }
+}
