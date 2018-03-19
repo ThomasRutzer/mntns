@@ -34,7 +34,7 @@ class MntsService implements MntsServiceInterface {
         }
     }
 
-    public async nextState() {
+    public async nextStep() {
         const level = store.state.mntns.levels.currentLevel < config.maxLevel
             ? store.state.mntns.levels.currentLevel + 1
             : config.maxLevel;

@@ -16,7 +16,7 @@ import { MntsServiceInterface } from "./mnts-service-interface";
         },
 
         progress() {
-            return (100 / this.$store.state.mntns.levels.allLevels.length) / this.$store.state.mntns.levels.currentLevel;
+            return (100 / this.$store.state.mntns.levels.allLevels.length) * this.$store.state.mntns.levels.currentLevel;
         }
     }
 })

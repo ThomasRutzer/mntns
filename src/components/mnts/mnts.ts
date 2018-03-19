@@ -1,3 +1,4 @@
+import SceneIntersectionModelInterface from 'mnts/src/components/scene';
 import {Component, Vue, Watch} from 'vue-property-decorator';
 import { types, diContainer } from "./../dependency-injection";
 
@@ -58,17 +59,17 @@ export class MntsComponent extends Vue {
         this.$router.push('/mnts');
     }
 
-    focusObject(data: {objectId: string, event: {type: string}}) {
+    focusObject(data: SceneIntersectionModelInterface) {
 
         // certain scene objects might not be focused
-        if (config.excludedFocusableObjectIds.indexOf(data.objectId) != -1) {
+        if (config.excludedFocusableObjectIds.indexOf(data.object.name) != -1) {
             return;
         }
 
         if (!this.isActivated) {
             this.focusedData = null;
         } else {
-            this.service.focusData(data.objectId);
+            this.service.focusData(data.object.name);
             this.focusedWatcher();
         }
     }
