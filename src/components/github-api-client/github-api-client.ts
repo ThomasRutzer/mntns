@@ -32,7 +32,7 @@ class GithubApiClient implements GithubApiClientInterface {
      * @param {number} maxItemCount, where 0 equals all
      * @return {AxiosPromise}
      */
-    getUserRepos(userName: string, maxItemCount?: number = 0) {
+    getUserRepos(userName: string, maxItemCount: number = 0) {
         return this.httpClient.get(`${baseUrl}/users/${userName}/repos?per_page=${maxItemCount}`);
     }
 
@@ -43,7 +43,7 @@ class GithubApiClient implements GithubApiClientInterface {
      * @param {number} maxItemCount, where 0 equals all
      * @return {AxiosPromise}
      */
-    getCommits(repoName: string, userName: string, maxItemCount?: number = 0) {
+    getCommits(repoName: string, userName: string, maxItemCount: number = 0) {
         return this.httpClient.get(`${baseUrl}/repos/${userName}/${repoName}/commits?per_page=${maxItemCount}`);
     }
 }

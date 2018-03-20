@@ -1,4 +1,3 @@
-import SceneIntersectionModelInterface from 'mnts/src/components/scene';
 import {Component, Vue, Watch} from 'vue-property-decorator';
 import { types, diContainer } from "./../dependency-injection";
 
@@ -29,6 +28,8 @@ export class MntsComponent extends Vue {
      * @type {Array} data > stores data to visualize mntns
      */
     private data: any[] = [];
+
+    private isActivated: boolean;
 
     private outside: boolean = false;
     private focusedData: string = null;
@@ -74,7 +75,10 @@ export class MntsComponent extends Vue {
     }
 
     updateDetailedData() {
-        this.detailedData = {};
+        this.detailedData = {
+            title: '',
+            url: ''
+        };
 
         switch (this.$store.state.mntns.levels.currentLevel) {
             case(1):
@@ -115,7 +119,7 @@ export class MntsComponent extends Vue {
         this.$router.push('/experiments');
     }
 
-    focusObject(data: SceneIntersectionModelInterface) {
+    focusObject(data: any) {
 
         if (!this.isActivated || this.detailedData) {
             return;

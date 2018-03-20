@@ -4,7 +4,6 @@ import * as chaiAsPromised from 'chai-as-promised';
 import {stub} from 'sinon';
 import {ComponentTest} from '../../util/component-test';
 import {MntsComponent} from './mnts';
-import mntnsConfig  from './mnts-config';
 import diContainer from "../dependency-injection/container";
 import store, { mutationTypes } from './../../store';
 
@@ -300,20 +299,11 @@ const rawCommits = [
 ];
 const mappedCommits = [];
 
-@Component({
-    template: '<div></div>'
-})
-class MockMntsComponent extends MntsComponent {
-    constructor() {
-        super();
-    }
-}
-
 describe('Mnts component', () => {
     let directiveTest: ComponentTest;
 
     beforeEach(() => {
-        directiveTest = new ComponentTest('<div><mnts></mnts></div>', {'mnts': MockMntsComponent});
+        directiveTest = new ComponentTest('<div><mnts></mnts></div>', {'mnts': MntsComponent});
     });
 
     describe('hook created()', () => {
@@ -335,12 +325,10 @@ describe('Mnts component', () => {
         it('sets level to 1', async () => {
             store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, {level:2});
 
-            let childComp: MockMntsComponent = null;
             directiveTest.createComponent({store});
 
-            await directiveTest.execute((vm) => {
-                childComp = vm.$children[0];
-                expect(vm.$store.state.mntns.levels.currentLevel).to.equal(1);
+            await directiveTest.execute(() => {
+                expect(store.state.mntns.levels.currentLevel).to.equal(1);
             });
         });
     });

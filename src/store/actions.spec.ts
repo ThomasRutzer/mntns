@@ -10,16 +10,6 @@ import {actions, actionTypes} from './';
 const mockGithubUserName = 'testUser';
 const mockRepoName = 'testRepo';
 
-const intialState = {
-    gitHubData: {
-        repos: {
-            mapped: null,
-            raw: null,
-        },
-        commits: {}
-    }
-};
-
 let state;
 
 describe('actions', () => {
@@ -346,16 +336,19 @@ describe('actions', () => {
         });
 
         it('returns promise', async () => {
-            return expect(actions[actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO]({commit: store.commit, state: state}, { repoName: mockRepoName, userName: mockGithubUserName } )).to.eventually.be.fulfilled;
+            return expect(actions[actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO](
+                {commit: store.commit, state: state},
+                { repoName: mockRepoName, userName: mockGithubUserName, perPage: 0 } ))
+                .to.eventually.be.fulfilled;
         });
 
         it('returns promise when called twice', async () => {
-            await expect(actions[actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO]({commit: store.commit, state: state}, { repoName: mockRepoName, userName: mockGithubUserName }));
-            return expect(actions[actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO]({commit: store.commit, state: state}, { repoName: mockRepoName, userName: mockGithubUserName })).to.eventually.be.fulfilled;
+            await expect(actions[actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO]({commit: store.commit, state: state}, { repoName: mockRepoName, userName: mockGithubUserName, perPage: 10 }));
+            return expect(actions[actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO]({commit: store.commit, state: state}, { repoName: mockRepoName, userName: mockGithubUserName, perPage: 10 })).to.eventually.be.fulfilled;
         });
 
         it('adds commit to store', async () => {
-            await actions[actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO]({commit: store.commit, state: state}, { repoName: mockRepoName, userName: mockGithubUserName } );
+            await actions[actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO]({commit: store.commit, state: state}, { repoName: mockRepoName, userName: mockGithubUserName, perPage: 10 } );
             expect(store.state.gitHubData.commits[mockRepoName].mapped).to.exist;
             expect(store.state.gitHubData.commits[mockRepoName].raw).to.exist;
         })
