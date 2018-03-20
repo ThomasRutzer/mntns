@@ -6,6 +6,7 @@ const glob = require('glob'),
   ExtractTextPlugin = require('extract-text-webpack-plugin'),
   PurifyCSSPlugin = require('purifycss-webpack'),
   FaviconsWebpackPlugin = require('favicons-webpack-plugin'),
+  jsonImporter = require('node-sass-json-importer'),
   autoprefixer = require('autoprefixer'),
   webpackConfig = require('./webpack.config.base'),
   helpers = require('./helpers'),
@@ -34,9 +35,10 @@ webpackConfig.module.rules = [...webpackConfig.module.rules,
           options: {
             minimize: true,
             sourceMap: true,
-            importLoaders: 2
+            importLoaders: 3
           }
         },
+
         {
           loader: 'postcss-loader',
           options: {
@@ -48,9 +50,10 @@ webpackConfig.module.rules = [...webpackConfig.module.rules,
           options: {
             outputStyle: 'expanded',
             sourceMap: true,
-            sourceMapContents: true
+            sourceMapContents: true,
+              importer: jsonImporter,
           }
-        }
+        },
       ],
       // use style-loader in development
       fallback: 'style-loader'
