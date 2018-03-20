@@ -52,6 +52,8 @@ export class MntsComponent extends Vue {
 
     async created() {
         this.$store.commit(mutationTypes.DEACTIVATE_BACKGROUND);
+        this.$store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, {level:1});
+
         this.service = diContainer.get<MntsServiceInterface>(types.MntnsService);
 
         await this.service.start();

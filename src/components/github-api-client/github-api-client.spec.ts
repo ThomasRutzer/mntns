@@ -134,7 +134,6 @@ const reposMockData = [
         "default_branch": "master"
     }
 ];
-
 const commitsMockData = [
     {
         "sha": "875670a38c40556f3c115dbeef1c4fd88cb240f2",
@@ -301,12 +300,12 @@ describe('Github Api client', () => {
         // mock private httpClient with <any>
         mock = new MockAdapter(<any>client.httpClient);
 
-        mock.onGet(`${baseUrl}/users/${mockGithubUserName}/repos`).reply(
+        mock.onGet(`${baseUrl}/users/${mockGithubUserName}/repos?per_page=0`).reply(
             200,
             reposMockData
         );
 
-        mock.onGet(`${baseUrl}/repos/${mockGithubUserName}/${mockRepoName}/commits`).reply(
+        mock.onGet(`${baseUrl}/repos/${mockGithubUserName}/${mockRepoName}/commits?per_page=0`).reply(
             200,
             commitsMockData
         );

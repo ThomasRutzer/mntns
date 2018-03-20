@@ -333,40 +333,14 @@ describe('Mnts component', () => {
         });
 
         it('sets level to 1', async () => {
-            store.commit(mutationTypes.MNTNS_NEXT_LEVEL, {level:2});
+            store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, {level:2});
 
             let childComp: MockMntsComponent = null;
             directiveTest.createComponent({store});
 
             await directiveTest.execute((vm) => {
                 childComp = vm.$children[0];
-                expect(vm.$store.state.mntns.level).to.equal(1);
-            });
-        });
-
-        it('does not exceed max level value', async () => {
-            let childComp: MockMntsComponent = null;
-            directiveTest.createComponent({store});
-
-            await directiveTest.execute(async (vm) => {
-                childComp = vm.$children[0];
-
-                await childComp.focusedMnt({ objectId: "1",type: mntnsConfig.eventToUpdateLevel});
-                await childComp.focusedMnt({ objectId: "1",type: mntnsConfig.eventToUpdateLevel});
-                await childComp.focusedMnt({ objectId: "1",type: mntnsConfig.eventToUpdateLevel});
-
-                expect(vm.$store.state.mntns.levels.currentLevel).to.equal(vm.$store.state.mntns.levels.length);
-            });
-        });
-
-        it('fullfils with empty promisewhen objectId is included in excludedFocusableObjectIds', async () => {
-            let childComp: MockMntsComponent = null;
-            directiveTest.createComponent({store});
-
-            await directiveTest.execute(async (vm) => {
-                childComp = vm.$children[0];
-
-                return expect(childComp.focusedMnt({objectId: "floor", type: "any"})).to.eventually.be.fulfilled;
+                expect(vm.$store.state.mntns.levels.currentLevel).to.equal(1);
             });
         });
     });

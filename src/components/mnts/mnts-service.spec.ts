@@ -298,26 +298,27 @@ describe('Mnts Service', () => {
 
     before(() => {
         service = new MntsService();
-
-        store.commit(mutationTypes.STORE_GITHUB_REPOS, {
-            rawRepos,
-            mappedRepos
-        });
-
-        store.commit(mutationTypes.STORE_COMMIT, {
-            raw: rawCommits,
-            mapped: mappedCommits,
-            repoName: "mntns"
-        });
     });
 
     describe('method focusData()', () => {
         it('when level is 1, focused data is repo', async () => {
+
+            store.commit(mutationTypes.USED_DATA, {
+                raw: rawRepos,
+                mapped: mappedRepos
+            });
+
             await service.focusData("1");
             expect(store.state.gitHubData.focusedData.raw).to.equal(rawRepos[0]);
         });
 
-        it('when level is 2, focused data is repo', async () => {
+        it('when level is 2, focused data is commit', async () => {
+
+            store.commit(mutationTypes.USED_DATA, {
+                raw: rawCommits,
+                mapped: mappedCommits
+            });
+
             store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, {level:2});
             await service.focusData("1");
             expect(store.state.gitHubData.focusedData.raw).to.equal(rawCommits[0]);
