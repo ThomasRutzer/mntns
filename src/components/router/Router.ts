@@ -18,9 +18,17 @@ export const createRoutes: () => RouteConfig[] = () => [
     },
 
     {
-        path: '/mnts',
+        path: '/experiments',
         components: {
             content: experimentsListingComponent,
+            background: mntsComponent,
+        },
+    },
+
+    {
+        path: '/experiments/mntns',
+        components: {
+            content: null,
             background: mntsComponent,
         },
     },

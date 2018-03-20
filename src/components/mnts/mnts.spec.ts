@@ -355,7 +355,7 @@ describe('Mnts component', () => {
                 await childComp.focusedMnt({ objectId: "1",type: mntnsConfig.eventToUpdateLevel});
                 await childComp.focusedMnt({ objectId: "1",type: mntnsConfig.eventToUpdateLevel});
 
-                expect(vm.$store.state.mntns.level).to.equal(mntnsConfig.maxLevel);
+                expect(vm.$store.state.mntns.levels.currentLevel).to.equal(vm.$store.state.mntns.levels.length);
             });
         });
 
