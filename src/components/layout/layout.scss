@@ -2,6 +2,7 @@
 @import "../../components/media-queries/sass-mq";
 @import "../spacing/spacing-definitions.json";
 
+// @todo: store z-indexes in layout-defintions.json
 .layout {
   display: grid;
   grid-template-columns: 1fr map_get($layout, "content-area-width-small") 1fr;
@@ -22,13 +23,13 @@
 
 .layout__header {
   position: relative;
-  z-index: 1;
+  z-index: 10;
   grid-area: header;
 }
 
 .layout__content {
   position: relative;
-  z-index: 1;
+  z-index: 5;
   grid-area: content;
 
   padding: map_get($spacing-sizes, 'm') 0;
@@ -40,6 +41,6 @@
 
 .layout__footer {
   position: relative;
-  z-index: 1;
+  z-index: 10;
   grid-area: footer;
 }

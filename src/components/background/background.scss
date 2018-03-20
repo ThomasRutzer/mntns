@@ -50,6 +50,9 @@ $background-backdrop-offset: 16px;
     overflow: hidden;
   }
 
+  &--active {
+    z-index: 5;
+  }
 }
 
 .background__backdrop {

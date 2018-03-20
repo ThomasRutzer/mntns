@@ -6,6 +6,10 @@ import './background.scss';
     computed: {
         isExpanded() {
             return this.$store.state.background.visibility === 1;
+        },
+
+        isActive() {
+            return this.$store.state.background.activated;
         }
     },
 })
@@ -22,7 +26,7 @@ export class BackgroundComponent extends Vue {
     created() {
         this.$router.beforeEach((to, from, next) => {
             this.transition = from.path === '/' || to.path === '/';
-            this.expandTransition = from.path === '/mnts' || to.path === '/mnts';
+            this.expandTransition = from.path === '/experiments' || to.path === '/experiments';
 
             next();
         })
