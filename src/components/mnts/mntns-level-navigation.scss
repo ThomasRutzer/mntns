@@ -7,12 +7,12 @@
   height: 100%;
 }
 
-.mntns-level-navigation__back {
+.mntns-level-navigation__progress {
   position: relative;
 
   span {
     overflow: hidden;
-    transition: width 300ms ease-out;
+    transition: width 2000ms 300ms ease-out;
   }
 
   svg {

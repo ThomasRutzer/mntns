@@ -22,17 +22,6 @@ import { MntsServiceInterface } from "./mnts-service-interface";
 })
 
 export class MntnsLevelNavigation extends Vue {
-    private mntnsService: MntsServiceInterface;
 
-    created() {
-        this.mntnsService = diContainer.get(types.MntnsService)
-    }
 
-    goBack() {
-        if (this.currentLevel.index <= 1) {
-            return;
-        }
-
-        this.mntnsService.previousStep();
-    }
 }

@@ -33,6 +33,13 @@ $mntns-focused-data-max-width: 150px;
   }
 }
 
+.mnts__detailed-data {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: calc((100vw - #{map_get($layout, "content-area-width-medium")}) / 2);
+}
+
 .mnts__focused-data {
   position: fixed;
   background-color: $color-darkest;
@@ -47,6 +54,20 @@ $mntns-focused-data-max-width: 150px;
     transform: translateX(-100%);
     border-radius: 0 0 $mntns-focused-data-border-radius 0;
   }
+
+  &--show-transition-enter-active,
+  &--show-transition-leave-active {
+    opacity: 1;
+    transition: opacity 300ms;
+  }
+
+  &--show-transition-enter,
+  &--show-transition-leave-to {
+    opacity: 0;
+  }
+}
+
+.mnts__detailed-data {
 
   &--show-transition-enter-active,
   &--show-transition-leave-active {

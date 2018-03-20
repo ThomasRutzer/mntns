@@ -26,14 +26,6 @@ export const createRoutes: () => RouteConfig[] = () => [
     },
 
     {
-        path: '/experiments/mntns',
-        components: {
-            content: null,
-            background: mntsComponent,
-        },
-    },
-
-    {
         path: '/contact',
         components: {
             content: contactComponent,

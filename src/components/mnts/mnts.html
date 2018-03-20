@@ -18,5 +18,38 @@
             {{ focusedData }}
         </div>
     </transition>
+
+    <transition name="mnts__detailed-data--show-transition">
+        <div v-if="isActivated && detailedData"
+             class="mnts__detailed-data">
+            <span @click="clearDetailedData()">Close</span>
+
+                <h3>
+                    {{ detailedData.title }}
+                </h3>
+
+                <div class="margin-top--m">
+                    <a class="primary-button"
+                       alt="view on Github"
+                       :href="detailedData.url">view on Github
+                    </a>
+                </div>
+
+            <div v-if="level == 1">
+                <div class="margin-top--s">
+                    <span class="primary-button" @click="forwards()">
+                        Dig deeper
+                    </span>
+                </div>
+            </div>
+
+            <div v-if="level == 2">
+                <span class="primary-button margin-top--m" @click="back()">
+                Back to overview
+                </span>
+            </div>
+        </div>
+    </transition>
+
 </div>
 

@@ -1,4 +1,4 @@
-import { Component, Vue } from 'vue-property-decorator';
+import { Component } from 'vue-property-decorator';
 import { RouterDefaultComponentAbstract } from './../router';
 
 @Component({

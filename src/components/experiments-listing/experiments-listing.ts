@@ -1,34 +1,14 @@
-import {Component, Vue, Watch} from 'vue-property-decorator';
-import {mutationTypes} from './../../store/';
-import { types, diContainer } from "./../dependency-injection";
+import {Component} from 'vue-property-decorator';
+import { RouterDefaultComponentAbstract } from './../router';
 
-import { MntsServiceInterface, config as mntnsConfig } from './../mnts';
+import {mutationTypes} from './../../store/';
 
 @Component({
     template: require('./experiments-listing.html'),
-    computed: {
-        dataLoaded() {
-            return this.$store.state.currentRoute.titleAnimatedIn;
-        },
-
-        level() {
-            return this.$store.state.mntns.levels.currentLevel;
-        }
-    },
 })
 
-export class ExperimentsListingComponent extends Vue {
+export class ExperimentsListingComponent extends RouterDefaultComponentAbstract {
     private isStarted: boolean = false;
-    private isActivated: boolean = false;
-    private details: boolean = false;
-    private mntnsService: MntsServiceInterface;
-
-    @Watch('$store.state.gitHubData.focusedData.event')
-    eventWatchHandler() {
-        if (event.type === mntnsConfig.eventToUpdateLevel) {
-            this.showDetails();
-        }
-    }
 
     beforeCreate() {
         this.$store.commit(mutationTypes.EXPAND_BACKGROUND);
@@ -40,50 +20,8 @@ export class ExperimentsListingComponent extends Vue {
         this.$store.commit(mutationTypes.UNFOCUS_REPO);
     }
 
-    created() {
-        this.mntnsService = diContainer.get<MntsServiceInterface>(types.MntnsService);
-    }
-
     startExperiment() {
-        this.isStarted = true;
-        this.activateExperiment();
-    }
-
-    stopExperiment() {
-        this.isStarted = false;
-    }
-
-    activateExperiment() {
-        this.isActivated = true;
+       this.isStarted = true;
         this.$store.commit(mutationTypes.ACTIVATE_BACKGROUND);
-    }
-
-    deactivateExperiment() {
-        this.isActivated = true;
-        this.$store.commit(mutationTypes.DEACTIVATE_BACKGROUND);
-    }
-
-    async nextStep() {
-        await this.mntnsService.nextStep();
-        this.hideDetails();
-    }
-
-    async back() {
-        await this.mntnsService.previousStep();
-        this.hideDetails();
-    }
-
-    showDetails() {
-        if (this.details) {
-            return;
-        }
-
-        this.details = this.$store.state.gitHubData.focusedData;
-        this.deactivateExperiment();
-    }
-
-    hideDetails() {
-        this.details = false;
-        this.activateExperiment();
     }
 }

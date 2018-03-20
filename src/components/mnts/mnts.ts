@@ -2,12 +2,18 @@ import SceneIntersectionModelInterface from 'mnts/src/components/scene';
 import {Component, Vue, Watch} from 'vue-property-decorator';
 import { types, diContainer } from "./../dependency-injection";
 
+import { mutationTypes } from './../../store';
+
 import { MntsServiceInterface } from "./mnts-service-interface";
 import config from './mnts-config';
 
 @Component({
     template: require('./mnts.html'),
     computed: {
+        level() {
+            return this.$store.state.mntns.levels.currentLevel;
+        },
+
         isActivated() {
             return this.$store.state.background.activated;
         },
@@ -19,9 +25,14 @@ import config from './mnts-config';
 })
 
 export class MntsComponent extends Vue {
+    /**
+     * @type {Array} data > stores data to visualize mntns
+     */
     private data: any[] = [];
+
     private outside: boolean = false;
     private focusedData: string = null;
+    private detailedData: {title: string, url: string} = null;
     private service: MntsServiceInterface;
 
     @Watch('$store.state.currentRoute.titleAnimatedIn')
@@ -34,7 +45,56 @@ export class MntsComponent extends Vue {
         this.data = this.$store.state.gitHubData.usedData.mapped;
     }
 
-    focusedWatcher() {
+    beforeDestroy() {
+        this.$store.commit(mutationTypes.DEACTIVATE_BACKGROUND);
+        this.$store.commit(mutationTypes.UNFOCUS_REPO);
+    }
+
+    async created() {
+        this.$store.commit(mutationTypes.DEACTIVATE_BACKGROUND);
+        this.service = diContainer.get<MntsServiceInterface>(types.MntnsService);
+
+        await this.service.start();
+    }
+
+    back() {
+        this.clearDetailedData();
+        this.service.previousStep();
+    }
+
+    forwards() {
+        this.clearDetailedData();
+        this.service.nextStep();
+    }
+
+    clearDetailedData() {
+        this.detailedData = null;
+    }
+
+    updateDetailedData() {
+        this.detailedData = {};
+
+        switch (this.$store.state.mntns.levels.currentLevel) {
+            case(1):
+                this.detailedData.title = this.$store.state.gitHubData.focusedData.raw.name;
+                this.detailedData.url = this.$store.state.gitHubData.focusedData.raw.url;
+                break;
+
+            case (2):
+                this.detailedData.title = this.$store.state.gitHubData.focusedData.raw.commit.message;
+                this.detailedData.url = this.$store.state.gitHubData.focusedData.raw.tree.url;
+        }
+
+        return null;
+
+    }
+
+    clearFocusedData()  {
+        this.outside = null;
+        this.focusedData = null;
+    }
+
+    updateFocusedData() {
         this.outside = this.$store.state.gitHubData.focusedData.event.x > (window.innerWidth / 2);
 
         switch (this.$store.state.mntns.levels.currentLevel) {
@@ -49,28 +109,29 @@ export class MntsComponent extends Vue {
         return null;
     }
 
-    async created() {
-        this.service = diContainer.get<MntsServiceInterface>(types.MntnsService);
-
-        await this.service.start();
-    }
-
     expandMnts() {
-        this.$router.push('/mnts');
+        this.$router.push('/experiments');
     }
 
     focusObject(data: SceneIntersectionModelInterface) {
+
+        if (!this.isActivated || this.detailedData) {
+            return;
+        }
 
         // certain scene objects might not be focused
         if (config.excludedFocusableObjectIds.indexOf(data.object.name) != -1) {
             return;
         }
 
-        if (!this.isActivated) {
-            this.focusedData = null;
+        this.service.focusData(data.object.name);
+
+        if (data.event.type === config.eventToUpdateLevel) {
+            this.clearFocusedData();
+            this.updateDetailedData();
         } else {
-            this.service.focusData(data.object.name);
-            this.focusedWatcher();
+            this.clearDetailedData();
+            this.updateFocusedData();
         }
     }
 }

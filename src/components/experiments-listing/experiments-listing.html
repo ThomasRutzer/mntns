@@ -7,44 +7,8 @@
             </h1>
 
             <span class="primary-button margin-top--l revealing-content"
-                  :class="{'revealing-content--reveal': dataLoaded}"
+                  :class="{'revealing-content--reveal': titleIn}"
                   @click="startExperiment()">explore</span>
         </div>
-
-        <div v-if="isStarted && details"
-             class="experiments-listing__details-box revealing-content revealing-content--reveal">
-
-            <div v-if="level == 1">
-                <span>repo:</span>
-                <h3>
-                    {{ details.raw.name }}
-                </h3>
-
-                <div class="margin-top--m">
-                    <a class="primary-button"
-                       :href="details.url">view repo</a>
-                </div>
-
-                <div class="margin-top--s">
-                    <span class="primary-button" @click="nextStep()">
-                        Dig deeper
-                    </span>
-                </div>
-
-            </div>
-
-            <div v-if="level == 2">
-                <span>commit message:</span>
-                <h3>
-                    {{ details.raw.commit.message }}
-                </h3>
-
-                <span class="primary-button margin-top--m" @click="back()">
-                    Back to overview
-                    </span>
-            </div>
-
-        </div>
-
     </div>
 </div>
