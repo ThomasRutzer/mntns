@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 import state from './state';
 import getters from './getters';
 import actions from './actions';
@@ -17,11 +17,11 @@ export default new Vuex.Store({
     mutations,
     getters,
     strict: debug,
-})
+});
 
 export {
     mutations,
     mutationTypes,
     actions,
     actionTypes
-}
+};

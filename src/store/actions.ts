@@ -1,10 +1,10 @@
-import * as mutationTypes from './mutation-types'
+import * as mutationTypes from './mutation-types';
 import * as actionTypes from './action-types';
 
-import { types, diContainer } from "./../components/dependency-injection";
-import { DataMapperInterface } from "../components/data-mapper/data-mapper-interface";
+import { types, diContainer } from './../components/dependency-injection';
+import { DataMapperInterface } from '../components/data-mapper/data-mapper-interface';
 import * as mappers from '../components/data-mapper/mappers';
-import { GithubApiClientInterface } from "./../components/github-api-client";
+import { GithubApiClientInterface } from './../components/github-api-client';
 
 /*
 list of all provided action. An action is a plain Function,
@@ -36,7 +36,7 @@ const actions = {
             commit(mutationTypes.GITHUB_DATA_MAPPING_STARTED);
 
             data = {
-                mappedRepos: res ? dataMapper.map(res.data, mappers.repoMappers): [],
+                mappedRepos: res ? dataMapper.map(res.data, mappers.repoMappers) : [],
                 rawRepos: res ? res.data : []
             };
 
@@ -68,7 +68,7 @@ const actions = {
             commit(mutationTypes.GITHUB_DATA_MAPPING_STARTED);
 
             data = {
-                mapped: res ? dataMapper.map(res.data, mappers.commitMappers): [],
+                mapped: res ? dataMapper.map(res.data, mappers.commitMappers) : [],
                 raw: res ? res.data : []
             };
 

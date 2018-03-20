@@ -18,11 +18,11 @@ const mutations = {
     },
 
     [types.CURRENT_TITLE_VISIBLE](state) {
-        state.currentRoute.titleAnimatedIn = true
+        state.currentRoute.titleAnimatedIn = true;
     },
 
     [types.CURRENT_TITLE_INVISIBLE](state) {
-        state.currentRoute.titleAnimatedIn = false
+        state.currentRoute.titleAnimatedIn = false;
     },
 
     [types.GITHUB_API_STARTED](state) {

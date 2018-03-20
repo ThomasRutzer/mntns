@@ -70,11 +70,11 @@ const state = {
             allLevels:  [
                 {
                     index: 1,
-                    title: "Repos"
+                    title: 'Repos'
                 },
                 {
                     index: 2,
-                    title: "Commits"
+                    title: 'Commits'
                 }
             ]
         }
