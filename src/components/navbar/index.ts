@@ -1,1 +1,5 @@
-export * from './navbar';
+import { NavbarComponent } from './navbar';
+
+export {
+    NavbarComponent
+};

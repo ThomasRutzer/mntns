@@ -3,9 +3,9 @@ import {createRouter} from './components/router/Router';
 import store from './store';
 
 // import static / router independent components
-const navbarComponent = () => import('./components/navbar').then(({ NavbarComponent }) => NavbarComponent);
-const backgroundComponent = () => import('./components/background').then(({ BackgroundComponent }) => BackgroundComponent);
-const footerbarComponent = () => import('./components/footerbar').then(({ FooterbarComponent }) => FooterbarComponent);
+import { NavbarComponent  } from './components/navbar';
+import { BackgroundComponent } from './components/background';
+import { FooterbarComponent } from  './components/footerbar';
 
 // import global directives
 import { titleAnimationDirective } from './components/string-operations';
@@ -22,8 +22,8 @@ let app = new Vue({
     el: '#app-main',
     store,
     components: {
-        'navbar': navbarComponent,
-        'footerbar': footerbarComponent,
-        'background': backgroundComponent
+        'navbar': NavbarComponent,
+        'footerbar': FooterbarComponent,
+        'background': BackgroundComponent
     },
 });
