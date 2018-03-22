@@ -19,13 +19,13 @@ let config = {
   module: {
     rules: [{
         test: /\.ts$/,
-        // exclude: /node_modules/,
+        //exclude: /node_modules/,
         enforce: 'pre',
         loader: 'tslint-loader'
       },
       {
         test: /\.ts$/,
-        // exclude: /node_modules/,
+       // exclude: /node_modules/,
         loader: 'awesome-typescript-loader'
       },
       {

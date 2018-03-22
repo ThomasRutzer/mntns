@@ -7,8 +7,8 @@
  */
 export default function getMinMaxNumbers( ...numbers: number[]) {
     let invalid = false;
-    numbers.map((number) => {
-       if (typeof number !== 'number') {
+    numbers.map((currNumber) => {
+       if (typeof currNumber !== 'number') {
             invalid = true;
        }
     });

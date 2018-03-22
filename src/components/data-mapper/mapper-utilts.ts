@@ -1,4 +1,4 @@
-import { getMinMaxNumbers } from "./../array-operations";
+import { getMinMaxNumbers } from './../array-operations';
 import max from 'date-fns/max';
 import min from 'date-fns/min';
 import differenceInDays from 'date-fns/difference_in_days';
@@ -18,7 +18,7 @@ const minMaxCache: Object = {};
  * @return {[number, number]} where first index is minValue, and 2nd maxValue
  */
 function getMinMaxTypeNumber(data: any[], property: string): number[]|null {
-    if(!minMaxCache[property]) {
+    if (!minMaxCache[property]) {
         const numbers = data.map((value) => {
             return Number(value[property]);
         });
@@ -37,12 +37,12 @@ function getMinMaxTypeNumber(data: any[], property: string): number[]|null {
  * @return {[number, number, number]} where first index is minValue, and 2nd maxValue and 3rd value as number not Date
  */
 function getMinMaxValueTypeDate(data: Object[], property: string, value: any): number[]|null {
-    if(!minMaxCache[property]) {
+    if (!minMaxCache[property]) {
         const dates = data.map((value) => {
             if (typeof property === 'string') {
                 return new Date(value[property]);
             } else {
-                return new Date(findDeep(value, property))
+                return new Date(findDeep(value, property));
             }
         });
 
@@ -62,12 +62,12 @@ function getMinMaxValueTypeDate(data: Object[], property: string, value: any): n
 }
 
 function getMinMaxTypeString(data: any[], property: string): number[]|null {
-    if(!minMaxCache[property]) {
+    if (!minMaxCache[property]) {
         const numbers = data.map((value) => {
             if (typeof property === 'string') {
                 return value[property].length;
             } else {
-                return findDeep(value, property).length
+                return findDeep(value, property).length;
             }
         });
 
@@ -98,4 +98,4 @@ export {
     getMinMaxTypeString,
     minMaxCache,
     rangeMapper
-}
+};

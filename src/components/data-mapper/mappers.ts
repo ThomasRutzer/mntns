@@ -15,45 +15,45 @@ import MountainConfig from 'mnts/src/components/mountain/mountainConfig';
  */
 const repoMappers = [
     {
-        dataKey: ["size"],
-        mountainsParameter: "height",
+        dataKey: ['size'],
+        mountainsParameter: 'height',
         min: MountainConfig.parameters.height.min,
         max: MountainConfig.parameters.height.max,
-        type: "number",
+        type: 'number',
     },
 
     {
-        dataKey: ["created_at"],
-        mountainsParameter: "x",
+        dataKey: ['created_at'],
+        mountainsParameter: 'x',
         min: -400,
         max: 400,
-        type: "date",
+        type: 'date',
     },
 
     {
-        dataKey: ["pushed_at"],
-        mountainsParameter: "z",
+        dataKey: ['pushed_at'],
+        mountainsParameter: 'z',
         min: -400,
         max: 400,
-        type: "date",
+        type: 'date',
     }
 ];
 
 const commitMappers = [
     {
-        dataKey: ["commit", "author", "date"],
-        mountainsParameter: "x",
+        dataKey: ['commit', 'author', 'date'],
+        mountainsParameter: 'x',
         min: -400,
         max: 400,
-        type: "date",
+        type: 'date',
     },
 
     {
-        dataKey: ["commit", "message"],
-        mountainsParameter: "height",
+        dataKey: ['commit', 'message'],
+        mountainsParameter: 'height',
         min: MountainConfig.parameters.height.min,
         max: MountainConfig.parameters.height.max,
-        type: "string",
+        type: 'string',
     }
 ];
 

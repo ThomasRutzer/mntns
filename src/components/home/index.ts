@@ -1,4 +1,4 @@
-import { HomeComponent} from "./home"
+import { HomeComponent} from './home';
 export {
     HomeComponent
 };

@@ -7,4 +7,4 @@ diContainer.bind<GithubApiClientInterface>(types.GithubApiClient).to(GithubApiCl
 export {
     GithubApiClientInterface,
     GithubApiClient
-}
+};

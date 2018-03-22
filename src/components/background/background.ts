@@ -14,6 +14,10 @@ import './background.scss';
     },
 })
 export class BackgroundComponent extends Vue {
+    private isExpanded: boolean;
+    private isActive: boolean;
+
+
     // actual transition of background component for
     // route specific component inside router-view=background
     // only apply this transition, when route context is "/" (home)
@@ -29,6 +33,6 @@ export class BackgroundComponent extends Vue {
             this.expandTransition = from.path === '/experiments' || to.path === '/experiments';
 
             next();
-        })
+        });
     }
 }

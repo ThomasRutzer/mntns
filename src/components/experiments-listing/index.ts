@@ -1,4 +1,4 @@
-import { ExperimentsListingComponent} from "./experiments-listing";
+import { ExperimentsListingComponent} from './experiments-listing';
 
 export {
     ExperimentsListingComponent

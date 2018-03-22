@@ -1,6 +1,6 @@
-import {MntsServiceInterface} from "./mnts-service-interface";
+import {MntsServiceInterface} from './mnts-service-interface';
 import config from './mnts-config';
-import { injectable } from "inversify";
+import { injectable } from 'inversify';
 import store from './../../store';
 import * as actionTypes from './../../store/action-types';
 import * as mutationTypes from './../../store/mutation-types';
@@ -27,7 +27,7 @@ class MntsService implements MntsServiceInterface {
                 raw: raw[0],
                 mapped: mapped[0],
                 id: id
-            })
+            });
 
         } else {
             store.commit(mutationTypes.UNFOCUS_REPO);
@@ -57,7 +57,7 @@ class MntsService implements MntsServiceInterface {
         store.commit(mutationTypes.USED_DATA, {
             raw: store.state.gitHubData.repos.raw,
             mapped: store.state.gitHubData.repos.mapped
-        })
+        });
     }
 
     private async progessState() {
@@ -67,7 +67,7 @@ class MntsService implements MntsServiceInterface {
             store.commit(mutationTypes.USED_DATA, {
                 raw: store.state.gitHubData.repos.raw,
                 mapped: store.state.gitHubData.repos.mapped
-            })
+            });
 
         } else if (store.state.mntns.levels.currentLevel === 2) {
             const repoName = store.state.gitHubData.focusedData.raw.name;
@@ -76,7 +76,7 @@ class MntsService implements MntsServiceInterface {
             store.commit(mutationTypes.USED_DATA, {
                 raw: store.state.gitHubData.commits[repoName].raw,
                 mapped: store.state.gitHubData.commits[repoName].mapped
-            })
+            });
         }
     }
 

@@ -1,4 +1,4 @@
-import { FooterbarComponent} from "./footerbar";
+import { FooterbarComponent} from './footerbar';
 
 export {
     FooterbarComponent

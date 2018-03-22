@@ -1,7 +1,7 @@
-import { injectable } from "inversify";
-import "reflect-metadata";
+import { injectable } from 'inversify';
+import 'reflect-metadata';
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { GithubApiClientInterface } from "./github-api-client-interface";
+import { GithubApiClientInterface } from './github-api-client-interface';
 
 const baseUrl = 'https://api.github.com';
 
@@ -16,10 +16,10 @@ class GithubApiClient implements GithubApiClientInterface {
          * commits on github don´t have a @property id
          */
         this.httpClient.interceptors.response.use(function(response: AxiosResponse) {
-            if(response.config.url.includes('commit')) {
+            if (response.config.url.includes('commit')) {
                 response.data.map((dataSet) => {
                     dataSet.id = dataSet.sha;
-                })
+                });
             }
 
             return response;
@@ -51,4 +51,4 @@ class GithubApiClient implements GithubApiClientInterface {
 export default GithubApiClient;
 export {
     baseUrl
-}
+};

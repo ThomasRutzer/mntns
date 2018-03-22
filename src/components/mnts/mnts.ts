@@ -1,9 +1,9 @@
 import {Component, Vue, Watch} from 'vue-property-decorator';
-import { types, diContainer } from "./../dependency-injection";
+import { types, diContainer } from './../dependency-injection';
 
 import { mutationTypes } from './../../store';
 
-import { MntsServiceInterface } from "./mnts-service-interface";
+import { MntsServiceInterface } from './mnts-service-interface';
 import config from './mnts-config';
 
 @Component({
@@ -18,7 +18,7 @@ import config from './mnts-config';
         },
 
         focusedEvent() {
-            return this.$store.state.gitHubData.focusedData.event
+            return this.$store.state.gitHubData.focusedData.event;
         },
     },
 })
@@ -30,6 +30,7 @@ export class MntsComponent extends Vue {
     private data: any[] = [];
 
     private isActivated: boolean;
+    private focusedEvent: any;
 
     private outside: boolean = false;
     private focusedData: string = null;
@@ -53,7 +54,7 @@ export class MntsComponent extends Vue {
 
     async created() {
         this.$store.commit(mutationTypes.DEACTIVATE_BACKGROUND);
-        this.$store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, {level:1});
+        this.$store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, { level: 1 });
 
         this.service = diContainer.get<MntsServiceInterface>(types.MntnsService);
 
@@ -126,7 +127,7 @@ export class MntsComponent extends Vue {
         }
 
         // certain scene objects might not be focused
-        if (config.excludedFocusableObjectIds.indexOf(data.object.name) != -1) {
+        if (config.excludedFocusableObjectIds.indexOf(data.object.name) !== -1) {
             return;
         }
 

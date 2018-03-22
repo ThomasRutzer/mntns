@@ -1,5 +1,4 @@
 import TweenMax from 'gsap';
-import { shuffle } from './../array-operations';
 import innerHTMLToWords from './innerhtml-to-words';
 import store, { mutationTypes } from '../../store/';
 
@@ -39,8 +38,8 @@ export default {
                span.innerHTML = word;
            }
 
-           span.style.opacity = "0";
-           span.style.display = "inline-block";
+           span.style.opacity = '0';
+           span.style.display = 'inline-block';
 
            shuffledIndexes[key] = key;
            elements[key] = span;
@@ -48,7 +47,7 @@ export default {
            el.appendChild(span);
         });
 
-        //shuffledIndexes = shuffle(shuffledIndexes);
+        // shuffledIndexes = shuffle(shuffledIndexes);
         allAnimationPromises.push(animationCompletePromise);
 
         let i = 0;
@@ -67,7 +66,7 @@ export default {
         }
 
         await Promise.all(allAnimationPromises);
-        store.commit(mutationTypes.CURRENT_TITLE_VISIBLE)
+        store.commit(mutationTypes.CURRENT_TITLE_VISIBLE);
     },
 };
 

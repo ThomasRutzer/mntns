@@ -1,10 +1,8 @@
-import { injectable } from "inversify";
-import "reflect-metadata";
-import { DataMapperInterface } from "./data-mapper-interface";
+import { injectable } from 'inversify';
+import 'reflect-metadata';
+import { DataMapperInterface } from './data-mapper-interface';
 import * as mapperUtils from './mapper-utilts';
 import { findDeep } from './../object-utils';
-import { capitalize } from './../string-operations';
-
 /**
  * DataMapper maps given data to specified output data.
  * Mapping is configured by mappers
@@ -28,7 +26,7 @@ class DataMapper implements DataMapperInterface {
                 let min, max, value;
 
                 // determine range, considering mapper type
-                switch(mapper.type) {
+                switch ( mapper.type ) {
                     case 'number':
                         [min, max] = mapperUtils.getMinMaxTypeNumber(data, mapper.dataKey[mapper.dataKey.length - 1]);
                         value = dataSet[mapper.dataKey];

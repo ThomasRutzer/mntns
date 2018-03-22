@@ -1,7 +1,4 @@
 import {Component, Vue} from 'vue-property-decorator';
-import { types, diContainer } from "./../dependency-injection";
-
-import { MntsServiceInterface } from "./mnts-service-interface";
 
 @Component({
     template: require('./mntns-level-navigation.html'),
@@ -12,7 +9,7 @@ import { MntsServiceInterface } from "./mnts-service-interface";
         currentLevel() {
             return this.$store.state.mntns.levels.allLevels.filter((level) => {
                 return level.index === this.$store.state.mntns.levels.currentLevel;
-            })[0]
+            })[0];
         },
 
         progress() {
@@ -22,6 +19,5 @@ import { MntsServiceInterface } from "./mnts-service-interface";
 })
 
 export class MntnsLevelNavigation extends Vue {
-
 
 }
