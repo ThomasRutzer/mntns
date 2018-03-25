@@ -1,6 +1,6 @@
 {
-  "font-family-main": "'Work Sans', sans-serif",
-  "font-family-highlight": "orator_fsregular, sans-serif",
+  "font-family-main": "'IBM Plex Mono', monospace",
+  "font-family-highlight": "'IBM Plex Mono', monospace",
   "font-size-main": "14px",
   "font-size-h1": "36px",
   "line-height-h1": "1.2",
