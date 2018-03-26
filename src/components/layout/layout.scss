@@ -32,7 +32,7 @@
   z-index: 5;
   grid-area: content;
 
-  padding: map_get($spacing-sizes, 'm') 0;
+  padding: map_get($spacing-sizes, 's') 0;
 
   @include mq($from: 'm') {
     padding: map_get($spacing-sizes, 'xl') 0;
