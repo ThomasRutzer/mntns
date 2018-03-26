@@ -39,7 +39,7 @@ webpackConfig.plugins = [...webpackConfig.plugins,
     favicon: helpers.root('/src/fav.jpg'),
   }),
   new DefinePlugin({
-    'process.env': env
+    'process.env': env.ENV
   })
 ];
 
