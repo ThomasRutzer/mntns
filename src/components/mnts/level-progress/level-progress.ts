@@ -1,7 +1,7 @@
 import {Component, Vue} from 'vue-property-decorator';
 
 @Component({
-    template: require('./mntns-level-navigation.html'),
+    template: require('./level-progress.html'),
     computed: {
         /**
          * @return  { Object } level
@@ -12,12 +12,16 @@ import {Component, Vue} from 'vue-property-decorator';
             })[0];
         },
 
+        /**
+         *
+         * @return { number } levels progress
+         */
         progress() {
             return (100 / this.$store.state.mntns.levels.allLevels.length) * this.$store.state.mntns.levels.currentLevel;
         }
     }
 })
 
-export class MntnsLevelNavigation extends Vue {
+export class LevelProgress extends Vue {
 
 }

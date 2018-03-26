@@ -1,9 +1,8 @@
 @import "./../colors/colors.json";
 @import "./../layout/layout-definitions.json";
-@import "mntns-level-navigation";
-
-$mntns-focused-data-border-radius: 15px;
-$mntns-focused-data-max-width: 150px;
+@import "level-progress/mntns-level-progress";
+@import "label/mntns-label";
+@import "detailed-data/mntns-detailed-data";
 
 .mnts {
   background-color: $color-darkest;
@@ -38,45 +37,23 @@ $mntns-focused-data-max-width: 150px;
   top: 50%;
   transform: translateY(-50%);
   left: calc((100vw - #{map_get($layout, "content-area-width-medium")}) / 2);
+
+  &--show-transition-enter-active,
+  &--show-transition-leave-active {
+    opacity: 1;
+    transition: opacity 300ms;
+  }
+
+  &--show-transition-enter,
+  &--show-transition-leave-to {
+    opacity: 0;
+  }
 }
 
-.mnts__focused-data {
+.mnts__label {
   position: fixed;
-  background-color: $color-darkest;
-  border-radius: 0 0 0 $mntns-focused-data-border-radius;
-  padding: 5px 10px;
-  max-width: $mntns-focused-data-max-width;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 
   &--outside {
     transform: translateX(-100%);
-    border-radius: 0 0 $mntns-focused-data-border-radius 0;
-  }
-
-  &--show-transition-enter-active,
-  &--show-transition-leave-active {
-    opacity: 1;
-    transition: opacity 300ms;
-  }
-
-  &--show-transition-enter,
-  &--show-transition-leave-to {
-    opacity: 0;
-  }
-}
-
-.mnts__detailed-data {
-
-  &--show-transition-enter-active,
-  &--show-transition-leave-active {
-    opacity: 1;
-    transition: opacity 300ms;
-  }
-
-  &--show-transition-enter,
-  &--show-transition-leave-to {
-    opacity: 0;
   }
 }

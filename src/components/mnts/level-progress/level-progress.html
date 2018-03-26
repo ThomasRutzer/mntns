@@ -1,0 +1,27 @@
+<div class="mntns-level-progress">
+    <div class="mntns-level-progress__indicator">
+
+        <span :style="{width: progress + '%'}">
+            <svg role="img">
+                <use xlink:href="#icon-mntns"></use>
+            </svg>
+        </span>
+        <span>
+            <svg role="img">
+                <use xlink:href="#icon-mntns"></use>
+            </svg>
+        </span>
+
+    </div>
+
+    <div class="mntns-level-progress__label">
+
+        <p class="text-color-highlight margin-vertical--none small-text-appearance">
+            Level {{currentLevel.index}}
+        </p>
+        <span>
+            {{ currentLevel.title }}
+        </span>
+    </div>
+
+</div>

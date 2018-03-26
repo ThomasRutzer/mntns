@@ -3,50 +3,84 @@
 
     <div v-show="isActivated"
          class="mnts__header revealing-content revealing-content--reveal">
-        <mntns-level-navigation></mntns-level-navigation>
+        <level-progress></level-progress>
     </div>
 
-    <generator @intersection="focusObject($event)"
+    <generator @intersection="onIntersection($event)"
                :data="data"></generator>
 
-    <transition name="mnts__focused-data--show-transition">
-        <div class="mnts__focused-data"
-             :class="{'mnts__focused-data--outside': outside}"
+    <transition name="mntns-label--show-transition">
+        <div class="mnts__label mntns-label"
+             :class="{'mntns__label--outside': outside}"
              :style="{left: focusedEvent.x + 'px', top: focusedEvent.y + 'px'}"
              v-if="focusedData">
 
-            {{ focusedData }}
+            <svg class="mntns-label__icon"
+                 role="img">
+                <use xlink:href="#icon-location"></use>
+            </svg>
+
+            <div class="mntns-label__content">
+                <p class="text-color-highlight margin-vertical--none small-text-appearance">
+                    {{level.title}}
+                </p>
+                <span>
+                    {{ focusedData }}
+                </span>
+            </div>
         </div>
     </transition>
 
     <transition name="mnts__detailed-data--show-transition">
         <div v-if="isActivated && detailedData"
-             class="mnts__detailed-data">
-            <span @click="clearDetailedData()">Close</span>
+             class="mnts-detailed-data mnts__detailed-data">
+            <a href="#" class="small-text-appearance text-color-highlight"
+               @click.prevent="clearDetailedData()">
+                Close(esc)
+            </a>
 
-                <h3>
-                    {{ detailedData.title }}
-                </h3>
+            <div class="mnts-detailed-data__label mntns-label ">
 
-                <div class="margin-top--m">
-                    <a class="primary-button"
-                       alt="view on Github"
-                       :href="detailedData.url">view on Github
-                    </a>
-                </div>
+                <svg class="mntns-label__icon"
+                     role="img">
+                    <use xlink:href="#icon-location"></use>
+                </svg>
 
-            <div v-if="level == 1">
-                <div class="margin-top--s">
-                    <span class="primary-button" @click="forwards()">
-                        Dig deeper
+                <div class="mntns-label__content">
+                    <p class="text-color-highlight margin-vertical--none small-text-appearance">
+                        {{level.title}}
+                    </p>
+                    <span>
+                        {{ detailedData.title }}
                     </span>
                 </div>
             </div>
 
-            <div v-if="level == 2">
-                <span class="primary-button margin-top--m" @click="back()">
-                Back to overview
-                </span>
+            <div class="margin-top--m">
+                <a class="primary-button"
+                   alt="view on Github"
+                   :href="detailedData.url">
+                    view on Github
+                </a>
+            </div>
+
+            <div v-if="level.index == 1">
+                <div class="margin-top--s">
+                    <a href="#"
+                       alt="dig deeper!"
+                       class="primary-button"
+                       @click.prevent="forwards()">
+                        Dig deeper
+                    </a>
+                </div>
+            </div>
+
+            <div v-if="level.index == 2">
+                <a href="#" alt="Back to overview"
+                   class="primary-button margin-top--m"
+                   @click.prevent="back()">
+                    Back to overview
+                </a>
             </div>
         </div>
     </transition>

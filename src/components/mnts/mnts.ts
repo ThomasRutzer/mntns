@@ -10,7 +10,10 @@ import config from './mnts-config';
     template: require('./mnts.html'),
     computed: {
         level() {
-            return this.$store.state.mntns.levels.currentLevel;
+            return {
+                index: this.$store.state.mntns.levels.currentLevel,
+                title: this.$store.state.mntns.levels.allLevels[this.$store.state.mntns.levels.currentLevel - 1].title
+            };
         },
 
         isActivated() {
@@ -44,6 +47,8 @@ export class MntsComponent extends Vue {
 
     @Watch('$store.state.gitHubData.usedData.mapped')
     dataWatcher() {
+        if(!this.$store.state.currentRoute.titleAnimatedIn) return;
+
         this.data = this.$store.state.gitHubData.usedData.mapped;
     }
 
@@ -54,10 +59,8 @@ export class MntsComponent extends Vue {
 
     async created() {
         this.$store.commit(mutationTypes.DEACTIVATE_BACKGROUND);
-        this.$store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, { level: 1 });
 
         this.service = diContainer.get<MntsServiceInterface>(types.MntnsService);
-
         await this.service.start();
     }
 
@@ -73,13 +76,25 @@ export class MntsComponent extends Vue {
 
     clearDetailedData() {
         this.detailedData = null;
+
+        document.removeEventListener(
+            'keydown',
+            this.clearKeyHandler,
+            false
+        );
     }
 
-    updateDetailedData() {
+    updateDetailedData(): void {
         this.detailedData = {
             title: '',
             url: ''
         };
+
+        document.addEventListener(
+            'keydown',
+            this.clearKeyHandler,
+            false
+        );
 
         switch (this.$store.state.mntns.levels.currentLevel) {
             case(1):
@@ -92,13 +107,18 @@ export class MntsComponent extends Vue {
                 this.detailedData.url = this.$store.state.gitHubData.focusedData.raw.tree.url;
         }
 
-        return null;
-
+        return;
     }
 
     clearFocusedData()  {
         this.outside = null;
         this.focusedData = null;
+    }
+
+    clearKeyHandler(e: KeyboardEvent) {
+        if (e.keyCode === 27) {
+            this.clearDetailedData();
+        }
     }
 
     updateFocusedData() {
@@ -120,14 +140,30 @@ export class MntsComponent extends Vue {
         this.$router.push('/experiments');
     }
 
-    focusObject(data: any) {
+    onIntersection(data: any) {
 
-        if (!this.isActivated || this.detailedData) {
+        // display no intersection
+        // when deactivated...
+        if (!this.isActivated) {
+            return;
+        }
+
+        // close detailedData on another mousedown
+        // and return...
+        if(this.detailedData && data.event.type === config.eventToUpdateLevel) {
+            this.clearDetailedData();
+            return;
+        }
+
+        // ...or return when detailedData is displayed
+        // and no other mousedown caught
+        if(this.detailedData) {
             return;
         }
 
         // certain scene objects might not be focused
         if (config.excludedFocusableObjectIds.indexOf(data.object.name) !== -1) {
+            this.clearFocusedData();
             return;
         }
 

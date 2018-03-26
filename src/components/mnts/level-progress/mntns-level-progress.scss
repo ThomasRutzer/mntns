@@ -1,14 +1,15 @@
-@import "./../colors/colors.json";
+@import "../../colors/colors.json";
 
-.mntns-level-navigation {
+.mntns-level-progress {
   display: flex;
   align-items: center;
   width: 100%;
   height: 100%;
 }
 
-.mntns-level-navigation__progress {
+.mntns-level-progress__indicator {
   position: relative;
+  margin-right: map_get($spacing-sizes, 's');
 
   span {
     overflow: hidden;
@@ -16,8 +17,8 @@
   }
 
   svg {
-    width: 80px;
-    height: 40px;
+    width: 60px;
+    height: 30px;
   }
 
   span:first-child {
