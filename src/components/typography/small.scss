@@ -1,0 +1,6 @@
+@import "./typography-definitions.json";
+
+small, .small-text-appearance {
+  font-size: $font-size-small;
+  line-height: $line-height-small;
+}
