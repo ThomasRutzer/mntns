@@ -1,10 +1,15 @@
 import {Component} from 'vue-property-decorator';
-import { RouterDefaultComponentAbstract } from './../router';
+import {RouterDefaultComponentAbstract} from './../router';
 
 import {mutationTypes} from './../../store/';
 
 @Component({
     template: require('./experiments-listing.html'),
+    computed: {
+        canStart() {
+            return this.$store.state.gitHubData.repos.mapped && this.titleIn;
+        }
+    }
 })
 
 export class ExperimentsListingComponent extends RouterDefaultComponentAbstract {
@@ -21,7 +26,7 @@ export class ExperimentsListingComponent extends RouterDefaultComponentAbstract 
     }
 
     startExperiment() {
-       this.isStarted = true;
+        this.isStarted = true;
         this.$store.commit(mutationTypes.ACTIVATE_BACKGROUND);
     }
 }
