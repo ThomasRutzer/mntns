@@ -70,7 +70,7 @@ const state = {
             allLevels:  [
                 {
                     index: 1,
-                    title: 'Repos'
+                    title: 'Repositories'
                 },
                 {
                     index: 2,
