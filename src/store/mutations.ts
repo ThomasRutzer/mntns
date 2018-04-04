@@ -1,6 +1,14 @@
 import * as types from './mutation-types';
 
 const mutations = {
+    [types.CONTENT_CLICKABLE](state) {
+        state.background.clickable = true;
+    },
+
+    [types.CONTENT_NOT_CLICKABLE](state) {
+        state.background.clickable = false;
+    },
+
     [types.EXPAND_BACKGROUND](state) {
         state.background.visibility = 1;
     },
@@ -33,6 +41,11 @@ const mutations = {
     [types.GITHUB_API_FINISHED](state) {
         state.gitHubData.startedLoading = false;
         state.gitHubData.finishedLoading = true;
+        state.gitHubData.loadingError = false;
+    },
+
+    [types.GITHUB_API_LOADING_ERROR](state) {
+        state.gitHubData.loadingError = true;
     },
 
     [types.GITHUB_DATA_MAPPING_STARTED](state) {

@@ -3,7 +3,7 @@
  * @param {HTMLElement} HMTLElement with text / html content
  * @return {Array}
  */
-const split = (HMTLElement) => {
+const innerHTMLToWords = (HMTLElement) => {
     function removeEmptyStrings(k) {
         return k !== '';
     }
@@ -28,4 +28,4 @@ const split = (HMTLElement) => {
     return output;
 };
 
-export default split;
+export default innerHTMLToWords;

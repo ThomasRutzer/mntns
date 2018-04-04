@@ -28,7 +28,8 @@
                 <navbar></navbar>
             </div>
 
-            <main class="layout__content">
+            <main class="layout__content"
+                  v-content-no-pointer-events="$store.state.background.clickable">
                 <router-view name="content">loading...</router-view>
             </main>
 

@@ -1,5 +1,5 @@
-import titleAnimationDirective from './title-typo-animation-directive';
+import innerHTMLToWords from './innerhtml-to-words';
 
 export {
-    titleAnimationDirective,
+    innerHTMLToWords
 };

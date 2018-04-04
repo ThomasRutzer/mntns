@@ -31,7 +31,10 @@ const actions = {
             commit(mutationTypes.GITHUB_API_STARTED);
 
             const res = await githubApiClient.getUserRepos(userName, perPage)
-                .catch((e) => {});
+                .catch((e) => {
+                    commit(mutationTypes.GITHUB_API_LOADING_ERROR);
+                    return Promise.reject(e);
+                });
 
             commit(mutationTypes.GITHUB_DATA_MAPPING_STARTED);
 

@@ -1,6 +1,6 @@
 import { injectable } from 'inversify';
 import 'reflect-metadata';
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import axios, {AxiosInstance, AxiosPromise, AxiosResponse} from 'axios';
 import { GithubApiClientInterface } from './github-api-client-interface';
 
 const baseUrl = 'https://api.github.com';
@@ -32,7 +32,7 @@ class GithubApiClient implements GithubApiClientInterface {
      * @param {number} maxItemCount, where 0 equals all
      * @return {AxiosPromise}
      */
-    getUserRepos(userName: string, maxItemCount: number = 0) {
+    getUserRepos(userName: string, maxItemCount: number = 0): AxiosPromise {
         return this.httpClient.get(`${baseUrl}/users/${userName}/repos?per_page=${maxItemCount}`);
     }
 

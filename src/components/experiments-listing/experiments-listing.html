@@ -10,9 +10,16 @@
                 Github account data.
             </h1>
 
-            <span class="primary-button margin-top--l revealing-content"
-                  :class="{'revealing-content--reveal': canStart}"
-                  @click="startExperiment()">explore</span>
+            <div class="margin-top--l">
+                <span class="primary-button revealing-content"
+                   :class="{'revealing-content--reveal': canStart}"
+                   @click="startExperiment()">explore</span>
+
+                <span v-show="cannotStart"
+                      class="revealing-content revealing-content--reveal">
+                ...but unfortunately, there´s a network error right now.
+                </span>
+            </div>
         </div>
     </div>
 </div>

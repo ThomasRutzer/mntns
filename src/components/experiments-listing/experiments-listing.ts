@@ -7,7 +7,14 @@ import {mutationTypes} from './../../store/';
     template: require('./experiments-listing.html'),
     computed: {
         canStart() {
-            return this.$store.state.gitHubData.repos.mapped && this.titleIn;
+            return !this.$store.state.gitHubData.loadingError &&
+                this.$store.state.gitHubData.repos.mapped &&
+                this.titleIn;
+        },
+
+        cannotStart() {
+            return this.$store.state.gitHubData.loadingError &&
+                this.titleIn;
         }
     }
 })

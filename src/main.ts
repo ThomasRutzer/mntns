@@ -8,8 +8,11 @@ import { BackgroundComponent } from './components/background';
 import { FooterbarComponent } from  './components/footerbar';
 
 // import global directives
-import { titleAnimationDirective } from './components/string-operations';
+import { titleAnimationDirective } from './components/title';
 Vue.directive('title-animation', titleAnimationDirective);
+
+import { contentNoPointerEvents } from './components/layout';
+Vue.directive('content-no-pointer-events', contentNoPointerEvents);
 
 // import any other modules
 import './components/github-api-client';

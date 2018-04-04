@@ -15,6 +15,12 @@ const state = {
          * whether background component is active or not.
          */
         activated: false,
+
+        /**
+         * if true, css-prop pointer-events none will be
+         * applied to content area
+         */
+        clickable: true
     },
 
     currentRoute: {
@@ -24,6 +30,7 @@ const state = {
     gitHubData: {
         startedLoading: null,
         finishedLoading: null,
+        loadingError: null,
 
         startedMapping: null,
         finishedMapping: null,
