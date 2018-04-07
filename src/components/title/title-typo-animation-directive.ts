@@ -1,10 +1,12 @@
 import TweenMax from 'gsap';
-import innerHTMLToWords from './innerhtml-to-words';
-import store, { mutationTypes } from '../../store/';
+import { innerHTMLToWords } from '../string-operations/';
+import { shuffle } from '../array-operations';
+import store, { mutationTypes } from '../../store';
 
 
 export default {
     bind() {
+        // commit mutation to store
         store.commit(mutationTypes.CURRENT_TITLE_INVISIBLE);
     },
 
@@ -47,26 +49,37 @@ export default {
            el.appendChild(span);
         });
 
-        // shuffledIndexes = shuffle(shuffledIndexes);
         allAnimationPromises.push(animationCompletePromise);
 
+        // shuffle Indexes for non-sequential animation
+        shuffledIndexes = shuffle(shuffledIndexes);
+
         let i = 0;
-        let l = elements.length;
+        let l = shuffledIndexes.length;
+
         for (i; i < l; i++) {
-            TweenMax.fromTo(elements[i], 1.5 + elements.length * 0.1,
-                {
-                    opacity: 0,
-                },
+            const currentElement = elements[shuffledIndexes[i]];
+
+            // apply some blur
+            currentElement.blur = 2;
+
+            TweenMax.to(currentElement, 3,
                 {
                     opacity:  1,
+                    blur: 0,
                     delay: 0.05 * i,
-                    onComplete: animationCompleteClb
+                    onComplete: animationCompleteClb,
+                    onUpdateParams: [elements[shuffledIndexes[i]]],
+                    onUpdate: function (el) {
+                        TweenMax.set(el, { filter: 'blur(' + el.blur + 'px)' });
+                    }
                 },
             );
         }
 
         await Promise.all(allAnimationPromises);
+
+        // commit mutation to broadcast that title anim is finished
         store.commit(mutationTypes.CURRENT_TITLE_VISIBLE);
     },
 };
-
