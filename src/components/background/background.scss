@@ -1,8 +1,7 @@
 @import "../../components/media-queries/sass-mq";
 @import "./../layout/layout-definitions.json";
 @import "./../colors/colors.json";
-
-$background-backdrop-offset: 16px;
+@import "/backdrop/background-backdrop";
 
 .background {
   position: fixed;
@@ -10,10 +9,6 @@ $background-backdrop-offset: 16px;
   height: 100vh;
   top: 0;
   left: 0;
-
-  &--transition {
-    transition: all 500ms ease-out;
-  }
 
   @include mq($from: 'm') {
     left: 50%;
@@ -42,6 +37,10 @@ $background-backdrop-offset: 16px;
     width: map_get($layout, 'content-area-width-medium') / 2;
   }
 
+  &--transition {
+    transition: all 500ms ease-out;
+  }
+
   &--expanded {
     width: 100vw;
     height: 100vh;
@@ -63,25 +62,10 @@ $background-backdrop-offset: 16px;
   width: 100%;
   height: 100%;
   z-index: -1;
-  background: $color-highlight;
-  // animation: backgroundEntrance 700ms forwards cubic-bezier(.37,.3,.33,.57);
-  @include mq($from: 'm') {
-    transform: translate($background-backdrop-offset, -$background-backdrop-offset);
-  }
-
 
   &--visible {
     display: block;
   }
 }
 
-@keyframes backgroundEntrance {
 
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}

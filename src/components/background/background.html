@@ -1,13 +1,19 @@
 <div class="background"
      :class="{'background--active': isActive,
               'background--expanded': isExpanded,
-              'background--transition': expandTransition}">
+              'background--transition': expandTransition}"
+
+     @mouseover="onMouseover"
+     @mouseout="onMouseout"
+>
 
     <transition :name="transition ? 'background--transition' : null">
         <router-view name="background"></router-view>
     </transition>
 
-    <div class="background__backdrop"
-         :class="{'background__backdrop--visible': !isExpanded}"
-    ></div>
+    <background-backdrop trigger-label="explore experiment"
+                         :activated="isMouseover"
+                         class="background__backdrop"
+                         :class="{'background__backdrop--visible': !isExpanded}">
+    </background-backdrop>
 </div>

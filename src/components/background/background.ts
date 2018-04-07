@@ -17,6 +17,8 @@ export class BackgroundComponent extends Vue {
     private isExpanded: boolean;
     private isActive: boolean;
 
+    // true, when users does mouseover
+    private isMouseover: boolean = false;
 
     // actual transition of background component for
     // route specific component inside router-view=background
@@ -34,5 +36,13 @@ export class BackgroundComponent extends Vue {
 
             next();
         });
+    }
+
+    onMouseover() {
+        this.isMouseover = true;
+    }
+
+    onMouseout() {
+        this.isMouseover = false;
     }
 }
