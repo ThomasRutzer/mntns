@@ -1,0 +1,22 @@
+@import "./../../colors/colors.json";
+
+$background-backdrop-offset: 16px;
+
+.background-backdrop {
+  background: $color-highlight;
+}
+
+.background-backdrop__activation-trigger {
+  color: $color-darkest;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 6px;
+  top: 6px;
+
+  svg {
+    width: 40px;
+    height: 20px;
+    fill: $color-darkest;
+  }
+}
