@@ -13,6 +13,7 @@
 
     <background-backdrop trigger-label="explore experiment"
                          :activated="isMouseover"
+                         v-if="!isExpanded"
                          class="background__backdrop"
                          :class="{'background__backdrop--visible': !isExpanded}">
     </background-backdrop>
