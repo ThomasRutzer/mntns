@@ -8,14 +8,11 @@
 
 .footerbar__list-item {
   display: inline-block;
-  margin-bottom: 8px;
 
-  @include mq($until: 'm') {
-    margin-right: map_get($spacing-sizes, 's');
+  margin-right: map_get($spacing-sizes, 's');
 
-    &:last-child {
-      margin-right: 0;
-    }
+  &:last-child {
+    margin-right: 0;
   }
 
   // breaking BEM Selector rules
