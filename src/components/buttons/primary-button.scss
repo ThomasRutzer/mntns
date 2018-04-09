@@ -9,14 +9,29 @@ $primary-button-line-width: 50px;
   padding-left: $primary-button-line-width + 4;
   cursor: pointer;
 
-  &:before {
+  &:before, &:after {
     content: '';
     position: absolute;
     left: 0;
     top: 50%;
-    width: $primary-button-line-width;
     height: 1px;
+  }
+
+  &:before {
     background-color: $color-dark;
+    width: $primary-button-line-width;
+  }
+
+  &:after {
+    background-color: $color-highlight;
+    width: 0;
+    transition: width 300ms ease-out;
+  }
+
+  &:hover {
+    &:after {
+      width: $primary-button-line-width;
+    }
   }
 }
 
