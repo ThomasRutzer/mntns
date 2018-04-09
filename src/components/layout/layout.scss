@@ -17,7 +17,7 @@
     grid-template-areas:
             ". header header ."
             ". . content ."
-            ". footer . .";
+            ". footer footer .";
   }
 }
 
@@ -31,8 +31,11 @@
   position: relative;
   z-index: 5;
   grid-area: content;
-
   padding: map_get($spacing-sizes, 's') 0;
+
+  &--no-pointer-events {
+    pointer-events: none;
+  }
 
   @include mq($from: 'm') {
     padding: map_get($spacing-sizes, 'xl') 0;
