@@ -73,6 +73,10 @@ const state = {
 
     mntns: {
         levels: {
+            /**
+             * @todo: store allLevels Object instead of single index
+             * @type number
+             */
             currentLevel: 1,
             allLevels:  [
                 {

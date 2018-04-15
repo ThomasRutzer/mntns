@@ -6,7 +6,7 @@ import { DataMapperInterface } from '../components/data-mapper/data-mapper-inter
 import * as mappers from '../components/data-mapper/mappers';
 import { GithubApiClientInterface } from './../components/github-api-client';
 
-/*
+/**
 list of all provided action. An action is a plain Function,
 which dispatches a commit, e.g.:
 @see: https://vuex.vuejs.org/en/actions.html
@@ -18,12 +18,22 @@ export const addToCart = ({ commit }, product) => {
         })
     }
 };
-*/
+**/
 
 const actions = {
+
+    /**
+     * @param {Function} commit helper from Store
+     * @param {Object} state of Store
+     * @param {string} userName
+     * @param {number} perPage
+     * @return {Promise<void>}
+     */
     async [actionTypes.RETRIEVE_GITHUB_REPOS] ({ commit, state }, { userName, perPage }) {
         let data;
 
+        // currently, raw data shall only
+        // load once, so we can check here
         if (!state.gitHubData.repos.raw) {
             const githubApiClient = diContainer.get<GithubApiClientInterface>(types.GithubApiClient);
             const dataMapper = diContainer.get<DataMapperInterface>(types.DataMapper);
@@ -56,9 +66,19 @@ const actions = {
         return Promise.resolve();
     },
 
+    /**
+     * @param {Function} commit helper from Store
+     * @param {Object} state of Store
+     * @param {string} userName
+     * @param {string} repoName
+     * @param {number} perPage
+     * @return {Promise<void>}
+     */
     async [actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO] ({ commit, state }, { repoName, userName, perPage }) {
         let data;
 
+        // any commits for certain repo shall only loaded once
+        // so we can check for that
         if (!state.gitHubData.commits[repoName]) {
             const githubApiClient = diContainer.get<GithubApiClientInterface>(types.GithubApiClient);
             const dataMapper = diContainer.get<DataMapperInterface>(types.DataMapper);
