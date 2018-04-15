@@ -1,7 +1,14 @@
 const types = {
-    GithubApiClient: Symbol.for('GithubApiClient'),
+
     DataMapper: Symbol.for('DataMapper'),
-    MntnsService: Symbol.for('MntnsService')
+    GithubApiClient: Symbol.for('GithubApiClient'),
+
+    Breakpoints: Symbol.for('Breakpoints'),
+
+    MediaQueryService: Symbol.for('MediaQueryService'),
+
+    MntnsService: Symbol.for('MntnsService'),
+    MntnsServiceFactory: Symbol.for('MntnsServiceFactory')
 };
 
 export default types;
