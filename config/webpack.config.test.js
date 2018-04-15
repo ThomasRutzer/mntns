@@ -2,11 +2,12 @@ var webpack = require('webpack'),
   webpackConfig = require('./webpack.config.base'),
   DefinePlugin = require('webpack/lib/DefinePlugin'),
   SourceMapDevToolPlugin = require('webpack/lib/SourceMapDevToolPlugin'),
+  jsonImporter = require('node-sass-json-importer'),
   env = require('../environment/dev.env');
 
 webpackConfig.module.rules = [{
     test: /\.ts$/,
-    exclude: /node_modules/,
+    exclude: /node_modules\/(?!(mnts)\/).*/,
     loader: 'awesome-typescript-loader',
     query: {
       compilerOptions: {

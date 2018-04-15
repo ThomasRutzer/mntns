@@ -31,40 +31,32 @@ webpackConfig.module.rules = [...webpackConfig.module.rules,
                     }
                 },
 
-            {
-                loader: 'postcss-loader',
-                options: {
-                    plugins: () => [autoprefixer],
-                }
-            },
-            {
-                loader: 'sass-loader',
-                options: {
-                    outputStyle: 'expanded',
-                    sourceMap: false,
-                    importer: jsonImporter,
-                }
-            },
-],
-// use style-loader in development
-fallback: 'style-loader'
-})
-},
-{
-    test: /\.(jpg|png|gif)$/,
-        loader
-:
-    'file-loader?name=assets/img/[name].[ext]'
-}
-,
-{
-    test: /\.(eot|svg|ttf|woff|woff2)$/,
-        loader
-:
-    'file-loader?name=fonts/[name].[ext]'
-}
-]
-;
+                {
+                   loader: 'postcss-loader',
+                   options: {
+                        plugins: () => [autoprefixer]
+                    }
+                },
+                {
+                    loader: 'sass-loader',
+                    options: {
+                        outputStyle: 'expanded',
+                        sourceMap: false,
+                        importer: jsonImporter
+                    }
+                }],
+        // use style-loader in development
+        fallback: 'style-loader'
+        })
+    },
+    {
+        test: /\.(jpg|png|gif)$/,
+        loader: 'file-loader?name=assets/img/[name].[ext]'
+    },
+    {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        loader: 'file-loader?name=fonts/[name].[ext]'
+    }];
 
 // ensure ts lint fails the build
 webpackConfig.module.rules[0].options = {
@@ -109,7 +101,6 @@ webpackConfig.plugins = [...webpackConfig.plugins,
     new DefinePlugin({
         'process.env': env
     }),
-]
-;
+];
 
 module.exports = webpackConfig;
