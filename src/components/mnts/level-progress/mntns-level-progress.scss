@@ -7,6 +7,10 @@
   height: 100%;
 }
 
+.mntns-level-progress__label {
+  min-width: 100px;
+}
+
 .mntns-level-progress__indicator {
   position: relative;
   margin-right: map_get($spacing-sizes, 's');

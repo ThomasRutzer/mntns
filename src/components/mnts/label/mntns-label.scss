@@ -11,6 +11,10 @@ $mntns-label-icon-size: 40px;
   padding: 5px 10px;
   max-width: $mntns-label-max-width;
 
+  &--spacingless {
+    padding: 0;
+  }
+
   &--show-transition-enter-active,
   &--show-transition-leave-active {
     opacity: 1;
