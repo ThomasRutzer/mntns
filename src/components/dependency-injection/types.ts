@@ -8,7 +8,9 @@ const types = {
     MediaQueryService: Symbol.for('MediaQueryService'),
 
     MntnsService: Symbol.for('MntnsService'),
-    MntnsServiceFactory: Symbol.for('MntnsServiceFactory')
+    MntnsServiceFactory: Symbol.for('MntnsServiceFactory'),
+
+    Store: Symbol.for('Store')
 };
 
 export default types;

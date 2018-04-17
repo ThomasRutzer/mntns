@@ -1,22 +1,46 @@
+import { expect } from 'chai';
+import Vuex from 'vuex';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+
 import repoMock from './../../mocks/github-repo-mock';
 import commitsMock from './../../mocks/github-commit-mock';
+
 import {baseUrl} from '../components/github-api-client/github-api-client';
-import store from './';
-import { expect } from 'chai';
 import './../components/github-api-client';
 import '../components/data-mapper';
-import {actions, actionTypes} from './';
+
+import { actions, actionTypes } from './';
+import { mutations, mutationTypes } from './';
 
 const mockGithubUserName = 'testUser';
 const mockRepoName = 'testRepo';
 
-let state;
-
 describe('actions', () => {
+
+    let state, store;
+
+    before(() => {
+        state = {
+            gitHubData: {
+                repos: {
+                    mapped: null,
+                    raw: null,
+                },
+                commits: {}
+            }
+        };
+
+        store = new Vuex.Store({
+            state,
+            actions,
+            mutations
+        });
+    });
+
     describe('type: retrieve github repos', () => {
         let mock;
+
         beforeEach(() => {
             mock = new MockAdapter(axios);
 
@@ -24,16 +48,6 @@ describe('actions', () => {
                 200,
                 repoMock
             );
-
-            state = {
-                gitHubData: {
-                    repos: {
-                        mapped: null,
-                        raw: null,
-                    },
-                    commits: {}
-                }
-            };
         });
 
         it('returns promise', async () => {
@@ -84,5 +98,4 @@ describe('actions', () => {
             expect(store.state.gitHubData.commits[mockRepoName].raw).to.exist;
         });
     });
-
 });

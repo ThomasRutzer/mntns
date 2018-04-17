@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { diContainer, types} from './../components/dependency-injection';
+
 import state from './state';
 import getters from './getters';
 import actions from './actions';
@@ -10,14 +12,15 @@ import * as mutationTypes from './mutation-types';
 Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV !== 'production';
-
-export default new Vuex.Store({
+const store = new Vuex.Store({
     state,
     actions,
     mutations,
     getters,
     strict: debug,
 });
+
+diContainer.bind<object>(types.Store).toConstantValue(store);
 
 export {
     mutations,
