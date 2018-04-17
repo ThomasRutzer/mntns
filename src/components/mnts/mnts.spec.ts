@@ -321,15 +321,5 @@ describe('Mnts component', () => {
         after(() => {
             diContainerStub.restore();
         });
-
-        it('sets level to 1', async () => {
-            store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, {level:2});
-
-            directiveTest.createComponent({store});
-
-            await directiveTest.execute(() => {
-                expect(store.state.mntns.levels.currentLevel).to.equal(1);
-            });
-        });
     });
 });
