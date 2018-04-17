@@ -30,7 +30,11 @@
 
             <main class="layout__content"
                   v-content-no-pointer-events="$store.state.background.clickable">
-                <router-view name="content">loading...</router-view>
+                <router-view name="content">
+                    <div class="main-loader">
+                        🔨 building something
+                    </div>
+                </router-view>
             </main>
 
             <div class="layout__background">
