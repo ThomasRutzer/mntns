@@ -8,6 +8,7 @@ export default {
      * @param { HTMLElement } el
      * @param { Object } bindings
      * @namespace bindings.value
+     * @property { boolean} activated
      * @property { Number=0 } initialOffsetX
      * @property { Number=0 } initialOffsetY
      * @property { Number=0 } maxOffsetX
@@ -15,35 +16,62 @@ export default {
      * @property { Number=300 } transitionDuration
      */
     bind(el, bindings) {
-        const initialOffsetX = bindings.value.initialOffsetX || 0;
-        const initialOffsetY = bindings.value.initialOffsetY || 0;
+        el.mousemoveOptions = {
+            duration: bindings.value.transitionDuration || 300,
+            initialOffsetX: bindings.value.initialOffsetX || 0,
+            initialOffsetY: bindings.value.initialOffsetY || 0,
 
-        const maxOffsetX = bindings.value.maxOffsetX || 0;
-        const maxOffsetY = bindings.value.maxOffsetY || 0;
+            maxOffsetX: bindings.value.maxOffsetX || 0,
+            maxOffsetY: bindings.value.maxOffsetY || 0
+        };
 
-        const duration = bindings.value.transitionDuration || 300;
-
-        // store handler as property of el to make it removable again
         el.mousemoveHandler = (e: MouseEvent) => {
+            const options = el.mousemoveOptions;
+
             const XPercentage = (e.pageX / window.innerWidth) * 100;
-            const offsetX = initialOffsetX + Math.round((maxOffsetX * (XPercentage / 100)));
+            const offsetX = options.initialOffsetX + Math.round((options.maxOffsetX * (XPercentage / 100)));
 
             const YPercentage = (((window.innerHeight - e.pageY) / window.innerHeight) * 100);
-            const offsetY = initialOffsetY + Math.round((maxOffsetY * (YPercentage / 100)));
+            const offsetY = options.initialOffsetY + Math.round((options.maxOffsetY * (YPercentage / 100)));
 
-            applyTransforms(offsetX, offsetY);
+            applyTransforms(el, offsetX, offsetY);
         };
 
-        const applyTransforms = (x: number, y: number) => {
-            el.style.transform = `translate(${x}px, ${y}px)`;
-        };
-
-        el.style.transition = `transform ${duration}ms ease-out`;
-        applyTransforms(initialOffsetX, initialOffsetY);
         document.addEventListener('mousemove', el.mousemoveHandler);
+        el.style.transition = `transform ${el.mousemoveOptions.duration}ms ease-out`;
+
+        applyTransforms(
+            el,
+            el.mousemoveOptions.initialOffsetX,
+            el.mousemoveOptions.initialOffsetY
+        );
+    },
+
+    update(el, bindings) {
+        if (bindings.value.activated) {
+            document.addEventListener('mousemove', el.mousemoveHandler);
+            el.style.transition = `transform ${el.mousemoveOptions.duration}ms ease-out`;
+
+            applyTransforms(
+                el,
+                el.mousemoveOptions.initialOffsetX,
+                el.mousemoveOptions.initialOffsetY
+            );
+        } else {
+            document.removeEventListener('mousemove', el.mousemoveHandler);
+            el.style.transition = `none`;
+
+            el.style.removeProperty('transform');
+        }
     },
 
     unbind(el) {
         document.removeEventListener('mousemove', el.mousemoveHandler);
+        delete el.mousemoveOptions;
+        el.style.cssText = '';
     }
 };
+
+function applyTransforms(el: HTMLElement, x: number, y: number) {
+    el.style.transform = `translate(${x}px, ${y}px)`;
+}
