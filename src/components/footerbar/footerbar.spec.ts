@@ -4,7 +4,7 @@ import Component from 'vue-class-component';
 import { expect } from 'chai';
 import { ComponentTest } from '../../util/component-test';
 import { FooterbarComponent } from './footerbar';
-import { RouterLink } from './../router/';
+import RouterLink from './../router/Router-Link';
 
 const links = [
     new RouterLink('Kontakt', '/contact'),

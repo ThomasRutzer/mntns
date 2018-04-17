@@ -2,7 +2,7 @@
     <ul class="footerbar__list bare-list">
         <li v-for="link in links"
             class="footerbar__list-item  revealing-content revealing-content--reveal">
-            <router-link class="bare-link" :to="link.path">{{link.name}}</router-link>
+            <router-link class="router-link bare-link" :to="link.path">{{link.name}}</router-link>
         </li>
     </ul>
 </footer>

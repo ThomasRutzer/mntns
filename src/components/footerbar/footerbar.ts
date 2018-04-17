@@ -1,12 +1,12 @@
 import { Component, Vue } from 'vue-property-decorator';
-import { RouterLink } from './../router/';
+import RouterLinks from './../router/Router-Link';
 
 @Component({
     template: require('./footerbar.html'),
 })
 export class FooterbarComponent extends Vue {
-    links: RouterLink[] = [
-        new RouterLink('Kontakt', 'contact'),
-        new RouterLink('mntns', 'experiments'),
+    links: RouterLinks[] = [
+        new RouterLinks('Kontakt', 'contact'),
+        new RouterLinks('mntns', 'experiments'),
     ];
 }

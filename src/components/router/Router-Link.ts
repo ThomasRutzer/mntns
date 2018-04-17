@@ -1,4 +1,4 @@
-class Link {
+class RotuerLink {
     name: string;
     path: string;
 
@@ -8,4 +8,4 @@ class Link {
     }
 }
 
-export default Link;
+export default RotuerLink;
