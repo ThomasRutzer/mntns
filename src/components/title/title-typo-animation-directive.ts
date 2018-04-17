@@ -1,30 +1,31 @@
 import TweenMax from 'gsap';
+import { Store } from 'vuex';
+import { diContainer, types} from './../dependency-injection';
+
 import { innerHTMLToWords } from '../string-operations/';
 import { shuffle } from '../array-operations';
-import store, { mutationTypes } from '../../store';
-
+import { mutationTypes } from '../../store';
 
 export default {
     bind() {
+        const store: Store<any> = diContainer.get(types.Store);
         // commit mutation to store
         store.commit(mutationTypes.CURRENT_TITLE_INVISIBLE);
     },
 
-    async inserted(el) {
+    /**
+     *
+     * @param { HTMLElement } el
+     * @param { Object } bindings
+     * @namespace bindings
+     * @property { boolean } tween, whether tween or not
+     * @return { Promise<any> }
+     */
+    async inserted(el, bindings): Promise<any> {
+        const store: Store<any> = diContainer.get(types.Store);
         const splittedWords = innerHTMLToWords(el);
         let shuffledIndexes = [];
         let elements = [];
-
-        // workaround for current native Promise,
-        // to resolve it later
-        let animationCompleteClb = new Function();
-        const animationCompletePromise = new Promise( (res) => {
-            animationCompleteClb = res;
-        });
-
-        // store a Promise for each Tween,
-        // so we can handle onComplete more conveniently
-        const allAnimationPromises: Promise<any> | any = [];
 
         el.innerHTML = null;
 
@@ -33,9 +34,8 @@ export default {
 
            // add space to each span except
            // last one
-           if (key !== splittedWords.length) {
+           if (key !== splittedWords.length - 1) {
                span.innerHTML = word + '&nbsp;';
-
            } else {
                span.innerHTML = word;
            }
@@ -49,35 +49,49 @@ export default {
            el.appendChild(span);
         });
 
-        allAnimationPromises.push(animationCompletePromise);
+        if (bindings.value.tween !== false) {
+            // workaround for current native Promise,
+            // to resolve it later
+            let animationCompleteClb = new Function();
+            const animationCompletePromise = new Promise( (res) => {
+                animationCompleteClb = res;
+            });
 
-        // shuffle Indexes for non-sequential animation
-        shuffledIndexes = shuffle(shuffledIndexes);
+            // store a Promise for each Tween,
+            // so we can handle onComplete more conveniently
+            const allAnimationPromises: Promise<any> | any = [];
+            allAnimationPromises.push(animationCompletePromise);
 
-        let i = 0;
-        let l = shuffledIndexes.length;
+            // shuffle Indexes for non-sequential animation
+            shuffledIndexes = shuffle(shuffledIndexes);
 
-        for (i; i < l; i++) {
-            const currentElement = elements[shuffledIndexes[i]];
+            let i = 0;
+            let l = shuffledIndexes.length;
 
-            // apply some blur
-            currentElement.blur = 2;
+            for (i; i < l; i++) {
+                const currentElement = elements[shuffledIndexes[i]];
 
-            TweenMax.to(currentElement, 3,
-                {
-                    opacity:  1,
-                    blur: 0,
-                    delay: 0.05 * i,
-                    onComplete: animationCompleteClb,
-                    onUpdateParams: [elements[shuffledIndexes[i]]],
-                    onUpdate: function (el) {
-                        TweenMax.set(el, { filter: 'blur(' + el.blur + 'px)' });
-                    }
-                },
-            );
+                // apply some blur
+                currentElement.blur = 2;
+
+                TweenMax.to(currentElement, 3,
+                    {
+                        opacity:  1,
+                        blur: 0,
+                        delay: 0.05 * i,
+                        onComplete: animationCompleteClb,
+                        onUpdateParams: [elements[shuffledIndexes[i]]],
+                        onUpdate: function (el) {
+                            TweenMax.set(el, { filter: 'blur(' + el.blur + 'px)' });
+                        }
+                    },
+                );
+            }
+
+            await Promise.all(allAnimationPromises);
+        } else {
+            await Promise.resolve();
         }
-
-        await Promise.all(allAnimationPromises);
 
         // commit mutation to broadcast that title anim is finished
         store.commit(mutationTypes.CURRENT_TITLE_VISIBLE);
