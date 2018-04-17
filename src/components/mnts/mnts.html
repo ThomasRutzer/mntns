@@ -6,8 +6,11 @@
         <level-progress></level-progress>
     </div>
 
-    <generator @intersection="onIntersection($event)"
-               :data="data"></generator>
+    <div class="mnts__canvas">
+        <generator :generator-id="mId"
+                   @intersection="onIntersection($event)"
+                   :data="data"></generator>
+    </div>
 
     <transition name="mntns-label--show-transition">
         <div class="mnts__label mntns-label"
@@ -34,54 +37,60 @@
     <transition name="mnts__detailed-data--show-transition">
         <div v-if="isActivated && detailedData"
              class="mnts-detailed-data mnts__detailed-data">
-            <a href="#" class="small-text-appearance text-color-highlight"
-               @click.prevent="clearDetailedData()">
-                Close(esc)
-            </a>
 
-            <div class="mnts-detailed-data__label mntns-label ">
+            <div class="mnts-detailed-data__content"
+                 v-mousemove-follow="{maxOffsetY: -32, maxOffsetX: 32, transitionDuration: 1700}">
+                <a href="#"
+                   class="mnts-detailed-data__close small-text-appearance text-color-highlight"
+                   @click.prevent="clearDetailedData()">
+                    Close(esc)
+                </a>
 
-                <svg class="mntns-label__icon"
-                     role="img">
-                    <use xlink:href="#icon-location"></use>
-                </svg>
+                <div class="mnts-detailed-data__label mntns-label mntns-label--spacingless">
 
-                <div class="mntns-label__content">
-                    <p class="text-color-highlight margin-vertical--none small-text-appearance">
-                        {{level.title}}
-                    </p>
-                    <span>
+                    <svg class="mnts-detailed-data__icon mntns-label__icon"
+                         role="img">
+                        <use xlink:href="#icon-location"></use>
+                    </svg>
+
+                    <div class="mntns-label__content">
+                        <p class="margin-vertical--none small-text-appearance">
+                            {{level.title}}
+                        </p>
+                        <span>
                         {{ detailedData.title }}
                     </span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="margin-top--m">
-                <a class="primary-button"
-                   alt="view on Github"
-                   :href="detailedData.url">
-                    view on Github
-                </a>
-            </div>
+                <div class="margin-top--m">
+                    <a class="primary-button"
+                       alt="view on Github"
+                       :href="detailedData.url">
+                        view on Github
+                    </a>
+                </div>
 
-            <div v-if="level.index == 1">
-                <div class="margin-top--s">
-                    <a href="#"
-                       alt="dig deeper!"
-                       class="primary-button"
-                       @click.prevent="forwards()">
-                        Dig deeper
+                <div v-if="level.index == 1">
+                    <div class="margin-top--s">
+                        <a href="#"
+                           alt="dig deeper!"
+                           class="primary-button"
+                           @click.prevent="forwards()">
+                            Dig deeper
+                        </a>
+                    </div>
+                </div>
+
+                <div v-if="level.index == 2">
+                    <a href="#" alt="Back to overview"
+                       class="primary-button margin-top--m"
+                       @click.prevent="back()">
+                        Back to overview
                     </a>
                 </div>
             </div>
 
-            <div v-if="level.index == 2">
-                <a href="#" alt="Back to overview"
-                   class="primary-button margin-top--m"
-                   @click.prevent="back()">
-                    Back to overview
-                </a>
-            </div>
         </div>
     </transition>
 

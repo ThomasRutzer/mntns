@@ -1,9 +1,10 @@
-import {Component, Vue, Watch} from 'vue-property-decorator';
+import {Component, Vue, Watch, Prop} from 'vue-property-decorator';
 import { types, diContainer } from './../dependency-injection';
 
 import { mutationTypes } from './../../store';
 
 import { MntsServiceInterface } from './mnts-service-interface';
+
 import config from './mnts-config';
 
 @Component({
@@ -17,6 +18,10 @@ import config from './mnts-config';
         },
 
         isActivated() {
+            if (this.$store.state.background.activated) {
+                this.service.setCameraToStart();
+            }
+
             return this.$store.state.background.activated;
         },
 
@@ -40,6 +45,9 @@ export class MntsComponent extends Vue {
     private detailedData: {title: string, url: string} = null;
     private service: MntsServiceInterface;
 
+    @Prop({default: 'mntns-scene1'})
+    mId: string;
+
     @Watch('$store.state.currentRoute.titleAnimatedIn')
     watchHandler() {
         this.dataWatcher();
@@ -47,7 +55,7 @@ export class MntsComponent extends Vue {
 
     @Watch('$store.state.gitHubData.usedData.mapped')
     dataWatcher() {
-        if(!this.$store.state.currentRoute.titleAnimatedIn) return;
+        if (!this.$store.state.currentRoute.titleAnimatedIn) return;
 
         this.data = this.$store.state.gitHubData.usedData.mapped;
     }
@@ -57,10 +65,12 @@ export class MntsComponent extends Vue {
         this.$store.commit(mutationTypes.UNFOCUS_REPO);
     }
 
-    async created() {
+    async mounted() {
         this.$store.commit(mutationTypes.DEACTIVATE_BACKGROUND);
 
-        this.service = diContainer.get<MntsServiceInterface>(types.MntnsService);
+        // @ts-ignore: Cannot invoke an expression whose type lacks a call signature.
+        // Type 'MntsServiceInterface' has no compatible call signatures
+        this.service = diContainer.get<MntsServiceInterface>(types.MntnsServiceFactory)(this.mId);
         await this.service.start();
     }
 
@@ -150,14 +160,14 @@ export class MntsComponent extends Vue {
 
         // close detailedData on another mousedown
         // and return...
-        if(this.detailedData && data.event.type === config.eventToUpdateLevel) {
+        if (this.detailedData && data.event.type === config.eventToUpdateLevel) {
             this.clearDetailedData();
             return;
         }
 
         // ...or return when detailedData is displayed
         // and no other mousedown caught
-        if(this.detailedData) {
+        if (this.detailedData) {
             return;
         }
 

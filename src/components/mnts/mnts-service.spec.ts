@@ -1,6 +1,9 @@
 import {expect} from 'chai';
+import Vuex from 'vuex';
+
+import * as GeneratorModule from 'mnts/src/components/generator';
 import MntsService from './mnts-service';
-import store, { mutationTypes } from './../../store';
+import { actions, actionTypes, mutations, mutationTypes } from './../../store';
 
 const rawRepos = [
     {
@@ -294,10 +297,58 @@ const rawCommits = [
 const mappedCommits = [];
 
 describe('Mnts Service', () => {
-    let service;
+    let service, store;
 
     before(() => {
-        service = new MntsService();
+        const generatorManager = GeneratorModule.GeneratorManagerFactory.create('test');
+
+        store = new Vuex.Store({
+            state: {
+                mntns: {
+                    levels: {
+                        currentLevel: 1,
+                        allLevels:  [
+                            {
+                                index: 1,
+                                title: 'Repositories'
+                            },
+                            {
+                                index: 2,
+                                title: 'Commits'
+                            }
+                        ]
+                    }
+                },
+                gitHubData: {
+                    startedLoading: null,
+                    finishedLoading: null,
+                    loadingError: null,
+
+                    startedMapping: null,
+                    finishedMapping: null,
+                    focusedData: {
+                        raw: null,
+                        mapped: null,
+                        event: null
+                    },
+                    usedData: {
+                        raw: null,
+                        mapped: null
+                    },
+
+                    repos: {
+                        mapped: null,
+                        raw: null,
+                    },
+
+                    commits: {}
+                },
+            },
+            actions,
+            mutations
+        });
+
+        service = new MntsService(store, generatorManager);
     });
 
     describe('method focusData()', () => {

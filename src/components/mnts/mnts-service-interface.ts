@@ -3,4 +3,5 @@ export interface MntsServiceInterface {
     nextStep();
     previousStep();
     start();
+    setCameraToStart();
 }
