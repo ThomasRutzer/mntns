@@ -33,7 +33,6 @@
 
   @include mq($from: 'l') {
     left: 50%;
-
     width: map_get($layout, 'content-area-width-medium') / 2;
   }
 

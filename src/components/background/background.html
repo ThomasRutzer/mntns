@@ -11,7 +11,7 @@
         <router-view name="background"></router-view>
     </transition>
 
-    <background-backdrop trigger-label="explore experiment"
+    <background-backdrop :trigger-label="$route.path === '/' ? 'explore experiment' : null"
                          :activated="isMouseover"
                          v-if="!isExpanded"
                          class="background__backdrop"
