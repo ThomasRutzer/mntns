@@ -1,6 +1,7 @@
 import Vue from 'vue';
+import { diContainer, types} from './components/dependency-injection';
+
 import {createRouter} from './components/router/Router';
-import store from './store';
 
 // import static / router independent components
 import { NavbarComponent  } from './components/navbar';
@@ -15,15 +16,17 @@ import { contentNoPointerEvents } from './components/layout';
 Vue.directive('content-no-pointer-events', contentNoPointerEvents);
 
 // import any other modules
+import './components/mousemove-follow';
 import './components/github-api-client';
 import './components/data-mapper';
+import './components/media-queries';
 
 import './main.scss';
 
 let app = new Vue({
     router: createRouter(),
     el: '#app-main',
-    store,
+    store: diContainer.get(types.Store),
     components: {
         'navbar': NavbarComponent,
         'footerbar': FooterbarComponent,
