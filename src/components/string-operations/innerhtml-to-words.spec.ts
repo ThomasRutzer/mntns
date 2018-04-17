@@ -1,7 +1,7 @@
 import textToWords from './innerhtml-to-words';
 import {expect} from 'chai';
 
-describe('textToWords', () => {
+describe('innerHTMLToWords', () => {
     it('splits correctly', () => {
         const htmlElement = document.createElement('div');
         htmlElement.innerText = "hello world";
