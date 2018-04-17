@@ -32,10 +32,6 @@ describe('Media Query Service', () => {
         matchMediaStub.restore();
     });
 
-    it('holds current matching breakpoint', () => {
-        expect(service.getCurrentBreakpoint()).to.equal('l');
-    });
-
     it('provides a method, where others can get notifications about changing matching breakpoints', () => {
         let matching = null;
         const callback = (matches) => {

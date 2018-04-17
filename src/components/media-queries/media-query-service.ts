@@ -6,19 +6,11 @@ import { BreakpointsInterface } from './breakpoints-interface';
 @injectable()
 class MediaQueryService implements MediaQueryServiceInterface {
     private breakpoints: BreakpointsInterface;
-    private currentBreakpoint: string;
 
     constructor(
         @inject(types.Breakpoints) breakpoints: BreakpointsInterface
     ) {
         this.breakpoints = breakpoints;
-
-        window.addEventListener('resize', () => this.onResize);
-        this.onResize();
-    }
-
-    public getCurrentBreakpoint() {
-        return this.currentBreakpoint;
     }
 
     /**
@@ -34,29 +26,12 @@ class MediaQueryService implements MediaQueryServiceInterface {
         res.addListener(callback);
     }
 
-    private onResize() {
-        this.currentBreakpoint = this.filterCurrentBreakpoint(this.breakpoints);
-    }
-
-    /**
-     *
-     * @param {BreakpointsInterface} breakpoints
-     * @return {string} key of currently matching breakpoint
-     */
-    private filterCurrentBreakpoint(breakpoints: BreakpointsInterface): string {
-        const matching = Object.keys(breakpoints).filter((breakpoint) => {
-            return this.checkBreakpoint(breakpoints[breakpoint]).matches;
-        });
-
-        return matching[0];
-    }
-
     /**
      * @param {string} breakpoint
      * @return {{matches: boolean; addListener: Function}}
      */
     private checkBreakpoint(breakpoint: string): { matches: boolean, addListener: Function } {
-        return window.matchMedia(`(min-width: ${breakpoint}px)`);
+        return window.matchMedia(`(min-width: ${breakpoint})`);
     }
 }
 
