@@ -1,4 +1,46 @@
-## Build Setup
+# 👋 Hello my friend,
+
+nice to see you! This is public source code of my
+current portfolio aka about me site! To be honest, after some iterations
+with former portfolios, I decided to skip a proper portfolio
+site with much content (I rarely update after a while) all in all and just write some words about me and contact options
+— feel free to use them!
+
+But to 🌶 it up a little, I give this site some space for experiments.
+This type of experiment might change after while😉. And since it´s 
+kind of experimental, please be aware of that:
+
+**During my daytime job, I´m really focused to provide a good
+crossbrowser experience. So at 🌃night, when I should sleep but ⚒️work
+on something like this, I really want to have some fun and work with
+some of the latest browser features — so if you want to have fun as well,
+use a browser with decent WegGl support. If you are really, really annoyed by
+your personal experiment with, feel free to get in touch (or wait for one of the upcoming feature
+to be finished)** 
+
+## Next steps
+
+Talking about upcoming features, I really really plan to work
+on this site from time to time. This are some of my next steps
+I want to focus.
+
+### Features
+
+* LoFi Mode — which users can toggle on, to make animations less
+consuming and maybe visualize background experiment in another way (without need of WebGL)
+
+* User Github Data — users can give their github addy, and its
+data will be used for experiment
+
+### Code & Architecture
+
+* clean up MntsComponent and seperate into smaller bits
+* make a proper and general Mock for DI
+
+### Build Setup
+
+It´s open source, so if you really want to check at Code on your own,
+here are some tips:
 
 ``` bash
 # install dependencies
@@ -25,3 +67,5 @@ npm run build
 # clean the production build
 npm run clean
 ```
+
+👋 That´s it! Thanks for reading that far. Hope to see you soon
