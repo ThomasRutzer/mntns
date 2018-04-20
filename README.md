@@ -14,28 +14,31 @@ kind of experimental, please be aware of that:
 crossbrowser experience. So at 🌃night, when I should sleep but ⚒️work
 on something like this, I really want to have some fun and work with
 some of the latest browser features — so if you want to have fun as well,
-use a browser with decent WegGl support. If you are really, really annoyed by
-your personal experiment with, feel free to get in touch (or wait for one of the upcoming feature
+use a browser with decent WebGl support. If you are really, really annoyed by
+your personal experiment, feel free to get in touch (or wait for one of the upcoming feature
 to be finished)** 
 
 ## Next steps
 
-Talking about upcoming features, I really really plan to work
-on this site from time to time. This are some of my next steps
-I want to focus.
+Talking about upcoming features, I plan to work
+on this site from time to time. This are some of my next steps.
 
 ### Features
 
 * LoFi Mode — which users can toggle on, to make animations less
 consuming and maybe visualize background experiment in another way (without need of WebGL)
 
-* User Github Data — users can give their github addy, and its
-data will be used for experiment
+* User Github Data — users can give their github addy, and their account
+data will be used for Mntns experiment
 
 ### Code & Architecture
 
 * clean up MntsComponent and seperate into smaller bits
 * make a proper and general Mock for DI
+* move entire Mntns Experiment to other [Repo](https://github.com/ThomasRutzer/mntns) — initially,
+my plan was, to provide the code of the other repo as a WebGL experiment, which 
+accepts Data and generates its Object. But now, I´d like to have all the Github Api
+Connection to take place their as well. Makes things easier
 
 ### Build Setup
 
