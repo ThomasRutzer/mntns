@@ -1,4 +1,5 @@
-<footer class="footerbar">
+<footer v-if="isVisible"
+        class="footerbar">
     <ul class="footerbar__list bare-list">
         <li v-for="link in links"
             class="footerbar__list-item  revealing-content revealing-content--reveal">
