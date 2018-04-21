@@ -24,7 +24,8 @@ const state = {
     },
 
     currentRoute: {
-        titleAnimatedIn: false
+        titleAnimatedIn: false,
+        footerVisible: true
     },
 
     gitHubData: {
@@ -81,16 +82,15 @@ const state = {
             allLevels:  [
                 {
                     index: 1,
-                    title: 'Repositories'
+                    title: 'repositories'
                 },
                 {
                     index: 2,
-                    title: 'Commits'
+                    title: 'commits'
                 }
             ]
         }
     }
-
 };
 
 export default state;

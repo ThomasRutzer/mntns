@@ -33,6 +33,10 @@ const mutations = {
         state.currentRoute.titleAnimatedIn = false;
     },
 
+    [types.FOOTER_VISIBLE](state, payload: boolean) {
+        state.currentRoute.footerVisible = payload;
+    },
+
     [types.GITHUB_API_STARTED](state) {
         state.gitHubData.startedLoading = true;
         state.gitHubData.finishedLoading = false;
