@@ -1,4 +1,4 @@
-import TweenMax from 'gsap';
+import TweenLite from 'gsap';
 import { Store } from 'vuex';
 import { diContainer, types} from './../dependency-injection';
 
@@ -49,7 +49,7 @@ export default {
            el.appendChild(span);
         });
 
-        if (bindings.value.tween !== false) {
+        if (true === bindings.value.tween) {
             // workaround for current native Promise,
             // to resolve it later
             let animationCompleteClb = new Function();
@@ -74,7 +74,7 @@ export default {
                 // apply some blur
                 currentElement.blur = 2;
 
-                TweenMax.to(currentElement, 3,
+                TweenLite.to(currentElement, 3,
                     {
                         opacity:  1,
                         blur: 0,
@@ -82,7 +82,7 @@ export default {
                         onComplete: animationCompleteClb,
                         onUpdateParams: [elements[shuffledIndexes[i]]],
                         onUpdate: function (el) {
-                            TweenMax.set(el, { filter: 'blur(' + el.blur + 'px)' });
+                            TweenLite.set(el, { filter: 'blur(' + el.blur + 'px)' });
                         }
                     },
                 );

@@ -68,8 +68,10 @@ describe('titleTypoAnimation', () => {
 
             Array.from(vm.$el.children).forEach((child, i) => {
                 if (i > vm.$el.children.length) {
+                    // @ts-ignore Property 'innerText' does not exist on type 'Element'.
                     expect(child.innerText.includes('&nbsp')).to.equal(true);
                 } else {
+                    // @ts-ignore Property 'innerText' does not exist on type 'Element'.
                     expect(child.innerText.includes('&nbsp')).to.equal(false);
                 }
             });
