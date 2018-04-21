@@ -6,7 +6,7 @@ import {BREAKPOINTS, MediaQueryServiceInterface} from '../../media-queries';
     template: require('./background-backdrop.html'),
 })
 export class BackgroundBackdropComponent extends Vue {
-    private mousemoveActivated: boolean;
+    private mousemoveActivated: boolean = true;
     private mediaQueryService: MediaQueryServiceInterface;
 
     @Prop()
