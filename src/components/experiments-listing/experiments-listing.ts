@@ -35,5 +35,6 @@ export class ExperimentsListingComponent extends RouterDefaultComponentAbstract 
     startExperiment() {
         this.isStarted = true;
         this.$store.commit(mutationTypes.ACTIVATE_BACKGROUND);
+        this.$store.commit(mutationTypes.FOOTER_VISIBLE, false);
     }
 }
