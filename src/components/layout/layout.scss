@@ -38,7 +38,7 @@
   }
 
   @include mq($from: 'm') {
-    padding: map_get($spacing-sizes, 'xl') 0;
+    padding: map_get($spacing-sizes, 'm') 0;
   }
 }
 
