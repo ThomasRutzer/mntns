@@ -14,7 +14,7 @@ $primary-button-line-width: 50px;
     position: absolute;
     left: 0;
     top: 50%;
-    height: 1px;
+    height: 2px;
   }
 
   &:before {
@@ -23,7 +23,7 @@ $primary-button-line-width: 50px;
   }
 
   &:after {
-    background-color: $color-highlight;
+    background-color: $color-secondary-highlight;
     width: 0;
     transition: width 300ms ease-out;
   }
