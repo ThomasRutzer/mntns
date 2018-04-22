@@ -2,8 +2,7 @@ import * as mutationTypes from './mutation-types';
 import * as actionTypes from './action-types';
 
 import { types, diContainer } from './../components/dependency-injection';
-import { DataMapperInterface } from '../components/data-mapper/data-mapper-interface';
-import * as mappers from '../components/data-mapper/mappers';
+import { DataMapperServiceInterface, MapperInterface } from '../components/data-mapper';
 import { GithubApiClientInterface } from './../components/github-api-client';
 
 /**
@@ -36,7 +35,8 @@ const actions = {
         // load once, so we can check here
         if (!state.gitHubData.repos.raw) {
             const githubApiClient = diContainer.get<GithubApiClientInterface>(types.GithubApiClient);
-            const dataMapper = diContainer.get<DataMapperInterface>(types.DataMapper);
+            const dataMapperService = diContainer.get<DataMapperServiceInterface>(types.DataMapperService);
+            const repoMappers = diContainer.get<MapperInterface[]>(types.RepositoryMapper);
 
             commit(mutationTypes.GITHUB_API_STARTED);
 
@@ -49,7 +49,7 @@ const actions = {
             commit(mutationTypes.GITHUB_DATA_MAPPING_STARTED);
 
             data = {
-                mappedRepos: res ? dataMapper.map(res.data, mappers.repoMappers) : [],
+                mappedRepos: res ? dataMapperService.map(res.data, repoMappers) : [],
                 rawRepos: res ? res.data : []
             };
 
@@ -81,7 +81,8 @@ const actions = {
         // so we can check for that
         if (!state.gitHubData.commits[repoName]) {
             const githubApiClient = diContainer.get<GithubApiClientInterface>(types.GithubApiClient);
-            const dataMapper = diContainer.get<DataMapperInterface>(types.DataMapper);
+            const dataMapperService = diContainer.get<DataMapperServiceInterface>(types.DataMapperService);
+            const commitMappers = diContainer.get<MapperInterface[]>(types.CommitsMapper);
 
             commit(mutationTypes.GITHUB_API_STARTED);
 
@@ -91,7 +92,7 @@ const actions = {
             commit(mutationTypes.GITHUB_DATA_MAPPING_STARTED);
 
             data = {
-                mapped: res ? dataMapper.map(res.data, mappers.commitMappers) : [],
+                mapped: res ? dataMapperService.map(res.data, commitMappers) : [],
                 raw: res ? res.data : []
             };
 

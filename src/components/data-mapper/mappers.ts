@@ -1,4 +1,5 @@
 import MountainConfig from 'mnts/src/components/mountain/mountainConfig';
+import {MapperInterface} from './mapper-interface';
 
 /**
  * strong bound mappers; only work when actually mapping
@@ -11,9 +12,9 @@ import MountainConfig from 'mnts/src/components/mountain/mountainConfig';
  * @property { String } height is any parameter to visualize Mountain.
  * @property { Number } min is minValue of this parameter
  * @property { Number } max is maxValue of this parameter
- * @property { String } type is type of dataKey, to use right mapping methods
+ * @property { String } type is type of dataKey, to use matching mapping methods
  */
-const repoMappers = [
+const repoMappers: MapperInterface[] = [
     {
         dataKey: ['size'],
         mountainsParameter: 'height',
@@ -39,7 +40,7 @@ const repoMappers = [
     }
 ];
 
-const commitMappers = [
+const commitMappers: MapperInterface[] = [
     {
         dataKey: ['commit', 'author', 'date'],
         mountainsParameter: 'x',

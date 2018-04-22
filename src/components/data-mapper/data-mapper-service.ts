@@ -1,15 +1,15 @@
 import { injectable } from 'inversify';
 import 'reflect-metadata';
-import { DataMapperInterface } from './data-mapper-interface';
+import { DataMapperServiceInterface } from './data-mapper-service-interface';
 import * as mapperUtils from './mapper-utilts';
 import { findDeep } from './../object-utils';
+
 /**
  * DataMapper maps given data to specified output data.
  * Mapping is configured by mappers
- * @todo: implement mapper model
  */
 @injectable()
-class DataMapper implements DataMapperInterface {
+class DataMapperService implements DataMapperServiceInterface {
 
     /**
      * @param {any[]} data actual set of data which will be mapped
@@ -62,4 +62,4 @@ class DataMapper implements DataMapperInterface {
     }
 }
 
-export default DataMapper;
+export default DataMapperService;

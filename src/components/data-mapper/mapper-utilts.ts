@@ -61,6 +61,12 @@ function getMinMaxValueTypeDate(data: Object[], property: string, value: any): n
     return [0, minMaxCache[property].range, parsedValue];
 }
 
+/**
+ * examines string length of given property
+ * @param {any[]} data all data
+ * @param {string} property property of data to retrieve range from
+ * @return {number[]} where first index is minValue, and 2nd maxValue
+ */
 function getMinMaxTypeString(data: any[], property: string): number[]|null {
     if (!minMaxCache[property]) {
         const numbers = data.map((value) => {

@@ -1,6 +1,9 @@
 const types = {
 
-    DataMapper: Symbol.for('DataMapper'),
+    DataMapperService: Symbol.for('DataMapperService'),
+    RepositoryMapper: Symbol.for('RepositoryMapper'),
+    CommitsMapper: Symbol.for('CommitsMapper'),
+
     GithubApiClient: Symbol.for('GithubApiClient'),
 
     Breakpoints: Symbol.for('Breakpoints'),
