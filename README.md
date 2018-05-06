@@ -11,7 +11,7 @@ This type of experiment might change after while😉. And since it´s
 kind of experimental, please be aware of that:
 
 **During my daytime job, I´m really focused to provide a good
-crossbrowser experience. So at 🌃night, when I should sleep but ⚒️work
+crossbrowser and a11y experience. So at 🌃night, when I should sleep but ⚒️work
 on something like this, I really want to have some fun and work with
 some of the latest browser features — so if you want to have fun as well,
 use a browser with decent WebGl support. If you are really, really annoyed by
