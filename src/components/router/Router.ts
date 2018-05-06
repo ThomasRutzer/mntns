@@ -37,6 +37,7 @@ export const createRoutes: () => RouteConfig[] = () => [
 export const createRouter = () => new VueRouter({
     mode: 'history',
     routes: createRoutes(),
+    base: '/experiments/dist/',
     scrollBehavior (to, from, savedPosition) {
         return { x: 0, y: 0 };
     }
