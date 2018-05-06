@@ -14,7 +14,12 @@ import './background.scss';
     },
 })
 export class BackgroundComponent extends Vue {
+    // background size. Fullscreen appearance on true
     private isExpanded: boolean;
+
+    // stores store state background activated.
+    // basically, experiment interactions are disabled on
+    // false
     private isActive: boolean;
 
     // true, when users does mouseover
