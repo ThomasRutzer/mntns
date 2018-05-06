@@ -6,6 +6,8 @@ import { mutationTypes } from './../../store';
 import { MntsServiceInterface } from './mnts-service-interface';
 
 import config from './mnts-config';
+import { MediaQueryServiceInterface } from '../media-queries/media-query-service-interface';
+import {BreakpointsInterface} from '../media-queries/breakpoints-interface';
 
 @Component({
     template: require('./mnts.html'),
@@ -23,11 +25,7 @@ import config from './mnts-config';
             }
 
             return this.$store.state.background.activated;
-        },
-
-        focusedEvent() {
-            return this.$store.state.gitHubData.focusedData.event;
-        },
+        }
     },
 })
 
@@ -38,12 +36,27 @@ export class MntsComponent extends Vue {
     private data: any[] = [];
 
     private isActivated: boolean;
-    private focusedEvent: any;
+    private focusedData: {
+        x?: number,
+        y?: number,
+        outside?: boolean,
+        message?: string
+    } = null;
 
-    private outside: boolean = false;
-    private focusedData: string = null;
-    private detailedData: {title: string, url: string} = null;
+    private detailedData: {
+        title: string,
+        url: string
+    } = null;
+
+    /**
+     * whether or not router link is activated
+     * concerning layout, it shall not on small devices
+     * @type {boolean}
+     */
+    private isLink: boolean = true;
     private service: MntsServiceInterface;
+
+    private mediaQueryService: MediaQueryServiceInterface;
 
     @Prop({default: 'mntns-scene1'})
     mId: string;
@@ -72,6 +85,11 @@ export class MntsComponent extends Vue {
         // Type 'MntsServiceInterface' has no compatible call signatures
         this.service = diContainer.get<MntsServiceInterface>(types.MntnsServiceFactory)(this.mId);
         await this.service.start();
+
+        this.mediaQueryService = diContainer.get<MediaQueryServiceInterface>(types.MediaQueryService);
+        this.mediaQueryService.on(diContainer.get<BreakpointsInterface>(types.Breakpoints)['m'], (mqEvent) => {
+            this.isLink = mqEvent.matches;
+        });
     }
 
     back() {
@@ -109,19 +127,18 @@ export class MntsComponent extends Vue {
         switch (this.$store.state.mntns.levels.currentLevel) {
             case(1):
                 this.detailedData.title = this.$store.state.gitHubData.focusedData.raw.name;
-                this.detailedData.url = this.$store.state.gitHubData.focusedData.raw.url;
+                this.detailedData.url = `https://github.com/thomasrutzer/${this.$store.state.gitHubData.focusedData.raw.name}`;
                 break;
 
             case (2):
                 this.detailedData.title = this.$store.state.gitHubData.focusedData.raw.commit.message;
-                this.detailedData.url = this.$store.state.gitHubData.focusedData.raw.tree.url;
+                this.detailedData.url = `https://github.com/thomasrutzer/mntns/commit/${this.$store.state.gitHubData.focusedData.raw.sha}`;
         }
 
         return;
     }
 
     clearFocusedData()  {
-        this.outside = null;
         this.focusedData = null;
     }
 
@@ -131,25 +148,36 @@ export class MntsComponent extends Vue {
         }
     }
 
-    updateFocusedData() {
-        this.outside = this.$store.state.gitHubData.focusedData.event.x > (window.innerWidth / 2);
+    updateFocusedData(position: {x: number, y: number}) {
+        this.focusedData = {};
+        this.focusedData.outside = position.x > (window.innerWidth / 2);
+
+        this.focusedData.x = position.x;
+        this.focusedData.y = position.y;
 
         switch (this.$store.state.mntns.levels.currentLevel) {
             case(1):
-                this.focusedData = this.$store.state.gitHubData.focusedData.raw.name;
+                this.focusedData.message = this.$store.state.gitHubData.focusedData.raw.name;
                 break;
 
             case (2):
-                this.focusedData = this.$store.state.gitHubData.focusedData.raw.commit.message;
+                this.focusedData.message = this.$store.state.gitHubData.focusedData.raw.commit.message;
         }
-
-        return null;
     }
 
     expandMnts() {
+
+        // concerning layout, on small devices,
+        // background click shall not trigger $router push
+        if (!this.isLink) return;
+
         this.$router.push('/experiments');
     }
 
+    /**
+     * @todo: refactoring required. Try to get rid of nested if conditions     *
+     * @param { SceneIntersectionModel } data
+     */
     onIntersection(data: any) {
 
         // display no intersection
@@ -184,7 +212,10 @@ export class MntsComponent extends Vue {
             this.updateDetailedData();
         } else {
             this.clearDetailedData();
-            this.updateFocusedData();
+
+            if (data.event.type === 'mousemove') {
+                this.updateFocusedData({x: data.event.x, y: data.event.y});
+            }
         }
     }
 }

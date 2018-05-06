@@ -16,7 +16,7 @@ export class MntnsLegendComponent extends Vue {
 
         this.legendData.length = 0;
 
-        switch(level) {
+        switch (level) {
             case 1:
                 currentMapper = repoMappers;
                 break;

@@ -1,8 +1,11 @@
 @import "./../colors/colors.json";
+@import "./../spacing/spacing-definitions.json";
+
 @import "./../layout/layout-definitions.json";
 @import "level-progress/mntns-level-progress";
 @import "label/mntns-label";
 @import "detailed-data/mntns-detailed-data";
+@import "legend/mntns-legend";
 
 .mnts {
   background-color: $color-darkest;
@@ -14,7 +17,7 @@
 
 .mnts__canvas {
   overflow: hidden;
-  position: relative;
+  position: absolute;
 
   // @todo: remove important statements
   canvas {
@@ -46,7 +49,17 @@
 
   @include mq($from: 'm') {
     right: calc((100vw - #{map_get($layout, "content-area-width-medium")}) / 2);
+  }
+}
 
+.mnts__legend {
+  position: absolute;
+  bottom: map_get($spacing-sizes, 's');
+  left: calc((100vw - #{map_get($layout, "content-area-width-small")}) / 2);
+  z-index: 1;
+
+  @include mq($from: 'm') {
+    left: calc((100vw - #{map_get($layout, "content-area-width-medium")}) / 2);
   }
 }
 

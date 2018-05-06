@@ -1,6 +1,6 @@
 export default {
     eventToUpdateLevel: 'mousedown',
     excludedFocusableObjectIds: ['floor'],
-    gitHubUsername: 'addyosmani',
+    gitHubUsername: 'thomasrutzer',
     maxSceneItems: 15
 };

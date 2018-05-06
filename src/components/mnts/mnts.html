@@ -12,10 +12,15 @@
                    :data="data"></generator>
     </div>
 
+    <div class="mnts__legend"
+         v-show="isActivated">
+        <mntns-legend></mntns-legend>
+    </div>
+
     <transition name="mntns-label--show-transition">
-        <div class="mnts__label mntns-label"
-             :class="{'mntns__label--outside': outside}"
-             :style="{left: focusedEvent.x + 'px', top: focusedEvent.y + 'px'}"
+        <div class="mnts__label mntns-label mntns-label--large-width"
+             :class="{'mntns__label--outside': focusedData.outside}"
+             :style="{left: focusedData.x + 'px', top: focusedData.y + 'px'}"
              v-if="focusedData">
 
             <svg class="mntns-label__icon"
@@ -28,7 +33,7 @@
                     {{level.title}}
                 </p>
                 <span>
-                    {{ focusedData }}
+                    {{ focusedData.message }}
                 </span>
             </div>
         </div>
