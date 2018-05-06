@@ -29,6 +29,8 @@ consuming and maybe visualize background experiment in another way (without need
 
 * Add more of a listing for all upcoming experiments
 
+* Think about hosting it somewhere else, since Github Pages is a pain to host SPAs
+
 ### Code & Architecture
 
 * make a proper and general Mock for DI
