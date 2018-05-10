@@ -2,6 +2,23 @@
 
 .router-link {
 
+  &:after {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    transition: width 300ms;
+    background-color: $color-secondary-highlight;
+  }
+
+  &:hover {
+    &:after {
+      width: 100%;
+    }
+  }
+
   // breaking BEM Selector rules
   // in order to make use of
   // vue-router classes
@@ -9,13 +26,7 @@
     position: relative;
 
     &:after {
-      position: absolute;
-      content: '';
       width: 100%;
-      height: 2px;
-      bottom: 0;
-      left: 0;
-      background-color: $color-secondary-highlight;
     }
   }
 }
