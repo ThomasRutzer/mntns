@@ -171,7 +171,7 @@ export class MntsComponent extends Vue {
         // background click shall not trigger $router push
         if (!this.isLink) return;
 
-        this.$router.push('/experiments');
+        this.$router.push('/experiment');
     }
 
     /**

@@ -37,8 +37,7 @@ export class BackgroundComponent extends Vue {
     created() {
         this.$router.beforeEach((to, from, next) => {
             this.transition = from.path === '/' || to.path === '/';
-            this.expandTransition = from.path === '/experiments' || to.path === '/experiments';
-
+            this.expandTransition = from.path === '/experiment' || to.path === '/experiment';
             next();
         });
     }

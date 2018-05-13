@@ -13,6 +13,5 @@ import RouterLinks from './../router/Router-Link';
 export class FooterbarComponent extends Vue {
     links: RouterLinks[] = [
         new RouterLinks('Kontakt', 'contact'),
-        new RouterLinks('mntns', 'experiments'),
     ];
 }

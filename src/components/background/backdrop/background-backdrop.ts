@@ -1,6 +1,6 @@
-import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import { types, diContainer } from './../../dependency-injection';
-import {BREAKPOINTS, MediaQueryServiceInterface} from '../../media-queries';
+import { MediaQueryServiceInterface} from '../../media-queries';
 
 @Component({
     template: require('./background-backdrop.html'),

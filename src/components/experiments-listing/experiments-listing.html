@@ -3,14 +3,13 @@
         <div v-show="!isStarted">
             <h1 class="experiments-listing__title"
                 v-title-animation="{tween: true}">
-                Mntns is an 🔥experimental way to visualize my
-                Github account data.
+                Experiment is getting ready⛏️
             </h1>
 
             <div class="margin-top--m">
                 <p class="primary-button revealing-content margin--none"
                    :class="{'revealing-content--reveal': canStart}"
-                   @click="startExperiment()">explore</p>
+                   @click="startExperiment()">start</p>
 
                 <p v-show="cannotStart"
                       class="revealing-content revealing-content--reveal margin--none">

@@ -3,8 +3,27 @@
         <h1 class="home__title title"
             ref="title"
             v-title-animation="{tween: true}">
-            ⚡I am Thomas Rutzer, a frontend developer who feels most comfortable where 💅sophisticated design meets
-            🧠structured code — and this is my experiments hub 🔥
+            ⚡I am Thomas Rutzer — and this a 🧠project I call Mntns.
+
         </h1>
+
+
+        <div class="margin-top--m">
+
+            <p class="home__copy revealing-content margin--none"
+               :class="{'revealing-content--reveal': canStart}">
+                It is an 🔥experimental way to visualize my
+                Github account data and activity.
+            </p>
+
+            <p class="primary-button revealing-content margin--none"
+               :class="{'revealing-content--reveal': canStart}"
+               @click="startExperiment()">explore</p>
+
+            <p v-show="cannotStart"
+               class="revealing-content revealing-content--reveal margin--none">
+                ...but unfortunately, there´s a network error right now.
+            </p>
+        </div>
     </div>
 </div>

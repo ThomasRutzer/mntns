@@ -18,7 +18,7 @@ export const createRoutes: () => RouteConfig[] = () => [
     },
 
     {
-        path: '/experiments',
+        path: '/experiment',
         components: {
             content: ExperimentsListingComponent,
             background: MntsComponent,

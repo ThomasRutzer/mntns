@@ -4,15 +4,37 @@ import {RouterDefaultComponentAbstract} from '../router';
 
 @Component({
     template: require('./home.html'),
+    computed: {
+        canStart() {
+            return this.titleIn;
+        }
+    }
 })
 export class HomeComponent extends RouterDefaultComponentAbstract {
+    // private isStarted: boolean = false;
 
     beforeCreate() {
-        this.$store.commit(mutationTypes.CONTENT_NOT_CLICKABLE);
+       // this.$store.commit(mutationTypes.CONTENT_NOT_CLICKABLE);
         this.$store.commit(mutationTypes.REDUCE_BACKGROUND);
+
+       // this.$store.commit(mutationTypes.DEACTIVATE_BACKGROUND);
+    }
+
+
+    beforeDestroy() {
+        // this.$store.commit(mutationTypes.DEACTIVATE_BACKGROUND);
+       // this.$store.commit(mutationTypes.UNFOCUS_REPO);
     }
 
     destroyed() {
-        this.$store.commit(mutationTypes.CONTENT_CLICKABLE);
+        // this.$store.commit(mutationTypes.CONTENT_CLICKABLE);
+    }
+
+    startExperiment() {
+        // this.isStarted = true;
+        // this.$store.commit(mutationTypes.ACTIVATE_BACKGROUND);
+        // this.$store.commit(mutationTypes.FOOTER_VISIBLE, false);
+       // this.$store.commit(mutationTypes.EXPAND_BACKGROUND);
+        this.$router.push('/experiment');
     }
 }
