@@ -9,7 +9,6 @@
 
 
         <div class="margin-top--m">
-
             <p class="home__copy revealing-content margin--none"
                :class="{'revealing-content--reveal': canStart}">
                 It is an 🔥experimental way to visualize my
@@ -19,11 +18,6 @@
             <p class="primary-button revealing-content margin--none"
                :class="{'revealing-content--reveal': canStart}"
                @click="startExperiment()">explore</p>
-
-            <p v-show="cannotStart"
-               class="revealing-content revealing-content--reveal margin--none">
-                ...but unfortunately, there´s a network error right now.
-            </p>
         </div>
     </div>
 </div>
