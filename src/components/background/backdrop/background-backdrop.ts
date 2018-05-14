@@ -15,7 +15,7 @@ export class BackgroundBackdropComponent extends Vue {
     @Prop()
     triggerLabel: string;
 
-    created() {
+    mounted() {
         const breakpoints = diContainer.get(types.Breakpoints);
         this.mediaQueryService = diContainer.get<MediaQueryServiceInterface>(types.MediaQueryService);
         this.mediaQueryService.on(breakpoints['m'], (mqEvent: MediaQueryList) => {
