@@ -1,8 +1,11 @@
 # 👋 Hello my friend,
 
 nice to see you! This is public source code of my
-personal **experiments hub***! Started with a single experiment to show, 
-I hope I have time and creativity (and skills😉) to add some more from now on.
+personal experiment, I name **mntns**! Its currently seperated into two 
+repositories. This one and [Repo](https://github.com/ThomasRutzer/mntns), basically
+the 3D landscape.
+
+I hope I have time and creativity (and skills😉) to add some more features from now on.
 And since it´s kind of experimental, please be aware of that:
 
 **During my daytime job, I´m really focused to provide a good
@@ -12,10 +15,6 @@ some of the latest browser features — so if you want to have fun as well,
 use a browser with decent WebGl support. If you are really, really annoyed by
 your personal experiment, feel free to get in touch (or wait for one of the upcoming feature
 to be finished)** 
-
-*<sub>It started as one repo for all experiments, before I decided that this will end up in a wildness
-I don´t want to control, but this is why, the first and only experiment atm is not fully seperated from
-the repo that I call `experiments hub`</szb> 
 
 ## Next steps
 
@@ -34,7 +33,7 @@ consuming and maybe visualize background experiment in another way (without need
 ### Code & Architecture
 
 * make a proper and general Mock for DI
-* move entire Mntns Experiment to other [Repo](https://github.com/ThomasRutzer/mntns) — initially, I planned to make **everything**, experimental hub and all experiments into one repo. Talking of this stupidity, I still haven´t separated Mntns entirely.
+
 ### Build Setup
 
 It´s open source, so if you really want to check at Code on your own,
