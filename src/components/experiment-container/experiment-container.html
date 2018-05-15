@@ -1,0 +1,19 @@
+<div class="experiment-container"
+     :class="{'experiment-container--active': isActive,
+              'experiment-container--expanded': isExpanded,
+              'experiment-container--transition': expandTransition}"
+
+     @mouseover="onMouseover"
+     @mouseout="onMouseout"
+>
+
+    <transition :name="transition ? 'experiment-container--transition' : null">
+        <router-view name="experiment-container"></router-view>
+    </transition>
+
+    <backdrop :activated="isMouseover"
+              v-if="!isExpanded"
+              class="experiment-container__backdrop"
+              :class="{'experiment-container__backdrop--visible': !isExpanded}">
+    </backdrop>
+</div>

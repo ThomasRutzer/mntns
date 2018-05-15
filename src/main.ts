@@ -5,7 +5,7 @@ import {createRouter} from './components/router/Router';
 
 // import static / router independent components
 import { NavbarComponent  } from './components/navbar';
-import { BackgroundComponent } from './components/background';
+import { ExperimentContainerComponent } from './components/experiment-container';
 import { FooterbarComponent } from  './components/footerbar';
 
 // import global directives
@@ -31,6 +31,6 @@ let app = new Vue({
     components: {
         'navbar': NavbarComponent,
         'footerbar': FooterbarComponent,
-        'background': BackgroundComponent
+        'experiment-container': ExperimentContainerComponent
     },
 });

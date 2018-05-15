@@ -2,7 +2,7 @@
 @import "./../layout/layout-definitions.json";
 @import "./../colors/colors.json";
 
-.background {
+.experiment-container {
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -52,7 +52,7 @@
   }
 }
 
-.background__backdrop {
+.experiment-container__backdrop {
   display: none;
   position: absolute;
   top: 0;

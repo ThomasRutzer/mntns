@@ -3,7 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router';
 
 import { HomeComponent }  from './../home';
 import { ContactComponent } from './../contact';
-import { ExperimentsListingComponent } from './../experiments-listing';
+import { ExperimentStartComponent } from './../experiment-start';
 import { MntsComponent } from './../mnts';
 
 Vue.use(VueRouter);
@@ -13,15 +13,15 @@ export const createRoutes: () => RouteConfig[] = () => [
         path: '/',
         components: {
             content: HomeComponent,
-            background: MntsComponent
+            'experiment-container': MntsComponent
         },
     },
 
     {
         path: '/experiment',
         components: {
-            content: ExperimentsListingComponent,
-            background: MntsComponent,
+            content: ExperimentStartComponent,
+            'experiment-container': MntsComponent,
         },
     },
 
@@ -29,7 +29,7 @@ export const createRoutes: () => RouteConfig[] = () => [
         path: '/contact',
         components: {
             content: ContactComponent,
-            background: null
+            'experiment-container': null
         },
     },
 ];
@@ -38,7 +38,7 @@ export const createRouter = () => new VueRouter({
     mode: 'history',
     routes: createRoutes(),
     base: '/mntns/dist/',
-    scrollBehavior (to, from, savedPosition) {
+    scrollBehavior () {
         return { x: 0, y: 0 };
     }
 });

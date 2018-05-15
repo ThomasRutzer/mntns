@@ -1,8 +1,8 @@
 import { Component, Vue } from 'vue-property-decorator';
-import './background.scss';
+import './experiment-container.scss';
 
 @Component({
-    template: require('./background.html'),
+    template: require('./experiment-container.html'),
     computed: {
         isExpanded() {
             return this.$store.state.background.visibility === 1;
@@ -13,7 +13,7 @@ import './background.scss';
         }
     },
 })
-export class BackgroundComponent extends Vue {
+export class ExperimentContainerComponent extends Vue {
     // background size. Fullscreen appearance on true
     private isExpanded: boolean;
 
