@@ -1,14 +1,13 @@
 import {expect} from 'chai';
-import {spy, stub, assert} from 'sinon';
+import {stub} from 'sinon';
 
 import Vue from 'vue';
-import {ComponentTest} from '../../../util/component-test';
+import {ComponentTest} from '../../util/component-test';
 
-import { diContainer, types } from './../../dependency-injection';
+import { diContainer, types } from '../dependency-injection';
+import { BackdropComponent } from './backdrop';
 
-import { BackgroundBackdropComponent } from './background-backdrop';
-
-describe('Background Backdrop', () => {
+describe('Backdrop', () => {
     let componentTest: ComponentTest,
         windowWidthStub,
         diContainerStub;
@@ -34,7 +33,7 @@ describe('Background Backdrop', () => {
 
         componentTest = new ComponentTest(
             '<div><background-backdrop trigger-label="Label" ref="backdrop"></background-backdrop></div>',
-            {'background-backdrop': BackgroundBackdropComponent}
+            {'backdrop': BackdropComponent}
         );
     });
 

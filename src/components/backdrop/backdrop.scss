@@ -1,12 +1,12 @@
-@import "./../../colors/colors.json";
+@import "../colors/colors.json";
 
-$background-backdrop-offset: 16px;
+$backdrop-offset: 16px;
 
-.background-backdrop {
+.backdrop {
   background: $color-highlight;
 }
 
-.background-backdrop__activation-trigger {
+.backdrop__activation-trigger {
   color: $color-darkest;
   display: flex;
   align-items: center;

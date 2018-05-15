@@ -20,6 +20,7 @@ import './components/mousemove-follow';
 import './components/github-api-client';
 import './components/data-mapper';
 import './components/media-queries';
+import './components/backdrop';
 
 import './main.scss';
 

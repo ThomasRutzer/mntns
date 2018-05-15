@@ -1,4 +1,4 @@
-<div class="background-backdrop"
+<div class="backdrop"
      v-mousemove-follow="{
         activated: mousemoveActivated,
         initialOffsetY: -16,
@@ -10,7 +10,7 @@
 >
     <span v-if="triggerLabel"
           :class="{'revealing-content--reveal': activated}"
-          class="background-backdrop__activation-trigger revealing-content">
+          class="backdrop__activation-trigger revealing-content">
         <svg role="img">
             <use xlink:href="#icon-mntns"></use>
         </svg>

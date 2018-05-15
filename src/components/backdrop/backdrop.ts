@@ -1,11 +1,11 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { types, diContainer } from './../../dependency-injection';
-import { MediaQueryServiceInterface} from '../../media-queries';
+import { types, diContainer } from './../dependency-injection';
+import { MediaQueryServiceInterface} from '../media-queries';
 
 @Component({
-    template: require('./background-backdrop.html'),
+    template: require('./backdrop.html'),
 })
-export class BackgroundBackdropComponent extends Vue {
+export class BackdropComponent extends Vue {
     private mousemoveActivated: boolean = true;
     private mediaQueryService: MediaQueryServiceInterface;
 

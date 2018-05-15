@@ -11,9 +11,9 @@
         <router-view name="background"></router-view>
     </transition>
 
-    <background-backdrop :activated="isMouseover"
-                         v-if="!isExpanded"
-                         class="background__backdrop"
-                         :class="{'background__backdrop--visible': !isExpanded}">
-    </background-backdrop>
+    <backdrop :activated="isMouseover"
+              v-if="!isExpanded"
+              class="background__backdrop"
+              :class="{'background__backdrop--visible': !isExpanded}">
+    </backdrop>
 </div>
