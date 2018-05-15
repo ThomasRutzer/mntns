@@ -32,7 +32,7 @@ describe('Backdrop', () => {
             });
 
         componentTest = new ComponentTest(
-            '<div><background-backdrop trigger-label="Label" ref="backdrop"></background-backdrop></div>',
+            '<div><backdrop trigger-label="Label" ref="backdrop"></backdrop></div>',
             {'backdrop': BackdropComponent}
         );
     });
@@ -48,7 +48,7 @@ describe('Backdrop', () => {
         componentTest.createComponent();
 
         await componentTest.execute((vm) => {
-            expect(vm.$el.querySelectorAll('.background-backdrop__activation-trigger span')[0].textContent).to.equal('Label');
+            expect(vm.$el.querySelectorAll('.backdrop__activation-trigger span')[0].textContent).to.equal('Label');
         });
     });
 

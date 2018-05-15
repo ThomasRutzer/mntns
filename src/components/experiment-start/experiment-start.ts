@@ -26,18 +26,18 @@ export class ExperimentStartComponent extends RouterDefaultComponentAbstract {
     private currentGithubUser: string = config.gitHubUsername;
 
     beforeCreate() {
-        this.$store.commit(mutationTypes.EXPAND_BACKGROUND);
-        this.$store.commit(mutationTypes.DEACTIVATE_BACKGROUND);
+        this.$store.commit(mutationTypes.EXPAND_EXPERIMENT_CONTAINER);
+        this.$store.commit(mutationTypes.DEACTIVATE_EXPERIMENT_CONTAINER);
     }
 
     beforeDestroy() {
-        this.$store.commit(mutationTypes.DEACTIVATE_BACKGROUND);
+        this.$store.commit(mutationTypes.DEACTIVATE_EXPERIMENT_CONTAINER);
         this.$store.commit(mutationTypes.UNFOCUS_REPO);
     }
 
     startExperiment() {
         this.isStarted = true;
-        this.$store.commit(mutationTypes.ACTIVATE_BACKGROUND);
+        this.$store.commit(mutationTypes.ACTIVATE_EXPERIMENT_CONTAINER);
         this.$store.commit(mutationTypes.FOOTER_VISIBLE, false);
     }
 }

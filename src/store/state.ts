@@ -1,18 +1,18 @@
 const state = {
 
-    background: {
+    experimentContainer: {
         /**
          * defines visibility of component, which Router
-         * renders into router-view=background
+         * renders into router-view=experimentContainer
          *
          * @property {number}
-         * @value 0 background component is visibile in reduced size
-         * @value 1 background is visible and expanded
+         * @value 0 experimentContainer component is visibile in reduced size
+         * @value 1 experimentContainer is visible and expanded
          */
         visibility: 0,
 
         /**
-         * whether background component is active or not.
+         * whether experimentContainer component is active or not.
          */
         activated: false,
 

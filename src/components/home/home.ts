@@ -15,14 +15,14 @@ export class HomeComponent extends RouterDefaultComponentAbstract {
 
     beforeCreate() {
        // this.$store.commit(mutationTypes.CONTENT_NOT_CLICKABLE);
-        this.$store.commit(mutationTypes.REDUCE_BACKGROUND);
+        this.$store.commit(mutationTypes.REDUCE_EXPERIMENT_CONTAINER);
 
-       // this.$store.commit(mutationTypes.DEACTIVATE_BACKGROUND);
+       // this.$store.commit(mutationTypes.DEACTIVATE_EXPERIMENT_CONTAINER);
     }
 
 
     beforeDestroy() {
-        // this.$store.commit(mutationTypes.DEACTIVATE_BACKGROUND);
+        // this.$store.commit(mutationTypes.DEACTIVATE_EXPERIMENT_CONTAINER);
        // this.$store.commit(mutationTypes.UNFOCUS_REPO);
     }
 
@@ -32,9 +32,9 @@ export class HomeComponent extends RouterDefaultComponentAbstract {
 
     startExperiment() {
         // this.isStarted = true;
-        // this.$store.commit(mutationTypes.ACTIVATE_BACKGROUND);
+        // this.$store.commit(mutationTypes.ACTIVATE_EXPERIMENT_CONTAINER);
         // this.$store.commit(mutationTypes.FOOTER_VISIBLE, false);
-       // this.$store.commit(mutationTypes.EXPAND_BACKGROUND);
+       // this.$store.commit(mutationTypes.EXPAND_EXPERIMENT_CONTAINER);
         this.$router.push('/experiment');
     }
 }

@@ -2,27 +2,27 @@ import * as types from './mutation-types';
 
 const mutations = {
     [types.CONTENT_CLICKABLE](state) {
-        state.background.clickable = true;
+        state.experimentContainer.clickable = true;
     },
 
     [types.CONTENT_NOT_CLICKABLE](state) {
-        state.background.clickable = false;
+        state.experimentContainer.clickable = false;
     },
 
-    [types.EXPAND_BACKGROUND](state) {
-        state.background.visibility = 1;
+    [types.EXPAND_EXPERIMENT_CONTAINER](state) {
+        state.experimentContainer.visibility = 1;
     },
 
-    [types.REDUCE_BACKGROUND](state) {
-        state.background.visibility = 0;
+    [types.REDUCE_EXPERIMENT_CONTAINER](state) {
+        state.experimentContainer.visibility = 0;
     },
 
-    [types.ACTIVATE_BACKGROUND](state) {
-        state.background.activated = true;
+    [types.ACTIVATE_EXPERIMENT_CONTAINER](state) {
+        state.experimentContainer.activated = true;
     },
 
-    [types.DEACTIVATE_BACKGROUND](state) {
-        state.background.activated = false;
+    [types.DEACTIVATE_EXPERIMENT_CONTAINER](state) {
+        state.experimentContainer.activated = false;
     },
 
     [types.CURRENT_TITLE_VISIBLE](state) {

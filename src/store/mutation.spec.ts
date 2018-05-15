@@ -2,33 +2,33 @@ import { expect } from 'chai';
 import { mutations, mutationTypes } from './';
 
 describe('mutations', () => {
-    it('reduces background', () => {
+    it('reduces experimentContainer', () => {
         // mock state
         const state = {
-            background: {
+            experimentContainer: {
                 visibility: 1
             }
         };
 
         // apply mutation
-        mutations[mutationTypes.REDUCE_BACKGROUND](state, null);
+        mutations[mutationTypes.REDUCE_EXPERIMENT_CONTAINER](state, null);
 
         // assert result
-        expect(state.background.visibility).to.equal(0);
+        expect(state.experimentContainer.visibility).to.equal(0);
     });
 
-    it('expands background', () => {
+    it('expands experimentContainer', () => {
         // mock state
         const state = {
-            background: {
+            experimentContainer: {
                 visibility: 1
             }
         };
 
         // apply mutation
-        mutations[mutationTypes.EXPAND_BACKGROUND](state, null);
+        mutations[mutationTypes.EXPAND_EXPERIMENT_CONTAINER](state, null);
 
         // assert result
-        expect(state.background.visibility).to.equal(1);
+        expect(state.experimentContainer.visibility).to.equal(1);
     });
 });

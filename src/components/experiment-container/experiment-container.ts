@@ -5,19 +5,19 @@ import './experiment-container.scss';
     template: require('./experiment-container.html'),
     computed: {
         isExpanded() {
-            return this.$store.state.background.visibility === 1;
+            return this.$store.state.experimentContainer.visibility === 1;
         },
 
         isActive() {
-            return this.$store.state.background.activated;
+            return this.$store.state.experimentContainer.activated;
         }
     },
 })
 export class ExperimentContainerComponent extends Vue {
-    // background size. Fullscreen appearance on true
+    // experimentContainer size. Fullscreen appearance on true
     private isExpanded: boolean;
 
-    // stores store state background activated.
+    // stores store state experimentContainer activated.
     // basically, experiment interactions are disabled on
     // false
     private isActive: boolean;
@@ -25,13 +25,13 @@ export class ExperimentContainerComponent extends Vue {
     // true, when users does mouseover
     private isMouseover: boolean = false;
 
-    // actual transition of background component for
-    // route specific component inside router-view=background
+    // actual transition of experimentContainer component for
+    // route specific component inside router-view=experimentContainer
     // only apply this transition, when route context is "/" (home)
     private transition: boolean = true;
 
     // actual expanding transition of
-    // route specific component inside router-view=background
+    // route specific component inside router-view=experimentContainer
     private expandTransition: boolean = false;
 
     created() {

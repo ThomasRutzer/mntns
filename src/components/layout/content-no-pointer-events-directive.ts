@@ -1,7 +1,7 @@
 const modifierClass: string = 'layout__content--no-pointer-events';
 
 /**
- * directive to watch state property "background.clickable"
+ * directive to watch state property "experimentContainer.clickable"
  * If it´s false, applies class to DOM Node where
  * it´s bound
  */

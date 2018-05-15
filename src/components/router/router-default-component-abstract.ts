@@ -15,7 +15,7 @@ import { mutationTypes } from './../../store/';
 })
 export class RouterDefaultComponentAbstract extends Vue {
     beforeCreate() {
-        this.$store.commit(mutationTypes.REDUCE_BACKGROUND);
+        this.$store.commit(mutationTypes.REDUCE_EXPERIMENT_CONTAINER);
         this.$store.commit(mutationTypes.FOOTER_VISIBLE, true);
     }
 }

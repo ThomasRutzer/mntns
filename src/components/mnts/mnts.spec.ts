@@ -140,7 +140,7 @@ describe('MntsCmponent', () => {
         componentTest.createComponent({store});
 
         await componentTest.execute((vm) => {
-            expect(vm.$store.state.background.activated).to.equal(false);
+            expect(vm.$store.state.experimentContainer.activated).to.equal(false);
         });
     });
 
@@ -208,7 +208,7 @@ describe('MntsCmponent', () => {
             vm.$refs.mntns.updateDetailedData();
             // @ts-ignore Property 'onIntersection' does not exist on type 'Vue | Element | Vue[] | Element[]'.
             //Property 'onIntersection' does not exist on type 'Vue'.
-            expect(vm.$refs.mntns.detailedData.title).to.equal('changed state.background to its own object');
+            expect(vm.$refs.mntns.detailedData.title).to.equal('changed state.experimentContainer to its own object');
             // @ts-ignore Property 'onIntersection' does not exist on type 'Vue | Element | Vue[] | Element[]'.
             //Property 'onIntersection' does not exist on type 'Vue'.
             expect(vm.$refs.mntns.detailedData.url).to.equal('https://github.com/thomasrutzer/mntns/commit/875670a38c40556f3c115dbeef1c4fd88cb240f2');
@@ -217,7 +217,7 @@ describe('MntsCmponent', () => {
 
     it('closes detailed data when its open and another mousedown event occured', async () => {
         componentTest.createComponent({store});
-        store.commit(mutationTypes.ACTIVATE_BACKGROUND);
+        store.commit(mutationTypes.ACTIVATE_EXPERIMENT_CONTAINER);
         store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, {
             level: 1
         });
@@ -246,7 +246,7 @@ describe('MntsCmponent', () => {
 
     it('just clears focused data when intersected object is any of excluded', async () => {
         componentTest.createComponent({store});
-        store.commit(mutationTypes.ACTIVATE_BACKGROUND);
+        store.commit(mutationTypes.ACTIVATE_EXPERIMENT_CONTAINER);
 
         await componentTest.execute((vm) => {
             // @ts-ignore Property 'onIntersection' does not exist on type 'Vue | Element | Vue[] | Element[]'.

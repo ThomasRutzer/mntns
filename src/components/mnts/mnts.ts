@@ -20,11 +20,11 @@ import {BreakpointsInterface} from '../media-queries/breakpoints-interface';
         },
 
         isActivated() {
-            if (this.$store.state.background.activated) {
+            if (this.$store.state.experimentContainer.activated) {
                 this.service.setCameraToStart();
             }
 
-            return this.$store.state.background.activated;
+            return this.$store.state.experimentContainer.activated;
         }
     },
 })
@@ -74,12 +74,12 @@ export class MntsComponent extends Vue {
     }
 
     beforeDestroy() {
-        this.$store.commit(mutationTypes.DEACTIVATE_BACKGROUND);
+        this.$store.commit(mutationTypes.DEACTIVATE_EXPERIMENT_CONTAINER);
         this.$store.commit(mutationTypes.UNFOCUS_REPO);
     }
 
     async mounted() {
-        this.$store.commit(mutationTypes.DEACTIVATE_BACKGROUND);
+        this.$store.commit(mutationTypes.DEACTIVATE_EXPERIMENT_CONTAINER);
 
         // @ts-ignore: Cannot invoke an expression whose type lacks a call signature.
         // Type 'MntsServiceInterface' has no compatible call signatures
