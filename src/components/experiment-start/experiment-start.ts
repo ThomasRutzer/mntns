@@ -4,7 +4,7 @@ import {RouterDefaultComponentAbstract} from './../router';
 import {mutationTypes} from './../../store/';
 
 @Component({
-    template: require('./experiments-listing.html'),
+    template: require('./experiment-start.html'),
     computed: {
         canStart() {
             return !this.$store.state.gitHubData.loadingError &&
@@ -19,7 +19,7 @@ import {mutationTypes} from './../../store/';
     }
 })
 
-export class ExperimentsListingComponent extends RouterDefaultComponentAbstract {
+export class ExperimentStartComponent extends RouterDefaultComponentAbstract {
     private isStarted: boolean = false;
 
     beforeCreate() {
