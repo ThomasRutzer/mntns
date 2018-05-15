@@ -1,6 +1,8 @@
 import {Component} from 'vue-property-decorator';
 import {RouterDefaultComponentAbstract} from './../router';
 
+import { config } from './../mnts';
+
 import {mutationTypes} from './../../store/';
 
 @Component({
@@ -21,6 +23,7 @@ import {mutationTypes} from './../../store/';
 
 export class ExperimentStartComponent extends RouterDefaultComponentAbstract {
     private isStarted: boolean = false;
+    private currentGithubUser: string = config.gitHubUsername;
 
     beforeCreate() {
         this.$store.commit(mutationTypes.EXPAND_BACKGROUND);
