@@ -7,8 +7,8 @@ import {Component, Vue} from 'vue-property-decorator';
          * @return  { Object } level
          */
         currentLevel() {
-            return this.$store.state.mntns.levels.allLevels.filter((level) => {
-                return level.index === this.$store.state.mntns.levels.currentLevel;
+            return this.$store.state.levels.allLevels.filter((level) => {
+                return level.index === this.$store.state.levels.currentLevel;
             })[0];
         },
 
@@ -17,7 +17,7 @@ import {Component, Vue} from 'vue-property-decorator';
          * @return { number } levels progress
          */
         progress() {
-            return (100 / this.$store.state.mntns.levels.allLevels.length) * this.$store.state.mntns.levels.currentLevel;
+            return (100 / this.$store.state.levels.allLevels.length) * this.$store.state.levels.currentLevel;
         }
     }
 })

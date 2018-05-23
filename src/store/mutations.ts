@@ -86,8 +86,8 @@ const mutations = {
         state.gitHubData.focusedData.event = null;
     },
 
-    [types.MNTNS_UPDATE_LEVEL](state, { level }) {
-        state.mntns.levels.currentLevel = level;
+    [types.UPDATE_LEVEL](state, { level }) {
+        state.levels.currentLevel = level;
     },
 
     [types.USED_DATA](state, payload) {

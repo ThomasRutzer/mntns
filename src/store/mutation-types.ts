@@ -40,4 +40,4 @@ export const UNFOCUS_REPO = 'UNFOCUS_REPO';
 
 export const USED_DATA = 'USED_DATA';
 
-export const MNTNS_UPDATE_LEVEL = 'MNTNS_UPDATE_LEVEL';
+export const UPDATE_LEVEL = 'UPDATE_LEVEL';

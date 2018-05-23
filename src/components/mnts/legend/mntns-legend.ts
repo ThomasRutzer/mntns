@@ -6,12 +6,12 @@ import { repoMappers, commitMappers } from '../../data-mapper/mappers';
 })
 
 export class MntnsLegendComponent extends Vue {
-    @Watch('$store.state.mntns.levels.currentLevel')
+    @Watch('$store.state.levels.currentLevel')
     updateLegendData(val?, oldVal?) {
         if (val === oldVal) return;
 
         const level = val;
-        const title = this.$store.state.mntns.levels.allLevels[this.$store.state.mntns.levels.currentLevel - 1].title;
+        const title = this.$store.state.levels.allLevels[this.$store.state.levels.currentLevel - 1].title;
         let currentMapper;
 
         this.legendData.length = 0;
@@ -37,6 +37,6 @@ export class MntnsLegendComponent extends Vue {
     private legendData: {label: string, value: any}[] = [];
 
     created() {
-        this.updateLegendData(this.$store.state.mntns.levels.currentLevel);
+        this.updateLegendData(this.$store.state.levels.currentLevel);
     }
 }

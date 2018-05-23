@@ -6,7 +6,7 @@ const state = {
          * renders into router-view=experimentContainer
          *
          * @property {number}
-         * @value 0 experimentContainer component is visibile in reduced size
+         * @value 0 experimentContainer component is visible in reduced size
          * @value 1 experimentContainer is visible and expanded
          */
         visibility: 0,
@@ -72,24 +72,22 @@ const state = {
         commits: {}
     },
 
-    mntns: {
-        levels: {
-            /**
-             * @todo: store allLevels Object instead of single index
-             * @type number
-             */
-            currentLevel: 1,
-            allLevels:  [
-                {
-                    index: 1,
-                    title: 'repositories'
-                },
-                {
-                    index: 2,
-                    title: 'commits'
-                }
-            ]
-        }
+    levels: {
+        /**
+         * @todo: store allLevels Object instead of single index
+         * @type number
+         */
+        currentLevel: 1,
+        allLevels:  [
+            {
+                index: 1,
+                title: 'repositories'
+            },
+            {
+                index: 2,
+                title: 'commits'
+            }
+        ]
     }
 };
 

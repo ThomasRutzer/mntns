@@ -14,8 +14,8 @@ import {BreakpointsInterface} from '../media-queries/breakpoints-interface';
     computed: {
         level() {
             return {
-                index: this.$store.state.mntns.levels.currentLevel,
-                title: this.$store.state.mntns.levels.allLevels[this.$store.state.mntns.levels.currentLevel - 1].title
+                index: this.$store.state.levels.currentLevel,
+                title: this.$store.state.levels.allLevels[this.$store.state.levels.currentLevel - 1].title
             };
         },
 
@@ -124,7 +124,7 @@ export class MntsComponent extends Vue {
             false
         );
 
-        switch (this.$store.state.mntns.levels.currentLevel) {
+        switch (this.$store.state.levels.currentLevel) {
             case(1):
                 this.detailedData.title = this.$store.state.gitHubData.focusedData.raw.name;
                 this.detailedData.url = `https://github.com/thomasrutzer/${this.$store.state.gitHubData.focusedData.raw.name}`;

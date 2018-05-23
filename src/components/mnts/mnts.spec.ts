@@ -8,7 +8,7 @@ import Vuex from 'vuex';
 
 import {mutations, mutationTypes} from './../../store';
 
-import {LevelProgress} from './level-progress/level-progress';
+import {LevelProgress} from '../levels/level-progress/level-progress';
 
 import rawRepos from './../../../mocks/github-repo-mock';
 import rawCommits from './../../../mocks/github-commit-mock';

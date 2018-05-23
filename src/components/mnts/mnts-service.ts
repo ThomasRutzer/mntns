@@ -47,23 +47,23 @@ class MntsService implements MntsServiceInterface {
     }
 
     public async nextStep() {
-        const level = this.store.state.mntns.levels.currentLevel < this.store.state.mntns.levels.allLevels.length
-            ? this.store.state.mntns.levels.currentLevel + 1
-            : this.store.state.mntns.levels.allLevels.length;
+        const level = this.store.state.levels.currentLevel < this.store.state.levels.allLevels.length
+            ? this.store.state.levels.currentLevel + 1
+            : this.store.state.levels.allLevels.length;
 
-        this.store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, { level });
+        this.store.commit(mutationTypes.UPDATE_LEVEL, { level });
 
         await this.progessState();
     }
 
     public async previousStep() {
-        this.store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, { level: 1 });
+        this.store.commit(mutationTypes.UPDATE_LEVEL, { level: 1 });
 
         await this.progessState();
     }
 
     public async start() {
-        this.store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, { level: 1});
+        this.store.commit(mutationTypes.UPDATE_LEVEL, { level: 1});
 
         await this.loadRepos();
         this.store.commit(mutationTypes.USED_DATA, {
@@ -78,14 +78,14 @@ class MntsService implements MntsServiceInterface {
 
     private async progessState() {
 
-        if (this.store.state.mntns.levels.currentLevel === 1) {
+        if (this.store.state.levels.currentLevel === 1) {
             await this.loadRepos();
             this.store.commit(mutationTypes.USED_DATA, {
                 raw: this.store.state.gitHubData.repos.raw,
                 mapped: this.store.state.gitHubData.repos.mapped
             });
 
-        } else if (this.store.state.mntns.levels.currentLevel === 2) {
+        } else if (this.store.state.levels.currentLevel === 2) {
             const repoName = this.store.state.gitHubData.focusedData.raw.name;
             await this.loadCommits(repoName);
 

@@ -5,7 +5,6 @@ import * as Generator from 'mnts/src/components/generator';
 import { diContainer, types} from './../dependency-injection';
 
 import { MntsComponent} from './mnts';
-import { LevelProgress } from './level-progress/level-progress';
 import { MntsServiceInterface} from './mnts-service-interface';
 import MntsService from './mnts-service';
 import config from './mnts-config';
@@ -13,7 +12,6 @@ import config from './mnts-config';
 import { MntnsLegendComponent } from './legend/mntns-legend';
 
 Vue.component('mntns-legend', MntnsLegendComponent);
-Vue.component('level-progress', LevelProgress);
 
 diContainer.bind<MntsServiceInterface>(types.MntnsService).to(MntsService);
 diContainer.bind<interfaces.Factory<MntsService>>(types.MntnsServiceFactory).toFactory<MntsService>((context: interfaces.Context) => {
