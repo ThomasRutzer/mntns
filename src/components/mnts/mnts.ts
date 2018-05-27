@@ -4,6 +4,7 @@ import { types, diContainer } from './../dependency-injection';
 import { mutationTypes } from './../../store';
 
 import { MntsServiceInterface } from './mnts-service-interface';
+import { LevelsServiceInterface } from './../levels';
 
 import config from './mnts-config';
 import { MediaQueryServiceInterface } from '../media-queries/media-query-service-interface';
@@ -13,10 +14,7 @@ import {BreakpointsInterface} from '../media-queries/breakpoints-interface';
     template: require('./mnts.html'),
     computed: {
         level() {
-            return {
-                index: this.$store.state.levels.currentLevel,
-                title: this.$store.state.levels.allLevels[this.$store.state.levels.currentLevel - 1].title
-            };
+            return  this.$store.state.levels.currentLevel;
         },
 
         isActivated() {
@@ -55,6 +53,7 @@ export class MntsComponent extends Vue {
      */
     private isLink: boolean = true;
     private service: MntsServiceInterface;
+    private levelsService: LevelsServiceInterface;
 
     private mediaQueryService: MediaQueryServiceInterface;
 
@@ -84,7 +83,11 @@ export class MntsComponent extends Vue {
         // @ts-ignore: Cannot invoke an expression whose type lacks a call signature.
         // Type 'MntsServiceInterface' has no compatible call signatures
         this.service = diContainer.get<MntsServiceInterface>(types.MntnsServiceFactory)(this.mId);
-        await this.service.start();
+
+        // @ts-ignore: Cannot invoke an expression whose type lacks a call signature.
+        // Type 'LevelsServiceInterface' has no compatible call signatures
+        this.levelsService = diContainer.get<LevelsServiceInterface>(types.LevelsServiceFactory)();
+        await this.levelsService.start();
 
         this.mediaQueryService = diContainer.get<MediaQueryServiceInterface>(types.MediaQueryService);
         this.mediaQueryService.on(diContainer.get<BreakpointsInterface>(types.Breakpoints)['m'], (mqEvent) => {
@@ -94,12 +97,12 @@ export class MntsComponent extends Vue {
 
     back() {
         this.clearDetailedData();
-        this.service.previousStep();
+        this.levelsService.previousStep();
     }
 
     forwards() {
         this.clearDetailedData();
-        this.service.nextStep();
+        this.levelsService.nextStep();
     }
 
     clearDetailedData() {
@@ -124,7 +127,7 @@ export class MntsComponent extends Vue {
             false
         );
 
-        switch (this.$store.state.levels.currentLevel) {
+        switch (this.$store.state.levels.currentLevel.index) {
             case(1):
                 this.detailedData.title = this.$store.state.gitHubData.focusedData.raw.name;
                 this.detailedData.url = `https://github.com/thomasrutzer/${this.$store.state.gitHubData.focusedData.raw.name}`;
@@ -155,7 +158,7 @@ export class MntsComponent extends Vue {
         this.focusedData.x = position.x;
         this.focusedData.y = position.y;
 
-        switch (this.$store.state.mntns.levels.currentLevel) {
+        switch (this.$store.state.levels.currentLevel.index) {
             case(1):
                 this.focusedData.message = this.$store.state.gitHubData.focusedData.raw.name;
                 break;

@@ -8,10 +8,10 @@ import { repoMappers, commitMappers } from '../../data-mapper/mappers';
 export class MntnsLegendComponent extends Vue {
     @Watch('$store.state.levels.currentLevel')
     updateLegendData(val?, oldVal?) {
-        if (val === oldVal) return;
+        if (!val || val === oldVal) return;
 
-        const level = val;
-        const title = this.$store.state.levels.allLevels[this.$store.state.levels.currentLevel - 1].title;
+        const level = val ? val.index : null;
+        const title = this.$store.state.levels.currentLevel.title;
         let currentMapper;
 
         this.legendData.length = 0;

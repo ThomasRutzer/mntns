@@ -27,11 +27,18 @@ webpackConfig.module.rules = [{
         loader: 'style-loader'
       },
       {
-        loader: 'css-loader'
+        loader: 'css-loader',
+        options: {
+          importLoaders: 1
+        },
       },
       {
-        loader: 'sass-loader'
-      }
+        loader: 'sass-loader',
+        // Apply the JSON importer via sass-loader's options.
+        options: {
+          importer: jsonImporter,
+        },
+      },
     ]
   },
   {

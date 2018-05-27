@@ -8,7 +8,7 @@ import Vuex from 'vuex';
 
 import {mutations, mutationTypes} from './../../store';
 
-import {LevelProgress} from '../levels/level-progress/level-progress';
+import {LevelProgress} from './../levels/level-progress/level-progress';
 
 import rawRepos from './../../../mocks/github-repo-mock';
 import rawCommits from './../../../mocks/github-commit-mock';
@@ -46,7 +46,7 @@ describe('MntsCmponent', () => {
 
         // mock Store.state
         state = {
-            background: {
+            experimentContainer: {
                 activated: false
             },
 
@@ -74,20 +74,10 @@ describe('MntsCmponent', () => {
                     }
                 }
             },
-
-            mntns: {
-                levels: {
-                    currentLevel: 1,
-                    allLevels: [
-                        {
-                            index: 1,
-                            title: 'Repositories'
-                        },
-                        {
-                            index: 2,
-                            title: 'Commits'
-                        }
-                    ]
+            levels: {
+                currentLevel: {
+                    index: 1,
+                    title: 'Repositories'
                 }
             }
         };
@@ -95,24 +85,26 @@ describe('MntsCmponent', () => {
         // stub DI
         stub(diContainer, 'get')
             .withArgs(types.Store).returns(new Vuex.Store({
-            state,
-            mutations
-        }))
-            .withArgs(types.MntnsServiceFactory).returns(() => {
-            return {
-                focusData: (id: string) => {
-                },
-                nextStep: () => {
-                },
-                previousStep: () => {
-                },
+              state,
+              mutations
+            }))
+            .withArgs(types.LevelsServiceFactory).returns(() => {
+              return {
+                nextStep: () => {},
+                previousStep: () => {},
                 start: () => {
                     return Promise.resolve();
+                }
+              }})
+            .withArgs(types.MntnsServiceFactory).returns(() => {
+              return {
+                focusData: (id: string) => {
                 },
                 setCameraToStart: () => {
                 }
-            }
-        });
+            }});
+
+        console.log(diContainer.get(types.LevelsService))
 
         store = diContainer.get(types.Store);
     });
@@ -173,8 +165,11 @@ describe('MntsCmponent', () => {
     it('filters proper focusedData when current level is 1', async() => {
         componentTest.createComponent({store});
 
-        store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, {
-            level: 1
+        store.commit(mutationTypes.UPDATE_LEVEL, {
+            level: {
+                index: 1,
+                title: 'Repositories'
+            }
         });
 
         await componentTest.execute((vm) => {
@@ -193,8 +188,11 @@ describe('MntsCmponent', () => {
     it('filters proper focusedData when current level is 2', async() => {
         componentTest.createComponent({store});
 
-        store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, {
-            level: 2
+        store.commit(mutationTypes.UPDATE_LEVEL, {
+            level: {
+                index: 2,
+                title: 'Commits'
+            }
         });
 
         store.commit(mutationTypes.FOCUS_REPO, {
@@ -218,7 +216,7 @@ describe('MntsCmponent', () => {
     it('closes detailed data when its open and another mousedown event occured', async () => {
         componentTest.createComponent({store});
         store.commit(mutationTypes.ACTIVATE_EXPERIMENT_CONTAINER);
-        store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, {
+        store.commit(mutationTypes.UPDATE_LEVEL, {
             level: 1
         });
 

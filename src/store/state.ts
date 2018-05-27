@@ -23,6 +23,9 @@ const state = {
         clickable: true
     },
 
+    /**
+    * route specifc data
+    */  
     currentRoute: {
         titleAnimatedIn: false,
         footerVisible: true
@@ -74,20 +77,9 @@ const state = {
 
     levels: {
         /**
-         * @todo: store allLevels Object instead of single index
-         * @type number
+         * @type LevelModel
          */
-        currentLevel: 1,
-        allLevels:  [
-            {
-                index: 1,
-                title: 'repositories'
-            },
-            {
-                index: 2,
-                title: 'commits'
-            }
-        ]
+        currentLevel: null,
     }
 };
 

@@ -1,5 +1,7 @@
 import * as types from './mutation-types';
 
+import { LevelModel } from './../components/levels';
+
 const mutations = {
     [types.CONTENT_CLICKABLE](state) {
         state.experimentContainer.clickable = true;

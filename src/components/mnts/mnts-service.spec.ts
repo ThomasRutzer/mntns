@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import Vuex from 'vuex';
 
-import * as GeneratorModule from 'mnts/src/components/generator';
+import * as GeneratorModule from 'mntns-landscape/src/components/generator';
 import MntsService from './mnts-service';
 import { actions, actionTypes, mutations, mutationTypes } from './../../store';
 
@@ -304,21 +304,19 @@ describe('Mnts Service', () => {
 
         store = new Vuex.Store({
             state: {
-                mntns: {
-                    levels: {
-                        currentLevel: 1,
-                        allLevels:  [
-                            {
-                                index: 1,
-                                title: 'Repositories'
-                            },
-                            {
-                                index: 2,
-                                title: 'Commits'
-                            }
-                        ]
-                    }
-                },
+              levels: {
+                  currentLevel: 1,
+                  allLevels:  [
+                      {
+                          index: 1,
+                          title: 'repositories'
+                      },
+                      {
+                          index: 2,
+                          title: 'commits'
+                      }
+                  ]
+              },
                 gitHubData: {
                     startedLoading: null,
                     finishedLoading: null,
@@ -370,7 +368,7 @@ describe('Mnts Service', () => {
                 mapped: mappedCommits
             });
 
-            store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, {level:2});
+            store.commit(mutationTypes.UPDATE_LEVEL, {level:2});
             await service.focusData("1");
             expect(store.state.gitHubData.focusedData.raw).to.equal(rawCommits[0]);
         });

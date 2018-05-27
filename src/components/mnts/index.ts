@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { interfaces } from 'inversify';
-import * as Generator from 'mnts/src/components/generator';
+import * as Generator from 'mntns-landscape/src/components/generator';
 
 import { diContainer, types} from './../dependency-injection';
 

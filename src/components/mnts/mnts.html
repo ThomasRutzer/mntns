@@ -1,7 +1,7 @@
 <div class="mnts"
      @click="expandMnts()">
 
-    <div v-show="isActivated"
+    <div v-if="isActivated"
          class="mnts__header revealing-content revealing-content--reveal">
         <level-progress></level-progress>
     </div>
@@ -100,4 +100,3 @@
     </transition>
 
 </div>
-

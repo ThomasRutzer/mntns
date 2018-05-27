@@ -26,21 +26,12 @@ describe('MntnsLegendComponent', () => {
         );
 
         state = {
-            mntns: {
-                levels: {
-                    currentLevel: 1,
-                    allLevels:  [
-                        {
-                            index: 1,
-                            title: 'repositories'
-                        },
-                        {
-                            index: 2,
-                            title: 'commits'
-                        }
-                    ]
-                }
-            }
+          levels: {
+              currentLevel: {
+                  index: 1,
+                  title: 'repositories'
+              }
+          }
         };
 
         // stub DI
@@ -60,7 +51,10 @@ describe('MntnsLegendComponent', () => {
     });
 
     it('outputs data based on mapper', async () => {
-        store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, { level: 1});
+        store.commit(mutationTypes.UPDATE_LEVEL, { level: {
+            index: 1,
+            title: 'repositories'
+        }});
         componentTest.createComponent({store});
 
         await componentTest.execute((vm) => {
@@ -72,7 +66,10 @@ describe('MntnsLegendComponent', () => {
     });
 
     it('holds an item in legendData for each mapper', async () => {
-        store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, { level: 1});
+        store.commit(mutationTypes.UPDATE_LEVEL, { level:   {
+            index: 2,
+            title: 'commits'
+        }});
         componentTest.createComponent({store});
 
         await componentTest.execute((vm) => {
@@ -85,11 +82,17 @@ describe('MntnsLegendComponent', () => {
     });
 
     it('updates data when current level changes', async () => {
-        store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, { level: 1});
+        store.commit(mutationTypes.UPDATE_LEVEL, { level: {
+            index: 1,
+            title: 'repositories'
+        }});
         componentTest.createComponent({store});
 
         await componentTest.execute((vm) => {
-            store.commit(mutationTypes.MNTNS_UPDATE_LEVEL, { level: 2});
+            store.commit(mutationTypes.UPDATE_LEVEL, { level:   {
+                  index: 2,
+                  title: 'commits'
+              }});
 
             Vue.nextTick(() => {
                 // @ts-ignore

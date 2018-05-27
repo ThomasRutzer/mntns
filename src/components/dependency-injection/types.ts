@@ -8,6 +8,8 @@ const types = {
 
     Breakpoints: Symbol.for('Breakpoints'),
 
+    LevelsService: Symbol.for('LevelsService'),
+    LevelsServiceFactory: Symbol.for('LevelsServiceFactory'),
     LevelModelFactory: Symbol.for('LevelModelFactory'),
 
     MediaQueryService: Symbol.for('MediaQueryService'),

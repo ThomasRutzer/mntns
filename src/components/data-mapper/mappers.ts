@@ -1,4 +1,4 @@
-import MountainConfig from 'mnts/src/components/mountain/mountainConfig';
+import MountainConfig from 'mntns-landscape/src/components/mountain/mountainConfig';
 import {MapperInterface} from './mapper-interface';
 
 /**

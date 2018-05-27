@@ -12,7 +12,7 @@ export default [
                 "email": "thomas.rutzer@diepartments.de",
                 "date": "2018-03-01T14:24:53Z"
             },
-            "message": "changed state.background to its own object",
+            "message": "changed state.experimentContainer to its own object",
             "tree": {
                 "sha": "15513bdd7f919148dad2e6e8642756b22ff77928",
                 "url": "https://api.github.com/repos/ThomasRutzer/portfolio/git/trees/15513bdd7f919148dad2e6e8642756b22ff77928"
