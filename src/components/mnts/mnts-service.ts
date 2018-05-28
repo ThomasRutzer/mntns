@@ -2,7 +2,6 @@ import { Store } from 'vuex';
 import {MntsServiceInterface} from './mnts-service-interface';
 import { injectable, inject } from 'inversify';
 import GeneratorManagerInterface from 'mntns-landscape/src/components/generator/manager/GeneratorManagerInterface';
-import * as actionTypes from './../../store/action-types';
 import * as mutationTypes from './../../store/mutation-types';
 import types from '../dependency-injection/types';
 

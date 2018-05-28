@@ -2,7 +2,6 @@
 @import "../../components/media-queries/sass-mq";
 @import "../spacing/spacing-definitions.json";
 
-// @todo: store z-indexes in layout-defintions.json
 .layout {
   display: grid;
   grid-template-columns: 1fr map_get($layout, "content-area-width-small") 1fr;
