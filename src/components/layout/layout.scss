@@ -23,13 +23,13 @@
 
 .layout__header {
   position: relative;
-  z-index: 10;
+  z-index: map-deep-get($layout, "global-z-indexes", "header");
   grid-area: header;
 }
 
 .layout__content {
   position: relative;
-  z-index: 5;
+  z-index: map-deep-get($layout, "global-z-indexes", "content");
   grid-area: content;
   padding: map_get($spacing-sizes, 's') 0;
 
@@ -44,6 +44,6 @@
 
 .layout__footer {
   position: relative;
-  z-index: 10;
+  z-index: map-deep-get($layout, "global-z-indexes", "footer");
   grid-area: footer;
 }

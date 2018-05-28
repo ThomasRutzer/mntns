@@ -1,26 +1,26 @@
-@import "./util/sass/map-get-next";
+@import "./util/sass/index";
 
-@import "components/a11y/visually-hidden";
-@import "components/experiment-container/experiment-container";
+@import "components/a11y/index";
+@import "components/experiment-container/index";
 @import "components/backdrop/backdrop";
-@import "components/buttons/buttons";
-@import "components/colors/colors";
-@import "components/contact/contact";
-@import "components/experiment-start/experiment-start";
-@import "components/footerbar/footerbar";
-@import "components/home/home";
-@import "components/layout/layout";
+@import "components/buttons/index";
+@import "components/colors/index";
+@import "components/contact/index";
+@import "components/experiment-start/index";
+@import "components/footerbar/index";
+@import "components/home/index";
+@import "components/layout/index";
 @import "components/lists/index";
 @import "components/levels/index";
-@import "components/links/links";
-@import "components/loader/loader";
-@import "components/mnts/mnts";
-@import "components/navbar/navbar";
-@import "components/revealing-content/revealing-content";
-@import "components/router/router";
-@import "components/spacing/spacing";
-@import "components/title/title";
-@import "components/typography/typography";
+@import "components/links/index";
+@import "components/loader/index";
+@import "components/mnts/index";
+@import "components/navbar/index";
+@import "components/revealing-content/index";
+@import "components/router/index";
+@import "components/spacing/index";
+@import "components/title/index";
+@import "components/typography/index";
 @import "components/typography/typography-definitions.json";
 
 html, body, #app-main {
