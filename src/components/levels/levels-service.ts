@@ -57,23 +57,8 @@ class LevelsService implements LevelsServiceInterface {
   }
 
   private async loadData() {
-
-      if (this.store.state.levels.currentLevel.index === 1) {
-          await this.loadRepos();
-          this.store.commit(mutationTypes.USED_DATA, {
-              raw: this.store.state.gitHubData.repos.raw,
-              mapped: this.store.state.gitHubData.repos.mapped
-          });
-
-      } else if (this.store.state.levels.currentLevel.index === 2) {
-          const repoName = this.store.state.gitHubData.focusedData.raw.name;
-          await this.loadCommits(repoName);
-
-          this.store.commit(mutationTypes.USED_DATA, {
-              raw: this.store.state.gitHubData.commits[repoName].raw,
-              mapped: this.store.state.gitHubData.commits[repoName].mapped
-          });
-      }
+      await this.levelDataLoader
+          .loadByType(this.store.state.levels.currentLevel.dataSrc);
   }
 
   private async loadCommits(repoName) {

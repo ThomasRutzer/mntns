@@ -4,7 +4,7 @@
  */
 import { injectable, inject } from 'inversify';
 import types from './../../dependency-injection/types';
-import { actionTypes } from './../../../store';
+import { actionTypes, mutationTypes } from './../../../store';
 import { Store } from 'vuex';
 import { LevelDataLoaderInterface } from './level-data-loader-interface';
 import landscapeConfig from './../../mnts/mnts-config';
@@ -31,6 +31,11 @@ class LevelDataLoader implements LevelDataLoaderInterface {
                 }
             );
 
+            this.store.commit(mutationTypes.USED_DATA, {
+                raw: this.store.state.gitHubData.repos.raw,
+                mapped: this.store.state.gitHubData.repos.mapped
+            });
+
             return Promise.resolve();
         }
 
@@ -45,6 +50,11 @@ class LevelDataLoader implements LevelDataLoaderInterface {
                     perPage: landscapeConfig.maxSceneItems
                 }
             );
+
+            this.store.commit(mutationTypes.USED_DATA, {
+                raw: this.store.state.gitHubData.commits[repoName].raw,
+                mapped: this.store.state.gitHubData.commits[repoName].mapped
+            });
 
             return Promise.resolve();
         }
