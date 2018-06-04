@@ -41,19 +41,19 @@
 
     <transition name="mnts__detailed-data--show-transition">
         <div v-if="isActivated && detailedData"
-             class="mnts-detailed-data mnts__detailed-data">
+             class="focus-data-details-data mnts__detailed-data">
 
-            <div class="mnts-detailed-data__content"
+            <div class="focus-data-details-data__content"
                  v-mousemove-follow="{maxOffsetY: -32, maxOffsetX: 32, transitionDuration: 1700}">
                 <a href="#"
-                   class="mnts-detailed-data__close small-text-appearance text-color-highlight"
+                   class="focus-data-details-data__close small-text-appearance text-color-highlight"
                    @click.prevent="clearDetailedData()">
                     Close(esc)
                 </a>
 
-                <div class="mnts-detailed-data__label mntns-label mntns-label--spacingless mntns-label--large-width">
+                <div class="focus-data-details-data__label mntns-label mntns-label--spacingless mntns-label--large-width">
 
-                    <svg class="mnts-detailed-data__icon mntns-label__icon"
+                    <svg class="focus-data-details-data__icon mntns-label__icon"
                          role="img">
                         <use xlink:href="#icon-location"></use>
                     </svg>

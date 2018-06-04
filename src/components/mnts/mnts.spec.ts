@@ -96,15 +96,13 @@ describe('MntsCmponent', () => {
                     return Promise.resolve();
                 }
               }})
-            .withArgs(types.MntnsServiceFactory).returns(() => {
+            .withArgs(types.FocusDataServiceFactory).returns(() => {
               return {
                 focusData: (id: string) => {
                 },
                 setCameraToStart: () => {
                 }
             }});
-
-        console.log(diContainer.get(types.LevelsService))
 
         store = diContainer.get(types.Store);
     });

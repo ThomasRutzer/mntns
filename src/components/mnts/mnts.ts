@@ -3,7 +3,7 @@ import { types, diContainer } from './../dependency-injection';
 
 import { mutationTypes } from './../../store';
 
-import { MntsServiceInterface } from './mnts-service-interface';
+import { FocusDataServiceInterface } from '../focus-data/';
 import { LevelsServiceInterface } from './../levels';
 
 import config from './mnts-config';
@@ -52,7 +52,7 @@ export class MntsComponent extends Vue {
      * @type {boolean}
      */
     private isLink: boolean = true;
-    private service: MntsServiceInterface;
+    private service: FocusDataServiceInterface;
     private levelsService: LevelsServiceInterface;
 
     private mediaQueryService: MediaQueryServiceInterface;
@@ -81,8 +81,8 @@ export class MntsComponent extends Vue {
         this.$store.commit(mutationTypes.DEACTIVATE_EXPERIMENT_CONTAINER);
 
         // @ts-ignore: Cannot invoke an expression whose type lacks a call signature.
-        // Type 'MntsServiceInterface' has no compatible call signatures
-        this.service = diContainer.get<MntsServiceInterface>(types.MntnsServiceFactory)(this.mId);
+        // Type 'FocusDataServiceInterface' has no compatible call signatures
+        this.service = diContainer.get<FocusDataServiceInterface>(types.FocusDataServiceFactory)(this.mId);
 
         // @ts-ignore: Cannot invoke an expression whose type lacks a call signature.
         // Type 'LevelsServiceInterface' has no compatible call signatures
@@ -152,6 +152,7 @@ export class MntsComponent extends Vue {
     }
 
     updateFocusedData(position: {x: number, y: number}) {
+
         this.focusedData = {};
         this.focusedData.outside = position.x > (window.innerWidth / 2);
 
@@ -165,6 +166,7 @@ export class MntsComponent extends Vue {
 
             case (2):
                 this.focusedData.message = this.$store.state.gitHubData.focusedData.raw.commit.message;
+                break;
         }
     }
 

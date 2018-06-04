@@ -1,5 +1,5 @@
 import { Component, Vue, Watch } from 'vue-property-decorator';
-import { repoMappers, commitMappers } from '../../data-mapper/mappers';
+import { reposMappers, commitsMappers } from '../../data-mapper/mappers';
 
 @Component({
     template: require('./mntns-legend.html')
@@ -18,11 +18,11 @@ export class MntnsLegendComponent extends Vue {
 
         switch (level) {
             case 1:
-                currentMapper = repoMappers;
+                currentMapper = reposMappers;
                 break;
 
             case 2:
-                currentMapper = commitMappers;
+                currentMapper = commitsMappers;
                 break;
         }
 

@@ -8,7 +8,7 @@ import Vuex from 'vuex';
 
 import {mutations, mutationTypes} from './../../../store';
 
-import { repoMappers, commitMappers } from '../../data-mapper/mappers';
+import { reposMappers, commitsMappers } from '../../data-mapper/mappers';
 import {diContainer, types} from '../../dependency-injection';
 
 import { MntnsLegendComponent } from './mntns-legend';
@@ -59,7 +59,7 @@ describe('MntnsLegendComponent', () => {
 
         await componentTest.execute((vm) => {
             // @ts-ignore
-            expect(vm.$refs.legend.legendData[0].label).to.equal(repoMappers[0].mountainsParameter);
+            expect(vm.$refs.legend.legendData[0].label).to.equal(reposMappers[0].mountainsParameter);
             // @ts-ignore
             expect(vm.$refs.legend.legendData[0].value).to.equal('repositories→size');
         });
@@ -76,7 +76,7 @@ describe('MntnsLegendComponent', () => {
 
             Vue.nextTick(() => {
                 // @ts-ignore
-                expect(vm.$refs.legend.legendData.length).to.equal(repoMappers.length);
+                expect(vm.$refs.legend.legendData.length).to.equal(reposMappers.length);
             });
         });
     });
@@ -96,7 +96,7 @@ describe('MntnsLegendComponent', () => {
 
             Vue.nextTick(() => {
                 // @ts-ignore
-                expect(vm.$refs.legend.legendData[0].label).to.equal(commitMappers[0].mountainsParameter);
+                expect(vm.$refs.legend.legendData[0].label).to.equal(commitsMappers[0].mountainsParameter);
                 // @ts-ignore
                 expect(vm.$refs.legend.legendData[0].value).to.equal('commits→size');
             });
