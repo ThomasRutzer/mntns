@@ -11,7 +11,7 @@ import './../components/github-api-client';
 import '../components/data-mapper';
 
 import { actions, actionTypes } from './';
-import { mutations, mutationTypes } from './';
+import { mutations } from './';
 
 const mockGithubUserName = 'testUser';
 const mockRepoName = 'testRepo';
