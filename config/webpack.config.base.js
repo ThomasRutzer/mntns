@@ -19,14 +19,14 @@ let config = {
   module: {
     rules: [{
         test: /\.ts$/,
-        exclude: /node_modules\/(?!(mnts)\/).*/,
+        exclude: /node_modules\/(?!(mntns-landscape)\/).*/,
         enforce: 'pre',
         loader: 'tslint-loader'
       },
       {
         test: /\.ts$/,
         // @see exclude but one: https://github.com/webpack/webpack/issues/2031
-        exclude: /node_modules\/(?!(mnts)\/).*/,
+        exclude: /node_modules\/(?!(mntns-landscape)\/).*/,
         loader: 'awesome-typescript-loader'
       },
       {

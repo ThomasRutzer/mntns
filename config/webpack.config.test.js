@@ -7,7 +7,7 @@ var webpack = require('webpack'),
 
 webpackConfig.module.rules = [{
     test: /\.ts$/,
-    exclude: /node_modules\/(?!(mnts)\/).*/,
+    exclude: /node_modules\/(?!(mntns-landscape)\/).*/,
     loader: 'awesome-typescript-loader',
     query: {
       compilerOptions: {

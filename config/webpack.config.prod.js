@@ -1,6 +1,6 @@
 const glob = require('glob'),
     path = require('path'),
-    UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin'),
+    UglifyJsPlugin = require('uglifyjs-webpack-plugin'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     CompressionPlugin = require('compression-webpack-plugin'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
@@ -18,7 +18,8 @@ const extractSass = new ExtractTextPlugin({
     disable: process.env.NODE_ENV === 'development'
 });
 
-webpackConfig.module.rules = [...webpackConfig.module.rules,
+webpackConfig.module.rules = [
+    ...webpackConfig.module.rules,
     {
         test: /\.scss$/,
         use: extractSass.extract({
@@ -91,8 +92,10 @@ webpackConfig.plugins = [...webpackConfig.plugins,
         }
     }),
     new UglifyJsPlugin({
-        include: /\.js$/,
-        minimize: true
+        uglifyOptions: {
+            include: /\.js$/,
+            minimize: true
+        }
     }),
     new CompressionPlugin({
         asset: '[path].gz[query]',

@@ -9,7 +9,7 @@
     "npm": ">=3"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production npm run clean && npm run dev && npm run compile",
+    "build": "cross-env NODE_ENV=production npm run clean && npm run compile",
     "build:parts": "npm run sass && npm run compile",
     "ci:teamcity": "karma --env=tc start karma.coverage.js && npm run coverage:remap",
     "ci:jenkins": "karma --env=jk start karma.coverage.js && npm run coverage:remap",
@@ -100,6 +100,7 @@
     "tslint": "~5.6.0",
     "tslint-loader": "~3.5.3",
     "typescript": "~2.6.2",
+    "uglifyjs-webpack-plugin": "^1.2.5",
     "url-loader": "^0.5.9",
     "webpack": "~3.5.5",
     "webpack-dev-server": "~2.7.1"
