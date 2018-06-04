@@ -8,6 +8,8 @@ const types = {
 
     Breakpoints: Symbol.for('Breakpoints'),
 
+    AllLevels: Symbol.for('AllLevels'),
+    LevelsDataLoader: Symbol.for('LevelDataLoader'),
     LevelsService: Symbol.for('LevelsService'),
     LevelsServiceFactory: Symbol.for('LevelsServiceFactory'),
     LevelModelFactory: Symbol.for('LevelModelFactory'),
