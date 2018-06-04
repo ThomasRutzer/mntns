@@ -1,7 +1,8 @@
 import { injectable } from 'inversify';
 import 'reflect-metadata';
 import { DataMapperServiceInterface } from './data-mapper-service-interface';
-import * as mapperUtils from './mapper-utilts';
+import * as mapperUtils from './mapper-utils';
+import { MapperInterface } from './mapper-interface';
 import { findDeep } from './../object-utils';
 
 /**
@@ -13,22 +14,23 @@ class DataMapperService implements DataMapperServiceInterface {
 
     /**
      * @param {any[]} data actual set of data which will be mapped
-     * @param {any[]} mappers a list of mappers to map data
+     * @param {MapperInterface[]} mappers a list of mappers to map data
      * @return {Object[]} with mapped data
      */
-    map(data: any[], mappers: any[]): Object[] {
+    map(data: any[], mappers: MapperInterface[]): Object[] {
         const mappedData: Object[] = [];
 
         data.forEach((dataSet, index) => {
             const mappedValues = {};
 
-            mappers.forEach((mapper, i) => {
+            mappers.forEach((mapper) => {
                 let min, max, value;
 
                 // determine range, considering mapper type
                 switch ( mapper.type ) {
                     case 'number':
                         [min, max] = mapperUtils.getMinMaxTypeNumber(data, mapper.dataKey[mapper.dataKey.length - 1]);
+                        // @ts-ignore
                         value = dataSet[mapper.dataKey];
                         break;
 

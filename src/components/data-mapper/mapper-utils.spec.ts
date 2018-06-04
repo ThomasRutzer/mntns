@@ -1,4 +1,4 @@
-import * as mapperUtils from './mapper-utilts';
+import * as mapperUtils from './mapper-utils';
 import {expect} from 'chai';
 
 describe('mapper utils', () => {

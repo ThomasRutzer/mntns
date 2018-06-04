@@ -14,7 +14,7 @@ import {MapperInterface} from './mapper-interface';
  * @property { Number } max is maxValue of this parameter
  * @property { String } type is type of dataKey, to use matching mapping methods
  */
-const repoMappers: MapperInterface[] = [
+const reposMappers: MapperInterface[] = [
     {
         dataKey: ['size'],
         mountainsParameter: 'height',
@@ -40,7 +40,7 @@ const repoMappers: MapperInterface[] = [
     }
 ];
 
-const commitMappers: MapperInterface[] = [
+const commitsMappers: MapperInterface[] = [
     {
         dataKey: ['commit', 'author', 'date'],
         mountainsParameter: 'x',
@@ -59,6 +59,6 @@ const commitMappers: MapperInterface[] = [
 ];
 
 export {
-    repoMappers,
-    commitMappers
+    reposMappers,
+    commitsMappers
 };

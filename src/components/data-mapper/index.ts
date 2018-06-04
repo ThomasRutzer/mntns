@@ -6,8 +6,8 @@ import * as mappers from './mappers';
 import { MapperInterface } from './mapper-interface';
 
 diContainer.bind<DataMapperServiceInterface>(types.DataMapperService).to(DataMapperService).inSingletonScope();
-diContainer.bind<MapperInterface[]>(types.RepositoryMapper).toConstantValue(mappers.repoMappers);
-diContainer.bind<MapperInterface[]>(types.CommitsMapper).toConstantValue(mappers.commitMappers);
+diContainer.bind<MapperInterface[]>(types.RepositoryMapper).toConstantValue(mappers.reposMappers);
+diContainer.bind<MapperInterface[]>(types.CommitsMapper).toConstantValue(mappers.commitsMappers);
 
 export {
     DataMapperServiceInterface,
