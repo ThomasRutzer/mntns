@@ -7,6 +7,7 @@ import { actions, actionTypes, mutations, mutationTypes } from './../../store';
 
 import rawRepos from './../../../mocks/github-repo-mock';
 import rawCommits from './../../../mocks/github-commit-mock';
+import {LevelDataLoaderInterface} from "./level-data-loader/level-data-loader-interface";
 
 const mappedRepos = [
     {
@@ -20,9 +21,10 @@ const mappedRepos = [
 const mappedCommits = [];
 
 describe('Levels Service', () => {
-    let service, store;
+    let levelsService, store, LevelsDataLoader;
 
     before(() => {
+        LevelsDataLoader = new LevelsDataLoader();
 
         store = new Vuex.Store({
             state: {
@@ -68,6 +70,6 @@ describe('Levels Service', () => {
             mutations
         });
 
-        service = new LevelsService(store, []);
+        levelsService = new LevelsService(store, [], LevelsDataLoader);
     });
 });

@@ -1,14 +1,16 @@
+import levelDataSources from './level-data-loader/level-data-sources';
+
 export default {
-    gitHubUsername: 'thomasrutzer',
-    maxSceneItems: 15,
     allLevels:  [
         {
             index: 1,
-            title: 'repositories'
+            title: 'repositories',
+            dataSrc: levelDataSources.REPOS
         },
         {
             index: 2,
-            title: 'commits'
+            title: 'commits',
+            dataSrc: levelDataSources.COMMITS
         }
     ]
 };
