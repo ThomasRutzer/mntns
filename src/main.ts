@@ -13,6 +13,7 @@ import { titleAnimationDirective } from './components/title';
 Vue.directive('title-animation', titleAnimationDirective);
 
 // import any other modules
+import './components/focus-data';
 import './components/mousemove-follow';
 import './components/github-api-client';
 import './components/data-mapper';

@@ -16,8 +16,8 @@ const types = {
 
     MediaQueryService: Symbol.for('MediaQueryService'),
 
-    MntnsService: Symbol.for('MntnsService'),
-    MntnsServiceFactory: Symbol.for('MntnsServiceFactory'),
+    FocusDataService: Symbol.for('FocusDataService'),
+    FocusDataServiceFactory: Symbol.for('FocusDataServiceFactory'),
 
     Store: Symbol.for('Store')
 };

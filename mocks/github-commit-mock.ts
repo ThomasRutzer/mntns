@@ -1,6 +1,7 @@
 export default [
     {
         "sha": "875670a38c40556f3c115dbeef1c4fd88cb240f2",
+        "id": "875670a38c40556f3c115dbeef1c4fd88cb240f2",
         "commit": {
             "author": {
                 "name": "Thomas Rutzer",
@@ -77,6 +78,7 @@ export default [
     },
     {
         "sha": "ae673a41d606dfb7c9db7b63b0c43860f21e3959",
+        "id": "ae673a41d606dfb7c9db7b63b0c43860f21e3959",
         "commit": {
             "author": {
                 "name": "Thomas Rutzer",

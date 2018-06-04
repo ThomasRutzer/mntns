@@ -1,12 +1,19 @@
+/**
+ * class FocusDataService handles
+ * intersected data from 3D-Landscape
+ * and commits filtered matching data set
+ * to Store
+ */
 import { Store } from 'vuex';
-import {MntsServiceInterface} from './mnts-service-interface';
+import * as mutationTypes from '../../store/mutation-types';
 import { injectable, inject } from 'inversify';
-import GeneratorManagerInterface from 'mntns-landscape/src/components/generator/manager/GeneratorManagerInterface';
-import * as mutationTypes from './../../store/mutation-types';
 import types from '../dependency-injection/types';
 
+import { FocusDataServiceInterface } from './focus-data-service-interface';
+import GeneratorManagerInterface from 'mntns-landscape/src/components/generator/manager/GeneratorManagerInterface';
+
 @injectable()
-class MntsService implements MntsServiceInterface {
+class FocusDataService implements FocusDataServiceInterface {
     private store: Store<any>;
     private generatorManager: GeneratorManagerInterface = null;
 
@@ -44,9 +51,10 @@ class MntsService implements MntsServiceInterface {
         }
     }
 
+    // @todo: move this to another service
     public setCameraToStart() {
         this.generatorManager.setCamera('start');
     }
 }
 
-export default MntsService;
+export default FocusDataService;
