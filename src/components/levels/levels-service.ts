@@ -34,47 +34,26 @@ class LevelsService implements LevelsServiceInterface {
           : this.allLevels.length;
 
       this.store.commit(mutationTypes.UPDATE_LEVEL, { level: this.allLevels[levelIndex - 1] });
-
       await this.loadData();
   }
 
   public async previousStep() {
-      // @todo: make this more dynamic
-      this.store.commit(mutationTypes.UPDATE_LEVEL, { level: this.allLevels[0] });
+      const levelIndex = this.store.state.levels.currentLevel.index > 0
+          ? this.store.state.levels.currentLevel.index - 1
+          : 1;
 
+      this.store.commit(mutationTypes.UPDATE_LEVEL, { level: this.allLevels[levelIndex - 1] });
       await this.loadData();
   }
 
   public async start() {
-      // @todo: make this more dynamic
       this.store.commit(mutationTypes.UPDATE_LEVEL, { level: this.allLevels[0]});
-
-      await this.loadRepos();
-      this.store.commit(mutationTypes.USED_DATA, {
-          raw: this.store.state.gitHubData.repos.raw,
-          mapped: this.store.state.gitHubData.repos.mapped
-      });
+      await this.loadData();
   }
 
   private async loadData() {
       await this.levelDataLoader
           .loadByType(this.store.state.levels.currentLevel.dataSrc);
-  }
-
-  private async loadCommits(repoName) {
-      await this.store.dispatch(
-              actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO,
-              { repoName, userName: gitHubConfig.gitHubUsername, perPage: landscapeConfig.maxSceneItems }
-          );
-      return Promise.resolve();
-  }
-
-  private async loadRepos() {
-      await this.store.dispatch(
-              actionTypes.RETRIEVE_GITHUB_REPOS,
-              { userName: gitHubConfig.gitHubUsername, perPage: landscapeConfig.maxSceneItems }
-          );
-      return Promise.resolve();
   }
 }
 

@@ -1,6 +1,10 @@
 import levelDataSources from './level-data-loader/level-data-sources';
 
 export default {
+    /**
+     * all levels, added
+     * to experiment.
+     */
     allLevels:  [
         {
             index: 1,

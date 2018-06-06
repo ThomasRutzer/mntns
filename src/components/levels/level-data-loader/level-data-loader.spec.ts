@@ -6,7 +6,6 @@ import {actions, actionTypes, mutations} from './../../../store';
 import LevelDataLaoder from './level-data-loader';
 import {LevelDataLoaderInterface} from "./level-data-loader-interface";
 
-
 describe('Level Data Loader', () => {
     let store, service: LevelDataLoaderInterface;
 

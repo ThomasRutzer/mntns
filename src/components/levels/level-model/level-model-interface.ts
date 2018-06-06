@@ -1,5 +1,10 @@
 interface LevelModelInterface {
+    /**
+     * overall index (1-based) of this level
+     * based on all levels
+     */
     index: number,
+
     title: string,
 
     /**

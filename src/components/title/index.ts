@@ -1,5 +1,4 @@
-import titleAnimationDirective from './title-typo-animation-directive';
+import Vue from 'vue';
 
-export {
-    titleAnimationDirective,
-};
+import titleAnimationDirective from './title-typo-animation-directive';
+Vue.directive('title-animation', titleAnimationDirective);

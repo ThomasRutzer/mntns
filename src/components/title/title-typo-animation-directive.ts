@@ -14,7 +14,6 @@ export default {
     },
 
     /**
-     *
      * @param { HTMLElement } el
      * @param { Object } bindings
      * @namespace bindings

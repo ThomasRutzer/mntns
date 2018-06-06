@@ -9,9 +9,13 @@ export class BackdropComponent extends Vue {
     private mousemoveActivated: boolean = true;
     private mediaQueryService: MediaQueryServiceInterface;
 
+    // currently activates / deactivates
+    // mousemove following
     @Prop()
     activated: boolean;
 
+    // displays a label
+    // on backdrop
     @Prop()
     triggerLabel: string;
 
