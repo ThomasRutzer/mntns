@@ -1,27 +1,27 @@
-import chai, {expect} from 'chai';
-import {stub} from 'sinon';
+import chai, { expect } from 'chai';
+import { stub } from 'sinon';
 
-import {ComponentTest} from '../../../util/component-test';
+import {ComponentTest} from '../../util/component-test';
 
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import {mutations, mutationTypes} from './../../../store';
+import {mutations, mutationTypes} from '../../store';
 
-import { reposMappers, commitsMappers } from '../../data-mapper/mappers';
-import {diContainer, types} from '../../dependency-injection';
+import { reposMappers, commitsMappers } from '../data-mapper/mappers';
+import {diContainer, types} from '../dependency-injection';
 
-import { MntnsLegendComponent } from './mntns-legend';
+import { LandscapeLegendComponent } from './landscape-legend';
 
-describe('MntnsLegendComponent', () => {
+describe('LandscapeLegend Component', () => {
     let componentTest: ComponentTest,
         store, state;
 
     before(() => {
         componentTest = new ComponentTest(
-            '<mntns-legend ref="legend"></mntns-legend>',
+            '<landscape-legend ref="legend"></landscape-legend>',
             {
-                'mntns-legend': MntnsLegendComponent,
+                'landscape-legend': LandscapeLegendComponent,
             }
         );
 
@@ -29,7 +29,8 @@ describe('MntnsLegendComponent', () => {
           levels: {
               currentLevel: {
                   index: 1,
-                  title: 'repositories'
+                  title: 'repositories',
+                  dataSrc: 'repos'
               }
           }
         };
@@ -53,7 +54,8 @@ describe('MntnsLegendComponent', () => {
     it('outputs data based on mapper', async () => {
         store.commit(mutationTypes.UPDATE_LEVEL, { level: {
             index: 1,
-            title: 'repositories'
+            title: 'repositories',
+            dataSrc: 'repos'
         }});
         componentTest.createComponent({store});
 

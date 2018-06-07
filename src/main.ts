@@ -12,6 +12,7 @@ import { FooterbarComponent } from  './components/footerbar';
 import './components/focus-data';
 import './components/mousemove-follow';
 import './components/github-api-client';
+import './components/landscape-legend';
 import './components/data-mapper';
 import './components/media-queries';
 import './components/backdrop';
