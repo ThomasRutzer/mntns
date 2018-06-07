@@ -1,45 +1,41 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import Vuex from 'vuex';
 
-import * as GeneratorModule from 'mntns-landscape/src/components/generator';
 import LevelsService from './levels-service';
-import { actions, actionTypes, mutations, mutationTypes } from './../../store';
-
-import rawRepos from './../../../mocks/github-repo-mock';
-import rawCommits from './../../../mocks/github-commit-mock';
-import {LevelDataLoaderInterface} from "./level-data-loader/level-data-loader-interface";
-
-const mappedRepos = [
-    {
-        id: 1,
-    },
-    {
-        id: 2
-    }
-];
-
-const mappedCommits = [];
+import { actions, mutations } from './../../store';
+import {LevelDataLoaderInterface} from './level-data-loader/level-data-loader-interface';
 
 describe('Levels Service', () => {
-    let levelsService, store, LevelsDataLoader;
+    let levelsService,
+        allLevels,
+        store,
+        levelDataLoader: LevelDataLoaderInterface;
 
     before(() => {
-        LevelsDataLoader = new LevelsDataLoader();
-
+        allLevels = [
+            {
+                index: 1,
+                title: 'first',
+                dataSrc: 'repos'
+            },
+            {
+                index: 2,
+                title: 'second',
+                dataSrc: 'commits'
+            },
+            {
+                index: 3,
+                title: 'third',
+                dataSrc: 'repos'
+            }
+        ];
         store = new Vuex.Store({
             state: {
               levels: {
-                  currentLevel: 1,
-                  allLevels:  [
-                      {
-                          index: 1,
-                          title: 'repositories'
-                      },
-                      {
-                          index: 2,
-                          title: 'commits'
-                      }
-                  ]
+                  currentLevel: {
+                      index: 1,
+                      title: 'repositories'
+                  }
               },
                 gitHubData: {
                     startedLoading: null,
@@ -69,7 +65,33 @@ describe('Levels Service', () => {
             actions,
             mutations
         });
+        levelDataLoader = {
+            loadByType() {
+                return Promise.resolve();
+            }
+        };
+        levelsService = new LevelsService(store, allLevels, levelDataLoader);
+    });
 
-        levelsService = new LevelsService(store, [], LevelsDataLoader);
+    it('provides a method, with which others can start from first level', async () => {
+        await levelsService.start();
+        expect(store.state.levels.currentLevel.index).to.equal(1);
+    });
+
+    it('provides a method, with which others can request next level', async () => {
+        await levelsService.nextStep();
+        expect(store.state.levels.currentLevel).to.equal(allLevels[1]);
+    });
+
+    it('provides a method, with which others can request previous level', async () => {
+        // assert it´s level with index 1
+        await levelsService.start();
+        // assert it´s level with index 2
+        await levelsService.nextStep();
+        //assert it´s level with index 3
+        await levelsService.nextStep();
+        // assert it´s level with index 2 again
+        await levelsService.previousStep();
+        expect(store.state.levels.currentLevel).to.equal(allLevels[1]);
     });
 });
