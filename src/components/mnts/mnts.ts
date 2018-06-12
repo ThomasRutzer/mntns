@@ -152,7 +152,6 @@ export class MntsComponent extends Vue {
     }
 
     updateFocusedData(position: {x: number, y: number}) {
-
         this.focusedData = {};
         this.focusedData.outside = position.x > (window.innerWidth / 2);
 

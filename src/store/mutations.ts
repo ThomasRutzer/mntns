@@ -77,7 +77,6 @@ const mutations = {
     [types.FOCUS_REPO](state, payload) {
         state.gitHubData.focusedData.raw = payload.raw;
         state.gitHubData.focusedData.mapped = payload.mapped;
-        state.gitHubData.focusedData.event = payload.event;
     },
 
     [types.UNFOCUS_REPO](state) {

@@ -26,7 +26,6 @@ class FocusDataService implements FocusDataServiceInterface {
     }
 
     public focusData(id: string) {
-
         let raw, mapped;
 
         raw = this.store.state.gitHubData.usedData.raw.filter((data) => {
@@ -38,14 +37,11 @@ class FocusDataService implements FocusDataServiceInterface {
         });
 
         if (raw.length > 0) {
-
             this.store.commit(mutationTypes.FOCUS_REPO, {
-                event,
                 raw: raw[0],
                 mapped: mapped[0],
                 id: id
             });
-
         } else {
             this.store.commit(mutationTypes.UNFOCUS_REPO);
         }

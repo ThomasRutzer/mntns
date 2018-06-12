@@ -40,6 +40,10 @@ $mntns-label-icon-size: 40px;
 
     border-radius: 50%;
     margin-right: map_get($spacing-sizes, 's');
+
+    &--inverted  {
+      fill: $color-lightest;
+    }
   }
 
   &__content {

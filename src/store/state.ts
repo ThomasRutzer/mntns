@@ -24,7 +24,6 @@ const state: StateInterface = {
         focusedData: {
             raw: null,
             mapped: null,
-            event: null
         },
 
         usedData: {

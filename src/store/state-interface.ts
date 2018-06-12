@@ -45,12 +45,10 @@ export interface StateInterface {
          * @type { Object }
          * @property { Object } raw data
          * @property { Object } mapped data
-         * @property  { Object } event type which triggered focus
          */
         focusedData: {
             raw: object,
             mapped: object,
-            event: object
         },
 
         /**
