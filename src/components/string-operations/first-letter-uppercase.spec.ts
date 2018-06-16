@@ -1,7 +1,7 @@
 import firstLetterUppercase from './first-letter-uppercase';
 import {expect} from 'chai';
 
-describe.only('first letter uppercase util', () => {
+describe('first letter uppercase util', () => {
     it('makes first letter uppercase for given string', () => {
         let stringToTest = 'anyname';
         expect(firstLetterUppercase(stringToTest)).to.equal('Anyname');
