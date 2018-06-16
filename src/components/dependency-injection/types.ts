@@ -1,5 +1,5 @@
 const types = {
-
+    DataMinMaxCache: Symbol.for('DataMinMaxCache'),
     DataMapperService: Symbol.for('DataMapperService'),
     RepositoryMapper: Symbol.for('RepositoryMapper'),
     CommitsMapper: Symbol.for('CommitsMapper'),
