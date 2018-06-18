@@ -49,7 +49,7 @@ const actions = {
             commit(mutationTypes.GITHUB_DATA_MAPPING_STARTED);
 
             data = {
-                mappedRepos: res ? dataMapperService.map(res.data, repoMappers) : [],
+                mappedRepos: res ? dataMapperService.map({cacheId: `github→${userName}→repos`, data: res.data}, repoMappers) : [],
                 rawRepos: res ? res.data : []
             };
 
@@ -92,7 +92,7 @@ const actions = {
             commit(mutationTypes.GITHUB_DATA_MAPPING_STARTED);
 
             data = {
-                mapped: res ? dataMapperService.map(res.data, commitMappers) : [],
+                mapped: res ? dataMapperService.map({ cacheId: `github→${userName}→${repoName}→commits`, data: res.data }, commitMappers) : [],
                 raw: res ? res.data : []
             };
 

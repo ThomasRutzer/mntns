@@ -1,8 +1,11 @@
 import { expect } from 'chai';
+import {stub} from 'sinon';
 import Vuex from 'vuex';
 import axios from 'axios';
+import { diContainer, types } from './../components/dependency-injection';
 import MockAdapter from 'axios-mock-adapter';
 
+import { reposMappers } from '../components/data-mapper/mappers';
 import repoMock from './../../mocks/github-repo-mock';
 import commitsMock from './../../mocks/github-commit-mock';
 
@@ -18,9 +21,35 @@ const mockRepoName = 'testRepo';
 
 describe('actions', () => {
 
-    let state, store;
+    let state, store, diContainerStub;
 
     before(() => {
+
+        diContainerStub = stub(diContainer, 'get')
+            .withArgs(types.DataMinMaxCache).returns({
+                cacheProperty: (dataSetId: string, property: string, minMaxValues: {min:any,max:any}) => {},
+                clearEntireCache:() => {},
+                clearCache: (dataSetId: string) => {},
+                getCachedProperty: (dataSetId: string, property: string) => {
+                    return { min: 0, max: 50};
+                }
+            })
+            .withArgs(types.DataMapperService).returns({
+                map: (dataSet: {cacheId?: string, data: any[]}, mapper: any[]) => {
+                    return dataSet.data.map((item) => {
+                        return {
+
+                        }
+                    });
+                }
+            })
+            .withArgs(types.RepositoryMapper).returns(reposMappers)
+            .withArgs(types.GithubApiClient).returns({
+                getUserRepos: (userName: string, maxItemCount?: number) => Promise.resolve({ data: repoMock }),
+                getCommits: (repoName: string, userName: string, maxItemCount?: number) => Promise.resolve({ data: commitsMock })
+            }
+        );
+
         state = {
             gitHubData: {
                 repos: {
@@ -36,6 +65,11 @@ describe('actions', () => {
             actions,
             mutations
         });
+    });
+
+    after(() => {
+        // @ts-ignore
+        diContainer.get.restore();
     });
 
     describe('type: retrieve github repos', () => {
@@ -67,6 +101,7 @@ describe('actions', () => {
 
     describe('type: retrieve github commits', () => {
         let mock;
+
         beforeEach(() => {
             mock = new MockAdapter(axios);
 

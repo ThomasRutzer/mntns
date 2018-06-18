@@ -7,7 +7,7 @@ describe('mapper utils', () => {
 
     describe('getMinMaxTypeNumber', () => {
         it('returns valid min max from data', () => {
-            const mappedData = mapperUtils.getMinMaxTypeNumber(reposMock, "size");
+            const mappedData = mapperUtils.getMinMaxTypeNumber(reposMock, ["size"]);
             expect(mappedData[0]).to.equal(549)
             expect(mappedData[1]).to.equal(1407)
         });
@@ -15,7 +15,7 @@ describe('mapper utils', () => {
 
     describe('getMinMaxTypeString', () => {
         it('returns valid min max from data', () => {
-            const mappedData = mapperUtils.getMinMaxTypeString(reposMock, "name");
+            const mappedData = mapperUtils.getMinMaxTypeString(reposMock, ["name"]);
             expect(mappedData[0]).to.equal(5)
             expect(mappedData[1]).to.equal(9)
         });
@@ -23,7 +23,7 @@ describe('mapper utils', () => {
 
     describe('getMinMaxTypeDate', () => {
         it('returns valid min max from data', () => {
-            const mappedData = mapperUtils.getMinMaxTypeDate(reposMock, "created_at");
+            const mappedData = mapperUtils.getMinMaxTypeDate(reposMock, ["created_at"]);
             expect(is_same_day(mappedData[0], new Date('Fri, 07 Apr 2017 13:08:11'))).to.equal(true);
             expect(is_same_day(mappedData[1], new Date('Sun, 21 Jan 2018 17:28:58'))).to.equal(true);
         });

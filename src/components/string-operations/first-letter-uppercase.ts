@@ -1,5 +1,5 @@
-const firstLetterUppercase = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+const firstLetterUppercase = (input) => {
+    return input.charAt(0).toUpperCase() + input.slice(1);
 };
 
 export default firstLetterUppercase;

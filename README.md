@@ -32,8 +32,9 @@ consuming and maybe visualize background experiment in another way (without need
 ### Code & Architecture
 
 * make a proper and general Mock for DI
-* movel **all** business logic from Vue components to services or providers
+* move **all** business logic from Vue components to services or providers
 * increase test coverage
+* implement Component lazy loading
 
 ### Build Setup
 

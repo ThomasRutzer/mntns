@@ -24,7 +24,7 @@ class DataMinMaxCacheService implements DataMinMaxCacheServiceInterface {
     public cacheProperty(
         dataSetId: string,
         property: string,
-        minMaxValues: {min: any,max: any}
+        minMaxValues: {min: any, max: any}
     ) {
         if (!this.cache[dataSetId]) {
             this.cache[dataSetId] = {};
@@ -45,7 +45,7 @@ class DataMinMaxCacheService implements DataMinMaxCacheServiceInterface {
 
     public getCachedProperty(dataSetId: string, property: string): {min: number, max: number}|null {
         if (this.cache[dataSetId] && this.cache[dataSetId][property]) {
-            return this.cache[dataSetId][property]
+            return this.cache[dataSetId][property];
         }
 
         return null;

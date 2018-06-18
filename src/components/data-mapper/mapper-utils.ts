@@ -1,4 +1,5 @@
 import { getMinMaxNumbers } from './../array-operations';
+import { findDeep } from './../object-utils';
 import max from 'date-fns/max';
 import min from 'date-fns/min';
 
@@ -8,9 +9,9 @@ import min from 'date-fns/min';
  * @param {string} property property of data to retrieve range from
  * @return {[number, number]} where first index is minValue, and 2nd maxValue
  */
-function getMinMaxTypeNumber(data: any[], property: string): number[]|null {
+function getMinMaxTypeNumber(data: any[], property: string[]): number[]|null {
     const numbers = data.map((value) => {
-        return Number(value[property]);
+        return Number(findDeep(value, property));
     });
 
     return getMinMaxNumbers( ...numbers );
@@ -19,12 +20,12 @@ function getMinMaxTypeNumber(data: any[], property: string): number[]|null {
 /**
  *
  * @param {any[]} data all data
- * @param {string} property property of data to retrieve range from
+ * @param {string[]} path to property of data to retrieve range from
  * @return {[number, number]} where first index is minValue, and 2nd maxValue
  */
-function getMinMaxTypeDate(data: Object[], property: string): any[]|null {
+function getMinMaxTypeDate(data: Object[], property: string[]): any[]|null {
     const dates = data.map((value) => {
-        return new Date(value[property]);
+        return new Date(findDeep(value, property));
     });
 
     const minDate = min( ...dates );
@@ -39,9 +40,10 @@ function getMinMaxTypeDate(data: Object[], property: string): any[]|null {
  * @param {string} property property of data to retrieve range from
  * @return {number[]} where first index is minValue, and 2nd maxValue
  */
-function getMinMaxTypeString(data: any[], property: string): number[]|null {
+function getMinMaxTypeString(data: any[], property: string[]): number[]|null {
     const numbers = data.map((value) => {
-        return value[property].length;
+        // @ts-ignore
+        return findDeep(value, property).length;
     });
 
     return getMinMaxNumbers( ...numbers );
