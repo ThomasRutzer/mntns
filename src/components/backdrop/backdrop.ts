@@ -23,7 +23,7 @@ export class BackdropComponent extends Vue {
         const breakpoints = diContainer.get(types.Breakpoints);
         this.mediaQueryService = diContainer.get<MediaQueryServiceInterface>(types.MediaQueryService);
         this.mediaQueryService.on(breakpoints['m'], (mqEvent: MediaQueryList) => {
-            this.mousemoveActivated = mqEvent.matches ? 2 : 1;
+            this.mousemoveActivated = mqEvent.matches ? 1 : 2;
         });
     }
 }
