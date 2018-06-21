@@ -1,3 +1,3 @@
 export default {
-    gitHubUsername: 'addyosmani',
+    gitHubUsername: 'thomasrutzer',
 };
