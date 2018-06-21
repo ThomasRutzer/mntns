@@ -15,6 +15,7 @@ import './components/mousemove-follow';
 import './components/github-api-client';
 import './components/landscape-legend';
 import './components/data-mapper';
+import './components/modal';
 import './components/media-queries';
 import './components/backdrop';
 import './components/levels';

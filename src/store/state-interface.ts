@@ -76,5 +76,10 @@ export interface StateInterface {
 
     levels: {
         currentLevel: LevelModel,
-    }
+    },
+
+    /**
+     * stores currently active Modal name
+     */
+    activeModal: string
 }

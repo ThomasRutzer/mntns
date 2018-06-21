@@ -41,7 +41,9 @@ const state: StateInterface = {
 
     levels: {
         currentLevel: null,
-    }
+    },
+
+    activeModal: null
 };
 
 export default state;

@@ -1,0 +1,65 @@
+@import "./../colors/colors.json";
+@import "./../layout/layout-definitions.json";
+@import "./../spacing/spacing-definitions.json";
+
+$modal-close-background-color: $color-dark;
+$modal-close-icon-fill: $color-highlight;
+
+$modal-dimmer-background-color: rgba($color-dark, 0.5);
+
+.modal {
+
+  &__backdrop {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $modal-dimmer-background-color;
+  }
+
+  &__wrapper {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 calc((100vw - #{map_get($layout, "content-area-width-small")}) / 2);
+
+    @include mq($from: 'm') {
+      padding: 0 calc((100vw - #{map_get($layout, "content-area-width-medium")}) / 2);
+    }
+  }
+
+  &__content {
+    position: relative;
+    background-color: $color-highlight;
+    color: $color-lightest;
+    padding: map_get($spacing-sizes, 's');
+    transition: all 300ms;
+    opacity: 1;
+
+    &.modal__content--leave-active {
+      transform: scale(1.1);
+    }
+
+    &.modal__content--enter {
+      opacity: 0;
+    }
+  }
+
+  &__close {
+    border: none;
+    -webkit-touch-callout: none;
+    user-select: none;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: -15px;
+    padding: 4px;
+    color: $color-lightest;
+    background-color: $color-secondary-highlight;
+  }
+}

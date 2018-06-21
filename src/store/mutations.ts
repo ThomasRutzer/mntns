@@ -92,8 +92,15 @@ const mutations = {
     [types.USED_DATA](state, payload) {
         state.gitHubData.usedData.raw = payload.raw;
         state.gitHubData.usedData.mapped = payload.mapped;
-    }
+    },
 
+    [types.OPEN_MODAL](state, payload) {
+        state.activeModal = payload.name;
+    },
+
+    [types.CLOSE_MODAL](state) {
+        state.activeModal = null;
+    }
 };
 
 export default mutations;

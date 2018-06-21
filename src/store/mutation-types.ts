@@ -41,3 +41,6 @@ export const UNFOCUS_REPO = 'UNFOCUS_REPO';
 export const USED_DATA = 'USED_DATA';
 
 export const UPDATE_LEVEL = 'UPDATE_LEVEL';
+
+export const OPEN_MODAL = 'OPEN_MODAL';
+export const CLOSE_MODAL = 'CLOSE_MODAL';

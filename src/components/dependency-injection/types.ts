@@ -19,7 +19,9 @@ const types = {
     FocusDataService: Symbol.for('FocusDataService'),
     FocusDataServiceFactory: Symbol.for('FocusDataServiceFactory'),
 
-    Store: Symbol.for('Store')
+    Store: Symbol.for('Store'),
+
+    ModalService: Symbol.for('ModalService'),
 };
 
 export default types;

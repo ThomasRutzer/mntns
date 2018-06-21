@@ -29,6 +29,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "date-fns": "^1.29.0",
+    "focus-trap": "^2.4.6",
     "gsap": "^1.20.3",
     "inversify": "^4.6.1",
     "mntns-landscape": "git+https://github.com/ThomasRutzer/mntns-landscape.git#master",
