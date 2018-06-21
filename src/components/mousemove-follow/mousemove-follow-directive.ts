@@ -8,7 +8,7 @@ export default {
      * @param { HTMLElement } el
      * @param { Object } bindings
      * @namespace bindings.value
-     * @property { boolean} activated
+     * @property { number} activated where 1=activated, 2=deactivated, 0=paused
      * @property { Number=0 } initialOffsetX
      * @property { Number=0 } initialOffsetY
      * @property { Number=0 } maxOffsetX
@@ -48,20 +48,31 @@ export default {
     },
 
     update(el, bindings) {
-        if (bindings.value.activated) {
-            document.addEventListener('mousemove', el.mousemoveHandler);
-            el.style.transition = `transform ${el.mousemoveOptions.duration}ms ease-out`;
 
-            applyTransforms(
-                el,
-                el.mousemoveOptions.initialOffsetX,
-                el.mousemoveOptions.initialOffsetY
-            );
-        } else {
-            document.removeEventListener('mousemove', el.mousemoveHandler);
-            el.style.transition = `none`;
+        switch (bindings.value.activated) {
+            case 1:
+                document.addEventListener('mousemove', el.mousemoveHandler);
+                el.style.transition = `transform ${el.mousemoveOptions.duration}ms ease-out`;
 
-            el.style.removeProperty('transform');
+                applyTransforms(
+                    el,
+                    el.mousemoveOptions.initialOffsetX,
+                    el.mousemoveOptions.initialOffsetY
+                );
+                break;
+
+            case 2:
+                document.removeEventListener('mousemove', el.mousemoveHandler);
+                el.style.transition = `none`;
+
+                el.style.removeProperty('transform');
+                break;
+
+            case 0:
+                document.removeEventListener('mousemove', el.mousemoveHandler);
+                break;
+
+            default:
         }
     },
 

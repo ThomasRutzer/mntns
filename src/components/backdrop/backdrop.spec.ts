@@ -58,7 +58,7 @@ describe('Backdrop', () => {
         await componentTest.execute((vm) => {
             // @ts-ignore  Property 'mousemoveActivated' does not exist on type 'Vue | Element | Vue[] | Element[]'.
             // Property 'mousemoveActivated' does not exist on type 'Vue'.
-            expect(vm.$refs.backdrop.mousemoveActivated).to.equal(true);
+            expect(vm.$refs.backdrop.mousemoveActivated).to.equal(1);
         });
     });
 });

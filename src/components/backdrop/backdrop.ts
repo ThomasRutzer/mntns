@@ -6,7 +6,7 @@ import { MediaQueryServiceInterface} from '../media-queries';
     template: require('./backdrop.html'),
 })
 export class BackdropComponent extends Vue {
-    private mousemoveActivated: boolean = true;
+    private mousemoveActivated: number = 1;
     private mediaQueryService: MediaQueryServiceInterface;
 
     // currently activates / deactivates
@@ -23,7 +23,7 @@ export class BackdropComponent extends Vue {
         const breakpoints = diContainer.get(types.Breakpoints);
         this.mediaQueryService = diContainer.get<MediaQueryServiceInterface>(types.MediaQueryService);
         this.mediaQueryService.on(breakpoints['m'], (mqEvent: MediaQueryList) => {
-            this.mousemoveActivated = mqEvent.matches;
+            this.mousemoveActivated = mqEvent.matches ? 2 : 1;
         });
     }
 }
