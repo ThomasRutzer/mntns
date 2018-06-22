@@ -1,27 +1,19 @@
 const types = {
+    AllLevels: Symbol.for('AllLevels'),
+    Breakpoints: Symbol.for('Breakpoints'),
+    CommitsMapper: Symbol.for('CommitsMapper'),
     DataMinMaxCache: Symbol.for('DataMinMaxCache'),
     DataMapperService: Symbol.for('DataMapperService'),
-    RepositoryMapper: Symbol.for('RepositoryMapper'),
-    CommitsMapper: Symbol.for('CommitsMapper'),
-
+    FocusDataService: Symbol.for('FocusDataService'),
     GithubApiClient: Symbol.for('GithubApiClient'),
-
-    Breakpoints: Symbol.for('Breakpoints'),
-
-    AllLevels: Symbol.for('AllLevels'),
     LevelsDataLoader: Symbol.for('LevelDataLoader'),
+    LevelModelFactory: Symbol.for('LevelModelFactory'),
     LevelsService: Symbol.for('LevelsService'),
     LevelsServiceFactory: Symbol.for('LevelsServiceFactory'),
-    LevelModelFactory: Symbol.for('LevelModelFactory'),
-
     MediaQueryService: Symbol.for('MediaQueryService'),
-
-    FocusDataService: Symbol.for('FocusDataService'),
-    FocusDataServiceFactory: Symbol.for('FocusDataServiceFactory'),
-
-    Store: Symbol.for('Store'),
-
     ModalService: Symbol.for('ModalService'),
+    RepositoryMapper: Symbol.for('RepositoryMapper'),
+    Store: Symbol.for('Store'),
 };
 
 export default types;
