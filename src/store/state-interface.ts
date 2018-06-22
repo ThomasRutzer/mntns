@@ -1,4 +1,5 @@
-import LevelModel from "../components/levels/level-model/level-model";
+import LevelModel from '../components/levels/level-model/level-model';
+import { ExtractedFocusDataInterface } from '../components/focus-data/extracted-focus-data-interface';
 
 export interface StateInterface {
     experimentContainer: {
@@ -45,10 +46,14 @@ export interface StateInterface {
          * @type { Object }
          * @property { Object } raw data
          * @property { Object } mapped data
+         * @property { String } id
+         * @property { ExtractedFosucInterface } extracted
          */
         focusedData: {
             raw: object,
             mapped: object,
+            id: string,
+            extracted: ExtractedFocusDataInterface
         },
 
         /**
@@ -56,7 +61,10 @@ export interface StateInterface {
          */
         usedData: {
             raw: object,
-            mapped: object
+            mapped: object,
+            // dataSrc, defined
+            // in each LevelModel
+            dataSrc: string
         },
 
         repos: {

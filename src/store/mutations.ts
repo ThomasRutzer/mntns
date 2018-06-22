@@ -77,6 +77,7 @@ const mutations = {
     [types.FOCUS_REPO](state, payload) {
         state.gitHubData.focusedData.raw = payload.raw;
         state.gitHubData.focusedData.mapped = payload.mapped;
+        state.gitHubData.focusedData.extracted = payload.extracted;
     },
 
     [types.UNFOCUS_REPO](state) {
@@ -92,6 +93,7 @@ const mutations = {
     [types.USED_DATA](state, payload) {
         state.gitHubData.usedData.raw = payload.raw;
         state.gitHubData.usedData.mapped = payload.mapped;
+        state.gitHubData.usedData.dataSrc = payload.dataSrc;
     },
 
     [types.OPEN_MODAL](state, payload) {

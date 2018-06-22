@@ -24,11 +24,14 @@ const state: StateInterface = {
         focusedData: {
             raw: null,
             mapped: null,
+            id: null,
+            extracted: null
         },
 
         usedData: {
             raw: null,
-            mapped: null
+            mapped: null,
+            dataSrc: null
         },
 
         repos: {
