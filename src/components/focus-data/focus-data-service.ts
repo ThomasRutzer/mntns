@@ -9,24 +9,25 @@ import * as mutationTypes from '../../store/mutation-types';
 import { injectable, inject } from 'inversify';
 import types from '../dependency-injection/types';
 
+import { firstLetterUppercase } from './../string-operations';
+import { findDeep } from './../object-utils/';
+
 import { FocusDataServiceInterface } from './focus-data-service-interface';
-import GeneratorManagerInterface from 'mntns-landscape/src/components/generator/manager/GeneratorManagerInterface';
+import { ExtractedFocusDataInterface } from './extracted-focus-data-interface';
+import * as extractMappers from './extract-mappers';
 
 @injectable()
 class FocusDataService implements FocusDataServiceInterface {
     private store: Store<any>;
-    private generatorManager: GeneratorManagerInterface = null;
 
     constructor(
         @inject(types.Store) store,
-        GeneratorManager: GeneratorManagerInterface
     ) {
         this.store = store;
-        this.generatorManager = GeneratorManager;
     }
 
-    public focusData(id: string) {
-        let raw, mapped;
+    public commitFocusedData(id: string) {
+        let extracted, raw, mapped;
 
         raw = this.store.state.gitHubData.usedData.raw.filter((data) => {
             return data.id.toString() === id;
@@ -36,10 +37,16 @@ class FocusDataService implements FocusDataServiceInterface {
             return data.id === id;
         });
 
+        extracted = this.extractData(
+            raw[0],
+            extractMappers[`extractFrom${firstLetterUppercase(this.store.state.gitHubData.usedData.dataSrc)}`]
+        );
+
         if (raw.length > 0) {
             this.store.commit(mutationTypes.FOCUS_REPO, {
                 raw: raw[0],
                 mapped: mapped[0],
+                extracted,
                 id: id
             });
         } else {
@@ -47,9 +54,12 @@ class FocusDataService implements FocusDataServiceInterface {
         }
     }
 
-    // @todo: move this to another service
-    public setCameraToStart() {
-        this.generatorManager.setCamera('start');
+    private extractData(data, mapper): ExtractedFocusDataInterface {
+        return {
+            url: mapper.url ? findDeep(data, mapper.url) : null,
+            title: mapper.title ? findDeep(data, mapper.title) : null,
+            description: mapper.desc ? findDeep(data, mapper.description) : null
+        };
     }
 }
 

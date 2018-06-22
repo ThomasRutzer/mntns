@@ -7,6 +7,7 @@ import FocusDataService from './focus-data-service';
 
 import rawRepos from './../../../mocks/github-repo-mock';
 import rawCommits from './../../../mocks/github-commit-mock';
+import {FocusDataServiceInterface} from "./focus-data-service-interface";
 const mappedRepos = [
     {
         id: 87546623,
@@ -17,8 +18,8 @@ const mappedRepos = [
 ];
 const mappedCommits = [];
 
-describe('Focus Data Service', () => {
-    let service, store;
+describe.only('Focus Data Service', () => {
+    let service: FocusDataServiceInterface, store;
 
     before(() => {
         store = new Vuex.Store({
@@ -62,14 +63,14 @@ describe('Focus Data Service', () => {
         service = new FocusDataService(store, generatorManager);
     });
 
-    describe('method focusData()', () => {
+    describe('method commitFocusedData()', () => {
         it('when level is 1, focused data is repo', async () => {
             store.commit(mutationTypes.USED_DATA, {
                 raw: rawRepos,
                 mapped: mappedRepos
             });
 
-            await service.focusData("87546623");
+            await service.commitFocusedData("87546623");
             expect(store.state.gitHubData.focusedData.raw).to.equal(rawRepos[0]);
         });
 
@@ -85,12 +86,12 @@ describe('Focus Data Service', () => {
                 title: 'commits'
             }});
 
-            await service.focusData("875670a38c40556f3c115dbeef1c4fd88cb240f2");
+            await service.commitFocusedData("875670a38c40556f3c115dbeef1c4fd88cb240f2");
             expect(store.state.gitHubData.focusedData.raw).to.equal(rawCommits[0]);
         });
 
         it('unfocus data, when called with unmatchind argument ID', async () => {
-            await service.focusData("1001");
+            await service.commitFocusedData("1001");
             expect(store.state.gitHubData.focusedData.raw).to.equal(null);
             expect(store.state.gitHubData.focusedData.mapped).to.equal(null);
         });

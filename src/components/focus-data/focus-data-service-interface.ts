@@ -1,4 +1,3 @@
 export interface FocusDataServiceInterface {
-    focusData(id: string);
-    setCameraToStart();
+    commitFocusedData(id: string);
 }
