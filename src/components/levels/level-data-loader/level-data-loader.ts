@@ -33,7 +33,8 @@ class LevelDataLoader implements LevelDataLoaderInterface {
 
             this.store.commit(mutationTypes.USED_DATA, {
                 raw: this.store.state.gitHubData.repos.raw,
-                mapped: this.store.state.gitHubData.repos.mapped
+                mapped: this.store.state.gitHubData.repos.mapped,
+                dataSrc: type
             });
 
             return Promise.resolve();
@@ -53,7 +54,8 @@ class LevelDataLoader implements LevelDataLoaderInterface {
 
             this.store.commit(mutationTypes.USED_DATA, {
                 raw: this.store.state.gitHubData.commits[repoName].raw,
-                mapped: this.store.state.gitHubData.commits[repoName].mapped
+                mapped: this.store.state.gitHubData.commits[repoName].mapped,
+                dataSrc: type
             });
 
             return Promise.resolve();
