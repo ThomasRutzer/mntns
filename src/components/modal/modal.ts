@@ -23,10 +23,7 @@ import { ModalServiceInterface } from './modal-service-interface';
          class="modal">
         <div class="modal__backdrop">
             <div class="modal__wrapper">
-                <div class="modal__container"
-                     @mouseenter="mouseMove = 0"
-                     @mouseleave="mouseMove = 1"
-                     v-mousemove-follow="{activated: mouseMove, maxOffsetY: -32, maxOffsetX: 32, transitionDuration: 1700}">
+                <div class="modal__container">
                     <transition name="modal__content-">
                         <div ref="content" 
                              v-show="isOpen"
@@ -59,9 +56,6 @@ export class ModalComponent extends Vue {
 
     @Provide()
     isOpen: boolean = false;
-
-    @Provide()
-    mouseMove: number = 1;
 
     @Watch('$store.state.activeModal')
     activeModalChangeHandler(newVal) {
