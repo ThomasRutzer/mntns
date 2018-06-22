@@ -1,5 +1,4 @@
-<div class="mnts"
-     @click="expandMnts()">
+<div class="mnts">
 
     <div v-if="isActivated"
          class="mnts__header revealing-content revealing-content--reveal">
@@ -19,9 +18,9 @@
 
     <transition name="mntns-label--show-transition">
         <div class="mnts__label mntns-label mntns-label--large-width"
-             :class="{'mntns__label--outside': focusedData.outside}"
-             :style="{left: focusedData.x + 'px', top: focusedData.y + 'px'}"
-             v-if="focusedData">
+             :class="{'mntns__label--outside': labelPos.outside}"
+             :style="{left: labelPos.x + 'px', top: labelPos.y + 'px'}"
+             v-if="extractedFocusData && !activeModal && labelPos.x && labelPos.y">
 
             <svg class="mntns-label__icon"
                  role="img">
@@ -33,23 +32,16 @@
                     {{level.title}}
                 </p>
                 <span>
-                    {{ focusedData.message }}
+                    {{ extractedFocusData.title }}
                 </span>
             </div>
         </div>
     </transition>
 
-    <transition name="mnts__detailed-data--show-transition">
-        <div v-if="isActivated && detailedData"
-             class="focus-data-details-data mnts__detailed-data">
-
-            <div class="focus-data-details-data__content"
-                 v-mousemove-follow="{maxOffsetY: -32, maxOffsetX: 32, transitionDuration: 1700}">
-                <a href="#"
-                   class="focus-data-details-data__close small-text-appearance text-color-highlight"
-                   @click.prevent="clearDetailedData()">
-                    Close(esc)
-                </a>
+    <modal :name="modalName">
+        <template v-if="level && extractedFocusData"
+                  slot="content">
+            <div class="focus-data-details-data__content">
 
                 <div class="focus-data-details-data__label mntns-label mntns-label--spacingless mntns-label--large-width">
 
@@ -63,15 +55,15 @@
                             {{level.title}}
                         </p>
                         <span>
-                        {{ detailedData.title }}
-                    </span>
+                            {{ extractedFocusData.title }}
+                        </span>
                     </div>
                 </div>
 
                 <div class="margin-top--m">
                     <a class="primary-button"
                        alt="view on Github"
-                       :href="detailedData.url">
+                       :href="extractedFocusData.url">
                         view on Github
                     </a>
                 </div>
@@ -89,14 +81,14 @@
 
                 <div v-if="level.index == 2">
                     <a href="#" alt="Back to overview"
-                       class="primary-button margin-top--m"
+                       class="primary-button margin-top--s"
                        @click.prevent="back()">
                         Back to overview
                     </a>
                 </div>
             </div>
 
-        </div>
-    </transition>
+        </template>
+    </modal>
 
 </div>

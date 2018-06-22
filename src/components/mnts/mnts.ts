@@ -1,64 +1,64 @@
-import {Component, Vue, Watch, Prop} from 'vue-property-decorator';
+import {Component, Vue, Watch, Prop, Provide} from 'vue-property-decorator';
 import { types, diContainer } from './../dependency-injection';
 
 import { mutationTypes } from './../../store';
 
 import { FocusDataServiceInterface } from '../focus-data/';
 import { LevelsServiceInterface } from './../levels';
-
 import config from './mnts-config';
-import { MediaQueryServiceInterface } from '../media-queries/media-query-service-interface';
-import {BreakpointsInterface} from '../media-queries/breakpoints-interface';
+import { ModalServiceInterface } from '../modal/modal-service-interface';
+import GeneratorManagerInterface from 'mntns-landscape/src/components/generator/manager/GeneratorManagerInterface';
+import * as Generator from 'mntns-landscape/src/components/generator';
 
 @Component({
     template: require('./mnts.html'),
     computed: {
+        activeModal() {
+            return this.$store.state.activeModal === this.modalName;
+        },
+
+        extractedFocusData() {
+            return this.$store.state.gitHubData.focusedData.extracted;
+        },
+
         level() {
             return  this.$store.state.levels.currentLevel;
         },
 
         isActivated() {
             if (this.$store.state.experimentContainer.activated) {
-                this.service.setCameraToStart();
+                this.generatorManager.setCamera('start');
             }
 
             return this.$store.state.experimentContainer.activated;
         }
     },
 })
-
 export class MntsComponent extends Vue {
+    private activeModal: boolean;
+
     /**
      * @type {Array} data > stores data to visualize mntns
      */
     private data: any[] = [];
 
     private isActivated: boolean;
-    private focusedData: {
+    private labelPos: {
         x?: number,
         y?: number,
         outside?: boolean,
-        message?: string
-    } = null;
+    } = {};
 
-    private detailedData: {
-        title: string,
-        url: string
-    } = null;
-
-    /**
-     * whether or not router link is activated
-     * concerning layout, it shall not on small devices
-     * @type {boolean}
-     */
-    private isLink: boolean = true;
-    private service: FocusDataServiceInterface;
+    private focusDataService: FocusDataServiceInterface;
     private levelsService: LevelsServiceInterface;
-
-    private mediaQueryService: MediaQueryServiceInterface;
+    private modalService: ModalServiceInterface;
+    private generatorManager: GeneratorManagerInterface;
 
     @Prop({default: 'mntns-scene1'})
     mId: string;
+
+    @Provide()
+    modalName: string = 'mntns-detailed-data';
 
     @Watch('$store.state.currentRoute.titleAnimatedIn')
     watchHandler() {
@@ -80,19 +80,18 @@ export class MntsComponent extends Vue {
     async mounted() {
         this.$store.commit(mutationTypes.DEACTIVATE_EXPERIMENT_CONTAINER);
 
-        // @ts-ignore: Cannot invoke an expression whose type lacks a call signature.
-        // Type 'FocusDataServiceInterface' has no compatible call signatures
-        this.service = diContainer.get<FocusDataServiceInterface>(types.FocusDataServiceFactory)(this.mId);
+        this.focusDataService = diContainer.get<FocusDataServiceInterface>(types.FocusDataService);
+
+        // currently from external npm-module
+        // and not injectable
+        this.generatorManager = Generator.GeneratorManagerFactory.getById(this.mId);
 
         // @ts-ignore: Cannot invoke an expression whose type lacks a call signature.
         // Type 'LevelsServiceInterface' has no compatible call signatures
         this.levelsService = diContainer.get<LevelsServiceInterface>(types.LevelsServiceFactory)();
         await this.levelsService.start();
 
-        this.mediaQueryService = diContainer.get<MediaQueryServiceInterface>(types.MediaQueryService);
-        this.mediaQueryService.on(diContainer.get<BreakpointsInterface>(types.Breakpoints)['m'], (mqEvent) => {
-            this.isLink = mqEvent.matches;
-        });
+        this.modalService = diContainer.get<ModalServiceInterface>(types.ModalService);
     }
 
     back() {
@@ -106,80 +105,31 @@ export class MntsComponent extends Vue {
     }
 
     clearDetailedData() {
-        this.detailedData = null;
-
-        document.removeEventListener(
-            'keydown',
-            this.clearKeyHandler,
-            false
-        );
+        if (this.activeModal) {
+            this.modalService.close();
+        }
     }
 
     updateDetailedData(): void {
-        this.detailedData = {
-            title: '',
-            url: ''
-        };
-
-        document.addEventListener(
-            'keydown',
-            this.clearKeyHandler,
-            false
-        );
-
-        switch (this.$store.state.levels.currentLevel.index) {
-            case(1):
-                this.detailedData.title = this.$store.state.gitHubData.focusedData.raw.name;
-                this.detailedData.url = `https://github.com/thomasrutzer/${this.$store.state.gitHubData.focusedData.raw.name}`;
-                break;
-
-            case (2):
-                this.detailedData.title = this.$store.state.gitHubData.focusedData.raw.commit.message;
-                this.detailedData.url = `https://github.com/thomasrutzer/mntns/commit/${this.$store.state.gitHubData.focusedData.raw.sha}`;
-        }
-
-        return;
-    }
-
-    clearFocusedData()  {
-        this.focusedData = null;
-    }
-
-    clearKeyHandler(e: KeyboardEvent) {
-        if (e.keyCode === 27) {
-            this.clearDetailedData();
+        if (!this.activeModal) {
+            this.modalService.open(this.modalName);
         }
     }
 
-    updateFocusedData(position: {x: number, y: number}) {
-        this.focusedData = {};
-        this.focusedData.outside = position.x > (window.innerWidth / 2);
-
-        this.focusedData.x = position.x;
-        this.focusedData.y = position.y;
-
-        switch (this.$store.state.levels.currentLevel.index) {
-            case(1):
-                this.focusedData.message = this.$store.state.gitHubData.focusedData.raw.name;
-                break;
-
-            case (2):
-                this.focusedData.message = this.$store.state.gitHubData.focusedData.raw.commit.message;
-                break;
-        }
+    clearLabel()  {
+        this.labelPos = {};
     }
 
-    expandMnts() {
+    updateLabel(position: {x: number, y: number}) {
+        this.labelPos = {};
+        this.labelPos.outside = position.x > (window.innerWidth / 2);
 
-        // concerning layout, on small devices,
-        // background click shall not trigger $router push
-        if (!this.isLink) return;
-
-        this.$router.push('/experiment');
+        this.labelPos.x = position.x;
+        this.labelPos.y = position.y;
     }
 
     /**
-     * @todo: refactoring required. Try to get rid of nested if conditions     *
+     * @todo: refactoring required. Try to get rid of nested if conditions
      * @param { SceneIntersectionModel } data
      */
     onIntersection(data: any) {
@@ -192,33 +142,33 @@ export class MntsComponent extends Vue {
 
         // close detailedData on another mousedown
         // and return...
-        if (this.detailedData && data.event.type === config.eventToUpdateLevel) {
+        if (this.activeModal && data.event.type === config.eventToUpdateLevel) {
             this.clearDetailedData();
             return;
         }
 
         // ...or return when detailedData is displayed
         // and no other mousedown caught
-        if (this.detailedData) {
+        if (this.activeModal) {
             return;
         }
 
         // certain scene objects might not be focused
         if (config.excludedFocusableObjectIds.indexOf(data.object.name) !== -1) {
-            this.clearFocusedData();
+            this.clearLabel();
             return;
         }
 
-        this.service.focusData(data.object.name);
+        this.focusDataService.commitFocusedData(data.object.name);
 
         if (data.event.type === config.eventToUpdateLevel) {
-            this.clearFocusedData();
+            this.clearLabel();
             this.updateDetailedData();
         } else {
             this.clearDetailedData();
 
             if (data.event.type === 'mousemove') {
-                this.updateFocusedData({x: data.event.x, y: data.event.y});
+                this.updateLabel({x: data.event.x, y: data.event.y});
             }
         }
     }
