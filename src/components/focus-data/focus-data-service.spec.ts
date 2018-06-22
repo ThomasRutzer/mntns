@@ -2,12 +2,11 @@ import { expect } from 'chai';
 import Vuex from 'vuex';
 import {actions, mutations, mutationTypes} from '../../store';
 
-import * as GeneratorModule from 'mntns-landscape/src/components/generator';
 import FocusDataService from './focus-data-service';
+import {FocusDataServiceInterface} from "./focus-data-service-interface";
 
 import rawRepos from './../../../mocks/github-repo-mock';
 import rawCommits from './../../../mocks/github-commit-mock';
-import {FocusDataServiceInterface} from "./focus-data-service-interface";
 const mappedRepos = [
     {
         id: 87546623,
@@ -18,7 +17,7 @@ const mappedRepos = [
 ];
 const mappedCommits = [];
 
-describe.only('Focus Data Service', () => {
+describe('Focus Data Service', () => {
     let service: FocusDataServiceInterface, store;
 
     before(() => {
@@ -27,7 +26,8 @@ describe.only('Focus Data Service', () => {
                 levels: {
                     currentLevel: {
                         index: 1,
-                        title: 'repositories'
+                        title: 'repositories',
+                        dataSrc: 'repos'
                     },
                 },
                 gitHubData: {
@@ -40,18 +40,18 @@ describe.only('Focus Data Service', () => {
                     focusedData: {
                         raw: null,
                         mapped: null,
-                        event: null
+                        extracted: null,
+                        id: null
                     },
                     usedData: {
                         raw: null,
-                        mapped: null
+                        mapped: null,
+                        dataSrc: null
                     },
-
                     repos: {
                         mapped: null,
                         raw: null,
                     },
-
                     commits: {}
                 },
             },
@@ -59,15 +59,15 @@ describe.only('Focus Data Service', () => {
             mutations
         });
 
-        const generatorManager = GeneratorModule.GeneratorManagerFactory.create('test');
-        service = new FocusDataService(store, generatorManager);
+        service = new FocusDataService(store);
     });
 
     describe('method commitFocusedData()', () => {
         it('when level is 1, focused data is repo', async () => {
             store.commit(mutationTypes.USED_DATA, {
                 raw: rawRepos,
-                mapped: mappedRepos
+                mapped: mappedRepos,
+                dataSrc: 'repos'
             });
 
             await service.commitFocusedData("87546623");
@@ -78,12 +78,14 @@ describe.only('Focus Data Service', () => {
 
             store.commit(mutationTypes.USED_DATA, {
                 raw: rawCommits,
-                mapped: mappedCommits
+                mapped: mappedCommits,
+                dataSrc: 'commits'
             });
 
             store.commit(mutationTypes.UPDATE_LEVEL, {level: {
                 index: 2,
-                title: 'commits'
+                title: 'commits',
+                dataSrc: 'commits'
             }});
 
             await service.commitFocusedData("875670a38c40556f3c115dbeef1c4fd88cb240f2");
@@ -94,6 +96,13 @@ describe.only('Focus Data Service', () => {
             await service.commitFocusedData("1001");
             expect(store.state.gitHubData.focusedData.raw).to.equal(null);
             expect(store.state.gitHubData.focusedData.mapped).to.equal(null);
+        });
+
+        it('commits expected extracted data for given dataSrc', async () => {
+            await service.commitFocusedData("1001");
+            expect(store.state.gitHubData.focusedData.extracted.title).to.equal('changed state.experimentContainer to its own object');
+            expect(store.state.gitHubData.focusedData.extracted.url).to.equal('https://api.github.com/repos/ThomasRutzer/portfolio/git/commits/875670a38c40556f3c115dbeef1c4fd88cb240f2');
+            expect(store.state.gitHubData.focusedData.extracted.description).to.equal(null);
         });
     });
 });
