@@ -1,13 +1,13 @@
-import chai, {expect} from 'chai';
+import chai, { expect } from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
-import {stub} from 'sinon';
-import {ComponentTest} from '../../util/component-test';
+chai.use(chaiAsPromised);
+import { stub, assert, spy } from 'sinon';
+import { ComponentTest } from '../../util/component-test';
 
 import Vue from 'vue';
 import Vuex from 'vuex';
 
 import {mutations, mutationTypes} from './../../store';
-
 import {LevelProgress} from './../levels/level-progress/level-progress';
 
 import rawRepos from './../../../mocks/github-repo-mock';
@@ -15,8 +15,6 @@ import rawCommits from './../../../mocks/github-commit-mock';
 
 import {MntsComponent} from './mnts';
 import {diContainer, types} from '../dependency-injection';
-
-chai.use(chaiAsPromised);
 
 const mappedRepos = [
     {
@@ -30,6 +28,7 @@ const mappedCommits = [];
 
 describe('MntsCmponent', () => {
     let componentTest: ComponentTest,
+        modalCloseCalled: boolean = false,
         store, state;
 
     before(() => {
@@ -58,21 +57,17 @@ describe('MntsCmponent', () => {
                     mapped: null,
                     raw: null,
                 },
+                focusedData: {
+                    raw: null,
+                    mapped: null,
+                    extracted: null,
+                    id: null
+                },
                 usedData: {
                     raw: null,
-                    mapped: null
+                    mapped: null,
+                    dataSrc: null
                 },
-                focusedData: {
-                    raw: {
-                        name: 'any',
-                        url: 'any'
-                    },
-                    event: {
-                        x: 0,
-                        y: 0,
-                        type: null
-                    }
-                }
             },
             levels: {
                 currentLevel: {
@@ -88,21 +83,24 @@ describe('MntsCmponent', () => {
               state,
               mutations
             }))
-            .withArgs(types.LevelsServiceFactory).returns(() => {
-              return {
-                nextStep: () => {},
-                previousStep: () => {},
-                start: () => {
-                    return Promise.resolve();
-                }
-              }})
-            .withArgs(types.FocusDataServiceFactory).returns(() => {
-              return {
-                focusData: (id: string) => {
+            .withArgs(types.FocusDataService).returns({
+                commitFocusedData: () => {}
+            })
+            .withArgs(types.ModalService).returns({
+                close: () => {
+                    modalCloseCalled = true;
                 },
-                setCameraToStart: () => {
-                }
-            }});
+                open: () => {}
+            })
+            .withArgs(types.LevelsServiceFactory).returns(() => {
+                return {
+                    nextStep: () => {},
+                    previousStep: () => {},
+                    start: () => {
+                        return Promise.resolve();
+                    }
+                }});
+
 
         store = diContainer.get(types.Store);
     });
@@ -111,6 +109,10 @@ describe('MntsCmponent', () => {
         // @ts-ignore
         // Property 'restore' does not exist on type '<T>(serviceIdentifier: string | symbol | Newable<T> | Abstract<T>) => T'.
         diContainer.get.restore();
+    });
+
+    afterEach(() => {
+       modalCloseCalled = false;
     });
 
     it('sets data, when title is animated in and data is mapped', async () => {
@@ -134,121 +136,45 @@ describe('MntsCmponent', () => {
         });
     });
 
-    it('clears detailed data section on any step back', async () => {
+    it('closes modal on step back', async () => {
         componentTest.createComponent({store});
 
         await componentTest.execute((vm) => {
+            // @ts-ignore
+            const clearDataSpy = spy(vm.$children[0], 'clearDetailedData');
+
             // @ts-ignore Property 'onIntersection' does not exist on type 'Vue | Element | Vue[] | Element[]'.
             //Property 'onIntersection' does not exist on type 'Vue'.
             vm.$refs.mntns.back();
-            // @ts-ignore Property 'onIntersection' does not exist on type 'Vue | Element | Vue[] | Element[]'.
-            //Property 'onIntersection' does not exist on type 'Vue'.
-            expect(vm.$refs.mntns.detailedData).to.equal(null);
+
+            assert.called(clearDataSpy);
+
+            clearDataSpy.restore();
         });
     });
 
-    it('clears detailed data section on any step forwards', async () => {
+    it('closes modal on step forwards', async () => {
         componentTest.createComponent({store});
 
         await componentTest.execute((vm) => {
+            /// @ts-ignore
+            const clearDataSpy = spy(vm.$children[0], 'clearDetailedData');
+
             // @ts-ignore Property 'onIntersection' does not exist on type 'Vue | Element | Vue[] | Element[]'.
             //Property 'onIntersection' does not exist on type 'Vue'.
-            vm.$refs.mntns.back();
-            // @ts-ignore Property 'onIntersection' does not exist on type 'Vue | Element | Vue[] | Element[]'.
-            //Property 'onIntersection' does not exist on type 'Vue'.
-            expect(vm.$refs.mntns.detailedData).to.equal(null);
+            vm.$refs.mntns.forwards();
+
+            assert.called(clearDataSpy);
+
+            clearDataSpy.restore();
         });
     });
 
-    it('filters proper focusedData when current level is 1', async() => {
-        componentTest.createComponent({store});
-
-        store.commit(mutationTypes.UPDATE_LEVEL, {
-            level: {
-                index: 1,
-                title: 'Repositories'
-            }
-        });
-
-        await componentTest.execute((vm) => {
-            // @ts-ignore Property 'onIntersection' does not exist on type 'Vue | Element | Vue[] | Element[]'.
-            //Property 'onIntersection' does not exist on type 'Vue'.
-            vm.$refs.mntns.updateDetailedData();
-            // @ts-ignore Property 'onIntersection' does not exist on type 'Vue | Element | Vue[] | Element[]'.
-            //Property 'onIntersection' does not exist on type 'Vue'.
-            expect(vm.$refs.mntns.detailedData.title).to.equal('any');
-            // @ts-ignore Property 'onIntersection' does not exist on type 'Vue | Element | Vue[] | Element[]'.
-            //Property 'onIntersection' does not exist on type 'Vue'.
-            expect(vm.$refs.mntns.detailedData.url.endsWith('any')).to.equal(true);
-        });
-    });
-
-    it('filters proper focusedData when current level is 2', async() => {
-        componentTest.createComponent({store});
-
-        store.commit(mutationTypes.UPDATE_LEVEL, {
-            level: {
-                index: 2,
-                title: 'Commits'
-            }
-        });
-
-        store.commit(mutationTypes.FOCUS_REPO, {
-            raw: rawCommits[0],
-            mapped: mappedCommits[0]
-        });
-
-        await componentTest.execute((vm) => {
-            // @ts-ignore Property 'onIntersection' does not exist on type 'Vue | Element | Vue[] | Element[]'.
-            //Property 'onIntersection' does not exist on type 'Vue'.
-            vm.$refs.mntns.updateDetailedData();
-            // @ts-ignore Property 'onIntersection' does not exist on type 'Vue | Element | Vue[] | Element[]'.
-            //Property 'onIntersection' does not exist on type 'Vue'.
-            expect(vm.$refs.mntns.detailedData.title).to.equal('changed state.experimentContainer to its own object');
-            // @ts-ignore Property 'onIntersection' does not exist on type 'Vue | Element | Vue[] | Element[]'.
-            //Property 'onIntersection' does not exist on type 'Vue'.
-            expect(vm.$refs.mntns.detailedData.url).to.equal('https://github.com/thomasrutzer/mntns/commit/875670a38c40556f3c115dbeef1c4fd88cb240f2');
-        });
-    });
-
-    it('closes detailed data when its open and another mousedown event occured', async () => {
-        componentTest.createComponent({store});
-        store.commit(mutationTypes.ACTIVATE_EXPERIMENT_CONTAINER);
-        store.commit(mutationTypes.UPDATE_LEVEL, {
-            level: 1
-        });
-
-        await componentTest.execute((vm) => {
-            // @ts-ignore Property 'onIntersection' does not exist on type 'Vue | Element | Vue[] | Element[]'.
-            //Property 'onIntersection' does not exist on type 'Vue'.
-            vm.$refs.mntns.focusedData = 'any';
-
-            // @ts-ignore Property 'onIntersection' does not exist on type 'Vue | Element | Vue[] | Element[]'.
-            //Property 'onIntersection' does not exist on type 'Vue'.
-            vm.$refs.mntns.onIntersection({
-                object: {
-                    name: 'any'
-                },
-                event: {
-                    type: 'mousedown'
-                }
-            });
-
-            // @ts-ignore Property 'onIntersection' does not exist on type 'Vue | Element | Vue[] | Element[]'.
-            //Property 'onIntersection' does not exist on type 'Vue'.
-            expect(vm.$refs.mntns.focusedData).to.equal(null);
-        });
-    });
-
-    it('just clears focused data when intersected object is any of excluded', async () => {
+    it('closes modal when intersected object is any of excluded', async () => {
         componentTest.createComponent({store});
         store.commit(mutationTypes.ACTIVATE_EXPERIMENT_CONTAINER);
 
         await componentTest.execute((vm) => {
-            // @ts-ignore Property 'onIntersection' does not exist on type 'Vue | Element | Vue[] | Element[]'.
-            //Property 'onIntersection' does not exist on type 'Vue'.
-            vm.$refs.mntns.focusedData = 'any';
-
             // @ts-ignore Property 'onIntersection' does not exist on type 'Vue | Element | Vue[] | Element[]'.
             //Property 'onIntersection' does not exist on type 'Vue'.
             vm.$refs.mntns.onIntersection({
@@ -259,7 +185,7 @@ describe('MntsCmponent', () => {
 
             // @ts-ignore Property 'onIntersection' does not exist on type 'Vue | Element | Vue[] | Element[]'.
             //Property 'onIntersection' does not exist on type 'Vue'.
-            expect(vm.$refs.mntns.focusedData).to.equal(null);
+            expect(vm.$refs.mntns.activeModal).to.equal(false);
         });
     });
 });
