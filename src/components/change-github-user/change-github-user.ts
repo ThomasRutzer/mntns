@@ -57,5 +57,6 @@ export class ChangeGithubUserComponent extends Vue {
                 this.requestedUserName = this.lastUserName;
             }
         })
+        
     }
 }
