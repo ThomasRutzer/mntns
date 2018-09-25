@@ -33,7 +33,8 @@ const actions = {
 
         // currently, raw data shall only
         // load once, so we can check here
-        if (!state.gitHubData.repos.raw) {
+        // @todo: implement cache logic here
+        if (true) {
             const githubApiClient = diContainer.get<GithubApiClientInterface>(types.GithubApiClient);
             const dataMapperService = diContainer.get<DataMapperServiceInterface>(types.DataMapperService);
             const repoMappers = diContainer.get<MapperInterface[]>(types.RepositoryMapper);

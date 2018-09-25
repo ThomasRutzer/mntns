@@ -2,17 +2,25 @@
     <div class="experiment-start__content">
         <div v-show="!isStarted">
             <h1 class="experiment-start__title"
-                v-title-animation="{tween: true}">
-                Experiment is getting ready for github user @{{ currentGithubUser }}⚒️️
+                v-title-animation="{tween: true}"
+            >
+                Experiment is getting ready for github user @{{ currentGithubUser }}
             </h1>
-
             <div class="margin-top--m">
-                <p class="primary-button revealing-content margin--none"
-                   :class="{'revealing-content--reveal': canStart}"
-                   @click="startExperiment()">start</p>
+                <div>
+                    <a class="primary-button revealing-content margin--none"
+                       :class="{'revealing-content--reveal': canStart}"
+                       @click="startExperiment()">start</a>
+                </div>
+
+                <div class="margin-top--s">
+                    <router-link class="primary-button revealing-content revealing-content--delayed-300"
+                                 :class="{'revealing-content--reveal': canStart}"
+                                 :to="'/experiment/update'">look up your account</router-link>
+                </div>
 
                 <p v-show="cannotStart"
-                      class="revealing-content revealing-content--reveal margin--none">
+                   class="revealing-content revealing-content--reveal margin--none">
                 ...but unfortunately, there´s a network error right now.
                 </p>
             </div>

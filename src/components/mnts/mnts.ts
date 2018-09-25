@@ -95,13 +95,13 @@ export class MntsComponent extends Vue {
     }
 
     back() {
-        this.clearDetailedData();
         this.levelsService.previousStep();
+        this.clearDetailedData();
     }
 
     forwards() {
-        this.clearDetailedData();
         this.levelsService.nextStep();
+        this.clearDetailedData();
     }
 
     clearDetailedData() {
@@ -143,7 +143,7 @@ export class MntsComponent extends Vue {
         // close detailedData on another mousedown
         // and return...
         if (this.activeModal && data.event.type === config.eventToUpdateLevel) {
-            this.clearDetailedData();
+            // this.clearDetailedData();
             return;
         }
 

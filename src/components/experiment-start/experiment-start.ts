@@ -1,8 +1,6 @@
 import {Component} from 'vue-property-decorator';
 import {RouterDefaultComponentAbstract} from './../router';
 
-import { gitHubConfig } from './../github-api-client';
-
 import {mutationTypes} from './../../store/';
 
 @Component({
@@ -17,13 +15,16 @@ import {mutationTypes} from './../../store/';
         cannotStart() {
             return this.$store.state.gitHubData.loadingError &&
                 this.titleIn;
+        },
+
+        currentGithubUser() {
+            return this.$store.state.gitHubData.userName;
         }
     }
 })
 
 export class ExperimentStartComponent extends RouterDefaultComponentAbstract {
     private isStarted: boolean = false;
-    private currentGithubUser: string = gitHubConfig.gitHubUsername;
 
     beforeCreate() {
         this.$store.commit(mutationTypes.EXPAND_EXPERIMENT_CONTAINER);

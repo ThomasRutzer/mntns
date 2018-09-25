@@ -34,6 +34,7 @@ export interface StateInterface {
     },
 
     gitHubData: {
+        userName: string,
         startedLoading: boolean,
         finishedLoading: boolean,
         loadingError: boolean,

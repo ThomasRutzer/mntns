@@ -11,3 +11,28 @@
 .experiment-start__title {
   max-width: 700px;
 }
+
+.experiment-start__form-trigger {
+  position: relative;
+  opacity: 1;
+  transition: opacity 300ms ease-out;
+
+  &:after {
+    width: 3px;
+    content: '';
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: -3px;
+    display: none;
+    background-color: $color-dark;
+  }
+
+  &:hover {
+    opacity: 0.5;
+
+    &:after {
+      display: block;
+    }
+  }
+}

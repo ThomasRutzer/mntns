@@ -14,6 +14,8 @@ const state: StateInterface = {
     },
 
     gitHubData: {
+        userName: 'thomasrutzer',
+
         startedLoading: null,
         finishedLoading: null,
         loadingError: null,

@@ -37,6 +37,10 @@ const mutations = {
         state.currentRoute.footerVisible = payload;
     },
 
+    [types.CHANGE_GITHUB_USERNAME](state, payload) {
+        state.gitHubData.userName = payload.userName;
+    },
+
     [types.GITHUB_API_STARTED](state) {
         state.gitHubData.startedLoading = true;
         state.gitHubData.finishedLoading = false;

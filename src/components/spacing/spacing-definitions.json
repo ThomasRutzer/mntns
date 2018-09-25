@@ -1,6 +1,7 @@
 {
   "spacing-sizes": {
     "none": "0",
+    "xs": "8px",
     "s": "16px",
     "m": "32px",
     "l": "64px",

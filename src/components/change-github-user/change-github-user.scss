@@ -1,0 +1,84 @@
+@import "./../colors/colors.json";
+@import "./../spacing/spacing-definitions.json";
+
+$change-github-user-border-height: 2px;
+$change-github-user-actions-offset: 25px;
+
+.change-github-user__flex-wrapper {
+  display: inline-flex;
+  position: relative;
+}
+
+.change-github-user__input-wrapper {
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: $change-github-user-border-height;
+    background-color: $color-highlight;
+    transition: width 250ms ease-out;
+  }
+
+  .change-github-user--focused & {
+    &:after {
+      width: 100%;
+    }
+  }
+}
+
+.change-github-user__prefix {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  padding-left: map_get($spacing-sizes, 's');
+  z-index: 1;
+}
+
+.change-github-user__submit {
+  position: relative;
+  background: none;
+  border: none;
+  width: 50px;
+  left: - #{$change-github-user-actions-offset};
+
+  svg {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 64px;
+    fill: $color-highlight;
+    transform: translateY(-50%) rotateZ(-180deg);
+  }
+
+  &:disabled {
+    svg {
+      fill: $color-dark;
+    }
+  }
+}
+
+.change-github-user__input {
+  background: none;
+  box-shadow: none;
+  appearance: none;
+  border: none;
+  border-bottom: $change-github-user-border-height solid $color-dark;
+  color: $color-dark;
+  background-color: $color-darkest;
+  padding-left: 40px;
+  padding-right: 5px + $change-github-user-actions-offset;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.change-github-user__label {
+  display: block;
+  margin-bottom: map_get($spacing-sizes, 'xs');
+}

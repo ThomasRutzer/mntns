@@ -10,6 +10,7 @@ import { FooterbarComponent } from  './components/footerbar';
 
 // import any other modules
 import './components/caches';
+import './components/change-github-user';
 import './components/focus-data';
 import './components/mousemove-follow';
 import './components/github-api-client';

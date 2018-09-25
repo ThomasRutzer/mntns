@@ -8,7 +8,6 @@ import { actionTypes, mutationTypes } from './../../../store';
 import { Store } from 'vuex';
 import { LevelDataLoaderInterface } from './level-data-loader-interface';
 import landscapeConfig from './../../mnts/mnts-config';
-import { gitHubConfig } from './../../github-api-client';
 import levelDataSources from './level-data-sources';
 
 @injectable()
@@ -26,7 +25,7 @@ class LevelDataLoader implements LevelDataLoaderInterface {
             await this.store.dispatch(
                 actionTypes.RETRIEVE_GITHUB_REPOS,
                 {
-                    userName: gitHubConfig.gitHubUsername,
+                    userName: this.store.state.gitHubData.userName,
                     perPage: landscapeConfig.maxSceneItems
                 }
             );
@@ -47,7 +46,7 @@ class LevelDataLoader implements LevelDataLoaderInterface {
                 actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO,
                 {
                     repoName,
-                    userName: gitHubConfig.gitHubUsername,
+                    userName: this.store.state.gitHubData.userName,
                     perPage: landscapeConfig.maxSceneItems
                 }
             );

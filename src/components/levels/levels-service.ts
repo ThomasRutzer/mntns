@@ -1,10 +1,7 @@
 import { injectable, inject } from 'inversify';
 import types from './../dependency-injection/types';
 import * as mutationTypes from './../../store/mutation-types';
-import * as actionTypes from './../../store/action-types';
 import { Store } from 'vuex';
-import landscapeConfig from './../mnts/mnts-config';
-import { gitHubConfig } from './../github-api-client';
 import { LevelsServiceInterface } from './levels-service-interface';
 import LevelModelInterface from './level-model/level-model-interface';
 import {LevelDataLoaderInterface} from './level-data-loader/level-data-loader-interface';

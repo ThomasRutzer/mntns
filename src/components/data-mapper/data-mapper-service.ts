@@ -86,6 +86,7 @@ class DataMapperService implements DataMapperServiceInterface {
             });
         });
 
+        this.dataMinMaxCache.clearEntireCache();
         return mappedData;
     }
 }

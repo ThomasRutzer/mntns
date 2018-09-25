@@ -1,0 +1,39 @@
+<div class="content-container">
+    <form class="change-github-user revealing-content revealing-content--reveal"
+          :class="componentClasses"
+          @submit.prevent="onSubmit"
+    >
+        <label class="change-github-user__label"
+               for="change-github-user-input">
+            enter your Github username
+        </label>
+        <div class="change-github-user__flex-wrapper">
+            <span class="change-github-user__prefix h1-appearance">
+            @
+        </span>
+            <div class="change-github-user__input-wrapper">
+                <input class="change-github-user__input h1-appearance"
+                       id="change-github-user-input"
+                       v-model="requestedUserName"
+                       :disabled="isDisabled"
+                       @focus="isFocused = true"
+                       @blur="isFocused = false"
+                >
+            </div>
+            <button class="change-github-user__submit"
+                    :disabled="!validInput || isDisabled"
+                    type="submit"
+            >
+                <svg version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
+                <g>
+                    <path d="M8.1,32.5h49.3h0.5v-1h-0.5H8.1l4.6-4.6l0.4-0.4l-0.7-0.7L12,26.1l-5.5,5.5L6.1,32l0.6,0.6L7,32.9l5,5l0.4,0.4
+                    l0.7-0.7l-0.4-0.4L8.1,32.5z"/>
+                </g>
+            </svg>
+            </button>
+        </div>
+    </form>
+</div>
