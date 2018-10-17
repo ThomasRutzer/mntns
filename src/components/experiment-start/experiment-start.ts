@@ -8,7 +8,8 @@ import {mutationTypes} from './../../store/';
     computed: {
         canStart() {
             return !this.$store.state.gitHubData.loadingError &&
-                this.$store.state.gitHubData.repos.mapped &&
+                this.$store.state.gitHubData.repos[this.$store.state.gitHubData.userName] &&
+                this.$store.state.gitHubData.repos[this.$store.state.gitHubData.userName].mapped &&
                 this.titleIn;
         },
 
