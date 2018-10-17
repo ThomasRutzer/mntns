@@ -1,9 +1,9 @@
 import DataMapperService from './data-mapper-service';
-import { DataMapperServiceInterface } from "./";
+import { DataMapperServiceInterface } from './';
 import { expect } from 'chai';
 
 import data from './../../../mocks/github-repo-mock';
-import {DataMinMaxCacheServiceInterface} from "../caches/data-min-max-cache-service-interface";
+import {DataMinMaxCacheServiceInterface} from '../caches/data-min-max-cache-service-interface';
 
 describe('Data Mapper', () => {
     let mapper: DataMapperServiceInterface = null;
