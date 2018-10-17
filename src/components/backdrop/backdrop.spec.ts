@@ -9,21 +9,19 @@ import { BackdropComponent } from './backdrop';
 
 describe('Backdrop', () => {
     let componentTest: ComponentTest,
-        windowWidthStub,
         diContainerStub;
 
     before(() => {
         Vue.directive('mousemove-follow', {});
 
-        windowWidthStub = stub(window, 'innerWidth').returns(500);
         diContainerStub = stub(diContainer, 'get')
+            // creating a dumb MediaQueryService mock
+            // which just returns a match
             .withArgs(types.MediaQueryService).returns({
                 on: (breakpoint, callback) => {
-                        if(breakpoint.match(/\d+/g).map(Number)[0] > window.innerWidth) {
-                            callback(true)
-                        }
-                    }
-                })
+                    callback({ matches: true });
+                }
+            })
             .withArgs(types.Breakpoints).returns({
                 's': '480px',
                 'm': '768px',
@@ -38,10 +36,8 @@ describe('Backdrop', () => {
     });
 
     after(() => {
-       windowWidthStub.restore();
-
-       // @ts-ignore
-       diContainer.get.restore();
+        // @ts-ignore
+        diContainer.get.restore();
     });
 
     it('sets given trigger label', async () => {
@@ -56,6 +52,8 @@ describe('Backdrop', () => {
         componentTest.createComponent();
 
         await componentTest.execute((vm) => {
+            // since MediaQueryService Mock says it matches
+            // property shall be 1 for match
             // @ts-ignore  Property 'mousemoveActivated' does not exist on type 'Vue | Element | Vue[] | Element[]'.
             // Property 'mousemoveActivated' does not exist on type 'Vue'.
             expect(vm.$refs.backdrop.mousemoveActivated).to.equal(1);
