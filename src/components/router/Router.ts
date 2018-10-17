@@ -5,7 +5,7 @@ import { HomeComponent }  from './../home';
 import { ContactComponent } from './../contact';
 import { ExperimentStartComponent } from './../experiment-start';
 import { MntsComponent } from './../mnts';
-import { ChangeGithubUserComponent } from "../change-github-user/change-github-user";
+import { ExperimentUpdateComponent } from '../experiment-upate/experiment-update';
 
 Vue.use(VueRouter);
 
@@ -27,9 +27,9 @@ export const createRoutes: () => RouteConfig[] = () => [
     },
 
     {
-        path: '/experiment/update',
+        path: '/update',
         components: {
-            content: ChangeGithubUserComponent,
+            content: ExperimentUpdateComponent,
             'experiment-container': MntsComponent,
         },
     },
