@@ -11,7 +11,6 @@ import {mutations, mutationTypes} from './../../store';
 import {LevelProgress} from './../levels/level-progress/level-progress';
 
 import rawRepos from './../../../mocks/github-repo-mock';
-import rawCommits from './../../../mocks/github-commit-mock';
 
 import {MntsComponent} from './mnts';
 import {diContainer, types} from '../dependency-injection';
@@ -24,7 +23,6 @@ const mappedRepos = [
         id: 2
     }
 ];
-const mappedCommits = [];
 
 describe('MntsCmponent', () => {
     let componentTest: ComponentTest,

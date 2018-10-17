@@ -1,8 +1,8 @@
-import {stub} from 'sinon';
-import {expect} from 'chai';
+import { stub } from 'sinon';
+import { expect } from 'chai';
 import MediaQueryService from './media-query-service';
-import {MediaQueryServiceInterface} from "./media-query-service-interface";
-import {BreakpointsInterface} from "./breakpoints-interface";
+import { MediaQueryServiceInterface } from './media-query-service-interface';
+import { BreakpointsInterface } from './breakpoints-interface';
 
 describe('Media Query Service', () => {
     let service: MediaQueryServiceInterface = null, matchMediaStub, windowStubWidth;

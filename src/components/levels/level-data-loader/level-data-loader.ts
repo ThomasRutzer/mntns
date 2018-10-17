@@ -30,6 +30,7 @@ class LevelDataLoader implements LevelDataLoaderInterface {
                 }
             );
 
+            console.log(this.store.state.gitHubData.repos)
             this.store.commit(mutationTypes.USED_DATA, {
                 raw: this.store.state.gitHubData.repos[this.store.state.gitHubData.userName].raw,
                 mapped: this.store.state.gitHubData.repos[this.store.state.gitHubData.userName].mapped,

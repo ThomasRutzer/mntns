@@ -4,11 +4,12 @@ import Vuex from 'vuex';
 
 import Component from 'vue-class-component';
 import { expect } from 'chai';
-import {stub} from 'sinon';
+import { stub } from 'sinon';
+
 import { ComponentTest } from '../../util/component-test';
 import { FooterbarComponent } from './footerbar';
 import RouterLink from './../router/Router-Link';
-import {diContainer, types} from '../dependency-injection';
+import { diContainer, types } from '../dependency-injection';
 
 const links = [
     new RouterLink('Kontakt', '/contact'),

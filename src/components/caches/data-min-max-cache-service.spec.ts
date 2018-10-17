@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import DataMinMaxCacheService from './data-min-max-cache-service';
 import { DataMinMaxCacheServiceInterface } from './data-min-max-cache-service-interface';
 
-describe.only('DataMinMaxCache', () => {
+describe('DataMinMaxCache', () => {
     let cache: DataMinMaxCacheServiceInterface = null;
 
     beforeEach(() => {

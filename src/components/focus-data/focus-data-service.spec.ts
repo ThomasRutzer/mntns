@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 import Vuex from 'vuex';
-import {actions, mutations, mutationTypes} from '../../store';
+import { actions, mutations, mutationTypes } from '../../store';
 
 import FocusDataService from './focus-data-service';
-import {FocusDataServiceInterface} from "./focus-data-service-interface";
+import { FocusDataServiceInterface } from "./focus-data-service-interface";
 
 import rawRepos from './../../../mocks/github-repo-mock';
 import rawCommits from './../../../mocks/github-commit-mock';

@@ -1,5 +1,5 @@
-import {expect} from 'chai';
-import {spy, stub, assert} from 'sinon';
+import { expect } from 'chai';
+import { spy, stub, assert } from 'sinon';
 
 import Vue from 'vue';
 import Vuex from 'vuex';

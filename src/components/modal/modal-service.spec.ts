@@ -4,7 +4,6 @@ import Vuex from 'vuex';
 import { mutations } from '../../store';
 import { ModalServiceInterface } from './modal-service-interface';
 import ModalService from './modal-service';
-import diContainer from "../dependency-injection/container";
 
 describe('Modal Service', () => {
     let service: ModalServiceInterface,

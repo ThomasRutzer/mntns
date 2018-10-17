@@ -21,7 +21,7 @@ class MockNavbarComponent extends NavbarComponent {
     }
 }
 
-describe('Navbar component', () => {
+describe('NavbarComponent', () => {
     let componentTest: ComponentTest;
     let router: VueRouter;
 
@@ -55,15 +55,6 @@ describe('Navbar component', () => {
         await componentTest.execute((vm) => { // ensure Vue has bootstrapped/run change detection
             debugger;
             expect(vm.$el.querySelectorAll('.navbar__list li')[0].textContent).to.equal(links[0].name);
-        });
-    });
-
-    it('adds active class properly', async () => {
-        componentTest.createComponent({ router: router });
-
-        // assuming route is "/"
-        await componentTest.execute((vm) => {
-            expect(vm.$el.querySelectorAll('.navbar__list li.navbar__list-item--active')[0].textContent).to.equal(links[0].name);
         });
     });
 });

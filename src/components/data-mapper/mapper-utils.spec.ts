@@ -1,6 +1,6 @@
 import * as mapperUtils from './mapper-utils';
 import is_same_day from 'date-fns/is_same_day';
-import {expect} from 'chai';
+import { expect } from 'chai';
 import reposMock from './../../../mocks/github-repo-mock';
 
 describe('mapper utils', () => {

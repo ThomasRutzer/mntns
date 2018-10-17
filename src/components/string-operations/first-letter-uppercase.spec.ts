@@ -1,5 +1,5 @@
-import firstLetterUppercase from './first-letter-uppercase';
 import {expect} from 'chai';
+import firstLetterUppercase from './first-letter-uppercase';
 
 describe('first letter uppercase util', () => {
     it('makes first letter uppercase for given string', () => {

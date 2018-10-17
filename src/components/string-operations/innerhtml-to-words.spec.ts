@@ -1,5 +1,5 @@
+import { expect } from 'chai';
 import textToWords from './innerhtml-to-words';
-import {expect} from 'chai';
 
 describe('innerHTMLToWords', () => {
     it('splits correctly', () => {
