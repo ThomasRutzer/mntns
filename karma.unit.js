@@ -5,6 +5,7 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['mocha', 'chai', 'sinon'],
     files: [
+      'node_modules/babel-polyfill/dist/polyfill.min.js', // ES6 compatibility
       'node_modules/es6-promise/dist/es6-promise.auto.js',
       'src/test.ts'
     ],
