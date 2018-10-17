@@ -43,7 +43,7 @@ class GithubApiClient implements GithubApiClientInterface {
      * @param {number} maxItemCount, where 0 equals all
      * @return {AxiosPromise}
      */
-    getCommits(repoName: string, userName: string, maxItemCount: number = 0) {
+    getCommits(repoName: string, userName: string, maxItemCount: number = 0): AxiosPromise {
         return this.httpClient.get(`${baseUrl}/repos/${userName}/${repoName}/commits?per_page=${maxItemCount}`);
     }
 }
