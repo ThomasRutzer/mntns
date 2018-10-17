@@ -1,0 +1,13 @@
+input {
+  background: none;
+  box-shadow: none;
+  appearance: none;
+  border: none;
+  color: $color-dark;
+  padding-right: map_get($spacing-sizes, 's');
+  width: 100%;
+
+  &:focus {
+    outline: 0;
+  }
+}
