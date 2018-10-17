@@ -37,7 +37,11 @@ export class ExperimentContainerComponent extends Vue {
     created() {
         this.$router.beforeEach((to, from, next) => {
             this.transition = from.path === '/' || to.path === '/';
-            this.expandTransition = from.path === '/experiment' || to.path === '/experiment';
+            this.expandTransition =
+                from.path === '/experiment' ||
+                to.path === '/experiment' ||
+                from.path === '/update' ||
+                to.path === '/update';
             next();
         });
     }
