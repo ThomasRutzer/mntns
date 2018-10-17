@@ -67,8 +67,10 @@ const mutations = {
     },
 
     [types.STORE_GITHUB_REPOS](state, payload) {
-        state.gitHubData.repos.mapped = payload.mappedRepos;
-        state.gitHubData.repos.raw = payload.rawRepos;
+        state.gitHubData.repos[payload.userName] = {
+            mapped: payload.mappedRepos,
+            raw: payload.rawRepos
+        };
     },
 
     [types.STORE_COMMIT](state, payload) {
