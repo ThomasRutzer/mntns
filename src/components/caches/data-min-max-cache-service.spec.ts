@@ -1,8 +1,8 @@
-import DataMinMaxCacheService from './data-min-max-cache-service';
-import {DataMinMaxCacheServiceInterface} from "./data-min-max-cache-service-interface";
 import { expect } from 'chai';
+import DataMinMaxCacheService from './data-min-max-cache-service';
+import { DataMinMaxCacheServiceInterface } from './data-min-max-cache-service-interface';
 
-describe('DataMinMaxCache', () => {
+describe.only('DataMinMaxCache', () => {
     let cache: DataMinMaxCacheServiceInterface = null;
 
     beforeEach(() => {
