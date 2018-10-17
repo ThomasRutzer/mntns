@@ -70,14 +70,19 @@ export interface StateInterface {
 
         repos: {
             /**
-             * mapped repos to match mntns interface
+             * key should be equivalent to userName
              */
-            mapped: object,
+            [key: string]: {
+                /**
+                * mapped repos to match mntns interface
+                */
+                mapped: object,
 
-            /**
-             * stores retrieved repos from GitHub,
-             */
-            raw: object,
+                /**
+                * stores retrieved repos from GitHub,
+                */
+                raw: object,
+            }
         },
 
         commits: object

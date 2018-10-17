@@ -36,10 +36,7 @@ const state: StateInterface = {
             dataSrc: null
         },
 
-        repos: {
-            mapped: null,
-            raw: null,
-        },
+        repos: {},
 
         commits: {}
     },
