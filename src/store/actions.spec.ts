@@ -1,7 +1,11 @@
-import { expect } from 'chai';
-import {stub} from 'sinon';
 import Vuex from 'vuex';
 import axios from 'axios';
+
+import chai, { expect } from 'chai';
+import { stub } from 'sinon';
+import * as chaiAsPromised from 'chai-as-promised';
+chai.use(chaiAsPromised);
+
 import { diContainer, types } from './../components/dependency-injection';
 import MockAdapter from 'axios-mock-adapter';
 
@@ -9,7 +13,7 @@ import { reposMappers } from '../components/data-mapper/mappers';
 import repoMock from './../../mocks/github-repo-mock';
 import commitsMock from './../../mocks/github-commit-mock';
 
-import {baseUrl} from '../components/github-api-client/github-api-client';
+import { baseUrl } from '../components/github-api-client/github-api-client';
 import './../components/github-api-client';
 import '../components/data-mapper';
 
@@ -24,7 +28,6 @@ describe('actions', () => {
     let state, store, diContainerStub;
 
     before(() => {
-
         diContainerStub = stub(diContainer, 'get')
             .withArgs(types.DataMinMaxCache).returns({
                 cacheProperty: (dataSetId: string, property: string, minMaxValues: {min:any,max:any}) => {},
@@ -52,10 +55,7 @@ describe('actions', () => {
 
         state = {
             gitHubData: {
-                repos: {
-                    mapped: null,
-                    raw: null,
-                },
+                repos: {},
                 commits: {}
             }
         };
@@ -95,7 +95,7 @@ describe('actions', () => {
 
         it('adds repos to store.state', async () => {
            await actions[actionTypes.RETRIEVE_GITHUB_REPOS]({commit: store.commit, state: state}, { userName: mockGithubUserName, perPage: 10 });
-           expect(store.state.gitHubData.repos.mapped.length).to.equal(2);
+           expect(store.state.gitHubData.repos[mockGithubUserName].mapped.length).to.equal(2);
        });
     });
 

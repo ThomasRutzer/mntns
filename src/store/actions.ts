@@ -28,28 +28,30 @@ const actions = {
      * @param {number} perPage
      * @return {Promise<void>}
      */
-    async [actionTypes.RETRIEVE_GITHUB_REPOS] ({ commit, state }, { userName, perPage }) {
+    async [actionTypes.RETRIEVE_GITHUB_REPOS] ({ commit, state }, { userName, perPage }): Promise<void> {
         let data;
 
         // currently, raw data shall only
         // load once, so we can check here
-        // @todo: implement cache logic here
-        if (true) {
+        if (!state.gitHubData.repos[userName]) {
             const githubApiClient = diContainer.get<GithubApiClientInterface>(types.GithubApiClient);
             const dataMapperService = diContainer.get<DataMapperServiceInterface>(types.DataMapperService);
             const repoMappers = diContainer.get<MapperInterface[]>(types.RepositoryMapper);
+            let res;
 
             commit(mutationTypes.GITHUB_API_STARTED);
 
-            const res = await githubApiClient.getUserRepos(userName, perPage)
-                .catch((e) => {
-                    commit(mutationTypes.GITHUB_API_LOADING_ERROR);
-                    return Promise.reject(e);
-                });
+            try {
+                res = await githubApiClient.getUserRepos(userName, perPage);
+            } catch (e) {
+                commit(mutationTypes.GITHUB_API_LOADING_ERROR);
+                return Promise.reject(e);
+            }
 
             commit(mutationTypes.GITHUB_DATA_MAPPING_STARTED);
 
             data = {
+                userName,
                 mappedRepos: res ? dataMapperService.map({cacheId: `github→${userName}→repos`, data: res.data}, repoMappers) : [],
                 rawRepos: res ? res.data : []
             };
@@ -58,8 +60,9 @@ const actions = {
             commit(mutationTypes.GITHUB_API_FINISHED);
         } else {
             data = {
-                mappedRepos: state.gitHubData.repos.mapped,
-                rawRepos: state.gitHubData.repos.raw
+                userName,
+                mappedRepos: state.gitHubData.repos[userName].mapped,
+                rawRepos: state.gitHubData.repos[userName].raw
             };
         }
 
@@ -84,11 +87,16 @@ const actions = {
             const githubApiClient = diContainer.get<GithubApiClientInterface>(types.GithubApiClient);
             const dataMapperService = diContainer.get<DataMapperServiceInterface>(types.DataMapperService);
             const commitMappers = diContainer.get<MapperInterface[]>(types.CommitsMapper);
+            let res;
 
             commit(mutationTypes.GITHUB_API_STARTED);
 
-            const res = await githubApiClient.getCommits(repoName, userName, perPage)
-                .catch((e) => {});
+            try {
+                res = await githubApiClient.getCommits(repoName, userName, perPage);
+            }
+            catch (e) {
+                return Promise.reject(e);
+            }
 
             commit(mutationTypes.GITHUB_DATA_MAPPING_STARTED);
 
