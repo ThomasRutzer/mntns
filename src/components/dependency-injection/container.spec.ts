@@ -1,4 +1,4 @@
-import { Container } from "inversify";
+import { Container } from 'inversify';
 import { expect } from 'chai'
 
 import diContainer from './container';
