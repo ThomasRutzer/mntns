@@ -1,0 +1,13 @@
+<div class="content-container">
+    <div class="experiment-update">
+        <h1 class="experiment-update__title title"
+            v-title-animation="{tween: true}"
+        >
+            Change github user name
+        </h1>
+        <div class="experiment-update__content margin-top--m revealing-content"
+             :class="{'revealing-content--reveal' : titleIn}">
+            <change-github-user></change-github-user>
+        </div>
+    </div>
+</div>
