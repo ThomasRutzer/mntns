@@ -1,23 +1,23 @@
-<div class="mnts">
+<div class="mntns">
 
     <div v-if="isActivated"
-         class="mnts__header revealing-content revealing-content--reveal">
-        <level-progress></level-progress>
+         class="mntns__infos revealing-content revealing-content--reveal">
+        <landscape-legend></landscape-legend>
     </div>
 
-    <div class="mnts__canvas">
+    <div v-if="isActivated"
+         class="mntns__progress revealing-content revealing-content--delayed-300 revealing-content--reveal">
+      <level-progress></level-progress>
+    </div>
+
+    <div class="mntns__canvas">
         <generator :generator-id="mId"
                    @intersection="onIntersection($event)"
                    :data="data"></generator>
     </div>
 
-    <div class="mnts__legend"
-         v-show="isActivated">
-        <landscape-legend></landscape-legend>
-    </div>
-
     <transition name="mntns-label--show-transition">
-        <div class="mnts__label mntns-label mntns-label--large-width"
+        <div class="mntns__label mntns-label mntns-label--large-width"
              :class="{'mntns__label--outside': labelPos.outside}"
              :style="{left: labelPos.x + 'px', top: labelPos.y + 'px'}"
              v-if="extractedFocusData && !activeModal && labelPos.x && labelPos.y">
