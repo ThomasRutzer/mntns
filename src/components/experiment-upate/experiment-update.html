@@ -3,11 +3,19 @@
         <h1 class="experiment-update__title title"
             v-title-animation="{tween: true}"
         >
-            Change github user name
+            Create mntns with your github user name
         </h1>
-        <div class="experiment-update__content margin-top--m revealing-content"
+        <div class="experiment-update__content margin-top--l revealing-content"
              :class="{'revealing-content--reveal' : titleIn}">
             <change-github-user></change-github-user>
+
+          <div class="margin-top--m revealing-content revealing-content--delayed-300"
+          :class="{'revealing-content--reveal' : titleIn}">
+            <router-link class="router-link bare-link" to="/experiment" exact>
+              or start exploring
+            </router-link>
+          </div>
+
         </div>
     </div>
 </div>
