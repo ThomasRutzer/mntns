@@ -45,4 +45,8 @@
   position: relative;
   z-index: map-deep-get($layout, "global-z-indexes", "footer");
   grid-area: footer;
+
+  &:empty {
+    pointer-events: none;
+  }
 }
