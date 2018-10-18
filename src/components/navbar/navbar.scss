@@ -4,25 +4,8 @@
   align-items: center;
 }
 
-.navbar__home {
-  overflow: hidden;
-  margin-left: 35px;
-  cursor: pointer;
-
-  svg {
-    width: 64px;
-    fill: $color-highlight;
-    animation: arrowEntrance 300ms forwards cubic-bezier(.37,.3,.33,.57);
-  }
-}
-
-@keyframes arrowEntrance {
-
-  0% {
-    transform: translateX(100%);
-  }
-
-  100% {
-    transform: translateX(0%);
+.navbar__list {
+  li {
+    margin-top:  map_get($spacing-sizes, 'xs');
   }
 }

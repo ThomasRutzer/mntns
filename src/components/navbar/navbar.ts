@@ -9,7 +9,8 @@ export class NavbarComponent extends Vue {
     private isHome: Boolean = false;
 
     links: RouterLink[] = [
-        new RouterLink('Home', '/')
+        new RouterLink('Home', '/'),
+        new RouterLink('Update github user', '/update')
     ];
 
     @Watch('$route.path')
