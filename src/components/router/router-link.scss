@@ -1,32 +1,29 @@
 @import "./../colors/colors.json";
 
 .router-link {
+  position: relative;
+  transition: color 300ms;
 
   &:after {
-    position: absolute;
-    content: '';
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    transition: width 300ms;
-    background-color: $color-secondary-highlight;
+    content: '↗';
+    display: inline-block;
+    margin-left: 4px;
+    color: $color-highlight;
+    font-weight: 500;
+    transition: transform 300ms;
   }
 
   &:hover {
+    color: $color-highlight;
+
     &:after {
-      width: 100%;
+      transform: translateY(-3px);
     }
   }
-
   // breaking BEM Selector rules
   // in order to make use of
   // vue-router classes
   &.router-link-active {
-    position: relative;
-
-    &:after {
-      width: 100%;
-    }
+    color: $color-highlight;
   }
 }
