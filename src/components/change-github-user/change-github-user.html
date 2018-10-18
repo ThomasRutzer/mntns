@@ -8,15 +8,16 @@
         </label>
         <div class="change-github-user__flex-wrapper"
              :class="{'change-github-user__flex-wrapper--focused': isFocused}">
-            <span class="change-github-user__prefix h1-appearance">
+            <span class="change-github-user__prefix h2-appearance">
         @
         </span>
-            <input class="change-github-user__input h1-appearance"
+            <input class="change-github-user__input h2-appearance"
                    id="change-github-user-input"
                    v-model="requestedUserName"
                    :disabled="isDisabled"
                    @focus="focus()"
                    @blur="blur()"
+                   spellcheck="false"
             >
             <button class="change-github-user__submit"
                     :class="{'change-github-user__submit--loading': isLoading}"

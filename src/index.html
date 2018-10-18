@@ -44,11 +44,16 @@
     <main class="layout__content"
           aria-live="polite">
 
-        <router-view name="content">
-            <div class="main-loader">
-                🔨 building something
-            </div>
-        </router-view>
+        <transition
+                name="route-transition-fade"
+                mode="out-in"
+        >
+            <router-view name="content">
+                <div class="main-loader">
+                    🔨 building something
+                </div>
+            </router-view>
+        </transition>
 
     </main>
 
