@@ -1,0 +1,12 @@
+
+.route-transition-fade-enter-active,
+.route-transition-fade-leave-active {
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.route-transition-fade-enter,
+.route-transition-fade-leave-active {
+  opacity: 0
+}
