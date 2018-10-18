@@ -5,8 +5,6 @@ $selector: "revealing-content";
 
 ///// OBJECT STYLES ///
 .#{$selector} {
-  overflow: hidden;
-  clip-path: polygon(0 0,0 0,0 100%,0 100%);
   opacity: 0;
 
   &.#{$selector}--reveal {
@@ -61,10 +59,13 @@ $selector: "revealing-content";
     clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
   }
 
-  100% {
-    opacity: 1;
+  99% {
     transform: translateX(0);
     clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
+  }
 
+  100% {
+    opacity: 1;
+    clip-path: unset;
   }
 }
