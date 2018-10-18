@@ -3,7 +3,7 @@ input {
   box-shadow: none;
   appearance: none;
   border: none;
-  color: $color-dark;
+  color: inherit;
   padding-right: map_get($spacing-sizes, 's');
   width: 100%;
 
