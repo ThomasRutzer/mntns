@@ -8,13 +8,13 @@
     content: '↗';
     display: inline-block;
     margin-left: 4px;
-    color: $color-highlight;
+    color: $color-secondary-highlight;
     font-weight: 500;
     transition: transform 300ms;
   }
 
   &:hover {
-    color: $color-highlight;
+    color: $color-secondary-highlight;
 
     &:after {
       transform: translateY(-3px);
@@ -24,6 +24,6 @@
   // in order to make use of
   // vue-router classes
   &.router-link-active {
-    color: $color-highlight;
+    color: $color-secondary-highlight;
   }
 }
