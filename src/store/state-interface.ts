@@ -1,5 +1,6 @@
 import LevelModel from '../components/levels/level-model/level-model';
 import { ExtractedFocusDataInterface } from '../components/focus-data/extracted-focus-data-interface';
+import LegendItemModel from "../components/landscape-legend/legend-item-model/legend-item-model";
 
 export interface StateInterface {
     experimentContainer: {
@@ -18,11 +19,7 @@ export interface StateInterface {
          */
         activated: boolean,
 
-        /**
-         * if true, css-prop pointer-events none will be
-         * applied to content area
-         */
-        clickable: boolean
+        legend: LegendItemModel[]
     },
 
     /**

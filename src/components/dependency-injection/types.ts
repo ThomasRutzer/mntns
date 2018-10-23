@@ -6,6 +6,7 @@ const types = {
     DataMapperService: Symbol.for('DataMapperService'),
     FocusDataService: Symbol.for('FocusDataService'),
     GithubApiClient: Symbol.for('GithubApiClient'),
+    LegendItemFactory: Symbol.for('LegendItemFactory'),
     LevelsDataLoader: Symbol.for('LevelDataLoader'),
     LevelModelFactory: Symbol.for('LevelModelFactory'),
     LevelsService: Symbol.for('LevelsService'),

@@ -1,14 +1,6 @@
 import * as types from './mutation-types';
 
 const mutations = {
-    [types.CONTENT_CLICKABLE](state) {
-        state.experimentContainer.clickable = true;
-    },
-
-    [types.CONTENT_NOT_CLICKABLE](state) {
-        state.experimentContainer.clickable = false;
-    },
-
     [types.EXPAND_EXPERIMENT_CONTAINER](state) {
         state.experimentContainer.visibility = 1;
     },
@@ -108,6 +100,10 @@ const mutations = {
 
     [types.CLOSE_MODAL](state) {
         state.activeModal = null;
+    },
+
+    [types.STORE_LEGEND](state, payload) {
+        state.experimentContainer.legend = payload;
     }
 };
 

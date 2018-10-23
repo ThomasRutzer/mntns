@@ -7,7 +7,7 @@
 
     <div v-if="isActivated"
          class="mntns__progress revealing-content revealing-content--delayed-300 revealing-content--reveal">
-      <level-progress></level-progress>
+        <level-progress></level-progress>
     </div>
 
     <div class="mntns__canvas">
@@ -41,49 +41,63 @@
     <modal :name="modalName">
         <template v-if="level && extractedFocusData"
                   slot="content">
-            <div class="focus-data-details-data__content">
-                <div class="focus-data-details-data__label mntns-label mntns-label--spacingless mntns-label--large-width">
-                    <svg class="focus-data-details-data__icon mntns-label__icon mntns-label__icon--inverted"
-                         role="img">
-                        <use xlink:href="#icon-location"></use>
-                    </svg>
+            <div class="mntns-label mntns-label--spacingless mntns-label--large-width">
+                <div class="mntns-label__content">
+                    <h3>
+                        {{ extractedFocusData.title }}
+                    </h3>
+                    <p class="margin-vertical--none small-text-appearance">
+                        level: {{level.title}}
+                    </p>
+                </div>
+            </div>
+            <div class="margin-bottom--s margin-top--m">
+                <div class="media-object">
+                    <div class="media-object__fixed">
+                        <svg class="focus-data-details-data__icon mntns-label__icon mntns-label__icon--inverted"
+                             role="img">
+                            <use xlink:href="#icon-location"></use>
+                        </svg>
+                    </div>
+                    <div class="media-object__fluid">
 
-                    <div class="mntns-label__content">
-                        <p class="margin-vertical--none small-text-appearance">
-                            {{level.title}}
-                        </p>
-                        <span>
-                            {{ extractedFocusData.title }}
-                        </span>
                     </div>
                 </div>
-
-                <div class="margin-top--m">
-                    <a class="primary-button"
-                       alt="view on Github"
-                       :href="extractedFocusData.url">
-                        view on Github
-                    </a>
-                </div>
-
-                <div v-if="level.index == 1">
-                    <div class="margin-top--s">
-                        <a href="#"
-                           alt="dig deeper!"
-                           class="primary-button"
-                           @click.prevent="forwards()">
-                            Dig deeper
+                <div class="media-object">
+                    <div class="media-object__fixed">
+                        source
+                    </div>
+                    <div class="media-object__fluid">
+                        <a class="router-link"
+                           alt="view on Github"
+                           :href="extractedFocusData.url">
+                            view on Github
                         </a>
                     </div>
                 </div>
+            </div>
 
-                <div v-if="level.index == 2">
-                    <a href="#" alt="Back to overview"
-                       class="primary-button margin-top--s"
-                       @click.prevent="back()">
-                        Back to overview
+            <div class="margin-top--m">
+
+            </div>
+
+            <div v-if="level.index == 1">
+                <div class="margin-top--s">
+                    <a href="#"
+                       alt="dig deeper!"
+                       class="primary-button"
+                       @click.prevent="forwards()">
+                        Dig deeper
                     </a>
                 </div>
+            </div>
+
+            <div v-if="level.index == 2">
+                <a href="#" alt="Back to overview"
+                   class="primary-button margin-top--s"
+                   @click.prevent="back()">
+                    Back to overview
+                </a>
             </div>
         </template>
     </modal>

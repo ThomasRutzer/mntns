@@ -30,6 +30,7 @@ const actions = {
      */
     async [actionTypes.RETRIEVE_GITHUB_REPOS] ({ commit, state }, { userName, perPage }): Promise<void> {
         let data;
+        const legendFactory = diContainer.get<any>(types.LegendItemFactory);
 
         // currently, raw data shall only
         // load once, so we can check here
@@ -67,6 +68,7 @@ const actions = {
         }
 
         commit(mutationTypes.STORE_GITHUB_REPOS, data);
+        commit(mutationTypes.STORE_LEGEND, legendFactory(state));
         return Promise.resolve();
     },
 
@@ -80,6 +82,7 @@ const actions = {
      */
     async [actionTypes.RETRIEVE_GITHUB_COMMITS_FOR_REPO] ({ commit, state }, { repoName, userName, perPage }) {
         let data;
+        const legendFactory = diContainer.get<any>(types.LegendItemFactory);
 
         // any commits for certain repo shall only loaded once
         // so we can check for that
@@ -115,6 +118,7 @@ const actions = {
         }
 
         commit(mutationTypes.STORE_COMMIT, { ...data, repoName});
+        commit(mutationTypes.STORE_LEGEND, legendFactory(state));
         return Promise.resolve();
     }
 };

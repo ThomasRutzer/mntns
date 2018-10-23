@@ -5,7 +5,7 @@ const state: StateInterface = {
     experimentContainer: {
         visibility: 0,
         activated: false,
-        clickable: true
+        legend: null
     },
 
     currentRoute: {

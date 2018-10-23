@@ -16,9 +16,10 @@ import commitsMock from './../../mocks/github-commit-mock';
 import { baseUrl } from '../components/github-api-client/github-api-client';
 import './../components/github-api-client';
 import '../components/data-mapper';
+import LegendFactory from './../components/landscape-legend/legend-factory';
 
 import { actions, actionTypes } from './';
-import { mutations } from './';
+import { mutations, mutationTypes } from './';
 
 const mockGithubUserName = 'testUser';
 const mockRepoName = 'testRepo';
@@ -46,6 +47,7 @@ describe('actions', () => {
                     });
                 }
             })
+            .withArgs(types.LegendItemFactory).returns(LegendFactory)
             .withArgs(types.RepositoryMapper).returns(reposMappers)
             .withArgs(types.GithubApiClient).returns({
                 getUserRepos: (userName: string, maxItemCount?: number) => Promise.resolve({ data: repoMock }),
@@ -54,9 +56,17 @@ describe('actions', () => {
         );
 
         state = {
+            experimentContainer: {
+                visibility: 0,
+                activated: false,
+                legend: null
+            },
             gitHubData: {
                 repos: {},
                 commits: {}
+            },
+            levels: {
+                currentLevel: null,
             }
         };
 
@@ -82,6 +92,15 @@ describe('actions', () => {
                 200,
                 repoMock
             );
+
+            store.commit(mutationTypes.UPDATE_LEVEL, {
+                level: {
+                    index: 1,
+                    dataSrc: 'repos',
+                    title: 'a level title',
+                    progress: 1
+                }
+            });
         });
 
         it('returns promise', async () => {
@@ -97,6 +116,17 @@ describe('actions', () => {
            await actions[actionTypes.RETRIEVE_GITHUB_REPOS]({commit: store.commit, state: state}, { userName: mockGithubUserName, perPage: 10 });
            expect(store.state.gitHubData.repos[mockGithubUserName].mapped.length).to.equal(2);
        });
+
+        it('updates legend with expected data', async () => {
+            await actions[actionTypes.RETRIEVE_GITHUB_REPOS]({commit: store.commit, state: state}, { userName: mockGithubUserName, perPage: 10 });
+            expect(store.state.experimentContainer.legend[0].label).to.equals('height');
+            expect(store.state.experimentContainer.legend[0].value).to.equals('a level title→size');
+            expect(store.state.experimentContainer.legend[1].label).to.equals('x');
+            expect(store.state.experimentContainer.legend[1].value).to.equals('a level title→created_at');
+            expect(store.state.experimentContainer.legend[2].label).to.equals('z');
+            expect(store.state.experimentContainer.legend[2].value).to.equals('a level title→pushed_at');
+            expect(store.state.experimentContainer.legend.length).to.equals(3);
+        });
     });
 
     describe('type: retrieve github commits', () => {
@@ -109,6 +139,15 @@ describe('actions', () => {
                 200,
                 commitsMock
             );
+
+            store.commit(mutationTypes.UPDATE_LEVEL, {
+                level: {
+                    index: 1,
+                    dataSrc: 'repos',
+                    title: 'another level title',
+                    progress: 1
+                }
+            });
         });
 
         it('returns promise', async () => {
@@ -132,5 +171,17 @@ describe('actions', () => {
             expect(store.state.gitHubData.commits[mockRepoName].mapped).to.exist;
             expect(store.state.gitHubData.commits[mockRepoName].raw).to.exist;
         });
+
+        it('updates legend with expected data', async () => {
+            await actions[actionTypes.RETRIEVE_GITHUB_REPOS]({commit: store.commit, state: state}, { userName: mockGithubUserName, perPage: 10 });
+            expect(store.state.experimentContainer.legend[0].label).to.equals('height');
+            expect(store.state.experimentContainer.legend[0].value).to.equals('another level title→size');
+            expect(store.state.experimentContainer.legend[1].label).to.equals('x');
+            expect(store.state.experimentContainer.legend[1].value).to.equals('another level title→created_at');
+            expect(store.state.experimentContainer.legend[2].label).to.equals('z');
+            expect(store.state.experimentContainer.legend[2].value).to.equals('another level title→pushed_at');
+            expect(store.state.experimentContainer.legend.length).to.equals(3);
+        });
+
     });
 });
