@@ -3,18 +3,24 @@
 .router-link {
   position: relative;
   transition: color 300ms;
+  text-decoration: none;
 
   &:after {
     content: '↗';
     display: inline-block;
     margin-left: 4px;
-    color: $color-secondary-highlight;
+    color: $color-secondary-highlight-shaded;
     font-weight: 500;
     transition: transform 300ms;
   }
 
+  &:visited,
+  &:any-link {
+    color: $color-dark;
+  }
+
   &:hover {
-    color: $color-secondary-highlight;
+    color: $color-secondary-highlight-shaded;
 
     &:after {
       transform: translateY(-3px);
@@ -24,6 +30,6 @@
   // in order to make use of
   // vue-router classes
   &.router-link-active {
-    color: $color-secondary-highlight;
+    color: $color-secondary-highlight-shaded;
   }
 }

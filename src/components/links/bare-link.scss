@@ -1,8 +1,26 @@
-.bare-link {
-  text-decoration: none;
-  color: inherit;
+@import "./../colors/colors.json";
 
-  &:visited {
-    color: inherit;
+.bare-link {
+  position: relative;
+  transition: color 300ms;
+  text-decoration: none;
+  color: $color-lightest;
+
+  &:after {
+    content: '→';
+    display: inline-block;
+    font-weight: 500;
+    transition: transform 300ms;
+  }
+
+  &:visited,
+  &:any-link {
+    color: $color-dark;
+  }
+
+  &:hover {
+    &:after {
+      transform: translateX(3px);
+    }
   }
 }
