@@ -9,9 +9,13 @@ import config from './mnts-config';
 import { ModalServiceInterface } from '../modal/modal-service-interface';
 import GeneratorManagerInterface from 'mntns-landscape/src/components/generator/manager/GeneratorManagerInterface';
 import * as Generator from 'mntns-landscape/src/components/generator';
+import { MntnsModalComponent } from './modal/mntns-modal';
 
 @Component({
     template: require('./mnts.html'),
+    components: {
+        'mntns-modal': MntnsModalComponent
+    },
     computed: {
         activeModal() {
             return this.$store.state.activeModal === this.modalName;

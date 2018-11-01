@@ -1,0 +1,44 @@
+@import "./../../spacing/spacing-definitions.json";
+
+.mntns-modal__cards {
+  @include mq($until: 'm') {
+    white-space: nowrap;
+    overflow-x: scroll;
+  }
+}
+
+.mntns-modal__card {
+  margin-right: map_get($spacing-sizes, 's');
+  display: inline-block;
+  opacity: 0;
+  animation-name: mntns-modal-card-animation;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  animation-duration: 600ms;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  @include mq($from: 'm') {
+    max-width: 33%;
+  }
+
+  @for $i from 1 through 3 {
+    &:nth-child(n+#{$i}) {
+      animation-delay: 100ms * $i;
+    }
+  }
+}
+
+@keyframes mntns-modal-card-animation {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,41 @@
+<div class="mntns-modal">
+  <div class="mntns-modal__cards">
+    <div class="mntns-modal__card card margin-bottom--s"
+         v-for="legendItem in legend"
+    >
+      <div class="card__content">
+        <div class="margin-bottom--s">
+        <span class="small-text-appearance">
+          parameter
+        </span>
+          <p class="text-color-secondary-highlight h3-appearance">
+            {{ legendItem.label }}
+          </p>
+        </div>
+        <div class="margin-bottom--s">
+        <span class="small-text-appearance">
+          data key
+        </span>
+          <p class="text-color-secondary-highlight h3-appearance">
+            {{ legendItem.value }}
+          </p>
+        </div>
+        <div class="margin-bottom--s">
+      <span class="small-text-appearance">
+          value
+        </span>
+          <p class="text-color-secondary-highlight h3-appearance">
+            {{ extractedFocusData[legendItem.label] }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="margin-top--m">
+    <a class="bare-link small-text-appearance"
+       alt="view on Github"
+       :href="extractedFocusData.url">
+      view source on Github
+    </a>
+  </div>
+</div>

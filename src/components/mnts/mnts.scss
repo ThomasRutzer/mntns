@@ -34,6 +34,13 @@
   }
 }
 
+.mntns__content {
+  &--dimmed {
+    opacity: 0.3;
+    transition: opacity 300ms;
+  }
+}
+
 .mntns__infos {
   position: absolute;
   bottom: map_get($spacing-sizes, 's');
