@@ -4,25 +4,23 @@
  * and commits filtered matching data set
  * to Store
  */
-import { Store } from 'vuex';
+import {Store} from 'vuex';
 import * as mutationTypes from '../../store/mutation-types';
-import { injectable, inject } from 'inversify';
+import {injectable, inject} from 'inversify';
 import types from '../dependency-injection/types';
 
-import { firstLetterUppercase } from './../string-operations';
-import { findDeep } from './../object-utils/';
+import {firstLetterUppercase} from './../string-operations';
+import {findDeep} from './../object-utils/';
 
-import { FocusDataServiceInterface } from './focus-data-service-interface';
-import { ExtractedFocusDataInterface } from './extracted-focus-data-interface';
+import {FocusDataServiceInterface} from './focus-data-service-interface';
+import {ExtractedFocusDataInterface} from './extracted-focus-data-interface';
 import * as extractMappers from './extract-mappers';
 
 @injectable()
 class FocusDataService implements FocusDataServiceInterface {
     private store: Store<any>;
 
-    constructor(
-        @inject(types.Store) store,
-    ) {
+    constructor(@inject(types.Store) store,) {
         this.store = store;
     }
 
@@ -54,12 +52,14 @@ class FocusDataService implements FocusDataServiceInterface {
         }
     }
 
-    private extractData(data, mapper): ExtractedFocusDataInterface {
-        return {
-            url: mapper.url ? findDeep(data, mapper.url) : null,
-            title: mapper.title ? findDeep(data, mapper.title) : null,
-            description: mapper.desc ? findDeep(data, mapper.description) : null
-        };
+    private extractData(data, mapper) {
+        const result = {};
+
+        Object.keys(mapper).forEach((mapperKey) => {
+            result[mapperKey] = mapper[mapperKey] ? findDeep(data, mapper[mapperKey]) : null
+        });
+
+        return result
     }
 }
 
