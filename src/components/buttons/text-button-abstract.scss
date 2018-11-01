@@ -1,0 +1,12 @@
+@import "./../spacing/spacing-definitions.json";
+
+$text-button-abstract-border-radius: 20px;
+
+@mixin text-button-abstract() {
+  padding: 0  map_get($spacing-sizes, 's');
+  text-decoration: none;
+  border-radius: $text-button-abstract-border-radius;
+  height: 40px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

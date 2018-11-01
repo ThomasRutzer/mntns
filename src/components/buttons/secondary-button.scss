@@ -1,8 +1,8 @@
 @import "./../colors/colors";
 
-.primary-button {
+.secondary-button {
   @include button-abstract();
   @include text-button-abstract();
-  background-color: $color-highlight-shaded;
+  background-color: $color-secondary-highlight-shaded;
 }
 

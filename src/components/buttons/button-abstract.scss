@@ -1,0 +1,46 @@
+@import "./../colors/colors";
+@import "./../spacing/spacing-definitions.json";
+
+
+@mixin button-abstract() {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  color: $color-light;
+  text-decoration: none;
+  border: none;
+  box-shadow: 0 1px 2px rgba($color-darkest ,0.15);
+  cursor: pointer;
+
+  &:after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 3px 15px rgba($color-darkest, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    border-radius: inherit;
+  }
+
+  &:hover {
+    &:after {
+      opacity: 1;
+    }
+  }
+
+  &:disabled {
+    background: $color-dark;
+    color: $color-darkest;
+    cursor: default;
+
+    &:hover {
+      &after {
+        opacity: 0;
+      }
+    }
+  }
+}
