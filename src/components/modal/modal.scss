@@ -5,13 +5,37 @@
 $modal-close-background-color: $color-dark;
 $modal-close-icon-fill: $color-highlight;
 
-$modal-dimmer-background-color: rgba($color-dark, 0);
+$modal-dimmer-background-color: rgba($color-secondary-highlight, 0.1);
 
 .modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: map-deep-get($layout, "global-z-indexes", "modal");
+
+  &.modal__content--enter-active,
+  &.modal__content--leave-active {
+    transition: transform 500ms, opacity 500ms;
+  }
+
+  @include mq($until: 'm') {
+    &.modal__content--enter,
+    &.modal__content--leave-to {
+      transform: translateX(-100%);
+    }
+  }
+
+  @include mq($from: 'm') {
+    &.modal__content--enter,
+    &.modal__content--leave-to {
+      opacity: 0;
+    }
+  }
 
   &__backdrop {
-    position: fixed;
-    z-index: 9998;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -26,40 +50,61 @@ $modal-dimmer-background-color: rgba($color-dark, 0);
     height: 100%;
     align-items: center;
     box-sizing: border-box;
-    padding: 0 calc((100vw - #{map_get($layout, "content-area-width-small")}) / 2);
 
     @include mq($from: 'm') {
       padding: 0 calc((100vw - #{map_get($layout, "content-area-width-medium")}) / 2);
     }
   }
 
-  &__content {
-    position: relative;
-    background-color: $color-highlight;
-    color: $color-lightest;
-    padding: map_get($spacing-sizes, 's');
-    transition: all 300ms;
-    opacity: 1;
+  &__container {
+    width: 90vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: rgba($color-secondary-highlight-shaded, 0.9);
 
-    &.modal__content--leave-active {
-      transform: scale(1.1);
-    }
-
-    &.modal__content--enter {
-      opacity: 0;
+    @include mq($from: 'm') {
+      max-height: calc(100vh - (#{map_get($layout, "header-height")} + #{map_get($layout, "footer-height")}));
+      max-width: 100%;
+      background-color: transparent;
     }
   }
 
-  &__close {
-    border: none;
-    -webkit-touch-callout: none;
-    user-select: none;
-    cursor: pointer;
-    position: absolute;
-    right: 0;
-    top: -15px;
-    padding: 4px;
+  &__header {
+      display: flex;
+      justify-content: space-between;
+      padding: map_get($spacing-sizes, 's');
+      color: $color-lightest;
+      min-height: map_get($layout, "header-height");
+
+      @include mq($from: 'm') {
+          padding: map_get($spacing-sizes, 's') 0;
+      }
+  }
+
+  &__footer {
+      display: flex;
+      align-items: center;
+      padding: map_get($spacing-sizes, 's');
+      min-height: map_get($layout, "footer-height");
+
+      @include mq($from: 'm') {
+          padding: map_get($spacing-sizes, 's') 0;
+      }
+  }
+
+  &__content {
+    position: relative;
     color: $color-lightest;
-    background-color: $color-secondary-highlight;
+    transition: all 300ms;
+    opacity: 1;
+    overflow: hidden;
+    overflow-y: auto;
+    padding: map_get($spacing-sizes, 's');
+
+    @include mq($from: 'm') {
+       padding: map_get($spacing-sizes, 's') 0;
+    }
   }
 }
