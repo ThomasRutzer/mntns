@@ -62,7 +62,7 @@ export default {
             allAnimationPromises.push(animationCompletePromise);
 
             // shuffle Indexes for non-sequential animation
-            shuffledIndexes = shuffle(shuffledIndexes);
+            // shuffledIndexes = shuffle(shuffledIndexes);
 
             let i = 0;
             let l = shuffledIndexes.length;
@@ -71,12 +71,14 @@ export default {
                 const currentElement = elements[shuffledIndexes[i]];
 
                 // apply some blur
-                currentElement.blur = 2;
+                // currentElement.blur = 2;
+                currentElement.style.transform = 'translateX(-20px)';
+                currentElement.style.opacity = '0';
 
-                TweenLite.to(currentElement, 3,
+                TweenLite.to(currentElement, 1.3,
                     {
                         opacity:  1,
-                        blur: 0,
+                        x: 0,
                         delay: 0.05 * i,
                         onComplete: animationCompleteClb,
                         onUpdateParams: [elements[shuffledIndexes[i]]],
