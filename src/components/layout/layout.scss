@@ -24,6 +24,11 @@
   position: relative;
   z-index: map-deep-get($layout, "global-z-indexes", "header");
   grid-area: header;
+
+  &--dimmed {
+    opacity: 0.3;
+    transition: opacity 300ms;
+  }
 }
 
 .layout__content {
