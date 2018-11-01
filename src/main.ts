@@ -9,7 +9,9 @@ import { ExperimentContainerComponent } from './components/experiment-container'
 import { FooterbarComponent } from  './components/footerbar';
 
 // import any other modules
+import './components/buttons';
 import './components/caches';
+import './components/card';
 import './components/change-github-user';
 import './components/focus-data';
 import './components/mousemove-follow';

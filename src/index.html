@@ -37,13 +37,14 @@
      v-cloak=""
      id="app-main">
 
-    <div class="layout__header">
-        <navbar></navbar>
+    <div class="layout__header"
+         :class="{'layout__header--dimmed': $store.state.activeModal }"
+    >
+      <navbar></navbar>
     </div>
 
     <main class="layout__content"
           aria-live="polite">
-
         <transition
                 name="route-transition-fade"
                 mode="out-in"
@@ -54,7 +55,6 @@
                 </div>
             </router-view>
         </transition>
-
     </main>
 
     <div class="layout__footer">
