@@ -9,7 +9,8 @@
     "global-z-indexes": {
       "header": 10,
       "content": 5,
-      "footer": 10
+      "footer": 10,
+      "modal": 20
     }
   }
 }
