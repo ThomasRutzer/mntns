@@ -4,6 +4,7 @@
   "color-light": "#f8f8f8",
   "color-lightest": "#f8f8f8",
   "color-highlight": "#00ffcc",
+  "color-highlight-shaded": "#05dcb1",
   "color-secondary-highlight": "#ad57ff",
   "color-secondary-highlight-shaded": "#6f1bc0"
 }
