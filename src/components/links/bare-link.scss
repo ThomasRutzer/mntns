@@ -5,6 +5,7 @@
   transition: color 300ms;
   text-decoration: none;
   color: $color-lightest;
+  transition: color 300ms;
 
   &:after {
     content: '→';
@@ -19,8 +20,10 @@
   }
 
   &:hover {
+    color: $color-secondary-highlight-shaded;
     &:after {
       transform: translateX(3px);
+      color: $color-secondary-highlight-shaded;
     }
   }
 }

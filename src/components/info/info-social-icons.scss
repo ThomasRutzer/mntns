@@ -1,0 +1,10 @@
+@import "./../colors/colors";
+
+.info-social-icon {
+  fill: $color-dark;
+  transition: fill 300ms;
+
+  &:hover {
+    fill: $color-secondary-highlight;
+  }
+}

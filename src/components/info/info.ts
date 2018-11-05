@@ -2,8 +2,8 @@ import { Component } from 'vue-property-decorator';
 import { RouterDefaultComponentAbstract } from './../router';
 
 @Component({
-    template: require('./contact.html'),
+    template: require('./info.html'),
 })
-export class ContactComponent extends RouterDefaultComponentAbstract {
+export class InfoComponent extends RouterDefaultComponentAbstract {
 
 }

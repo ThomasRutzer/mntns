@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 
 import { HomeComponent }  from './../home';
-import { ContactComponent } from './../contact';
+import { InfoComponent } from './../info';
 import { ExperimentStartComponent } from './../experiment-start';
 import { MntsComponent } from './../mnts';
 import { ExperimentUpdateComponent } from '../experiment-upate/experiment-update';
@@ -35,9 +35,9 @@ export const createRoutes: () => RouteConfig[] = () => [
     },
 
     {
-        path: '/contact',
+        path: '/info',
         components: {
-            content: ContactComponent,
+            content: InfoComponent,
             'experiment-container': null
         },
     },

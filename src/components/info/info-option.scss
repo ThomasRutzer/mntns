@@ -1,0 +1,26 @@
+@import "./../colors/colors";
+
+$info-option-line-width: 50px;
+
+.info-option {
+  display: flex;
+}
+
+.info-option__label {
+  position: relative;
+  width: 0;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: $info-option-line-width + 8;
+    top: 8px;
+    width: $info-option-line-width;
+    height: 1px;
+    background-color: $color-dark;
+  }
+}
+
+.info-option__value {
+  margin-left: 2* $info-option-line-width + 32;
+}
