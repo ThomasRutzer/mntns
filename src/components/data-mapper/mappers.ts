@@ -1,4 +1,5 @@
 import MountainConfig from 'mntns-landscape/src/components/mountain/mountainConfig';
+import GeneratorConfig from 'mntns-landscape/src/components/generator/generatorManagerConfig';
 import {MapperInterface} from './mapper-interface';
 
 /**
@@ -26,16 +27,16 @@ const reposMappers: MapperInterface[] = [
     {
         dataKey: ['created_at'],
         mountainsParameter: 'x',
-        min: -400,
-        max: 400,
+        min: GeneratorConfig.layout.position.x.min,
+        max: GeneratorConfig.layout.position.x.max,
         type: 'date',
     },
 
     {
         dataKey: ['pushed_at'],
         mountainsParameter: 'z',
-        min: -400,
-        max: 400,
+        min: GeneratorConfig.layout.position.z.min,
+        max: GeneratorConfig.layout.position.z.max,
         type: 'date',
     }
 ];
