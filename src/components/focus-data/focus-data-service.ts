@@ -20,7 +20,7 @@ import * as extractMappers from './extract-mappers';
 class FocusDataService implements FocusDataServiceInterface {
     private store: Store<any>;
 
-    constructor(@inject(types.Store) store,) {
+    constructor(@inject(types.Store) store) {
         this.store = store;
     }
 
@@ -56,10 +56,10 @@ class FocusDataService implements FocusDataServiceInterface {
         const result = {};
 
         Object.keys(mapper).forEach((mapperKey) => {
-            result[mapperKey] = mapper[mapperKey] ? findDeep(data, mapper[mapperKey]) : null
+            result[mapperKey] = mapper[mapperKey] ? findDeep(data, mapper[mapperKey]) : null;
         });
 
-        return result
+        return result;
     }
 }
 

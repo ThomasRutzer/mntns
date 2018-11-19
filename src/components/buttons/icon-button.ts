@@ -18,7 +18,6 @@ export class IconButtonComponent extends Vue {
         break;
     }
 
-
     return createElement(
       `${this.htmlTag}`,
       {
@@ -27,6 +26,6 @@ export class IconButtonComponent extends Vue {
           innerHTML: icon
         }
       }
-    )
+    );
   }
 }
