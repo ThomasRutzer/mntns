@@ -146,7 +146,10 @@ export class MntsComponent extends Vue {
 
         // close detailedData on another mousedown
         // and return...
-        if (this.activeModal && data.event.type === config.eventToUpdateLevel) {
+        if (this.activeModal
+          && data
+          && data.event
+          && data.event.type === config.eventToUpdateLevel) {
             // this.clearDetailedData();
             return;
         }
