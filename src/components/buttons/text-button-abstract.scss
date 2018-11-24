@@ -1,12 +1,19 @@
 @import "./../spacing/spacing-definitions.json";
 
-$text-button-abstract-border-radius: 20px;
-
 @mixin text-button-abstract() {
   padding: 0  map_get($spacing-sizes, 's');
   text-decoration: none;
-  border-radius: $text-button-abstract-border-radius;
+  border-radius: 25px;
   height: 40px;
   white-space: nowrap;
   text-overflow: ellipsis;
+  min-height: 45px;
+  min-width: 120px;
+  justify-content: center;
+
+  @include mq($from: 'm') {
+    border-radius: 20px;
+    min-height: auto;
+    min-width: auto;
+  }
 }
