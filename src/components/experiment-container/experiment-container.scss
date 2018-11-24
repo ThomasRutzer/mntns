@@ -5,7 +5,7 @@
 .experiment-container {
   position: fixed;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   top: 0;
   left: 0;
 
@@ -15,7 +15,7 @@
     top: map_get($layout, 'header-height') * 2;
 
     width: calc(#{map_get($layout, 'content-area-width-medium')} - #{map_get($layout, 'header-row-width')} * 2 );
-    height: calc(100vh - (#{map_get($layout, 'header-height')} + #{map_get($layout, 'footer-height')}) * 2);
+    height: calc(100% - (#{map_get($layout, 'header-height')} + #{map_get($layout, 'footer-height')}) * 2);
 
     &--transition-enter-active,
     &--transition-leave-active {
@@ -41,7 +41,7 @@
 
   &--expanded {
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     top: 0;
     left: 0;
     overflow: hidden;
