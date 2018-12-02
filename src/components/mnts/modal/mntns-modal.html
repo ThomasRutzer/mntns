@@ -4,6 +4,10 @@
          v-for="legendItem in legend"
     >
       <div class="card__content">
+        <svg class="icon icon--large icon--light"
+             role="img">
+            <use :xlink:href="`#icon-info-${legendItem.label}`"></use>
+        </svg>
         <div class="margin-bottom--s">
         <span class="small-text-appearance">
           parameter
