@@ -11,8 +11,8 @@
           Hello you
         </h1>
 
-        <div class="margin-top--m">
-            <p class="home__copy revealing-content margin--none"
+        <div class="home__copy margin-top--m">
+            <p class="revealing-content margin--none"
                :class="{'revealing-content--reveal': titleIn}">
               Source code is available
               <a class="bare-link"
@@ -20,9 +20,11 @@
                  href="https://github.com/ThomasRutzer/mntns" title="view source">
                 here
               </a>
-              This experiment is brought to you by Thomas Rutzer.
             </p>
-
+            <p class="revealing-content revealing-content--delayed-300 margin--none"
+                :class="{'revealing-content--reveal': titleIn}">
+                This is brought to you by Thomas Rutzer.
+            </p>
           <div class="revealing-content revealing-content--delayed-300 margin-top--m"
              :class="{'revealing-content--reveal': titleIn}">
 
