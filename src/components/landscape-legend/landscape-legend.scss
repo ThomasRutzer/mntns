@@ -1,0 +1,5 @@
+@import "../selection/no-user-select-mixin";
+
+.landscape-legend {
+  @include no-user-select();
+}

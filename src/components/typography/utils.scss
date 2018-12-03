@@ -7,13 +7,3 @@
 .text-color-secondary-highlight {
   color: $color-secondary-highlight;
 }
-
-::-moz-selection {
-  color: $color-lightest;
-  background: $color-secondary-highlight;
-}
-
-::selection {
-  color: $color-lightest;
-  background: $color-secondary-highlight;
-}

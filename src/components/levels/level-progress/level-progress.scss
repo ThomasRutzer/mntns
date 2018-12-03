@@ -1,10 +1,13 @@
 @import "../../colors/colors.json";
+@import "../../selection/no-user-select-mixin";
 
 .level-progress {
   display: none;
   align-items: center;
   width: 100%;
   height: 100%;
+
+  @include no-user-select();
 
   @include mq($from: 'm') {
     display: flex;
