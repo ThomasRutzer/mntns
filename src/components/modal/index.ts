@@ -9,4 +9,5 @@ diContainer.bind<ModalServiceInterface>(types.ModalService)
     .to(ModalService).inSingletonScope();
 
 Vue.component('modal', ModalComponent);
+// @ts-ignore
 Vue.directive('modal-trigger', modalTrigger);

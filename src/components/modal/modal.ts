@@ -84,6 +84,7 @@ export class ModalComponent extends Vue {
     // move element as last child of app DOM
     this.$el.parentNode.removeChild(this.$el);
     document.getElementById('app-main').appendChild(this.$el);
+    // @ts-ignore
     this.focusTrap = FocusTrap(this.$el);
   }
 
