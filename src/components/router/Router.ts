@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import { HomeComponent }  from './../home';
 import { InfoComponent } from './../info';
 import { ExperimentStartComponent } from './../experiment-start';
 import { MntsComponent } from './../mnts';
@@ -16,18 +15,10 @@ export const createRouter = () => new VueRouter({
         {
             path: '/',
             components: {
-                content: HomeComponent,
-                'experiment-container': MntsComponent
-            }
-        },
-        {
-            path: '/experiment',
-            components: {
                 content: ExperimentStartComponent,
                 'experiment-container': MntsComponent,
             },
         },
-
         {
             path: '/update',
             components: {
@@ -44,7 +35,7 @@ export const createRouter = () => new VueRouter({
             },
         },
     ],
-    base: '/mntns/dist/',
+    // base: '/mntns/dist/',
     scrollBehavior () {
         return { x: 0, y: 0 };
     }
