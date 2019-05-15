@@ -31,7 +31,7 @@ export const createRouter = () => new VueRouter({
             path: '/info',
             components: {
                 content: InfoComponent,
-                'experiment-container': null
+                'experiment-container': MntsComponent
             },
         },
     ],
