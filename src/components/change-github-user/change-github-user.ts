@@ -67,7 +67,7 @@ export class ChangeGithubUserComponent extends Vue {
                 this.$store.state.gitHubData.repos[this.requestedUserName].mapped.length > 0) {
                 this.$store.commit(mutationTypes.CHANGE_GITHUB_USERNAME, {userName: this.requestedUserName});
                 this.levelService.start();
-                this.$router.push('/experiment');
+                this.$router.push('/');
             } else {
                 this.nothingFound = true;
                 this.requestedUserName = '';
