@@ -9,10 +9,8 @@
     "npm": ">=3"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production npm run clean && npm run compile",
+    "build": "cross-env NODE_ENV=production npm run clean && run test && npm run compile",
     "build:parts": "npm run sass && npm run compile",
-    "ci:teamcity": "karma --env=tc start karma.coverage.js && npm run coverage:remap",
-    "ci:jenkins": "karma --env=jk start karma.coverage.js && npm run coverage:remap",
     "clean": "rimraf dist && rimraf coverage",
     "compile": "webpack --config config/webpack.config.prod.js",
     "coverage": "npm run coverage:run && npm run coverage:remap && npm run coverage:open",
@@ -24,7 +22,9 @@
     "serve": "http-server dist/ -o",
     "test": "cross-env NODE_ENV=development karma start karma.unit.js",
     "test:debug": "cross-env NODE_ENV=development karma start karma.debug.js",
-    "test:watch": "cross-env NODE_ENV=development karma start karma.unit.js --singleRun=false --auto-watch"
+    "test:watch": "cross-env NODE_ENV=development karma start karma.unit.js --singleRun=false --auto-watch",
+    "ci:teamcity": "karma --env=tc start karma.coverage.js && npm run coverage:remap",
+    "deploy": "npm run build --prefix-paths && gh-pages -d dist"
   },
   "dependencies": {
     "axios": "^0.16.2",
@@ -63,6 +63,7 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "favicons-webpack-plugin": "0.0.7",
     "file-loader": "^0.11.2",
+    "gh-pages": "^2.0.1",
     "glob": "^7.1.3",
     "html-webpack-plugin": "^2.30.1",
     "http-server": "~0.10.0",
