@@ -35,7 +35,7 @@ export const createRouter = () => new VueRouter({
             },
         },
     ],
-    base: '/mntns/dist/',
+    base: '/mntns/',
     scrollBehavior () {
         return { x: 0, y: 0 };
     }
