@@ -4,14 +4,14 @@ nice to see you! This is public source code of my
 personal experiment, I call **mntns**! Its currently seperated into two 
 repositories. This one and [mntns landscape](https://github.com/ThomasRutzer/mntns).
 
-[View it](https://thomasrutzer.github.io/mntns/dist/)
+[View it](https://thomasrutzer.github.io/mntns/)
 
 With "ship early, ship often" in mind, I released a first working version, which
 is currently undergoing some refactoring.
 After that, I hope I will find some time (and ideas😉) to add some more features from now on.
-And since it´s kind of experimental, please be aware of that:
+And since it's kind of experimental, please be aware of that:
 
-**During my daytime job, I´m really focused to provide a good
+**During my daytime job, I'm really focused to provide a good
 crossbrowser and a11y experience. So at 🌃night, when I should sleep but ⚒️work
 on something like this, I really want to have some fun and work with
 some of the latest browser features — so if you want to have fun as well,
@@ -20,7 +20,7 @@ my personal experiment, feel free to get in touch**
 
 ## Next steps
 
-Talking about upcoming features,this are some of my next steps focused:
+Talking about upcoming features, this are some of my next steps focused:
 
 ### Features
 
@@ -38,7 +38,7 @@ consuming and maybe visualize background experiment in another way (without need
 
 ### Build Setup
 
-It´s open source, so if you really want to check at Code on your own,
+It's open source, so if you really want to check at Code on your own,
 here are some tips:
 
 ``` bash
