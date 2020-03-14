@@ -85,7 +85,7 @@
     "karma-webpack": "^2.0.13",
     "lodash.clonedeep": "^4.5.0",
     "lodash.merge": "^4.6.1",
-    "minimist": "~1.2.0",
+    "minimist": "~1.2.2",
     "mocha": "^3.5.3",
     "ncp": "~2.0.0",
     "node-sass": "^4.12.0",
